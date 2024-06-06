@@ -18458,15 +18458,15 @@ namespace System.Linq.Expressions.Tests
             act();
         }
 
-        interface IInterface
+        public interface IInterface
         {
         }
 
-        class NonSealed
+        public class NonSealed
         {
         }
 
-        class Derived : NonSealed, IInterface
+        public class Derived : NonSealed, IInterface
         {
         }
 

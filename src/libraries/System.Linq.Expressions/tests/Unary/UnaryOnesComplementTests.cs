@@ -216,7 +216,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidOperationException>(() => Expression.OnesComplement(operand));
         }
 
-        private class Complementary
+        public class Complementary
         {
             public int Value { get; set; }
 

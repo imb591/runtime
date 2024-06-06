@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Linq.Expressions.Tests;
 using Xunit;
 
 namespace System.Dynamic.Tests
@@ -30,7 +31,8 @@ namespace System.Dynamic.Tests
 
             // The above are implementation details that could reasonably change without error.
             // The below must still hold so that empty binding restrictions still allows everything.
-            Assert.True(Expression.Lambda<Func<bool>>(exp).Compile()());
+            Assert.True(Expression.Lambda<Func<bool>>(exp).Compile(CompilationType.Compile)());
+            Assert.True(Expression.Lambda<Func<bool>>(exp).Compile(CompilationType.CompileToMethod)());
         }
 
         [Fact]
@@ -139,7 +141,7 @@ namespace System.Dynamic.Tests
                     BindingRestrictions bX = BindingRestrictions.GetExpressionRestriction(Expression.Constant(x));
                     BindingRestrictions bY = BindingRestrictions.GetExpressionRestriction(Expression.Constant(y));
                     BindingRestrictions merged = bX.Merge(bY);
-                    Assert.Equal(x & y, Expression.Lambda<Func<bool>>(merged.ToExpression()).Compile()());
+                    Assert.Equal(x & y, Expression.Lambda<Func<bool>>(merged.ToExpression()).Compile(CompilationType.CompileToMethod)());
                 }
         }
 
@@ -156,14 +158,14 @@ namespace System.Dynamic.Tests
                     {
                         BindingRestrictions bY = BindingRestrictions.GetExpressionRestriction(Expression.Constant(y));
                         BindingRestrictions merged = bW.Merge(bX).Merge(bY);
-                        Assert.Equal(w & x & y, Expression.Lambda<Func<bool>>(merged.ToExpression()).Compile()());
+                        Assert.Equal(w & x & y, Expression.Lambda<Func<bool>>(merged.ToExpression()).Compile(CompilationType.CompileToMethod)());
                         foreach (bool z in new[] {false, true})
                         {
                             BindingRestrictions bZ = BindingRestrictions.GetExpressionRestriction(
                                 Expression.Constant(z));
                             merged = bW.Merge(bX).Merge(bY).Merge(bZ);
                             Assert.Equal(
-                                w & x & y & z, Expression.Lambda<Func<bool>>(merged.ToExpression()).Compile()());
+                                w & x & y & z, Expression.Lambda<Func<bool>>(merged.ToExpression()).Compile(CompilationType.CompileToMethod)());
                         }
                     }
                 }
@@ -176,11 +178,11 @@ namespace System.Dynamic.Tests
             Egalitarian instance = new Egalitarian();
             Expression exp = Expression.Constant(instance);
             BindingRestrictions sameInstance = BindingRestrictions.GetInstanceRestriction(exp, instance);
-            Assert.True(Expression.Lambda<Func<bool>>(sameInstance.ToExpression()).Compile()());
+            Assert.True(Expression.Lambda<Func<bool>>(sameInstance.ToExpression()).Compile(CompilationType.CompileToMethod)());
             BindingRestrictions diffInstance = BindingRestrictions.GetInstanceRestriction(exp, new Egalitarian());
-            Assert.False(Expression.Lambda<Func<bool>>(diffInstance.ToExpression()).Compile()());
+            Assert.False(Expression.Lambda<Func<bool>>(diffInstance.ToExpression()).Compile(CompilationType.CompileToMethod)());
             BindingRestrictions noInstance = BindingRestrictions.GetInstanceRestriction(exp, null);
-            Assert.False(Expression.Lambda<Func<bool>>(noInstance.ToExpression()).Compile()());
+            Assert.False(Expression.Lambda<Func<bool>>(noInstance.ToExpression()).Compile(CompilationType.CompileToMethod)());
         }
 
         [Fact]
@@ -188,9 +190,9 @@ namespace System.Dynamic.Tests
         {
             Expression exp = Expression.Default(typeof(Egalitarian));
             BindingRestrictions hasNull = BindingRestrictions.GetInstanceRestriction(exp, null);
-            Assert.True(Expression.Lambda<Func<bool>>(hasNull.ToExpression()).Compile()());
+            Assert.True(Expression.Lambda<Func<bool>>(hasNull.ToExpression()).Compile(CompilationType.CompileToMethod)());
             BindingRestrictions hasInst = BindingRestrictions.GetInstanceRestriction(exp, new Egalitarian());
-            Assert.False(Expression.Lambda<Func<bool>>(hasInst.ToExpression()).Compile()());
+            Assert.False(Expression.Lambda<Func<bool>>(hasInst.ToExpression()).Compile(CompilationType.CompileToMethod)());
         }
 
         [Fact]
@@ -255,14 +257,14 @@ namespace System.Dynamic.Tests
         public void TypeRestrictionTrueForMatchType(object obj)
         {
             BindingRestrictions isType = BindingRestrictions.GetTypeRestriction(Expression.Constant(obj), obj.GetType());
-            Assert.True(Expression.Lambda<Func<bool>>(isType.ToExpression()).Compile()());
+            Assert.True(Expression.Lambda<Func<bool>>(isType.ToExpression()).Compile(CompilationType.CompileToMethod)());
         }
 
         [Theory, MemberData(nameof(ObjectsAndWrongTypes))]
         public void TypeRestrictionFalseForOtherType(object obj, Type type)
         {
             BindingRestrictions isType = BindingRestrictions.GetTypeRestriction(Expression.Constant(obj), type);
-            Assert.False(Expression.Lambda<Func<bool>>(isType.ToExpression()).Compile()());
+            Assert.False(Expression.Lambda<Func<bool>>(isType.ToExpression()).Compile(CompilationType.CompileToMethod)());
         }
 
         [Fact]

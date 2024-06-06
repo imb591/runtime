@@ -303,7 +303,7 @@ namespace System.Linq.Expressions.Tests
                 Expression.Block(
                     Expression.Call(GetType().GetMethod(nameof(DoNothing))),
                     Expression.Return(target),
-                    Expression.Throw(Expression.Constant(new Exception())),
+                    Expression.Throw(Expression.New(typeof(Exception))),
                     Expression.Label(target)),
                 true);
             Action act = lambda.Compile(useInterpreter);
@@ -316,13 +316,9 @@ namespace System.Linq.Expressions.Tests
   IL_0000: tail.
   IL_0002: call       void class [System.Linq.Expressions.Tests]System.Linq.Expressions.Tests.Return::DoNothing()
   IL_0007: ret
-  IL_0008: ldarg.0
-  IL_0009: ldfld      class [System.Linq.Expressions]System.Runtime.CompilerServices.Closure::Constants
-  IL_000e: ldc.i4.0
-  IL_000f: ldelem.ref
-  IL_0010: castclass  class [System.Private.CoreLib]System.Exception
-  IL_0015: throw
-  IL_0016: ret
+  IL_0008: newobj     instance void class [System.Private.CoreLib]System.Exception::.ctor()
+  IL_000d: throw
+  IL_000e: ret
 }", @"
 object lambda_method(object[])
 {
@@ -332,7 +328,7 @@ object lambda_method(object[])
 
   IP_0000: Call(Void DoNothing())
   IP_0001: Goto[0] -> 4
-  IP_0002: LoadCached(0: System.Exception: Exception of type 'System.Exception' was thrown.)
+  IP_0002: New Exception(Void .ctor())
   IP_0003: Throw()
 }");
         }

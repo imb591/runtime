@@ -651,8 +651,8 @@ namespace System.Linq.Expressions.Tests
             Func<AndAlso> f1 = () => a1 && !a1;
             AndAlso r1 = f1();
 
-            Expression<Func<AndAlso>> e = () => a1 && !a1;
-            AndAlso r2 = e.Compile(useInterpreter)();
+            Expression<Func<AndAlso, AndAlso>> e = a1 => a1 && !a1;
+            AndAlso r2 = e.Compile(useInterpreter)(a1);
 
             Assert.Equal(r2.value, r1.value);
         }
@@ -934,7 +934,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Null(f6());
         }
 
-        private class TestClass : IEquatable<TestClass>
+        public class TestClass : IEquatable<TestClass>
         {
             private int _val;
             public TestClass(string S, int Val)
@@ -1739,9 +1739,9 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<int, int>> f = x => x + 1;
             Func<int, int> compiled = f.Compile(useInterpreter);
-            Expression<Func<int>> lambda = () => compiled(5);
-            Func<int> d = lambda.Compile(useInterpreter);
-            Assert.Equal(6, d());
+            Expression<Func<Func<int, int>, int>> lambda = compiled => compiled(5);
+            Func<Func<int, int>, int> d = lambda.Compile(useInterpreter);
+            Assert.Equal(6, d(compiled));
         }
 
         [Theory]
@@ -1750,9 +1750,9 @@ namespace System.Linq.Expressions.Tests
         {
             Expression<Func<object, bool>> f = x => x == Type.Missing;
             Func<object, bool> compiled = f.Compile(useInterpreter);
-            Expression<Func<object, bool>> lambda = x => compiled(x);
-            Func<object, bool> d = lambda.Compile(useInterpreter);
-            Assert.True(d(Type.Missing));
+            Expression<Func<Func<object, bool>, object, bool>> lambda = (compiled, x) => compiled(x);
+            Func<Func<object, bool>, object, bool> d = lambda.Compile(useInterpreter);
+            Assert.True(d(compiled, Type.Missing));
         }
 
         [Theory]

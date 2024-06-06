@@ -16,7 +16,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private class IntegralException : Exception
+        public class IntegralException : Exception
         {
             public IntegralException(int number)
             {

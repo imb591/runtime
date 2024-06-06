@@ -276,7 +276,7 @@ namespace System.Linq.Expressions.Tests
                     Assert.Equal(xVal != yVal, func(xVal, yVal));
         }
 
-        private struct UselessValue
+        public struct UselessValue
         {
         }
 

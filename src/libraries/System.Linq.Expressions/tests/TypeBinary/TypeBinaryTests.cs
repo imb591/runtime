@@ -25,12 +25,12 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        protected enum ByteBased : byte
+        public enum ByteBased : byte
         {
             A, B, C, D
         }
 
-        protected enum SByteBased : byte
+        public enum SByteBased : byte
         {
             A, B, C, D
         }
@@ -55,7 +55,7 @@ namespace System.Linq.Expressions.Tests
                 yield return Expression.Constant("hello", typeof(object));
                 yield return Expression.Constant(Expression.Empty());
                 yield return Expression.Constant(Expression.And(Expression.Constant(1), Expression.Constant(2)));
-                yield return Expression.Constant(typeof(int));
+                yield return Expression.Constant(typeof(int), typeof(Type));
                 yield return Expression.New(typeof(string).GetConstructor(new[] { typeof(char[]) }), Expression.Constant(new[] { 't', 'e', 's', 't' }));
                 yield return Expression.Convert(Expression.Constant(DateTime.MaxValue), typeof(DateTime?));
                 yield return Expression.Constant(1, typeof(int?));

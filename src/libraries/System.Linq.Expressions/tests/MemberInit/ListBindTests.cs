@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
 {
     public class ListBindTests
     {
-        private class ListWrapper<T>
+        public class ListWrapper<T>
         {
             public static List<T> StaticListField = new List<T>();
             public static List<T> StaticListProperty { get; set; }
@@ -89,7 +89,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("member", () => Expression.ListBind(member, Enumerable.Empty<ElementInit>()));
         }
 
-        private static IEnumerable<object> NonAddableListExpressions()
+        public static IEnumerable<object[]> NonAddableListExpressions()
         {
             PropertyInfo property = typeof(ListWrapper<int>).GetProperty(nameof(ListWrapper<int>.EnumerableProperty));
             MemberInfo member = typeof(ListWrapper<int>).GetMember(nameof(ListWrapper<int>.EnumerableProperty))[0];

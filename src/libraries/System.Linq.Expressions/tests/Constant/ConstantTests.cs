@@ -280,9 +280,9 @@ namespace System.Linq.Expressions.Tests
 
         private static TypeBuilder GetTypeBuilder()
         {
-            AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), AssemblyBuilderAccess.RunAndCollect);
+            AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), AssemblyBuilderAccess.Run);
             ModuleBuilder module = assembly.DefineDynamicModule("Name");
-            return module.DefineType("Type");
+            return module.DefineType("Type", TypeAttributes.Public);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
@@ -299,18 +299,19 @@ namespace System.Linq.Expressions.Tests
                 typeof(PrivateGenericClass<int>)
             })
             {
+                if (useInterpreter == CompilationType.CompileToMethod && value != null && (value.IsGenericParameter || !value.IsPublic)) continue;
                 VerifyTypeConstant(value, useInterpreter);
             }
 
             if (PlatformDetection.IsReflectionEmitSupported)
             {
-                VerifyTypeConstant(GetTypeBuilder(), useInterpreter);
+                VerifyTypeConstant(useInterpreter == CompilationType.CompileToMethod ? GetTypeBuilder().CreateType() : GetTypeBuilder(), useInterpreter);
             }
         }
 
         private static MethodInfo GlobalMethod(params Type[] parameterTypes)
         {
-            ModuleBuilder module = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), AssemblyBuilderAccess.RunAndCollect).DefineDynamicModule("Module");
+            ModuleBuilder module = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), AssemblyBuilderAccess.Run).DefineDynamicModule("Module");
             MethodBuilder globalMethod = module.DefineGlobalMethod("GlobalMethod", MethodAttributes.Public | MethodAttributes.Static, typeof(void), parameterTypes);
             globalMethod.GetILGenerator().Emit(OpCodes.Ret);
             module.CreateGlobalFunctions();
@@ -1034,7 +1035,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        class Bar
+        public class Bar
         {
             public int Foo = 41;
             public int Qux = 43;

@@ -43,7 +43,7 @@ namespace System.Linq.Expressions.Tests
                 }
         }
 
-        private class Box<T>
+        public class Box<T>
         {
             public static T StaticValue { get; set; }
             public T Value { get; set; }
@@ -493,7 +493,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidOperationException>(() => Expression.MakeBinary(type, lhs, rhs, false, meth, conversion));
         }
 
-        private class AddsToSomethingElse : IEquatable<AddsToSomethingElse>
+        public class AddsToSomethingElse : IEquatable<AddsToSomethingElse>
         {
             public int Value { get; }
 

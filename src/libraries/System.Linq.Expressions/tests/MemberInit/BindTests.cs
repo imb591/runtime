@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
 {
     public class BindTests
     {
-        private class PropertyAndFields
+        public class PropertyAndFields
         {
 #pragma warning disable 649 // Assigned through expressions.
             public string StringProperty { get; set; }

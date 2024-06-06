@@ -16554,11 +16554,11 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private struct HalfLiftedTo
+        public struct HalfLiftedTo
         {
         }
 
-        private struct ImplicitHalfLiftedFrom
+        public struct ImplicitHalfLiftedFrom
         {
             public bool NullEquiv { get; set; }
 
@@ -16566,7 +16566,7 @@ namespace System.Linq.Expressions.Tests
                 source.NullEquiv ? default(HalfLiftedTo?) : new HalfLiftedTo();
         }
 
-        private struct ExplicitHalfLiftedFrom
+        public struct ExplicitHalfLiftedFrom
         {
             public bool NullEquiv { get; set; }
 
@@ -16574,25 +16574,25 @@ namespace System.Linq.Expressions.Tests
                 source.NullEquiv ? default(HalfLiftedTo?) : new HalfLiftedTo();
         }
 
-        private struct ImplicitHalfLiftedOverloaded
+        public struct ImplicitHalfLiftedOverloaded
         {
             public static implicit operator HalfLiftedTo?(ImplicitHalfLiftedOverloaded source) => new HalfLiftedTo();
 
             public static implicit operator HalfLiftedTo?(ImplicitHalfLiftedOverloaded? source) => new HalfLiftedTo();
         }
 
-        private struct ImplicitHalfLiftedFromReverse
+        public struct ImplicitHalfLiftedFromReverse
         {
             public static implicit operator HalfLiftedTo(ImplicitHalfLiftedFromReverse? source) => new HalfLiftedTo();
         }
 
-        private struct HalfLiftedToTargetOperator
+        public struct HalfLiftedToTargetOperator
         {
             public static implicit operator HalfLiftedToTargetOperator?(HalfLiftedFromTargetOperator source) =>
                 source.NullEquiv ? default(HalfLiftedToTargetOperator?) : new HalfLiftedToTargetOperator();
         }
 
-        private struct HalfLiftedFromTargetOperator
+        public struct HalfLiftedFromTargetOperator
         {
             public bool NullEquiv { get; set; }
         }
@@ -16809,7 +16809,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(result, del.DynamicInvoke());
         }
 
-        private class CustomConversions
+        public class CustomConversions
         {
             public int Value { get; set; }
 
@@ -16991,15 +16991,15 @@ namespace System.Linq.Expressions.Tests
                 () => Expression.Convert(Expression.Default(typeof(IAsyncResult[])), typeof(string[])));
         }
 
-        interface IInterface
+        public interface IInterface
         {
         }
 
-        class NonSealed
+        public class NonSealed
         {
         }
 
-        class Derived : NonSealed, IInterface
+        public class Derived : NonSealed, IInterface
         {
         }
 

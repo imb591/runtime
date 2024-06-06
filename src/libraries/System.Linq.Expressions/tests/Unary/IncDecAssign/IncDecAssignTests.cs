@@ -338,7 +338,7 @@ namespace System.Linq.Expressions.Tests
             yield return new object[] { typeof(Tuple<string, int>) };
         }
 
-        protected static string SillyMethod(string value)
+        public static string SillyMethod(string value)
         {
             return value == null ? null : "Eggplant";
         }
@@ -348,7 +348,7 @@ namespace System.Linq.Expressions.Tests
             return x.ToString();
         }
 
-        protected class TestPropertyClass<T>
+        public class TestPropertyClass<T>
         {
             public static T TestStatic { get; set; }
             public T TestInstance { get; set; }

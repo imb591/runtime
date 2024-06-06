@@ -636,7 +636,7 @@ namespace System.Linq.Expressions.Tests
                 "comparison", () => Expression.Switch(switchVal, defaultExp, method, switchCase));
         }
 
-        static bool WithinTen(int x, int y) => Math.Abs(x - y) < 10;
+        public static bool WithinTen(int x, int y) => Math.Abs(x - y) < 10;
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public void LiftedCall(CompilationType useInterpreter)
@@ -645,7 +645,7 @@ namespace System.Linq.Expressions.Tests
                 Expression.Switch(
                     Expression.Constant(30, typeof(int?)),
                     Expression.Constant(0),
-                    typeof(SwitchTests).GetMethod(nameof(WithinTen), BindingFlags.Static | BindingFlags.NonPublic),
+                    typeof(SwitchTests).GetMethod(nameof(WithinTen), BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic),
                     Expression.SwitchCase(Expression.Constant(1), Expression.Constant(2, typeof(int?))),
                     Expression.SwitchCase(Expression.Constant(2), Expression.Constant(9, typeof(int?)), Expression.Constant(28, typeof(int?))),
                     Expression.SwitchCase(Expression.Constant(3), Expression.Constant(49, typeof(int?)))
@@ -662,7 +662,7 @@ namespace System.Linq.Expressions.Tests
                 Expression.Switch(
                     Expression.Constant(30, typeof(int?)),
                     Expression.Constant(0),
-                    typeof(SwitchTests).GetMethod(nameof(WithinTen), BindingFlags.Static | BindingFlags.NonPublic),
+                    typeof(SwitchTests).GetMethod(nameof(WithinTen), BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public),
                     Expression.SwitchCase(Expression.Constant(1), Expression.Constant(2))
                     )
                 );

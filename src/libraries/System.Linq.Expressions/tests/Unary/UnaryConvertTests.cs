@@ -234,7 +234,7 @@ namespace System.Linq.Expressions.Tests
                     Type t = o.GetType();
                     ConstantExpression c = Expression.Constant(o, t);
 
-                    foreach (var i in t.GetTypeInfo().ImplementedInterfaces)
+                    foreach (var i in t.GetTypeInfo().ImplementedInterfaces.Where(x => x.IsPublic))
                     {
                         yield return factory(c, i);
                     }
@@ -248,7 +248,7 @@ namespace System.Linq.Expressions.Tests
 
                     foreach (var c in new[] { Expression.Constant(o, n), Expression.Constant(null, n) })
                     {
-                        foreach (var i in t.GetTypeInfo().ImplementedInterfaces)
+                        foreach (var i in t.GetTypeInfo().ImplementedInterfaces.Where(x => x.IsPublic))
                         {
                             yield return factory(c, i);
                         }

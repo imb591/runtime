@@ -94,7 +94,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Helpers
 
-        class X
+        public class X
         {
             private readonly Y _y = new Y();
             private readonly List<int> _xs = new List<int>();
@@ -107,7 +107,7 @@ namespace System.Linq.Expressions.Tests
             public List<int> XS { get { return _xs; } }
         }
 
-        class Y
+        public class Y
         {
             private readonly List<int> _ys = new List<int>();
 

@@ -9,7 +9,7 @@ namespace System.Linq.Expressions.Tests
 {
     public static class CallTests
     {
-        private struct Mutable
+        public struct Mutable
         {
             private int x;
 
@@ -31,7 +31,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private class Wrapper<T>
+        public class Wrapper<T>
         {
             public const int Zero = 0;
             public T Field;
@@ -45,7 +45,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static class Methods
+        public static class Methods
         {
             public static void ByRef(ref int x) { ++x; }
         }
@@ -690,9 +690,9 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(DayOfWeek.Monday, expr.Compile(useInterpreter)()[0]);
         }
 
-        private static DayOfWeek ToDayOfWeek0() => DayOfWeek.Monday;
-        private static DayOfWeek ToDayOfWeek1(int i) => (DayOfWeek)i;
-        private static DayOfWeek ToDayOfWeek2(int i, int j) => (DayOfWeek)(i + j);
+        public static DayOfWeek ToDayOfWeek0() => DayOfWeek.Monday;
+        public static DayOfWeek ToDayOfWeek1(int i) => (DayOfWeek)i;
+        public static DayOfWeek ToDayOfWeek2(int i, int j) => (DayOfWeek)(i + j);
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
@@ -718,9 +718,9 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(DayOfWeek.Monday, expr.Compile(useInterpreter)()[0].Value);
         }
 
-        private static DayOfWeek? ToDayOfWeekOpt0() => DayOfWeek.Monday;
-        private static DayOfWeek? ToDayOfWeekOpt1(int i) => (DayOfWeek)i;
-        private static DayOfWeek? ToDayOfWeekOpt2(int i, int j) => (DayOfWeek)(i + j);
+        public static DayOfWeek? ToDayOfWeekOpt0() => DayOfWeek.Monday;
+        public static DayOfWeek? ToDayOfWeekOpt1(int i) => (DayOfWeek)i;
+        public static DayOfWeek? ToDayOfWeekOpt2(int i, int j) => (DayOfWeek)(i + j);
 
         public class GenericClass<T>
         {

@@ -1,6 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Collections.Generic;
+using System.Globalization;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
@@ -23,7 +25,7 @@ namespace System.Linq.Expressions.Tests
             for (var i = 0; i < n; i++)
                 e = Expression.Add(e, Expression.Constant(1));
 
-            Func<int> f = Expression.Lambda<Func<int>>(e).Compile(useInterpreter);
+            Func<int> f = Expression.Lambda<Func<int>>(e).Compile(useInterpreter, withoutVisitor: true);
 
             Assert.Equal(n, f());
         }
@@ -252,6 +254,23 @@ namespace System.Linq.Expressions.Tests
                     IL_0000: ldc.i4.s   42
                     IL_0002: ret
                   }",
+                methodBuilderExpected: @".method class [System.Private.CoreLib]System.Func`1<int32> ::lambda_method(class [System.Linq.Expressions]System.Runtime.CompilerServices.Closure)
+                  {
+                      .maxstack 3
+
+                      IL_0000: ldnull
+                      IL_0001: ldftn      int32 class [CompiledExpressionsVerifyIL_Closure1]VerifyIL_Closure1::lambda_method()
+                      IL_0007: newobj     instance void class [System.Private.CoreLib]System.Func`1<int32>::.ctor(object,native int)
+                      IL_000c: ret
+                  }
+
+                  .method int32 class [CompiledExpressionsVerifyIL_Closure1]VerifyIL_Closure1::lambda_method()
+                  {
+                      .maxstack 1
+
+                      IL_0000: ldc.i4.s   42
+                      IL_0002: ret
+                  }",
                 appendInnerLambdas: true);
         }
 
@@ -309,6 +328,46 @@ namespace System.Linq.Expressions.Tests
                     IL_000a: castclass  class [System.Private.CoreLib]System.Runtime.CompilerServices.StrongBox`1<int32>
                     IL_000f: ldfld      class [System.Private.CoreLib]System.Runtime.CompilerServices.StrongBox`1<int32>::Value
                     IL_0014: ret
+                  }",
+                methodBuilderExpected: @".method class [System.Private.CoreLib]System.Func`1<int32> ::lambda_method(class [System.Linq.Expressions]System.Runtime.CompilerServices.Closure,int32)
+                  {
+                      .maxstack 5
+                      .locals init (
+                        [0] object[]
+                      )
+
+                      IL_0000: ldc.i4.1
+                      IL_0001: newarr     object
+                      IL_0006: dup
+                      IL_0007: ldc.i4.0
+                      IL_0008: ldarg.0
+                      IL_0009: newobj     instance void class [System.Private.CoreLib]System.Runtime.CompilerServices.StrongBox`1<int32>::.ctor(int32)
+                      IL_000e: stelem.ref
+                      IL_000f: stloc.0
+                      IL_0010: ldnull
+                      IL_0011: ldloc.0
+                      IL_0012: newobj     instance void class [CompileToMethod]System.Runtime.CompilerServices.Closure::.ctor(object[],object[])
+                      IL_0017: ldftn      int32 class [CompiledExpressionsVerifyIL_Closure2]VerifyIL_Closure2::lambda_method(class [CompileToMethod]System.Runtime.CompilerServices.Closure)
+                      IL_001d: newobj     instance void class [System.Private.CoreLib]System.Func`1<int32>::.ctor(object,native int)
+                      IL_0022: ret
+                  }
+
+                  .method int32 class [CompiledExpressionsVerifyIL_Closure2]VerifyIL_Closure2::lambda_method(class [CompileToMethod]System.Runtime.CompilerServices.Closure)
+                  {
+                      .maxstack 2
+                      .locals init (
+                        [0] object[]
+                      )
+
+                      IL_0000: ldarg.0
+                      IL_0001: ldfld      class [CompileToMethod]System.Runtime.CompilerServices.Closure::Locals
+                      IL_0006: stloc.0
+                      IL_0007: ldloc.0
+                      IL_0008: ldc.i4.0
+                      IL_0009: ldelem.ref
+                      IL_000a: castclass  class [System.Private.CoreLib]System.Runtime.CompilerServices.StrongBox`1<int32>
+                      IL_000f: ldfld      class [System.Private.CoreLib]System.Runtime.CompilerServices.StrongBox`1<int32>::Value
+                      IL_0014: ret
                   }",
                 appendInnerLambdas: true);
         }
@@ -371,10 +430,58 @@ namespace System.Linq.Expressions.Tests
                     IL_0015: add
                     IL_0016: ret
                   }",
+                methodBuilderExpected: @".method class [System.Private.CoreLib]System.Func`2<int32,int32> ::lambda_method(class [System.Linq.Expressions]System.Runtime.CompilerServices.Closure,int32)
+                  {
+                      .maxstack 5
+                      .locals init (
+                        [0] object[]
+                      )
+
+                      IL_0000: ldc.i4.1
+                      IL_0001: newarr     object
+                      IL_0006: dup
+                      IL_0007: ldc.i4.0
+                      IL_0008: ldarg.0
+                      IL_0009: newobj     instance void class [System.Private.CoreLib]System.Runtime.CompilerServices.StrongBox`1<int32>::.ctor(int32)
+                      IL_000e: stelem.ref
+                      IL_000f: stloc.0
+                      IL_0010: ldnull
+                      IL_0011: ldloc.0
+                      IL_0012: newobj     instance void class [CompileToMethod]System.Runtime.CompilerServices.Closure::.ctor(object[],object[])
+                      IL_0017: ldftn      int32 class [CompiledExpressionsVerifyIL_Closure3]VerifyIL_Closure3::lambda_method(class [CompileToMethod]System.Runtime.CompilerServices.Closure,int32)
+                      IL_001d: newobj     instance void class [System.Private.CoreLib]System.Func`2<int32,int32>::.ctor(object,native int)
+                      IL_0022: ret
+                  }
+
+                  .method int32 class [CompiledExpressionsVerifyIL_Closure3]VerifyIL_Closure3::lambda_method(class [CompileToMethod]System.Runtime.CompilerServices.Closure,int32)
+                  {
+                      .maxstack 2
+                      .locals init (
+                        [0] object[]
+                      )
+
+                      IL_0000: ldarg.0
+                      IL_0001: ldfld      class [CompileToMethod]System.Runtime.CompilerServices.Closure::Locals
+                      IL_0006: stloc.0
+                      IL_0007: ldloc.0
+                      IL_0008: ldc.i4.0
+                      IL_0009: ldelem.ref
+                      IL_000a: castclass  class [System.Private.CoreLib]System.Runtime.CompilerServices.StrongBox`1<int32>
+                      IL_000f: ldfld      class [System.Private.CoreLib]System.Runtime.CompilerServices.StrongBox`1<int32>::Value
+                      IL_0014: ldarg.1
+                      IL_0015: add
+                      IL_0016: ret
+                  }",
                 appendInnerLambdas: true);
         }
 
-        internal static void VerifyIL(this LambdaExpression expression, string expected, bool appendInnerLambdas = false)
+        internal static void VerifyIL(this LambdaExpression expression, string expected, bool appendInnerLambdas = false, string methodBuilderExpected = null, [CallerMemberName]string className = null)
+        {
+            VerifyDynamicMethodIL(expression, expected, appendInnerLambdas);
+            VerifyMethodBuilderIL(expression, methodBuilderExpected ?? expected, appendInnerLambdas, className);
+        }
+
+        internal static void VerifyDynamicMethodIL(this LambdaExpression expression, string expected, bool appendInnerLambdas = false)
         {
             string actual = expression.GetIL(appendInnerLambdas);
 
@@ -382,6 +489,140 @@ namespace System.Linq.Expressions.Tests
             string nActual = Normalize(actual);
 
             Assert.Equal(nExpected, nActual);
+        }
+
+        internal static void VerifyMethodBuilderIL(this LambdaExpression expression, string expected, bool appendInnerLambdas = false, [CallerMemberName]string className = null)
+        {
+            string actual = expression.GetMethodBuilderIL(className, appendInnerLambdas);
+
+            string nExpected = Normalize(expected);
+            nExpected = TransformToMethodBuilder(nExpected, className);
+            string nActual = Normalize(actual);
+            nExpected = Regex.Replace(nExpected, @"<ExpressionCompilerImplementationDetails>\{\d+\}", "");
+            nActual = Regex.Replace(nActual, @"<ExpressionCompilerImplementationDetails>\{\d+\}", "");
+            nExpected = Regex.Replace(nExpected, @"\.maxstack \d+", "");
+            nActual = Regex.Replace(nActual, @"\.maxstack \d+", "");
+
+            try
+            {
+                Assert.Equal(nExpected, nActual);
+            }
+            catch (Exception xunit)
+            {
+                throw new Exception($"IL assertion failed. Expected (normalized):\n{nExpected}\n\nActual:\n{actual}", xunit);
+            }
+        }
+
+        private static readonly Regex s_instruction = new Regex(@"IL_([0-9a-f]{4}): (\S+(?:\s+V_(\d+))?)", RegexOptions.Compiled);
+        private static readonly Regex s_instructionSecondPass = new Regex(@"IL_(?:[0-9a-f]{4}): (?:\S+)(?:\s+IL_([0-9a-f]{4}))?", RegexOptions.Compiled);
+
+        private static string TransformToMethodBuilder(string nExpected, string className)
+        {
+            nExpected = nExpected
+                .Replace(
+                    "::lambda_method(class [System.Linq.Expressions]System.Runtime.CompilerServices.Closure,",
+                    $"class [" + TestCompiler.AssemblyName(className) + "]" + className + "::M(");
+            nExpected = nExpected
+                .Replace(
+                    "::lambda_method(class [System.Linq.Expressions]System.Runtime.CompilerServices.Closure",
+                    $"class [" + TestCompiler.AssemblyName(className) + "]" + className + "::M(");
+            nExpected = nExpected
+                .Replace(
+                    "class [System.Linq.Expressions]System.Runtime.CompilerServices.RuntimeOps",
+                    $"class [CompileToMethod]{typeof(RuntimeOps).FullName}");
+            int currentOffset = 0;
+            bool innerMethod = false;
+            var addressChanges = new Dictionary<int, int>();
+            nExpected = s_instruction.Replace(nExpected, match =>
+            {
+                string result = match.Groups[0].Value;
+                if (innerMethod)
+                {
+                    return result;
+                }
+                int address = int.Parse(match.Groups[1].Value, NumberStyles.HexNumber);
+                string instruction = match.Groups[2].Value;
+                if (instruction.StartsWith("ldarg "))
+                {
+                    int argumentIndex = int.Parse(match.Groups[3].Value);
+                    result = $"IL_{IlOffset()}: ldarg      V_{argumentIndex - 1}";
+                }
+                else if (instruction.StartsWith("ldarga "))
+                {
+                    int argumentIndex = int.Parse(match.Groups[3].Value);
+                    result = $"IL_{IlOffset()}: ldarga     V_{argumentIndex - 1}";
+                }
+                else if (instruction.StartsWith("ldarg.s"))
+                {
+                    int argumentIndex = int.Parse(match.Groups[3].Value);
+                    if (argumentIndex == 4)
+                    {
+                        result = $"IL_{IlOffset()}: ldarg.3";
+                        currentOffset -= 1;
+                    }
+                    else
+                    {
+                        result = $"IL_{IlOffset()}: ldarg.s    V_{argumentIndex - 1}";
+                    }
+                }
+                else if (instruction.StartsWith("ldarga.s"))
+                {
+                    int argumentIndex = int.Parse(match.Groups[3].Value);
+                    if (argumentIndex == 4)
+                    {
+                        result = $"IL_{IlOffset()}: ldarga.3";
+                        currentOffset -= 1;
+                    }
+                    else
+                    {
+                        result = $"IL_{IlOffset()}: ldarga.s   V_{argumentIndex - 1}";
+                    }
+                }
+                else if (instruction.StartsWith("ldarg."))
+                {
+                    int argumentIndex = int.Parse(instruction.Substring("ldarg.".Length));
+                    if (argumentIndex > 0)
+                    {
+                        result = $"IL_{IlOffset()}: ldarg.{argumentIndex - 1}";
+                    }
+                    else
+                    {
+                        innerMethod = true;
+                    }
+                }
+                else if (instruction.StartsWith("ldarga."))
+                {
+                    int argumentIndex = int.Parse(instruction.Substring("ldarga.".Length));
+                    result = $"IL_{IlOffset()}: ldarga.{argumentIndex - 1}";
+                }
+                else if (currentOffset != 0)
+                {
+                    result = $"IL_{(IlOffset())}: {instruction}";
+                }
+
+                if (currentOffset != 0)
+                {
+                    addressChanges[address] = address + currentOffset;
+                }
+                return result;
+
+                string IlOffset() => (address + currentOffset).ToString("x4");
+            });
+            nExpected = s_instructionSecondPass.Replace(nExpected, match =>
+            {
+                string result = match.Groups[0].Value;
+                if (match.Groups[1].Value != string.Empty)
+                {
+                    int jumpAddress = int.Parse(match.Groups[1].Value, NumberStyles.HexNumber);
+                    if (addressChanges.TryGetValue(jumpAddress, out int newJumpAddress))
+                    {
+                        result = result.Replace(" IL_" + match.Groups[1].Value, " IL_" + newJumpAddress.ToString("x4"));
+                    }
+                }
+                return result;
+            });
+
+            return nExpected;
         }
 
         private static string Normalize(string s)
@@ -417,6 +658,11 @@ namespace System.Linq.Expressions.Tests
 
             object o = f.DynamicInvoke();
             Assert.Equal(expectedValue, o);
+
+            f = Expression.Lambda(e).Compile(CompilationType.CompileToMethod);
+
+            o = f.DynamicInvoke();
+            Assert.Equal(expectedValue, o);
         }
 
         private static void Verify_VariableBinder_CatchBlock_Filter(CatchBlock @catch)
@@ -430,6 +676,7 @@ namespace System.Linq.Expressions.Tests
                 );
 
             Assert.Throws<InvalidOperationException>(() => e.Compile(CompilationType.Compile));
+            Assert.Throws<InvalidOperationException>(() => e.Compile(CompilationType.CompileToMethod));
         }
 
         /// <summary>

@@ -7,12 +7,12 @@ namespace System.Linq.Expressions.Tests
 {
     public abstract class ReferenceEqualityTests
     {
-        protected static IEnumerable<object[]> ReferenceObjectsData()
+        public static IEnumerable<object[]> ReferenceObjectsData()
         {
             return ReferenceObjects().Select(i => new[] { i });
         }
 
-        protected static IEnumerable<object[]> DifferentObjects()
+        public static IEnumerable<object[]> DifferentObjects()
         {
             return from x in ReferenceObjects()
                    from y in ReferenceObjects()
@@ -21,12 +21,12 @@ namespace System.Linq.Expressions.Tests
                    select new[] { x, y };
         }
 
-        protected static IEnumerable<object[]> ComparableValuesData()
+        public static IEnumerable<object[]> ComparableValuesData()
         {
             return ComparableValues().Select(i => new object[] { i });
         }
 
-        protected static IEnumerable<object[]> DifferentComparableValues()
+        public static IEnumerable<object[]> DifferentComparableValues()
         {
             return from x in ComparableValues()
                    from y in ComparableValues()

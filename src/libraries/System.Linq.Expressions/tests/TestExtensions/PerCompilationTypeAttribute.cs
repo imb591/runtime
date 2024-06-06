@@ -17,6 +17,7 @@ namespace System.Linq.Expressions.Tests
     {
         private static readonly object s_boxedFalse = CompilationType.Compile;
         private static readonly object s_boxedTrue = CompilationType.Interpret;
+        private static readonly object s_boxedCompileToMethod = CompilationType.CompileToMethod;
 
         private readonly MemberDataAttribute delegatedTo;
 
@@ -42,6 +43,9 @@ namespace System.Linq.Expressions.Tests
                 object[] withTrue = new object[received.Length + 1];
                 withTrue[received.Length] = s_boxedTrue;
 
+                object[] withCompileToMethod = new object[received.Length + 1];
+                withCompileToMethod[received.Length] = s_boxedCompileToMethod;
+
                 for (int i = 0; i != received.Length; ++i)
                 {
                     object arg = received[i];
@@ -50,12 +54,14 @@ namespace System.Linq.Expressions.Tests
                         withFalse[i] = arg;
 
                     withTrue[i] = arg;
+                    withCompileToMethod[i] = arg;
                 }
 
                 if (withFalse != null)
                     yield return withFalse;
 
                 yield return withTrue;
+                yield return withCompileToMethod;
             }
         }
     }

@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace System.Linq.Expressions.Tests
 {
-    internal class SampleClassWithProperties
+    public class SampleClassWithProperties
     {
         internal readonly PropertyInfo DefaultIndexer = typeof(List<int>).GetProperty("Item");
         internal readonly ConstantExpression[] DefaultArguments = { Expression.Constant(0) };

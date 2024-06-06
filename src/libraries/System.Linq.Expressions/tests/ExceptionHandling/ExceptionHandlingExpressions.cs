@@ -14,7 +14,7 @@ namespace System.Linq.Expressions.Tests
     {
         // As this class is only used here, it is distinguished from an exception
         // being thrown due to an actual error.
-        protected class TestException : Exception
+        public class TestException : Exception
         {
             public TestException()
                 : base("This is a test exception")
@@ -22,7 +22,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        protected class DerivedTestException : TestException
+        public class DerivedTestException : TestException
         {
         }
 
@@ -252,10 +252,10 @@ namespace System.Linq.Expressions.Tests
                         new[]{ typeof(RuntimeCompatibilityAttribute).GetProperty(nameof(RuntimeCompatibilityAttribute.WrapNonExceptionThrows)) },
                         new object[] { assemblyWraps });
                 AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(
-                    new AssemblyName("Name"), AssemblyBuilderAccess.RunAndCollect);
+                    new AssemblyName("Name"), AssemblyBuilderAccess.Run);
                 assembly.SetCustomAttribute(custAtt);
                 ModuleBuilder module = assembly.DefineDynamicModule("Name");
-                TypeBuilder type = module.DefineType("Type");
+                TypeBuilder type = module.DefineType("Type", TypeAttributes.Public);
                 MethodBuilder throwingMethod = type.DefineMethod(
                     "WillThrow", MethodAttributes.Public | MethodAttributes.Static, typeof(void), Type.EmptyTypes);
                 ILGenerator ilGen = throwingMethod.GetILGenerator();
@@ -980,6 +980,12 @@ namespace System.Linq.Expressions.Tests
             TryFinallyWithinFilter(CompilationType.Compile);
         }
 
+        [Fact(Skip = "compilation fails"), ActiveIssue("https://github.com/dotnet/runtime/issues/20083")]
+        public void TryFinallyWithinFilterCompiledToMethod()
+        {
+            TryFinallyWithinFilter(CompilationType.CompileToMethod);
+        }
+
         [Fact]
         public void TryFinallyWithinFilterCompiledProhibited()
         {
@@ -1007,6 +1013,7 @@ namespace System.Linq.Expressions.Tests
             if (PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly)
             {
                 Assert.Throws<InvalidOperationException>(() => lambda.Compile(CompilationType.Compile));
+                Assert.Throws<InvalidOperationException>(() => lambda.Compile(CompilationType.CompileToMethod));
             }
             else
             {
@@ -1044,6 +1051,12 @@ namespace System.Linq.Expressions.Tests
             TryCatchWithinFilter(CompilationType.Compile);
         }
 
+        [Fact(Skip = "compilation fails"), ActiveIssue("https://github.com/dotnet/runtime/issues/20083")]
+        public void TryCatchWithinFilterCompiledToMethod()
+        {
+            TryCatchWithinFilter(CompilationType.CompileToMethod);
+        }
+
         [Theory, InlineData(CompilationType.Interpret)]
         public void TryCatchThrowingWithinFilter(CompilationType useInterpreter)
         {
@@ -1074,7 +1087,13 @@ namespace System.Linq.Expressions.Tests
             TryCatchThrowingWithinFilter(CompilationType.Compile);
         }
 
-        private bool MethodWithManyArguments(
+        [Fact(Skip = "compilation fails"), ActiveIssue("https://github.com/dotnet/runtime/issues/20083")]
+        public void TryCatchThrowingWithinFilterCompiledToMethod()
+        {
+            TryCatchThrowingWithinFilter(CompilationType.CompileToMethod);
+        }
+
+        public bool MethodWithManyArguments(
             int a, int b, int c, int d, int e, int f, int g, int h, int i, int j,
             int k, int l, int m, int n, int o, int p, int q, int r, int s,
             bool returnBack)

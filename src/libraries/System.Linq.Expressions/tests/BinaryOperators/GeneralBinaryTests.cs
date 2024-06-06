@@ -256,7 +256,7 @@ namespace System.Linq.Expressions.Tests
             Expression.Lambda(op).Compile(useInterpreter).DynamicInvoke();
         }
 
-        private class GenericClassWithNonGenericMethod<TClassType>
+        public class GenericClassWithNonGenericMethod<TClassType>
         {
             public static int DoIntStuff(int x, int y) => unchecked(x + y);
 

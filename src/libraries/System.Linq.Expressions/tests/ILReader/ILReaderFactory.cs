@@ -16,6 +16,10 @@ namespace System.Linq.Expressions.Tests
             {
                 return new ILReader(new DynamicMethodILProvider(dm), new DynamicScopeTokenResolver(dm));
             }
+            if (obj is MethodBuilder mb)
+            {
+                return new ILReader(new MethodBuilderILProvider(mb), new ModuleScopeTokenResolver(mb));
+            }
 
             throw new NotSupportedException($"Reading IL from type '{obj.GetType()}' is currently not supported.");
         }

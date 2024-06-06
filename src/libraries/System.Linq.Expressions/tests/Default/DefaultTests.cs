@@ -8,12 +8,12 @@ namespace System.Linq.Expressions.Tests
 {
     public class DefaultTests
     {
-        private enum MyEnum
+        public enum MyEnum
         {
             Value
         }
 
-        private class EnumOutLambdaClass
+        public class EnumOutLambdaClass
         {
             public static void BarRef(out MyEnum o)
             {

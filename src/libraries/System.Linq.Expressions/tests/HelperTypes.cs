@@ -250,6 +250,7 @@ namespace System.Linq.Expressions.Tests
     {
         Compile,
         Interpret,
+        CompileToMethod,
         WithoutPreference,
     }
 
@@ -267,6 +268,7 @@ namespace System.Linq.Expressions.Tests
                     {
                         CompilationType.Compile,
                         CompilationType.Interpret,
+                        CompilationType.CompileToMethod,
                     }
                     :
                     new CompilationType[]
@@ -398,7 +400,7 @@ namespace System.Linq.Expressions.Tests
         private static ModuleBuilder GetModuleBuilder()
         {
             AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(
-                new AssemblyName("Name"), AssemblyBuilderAccess.RunAndCollect);
+                new AssemblyName("Name"), AssemblyBuilderAccess.Run);
             return assembly.DefineDynamicModule("Name");
         }
 
@@ -492,6 +494,7 @@ namespace System.Linq.Expressions.Tests
             if (CompilationTypes.CanCompileToIL)
             {
                 expression.VerifyIL(il);
+                expression.VerifyMethodBuilderIL(il);
             }
 
             // LambdaExpression.CanCompileToIL is not directly required,

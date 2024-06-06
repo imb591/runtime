@@ -129,6 +129,7 @@ namespace System.Linq.Expressions.Tests
 
             internal void TypeDefOrRef(int token, byte indexType, int index)
             {
+                token = (indexType << 24) | index;
                 Type type = _parent._tokenResolver.AsType(token);
                 ((TypeInner)_inner).Resolve(type);
             }

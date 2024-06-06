@@ -34,7 +34,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private class AnyTypeList : IEnumerable<object>
+        public class AnyTypeList : IEnumerable<object>
         {
             private readonly List<object> _inner = new List<object>();
 
@@ -47,7 +47,7 @@ namespace System.Linq.Expressions.Tests
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
-        private struct ListValueType : IEnumerable<int>
+        public struct ListValueType : IEnumerable<int>
         {
             private List<int> _store;
 

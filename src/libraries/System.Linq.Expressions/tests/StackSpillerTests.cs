@@ -964,14 +964,14 @@ namespace System.Linq.Expressions.Tests
                     }");
         }
 
-        private static Expression<Func<int>> Spill_RefArgs_Invoke()
+        private static Expression<Func<Assign, int>> Spill_RefArgs_Invoke()
         {
-            ConstantExpression assign = Expression.Constant(new Assign((ref int l, int r) => { l = r; }));
+            ParameterExpression assign = Expression.Parameter(typeof(Assign));
             ParameterExpression x = Expression.Parameter(typeof(int));
             ConstantExpression v = Expression.Constant(42);
             BlockExpression b = Expression.Block(new[] { x }, Expression.Invoke(assign, x, Spill(v)), x);
 
-            Expression<Func<int>> e = Expression.Lambda<Func<int>>(b);
+            Expression<Func<Assign, int>> e = Expression.Lambda<Func<Assign, int>>(b, assign);
 
             return e;
         }
@@ -979,75 +979,75 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void Spill_RefArgs_Invoke_CodeGen()
         {
-            Expression<Func<int>> e = Spill_RefArgs_Invoke();
+            Expression<Func<Assign, int>> e = Spill_RefArgs_Invoke();
 
             e.Verify(
                 il: @"
-                    .method int32 ::lambda_method(class [System.Linq.Expressions]System.Runtime.CompilerServices.Closure)
+                    .method int32 ::lambda_method(class [System.Linq.Expressions]System.Runtime.CompilerServices.Closure,class [System.Linq.Expressions.Tests]System.Linq.Expressions.Tests.StackSpillerTests+Assign)
                     {
                       .maxstack 3
                       .locals init (
-                        [0] int32&,
-                        [1] int32,
+                        [0] class [System.Linq.Expressions.Tests]System.Linq.Expressions.Tests.StackSpillerTests+Assign,
+                        [1] int32&,
                         [2] int32,
-                        [3] int32
+                        [3] int32,
+                        [4] int32
                       )
 
-                      // V0 = ref x                       // spill reference to x [V2] into V0
-                      IL_0000: ldloca.s   V_2
-                      IL_0002: stloc.0
+                      IL_0000: ldarg.1
+                      IL_0001: stloc.0
+                      // V1 = ref x                       // spill reference to x [V3] into V1
+                      IL_0002: ldloca.s   V_3
+                      IL_0004: stloc.1
 
-                      // V1 = try { 42 } finally { }
+                      // V2 = try { 42 } finally { }
                       .try
                       {
-                        IL_0003: ldc.i4.s   42
-                        IL_0005: stloc.3
-                        IL_0006: leave      IL_000c
+                        IL_0005: ldc.i4.s   42
+                        IL_0007: stloc.s    V_4
+                        IL_0009: leave      IL_000f
                       }
                       finally
                       {
-                        IL_000b: endfinally
+                        IL_000e: endfinally
                       }
-                      IL_000c: ldloc.3
-                      IL_000d: stloc.1
+                      IL_000f: ldloc.s    V_4
+                      IL_0011: stloc.2
 
-                      // f.Invoke(ref x, try { 42 })      // using spilled reference in V0
-                      IL_000e: ldarg.0
-                      IL_000f: ldfld      class [System.Linq.Expressions]System.Runtime.CompilerServices.Closure::Constants
-                      IL_0014: ldc.i4.0
-                      IL_0015: ldelem.ref
-                      IL_0016: castclass  class [System.Linq.Expressions.Tests]System.Linq.Expressions.Tests.StackSpillerTests+Assign
-                      IL_001b: ldloc.0
-                      IL_001c: ldloc.1
-                      IL_001d: callvirt   instance void class [System.Linq.Expressions.Tests]System.Linq.Expressions.Tests.StackSpillerTests+Assign::Invoke(int32&,int32)
+                      // f.Invoke(ref x, try { 42 })      // using spilled reference in V1
+                      IL_0012: ldloc.0
+                      IL_0013: ldloc.1
+                      IL_0014: ldloc.2
+                      IL_0015: callvirt   instance void class [System.Linq.Expressions.Tests]System.Linq.Expressions.Tests.StackSpillerTests+Assign::Invoke(int32&,int32)
 
                       // return x
-                      IL_0022: ldloc.2
-                      IL_0023: ret
+                      IL_001a: ldloc.3
+                      IL_001b: ret
                     }",
                 instructions: @"
                     object lambda_method(object[])
                     {
-                      .locals 1
+                      .locals 2
                       .maxstack 5
                       .maxcontinuation 1
 
-                      IP_0000: InitImmutableValue(0)
-                      IP_0001: LoadCached(0: System.Linq.Expressions.Tests.StackSpillerTests+Assign)
+                      IP_0000: InitParameter(0)
+                      IP_0001: InitImmutableValue(1)
                       IP_0002: LoadLocal(0)
+                      IP_0003: LoadLocal(1)
                       .try
                       {
-                        IP_0003: EnterTryFinally[0] -> 6
-                        IP_0004: LoadObject(42)
-                        IP_0005: Goto[1] -> 8
+                        IP_0004: EnterTryFinally[0] -> 7
+                        IP_0005: LoadObject(42)
+                        IP_0006: Goto[1] -> 9
                       }
                       finally
                       {
-                        IP_0006: EnterFinally[0] -> 6
-                        IP_0007: LeaveFinally()
+                        IP_0007: EnterFinally[0] -> 7
+                        IP_0008: LeaveFinally()
                       }
-                      IP_0008: Call(Void Invoke(Int32 ByRef, Int32))
-                      IP_0009: LoadLocal(0)
+                      IP_0009: Call(Void Invoke(Int32 ByRef, Int32))
+                      IP_0010: LoadLocal(1)
                     }");
         }
 
@@ -1055,11 +1055,12 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void Spill_RefArgs_Invoke_Eval(CompilationType useInterpreter)
         {
-            Expression<Func<int>> e = Spill_RefArgs_Invoke();
+            Assign assign = (ref int l, int r) => { l = r; };
+            Expression<Func<Assign, int>> e = Spill_RefArgs_Invoke();
 
-            Func<int> f = e.Compile(useInterpreter);
+            Func<Assign, int> f = e.Compile(useInterpreter);
 
-            Assert.Equal(42, f());
+            Assert.Equal(42, f(assign));
         }
 
         private static Expression<Func<int>> Spill_RefArgs_Invoke_Inline()
@@ -2023,6 +2024,74 @@ namespace System.Linq.Expressions.Tests
 
                   IL_0036: ret
                 }"
+            , methodBuilderExpected: @"
+                .method void ::lambda_method(class [System.Linq.Expressions]System.Runtime.CompilerServices.Closure,class [System.Private.CoreLib]System.Action`2<class [System.Linq.Expressions]System.Runtime.CompilerServices.IRuntimeVariables,int32>,int32)
+                {
+                    .maxstack 6
+                    .locals init (
+                      [0] object[],
+                      [1] class [System.Private.CoreLib]System.Action`2<class [System.Linq.Expressions]System.Runtime.CompilerServices.IRuntimeVariables,int32>,
+                      [2] int32,
+                      [3] int32
+                    )
+
+                    // Hoist `x` to a closure in V_0
+                    IL_0000: ldc.i4.1
+                    IL_0001: newarr     object
+                    IL_0006: dup
+                    IL_0007: ldc.i4.0
+                    IL_0008: ldarg.2
+                    IL_0009: newobj     instance void class [System.Private.CoreLib]System.Runtime.CompilerServices.StrongBox`1<int32>::.ctor(int32)
+                    IL_000e: stelem.ref
+                    IL_000f: stloc.0
+
+                    // Save target (`f`) into V_1
+                    IL_0010: ldarg.1
+                    IL_0011: stloc.1
+
+                    // Save arg1 (`try { 2 } finally {}`) into V_2
+                    .try
+                    {
+                      IL_0012: ldc.i4.2
+                      IL_0013: stloc.3
+                      IL_0014: leave      IL_001a
+                    }
+                    finally
+                    {
+                      IL_0019: endfinally
+                    }
+                    IL_001a: ldloc.3
+                    IL_001b: stloc.2
+
+                    // Load target from V_1
+                    IL_001c: ldloc.1
+
+                    // <OPTIMIZATION> Load arg0 (`RuntimeVariables`) by calling RuntimeOps.CreateRuntimeVariables </OPTIMIZATION>
+                    IL_001d: ldloc.0
+
+                    IL_001e: ldsfld     class [CompiledExpressionsSpill_Optimizations_RuntimeVariables2]Spill_Optimizations_RuntimeVariables2::<ExpressionCompilerImplementationDetails>{1}ConstantArray
+                    IL_0023: ldnull
+                    IL_0024: bne.un     IL_0039
+                    IL_0029: ldc.i4.1
+                    IL_002a: newarr     int64
+                    IL_002f: dup
+                    IL_0030: ldc.i4.0
+                    IL_0031: ldc.i4.0
+                    IL_0032: conv.i8
+                    IL_0033: stelem.i8
+                    IL_0034: stsfld     class [CompiledExpressionsSpill_Optimizations_RuntimeVariables2]Spill_Optimizations_RuntimeVariables2::<ExpressionCompilerImplementationDetails>{1}ConstantArray
+                    IL_0039: ldsfld     class [CompiledExpressionsSpill_Optimizations_RuntimeVariables2]Spill_Optimizations_RuntimeVariables2::<ExpressionCompilerImplementationDetails>{1}ConstantArray
+
+                    IL_003e: call       class [System.Linq.Expressions]System.Runtime.CompilerServices.IRuntimeVariables class [System.Linq.Expressions]System.Runtime.CompilerServices.RuntimeOps::CreateRuntimeVariables(object[],int64[])
+
+                    // Load arg1 from V_2
+                    IL_0043: ldloc.2
+
+                    // Evaluate `target(arg0, arg1)` delegate invocation
+                    IL_0044: callvirt   instance void class [System.Private.CoreLib]System.Action`2<class [System.Linq.Expressions]System.Runtime.CompilerServices.IRuntimeVariables,int32>::Invoke(class [System.Linq.Expressions]System.Runtime.CompilerServices.IRuntimeVariables,int32)
+
+                    IL_0049: ret
+                }"
             );
         }
 
@@ -2051,7 +2120,7 @@ namespace System.Linq.Expressions.Tests
                     z
                 );
 
-            Func<Func<int, int, int, int>, int, int, int, int> d = e.Compile();
+            Func<Func<int, int, int, int>, int, int, int, int> d = e.Compile(CompilationType.CompileToMethod);
             Assert.Equal(7, d((a, b, c) => a + b * c, 1, 2, 3));
 
             e.VerifyIL(@"
@@ -2129,7 +2198,7 @@ namespace System.Linq.Expressions.Tests
                     x4
                 );
 
-            Func<int, int, int, int, int> d = e.Compile();
+            Func<int, int, int, int, int> d = e.Compile(CompilationType.CompileToMethod);
             Assert.Equal(10, d(1, 2, 3, 4));
 
             e.VerifyIL(@"
@@ -2236,17 +2305,17 @@ namespace System.Linq.Expressions.Tests
             return Expression.TryFinally(expression, Expression.Empty());
         }
 
-        class BarHolder
+        public class BarHolder
         {
             public Bar Bar { get; } = new Bar();
         }
 
-        class ListHolder
+        public class ListHolder
         {
             public List<int> Xs { get; } = new List<int>();
         }
 
-        class Bar
+        public class Bar
         {
             public int Baz { get; set; }
             public int Foo { get; set; }
@@ -2268,7 +2337,7 @@ namespace System.Linq.Expressions.Tests
             public override Expression Reduce() => _reduced;
         }
 
-        struct ValueVector
+        public struct ValueVector
         {
             private int v0;
 
@@ -2279,7 +2348,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        struct ValueBar
+        public struct ValueBar
         {
             public ValueBar(Baz baz)
             {
@@ -2305,7 +2374,7 @@ namespace System.Linq.Expressions.Tests
             public void Qux(int x) => Foo = x;
         }
 
-        class Baz
+        public class Baz
         {
             public Baz()
             {
@@ -2322,7 +2391,7 @@ namespace System.Linq.Expressions.Tests
             public void Qux(int x) => Foo = x;
         }
 
-        class ByRefs
+        public class ByRefs
         {
             public ByRefs(ref int x, int v)
             {
@@ -2335,9 +2404,9 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        delegate void Assign(ref int x, int v);
+        public delegate void Assign(ref int x, int v);
 
-        struct ValueList : IEnumerable<int>
+        public struct ValueList : IEnumerable<int>
         {
             private List<int> _values;
 

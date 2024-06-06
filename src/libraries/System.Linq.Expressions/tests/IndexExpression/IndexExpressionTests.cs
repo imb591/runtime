@@ -664,22 +664,22 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private interface IIndexable
+        public interface IIndexable
         {
             int this[int index] { get; }
         }
 
-        private struct InterfaceIndexableValueType : IIndexable
+        public struct InterfaceIndexableValueType : IIndexable
         {
             public int this[int index] => index * 2;
         }
 
-        private class IntAndExpressionIndexed
+        public class IntAndExpressionIndexed
         {
             public bool this[int x, Expression<Action> y] => true;
         }
 
-        private class OverloadedIndexers
+        public class OverloadedIndexers
         {
             public int this[int index] => 0;
 

@@ -9,7 +9,7 @@ namespace System.Linq.Expressions.Tests
 {
     public class Assign
     {
-        private class PropertyAndFields
+        public class PropertyAndFields
         {
 #pragma warning disable 649 // Assigned through expressions.
             public string StringProperty { get; set; }
@@ -76,7 +76,7 @@ namespace System.Linq.Expressions.Tests
             public int this[int i] { set { } }
         }
 
-        private struct StructWithPropertiesAndFields
+        public struct StructWithPropertiesAndFields
         {
             private int _underlyingIndexerField;
             public int this[int i]

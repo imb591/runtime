@@ -62,9 +62,86 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
+
         private static void AppendIL(MethodInfo method, StringWriter sw, ITypeFactory typeFactory)
         {
             ILReader reader = ILReaderFactory.Create(method);
+            ExceptionInfo[] exceptions = reader.ILProvider.GetExceptionInfos();
+            var writer = new RichILStringToTextWriter(sw, exceptions);
+
+            sw.WriteLine(".method " + method.ToIL());
+            sw.WriteLine("{");
+            sw.WriteLine("  .maxstack " + reader.ILProvider.MaxStackSize);
+
+            byte[] sig = reader.ILProvider.GetLocalSignature();
+            var lsp = new LocalsSignatureParser(reader.Resolver, typeFactory);
+            var locals = default(Type[]);
+            if (lsp.Parse(sig, out locals) && locals.Length > 0)
+            {
+                sw.WriteLine("  .locals init (");
+
+                for (var i = 0; i < locals.Length; i++)
+                {
+                    sw.WriteLine($"    [{i}] {locals[i].ToIL()}{(i != locals.Length - 1 ? "," : "")}");
+                }
+
+                sw.WriteLine("  )");
+            }
+
+            sw.WriteLine();
+
+            writer.Indent();
+            reader.Accept(new ReadableILStringVisitor(writer));
+            writer.Dedent();
+
+            sw.WriteLine("}");
+        }
+
+        public static string GetMethodBuilderIL(this LambdaExpression expression, string className, bool appendInnerLambdas = false)
+        {
+            MethodBuilder method = expression.CompileToMethodBuilder(className);
+            ITypeFactory typeFactory = GetTypeFactory(expression);
+
+            CultureInfo oldCulture = CultureInfo.CurrentCulture;
+            CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+            try
+            {
+                var sw = new StringWriter();
+
+                AppendIL(method, method, sw, typeFactory);
+
+                if (appendInnerLambdas)
+                {
+                    var type = (TypeBuilder)method.DeclaringType;
+
+                    int i = 0;
+                    var typeBuilderType = Type.GetType("System.Reflection.Emit.RuntimeTypeBuilder");
+                    var methodBuildersField = typeBuilderType.GetField("m_listMethods", BindingFlags.NonPublic | BindingFlags.Instance);
+                    var methodBuilders = ((IEnumerable<MethodBuilder>)methodBuildersField.GetValue(type)).ToDictionary(mb => mb.Name);
+                    foreach (var innerMethod in type.GetMethods(BindingFlags.NonPublic | BindingFlags.Static))
+                    {
+                        if (methodBuilders.TryGetValue(innerMethod.Name, out var innerMethodBuilder))
+                        {
+                            sw.WriteLine();
+                            sw.WriteLine("// closure.Constants[" + i + "]");
+                            AppendIL(innerMethod, innerMethodBuilder, sw, typeFactory);
+                        }
+
+                        i++;
+                    }
+                }
+
+                return sw.ToString();
+            }
+            finally
+            {
+                CultureInfo.CurrentCulture = oldCulture;
+            }
+        }
+
+        private static void AppendIL(MethodInfo method, MethodInfo methodBuilder, StringWriter sw, ITypeFactory typeFactory)
+        {
+            ILReader reader = ILReaderFactory.Create(methodBuilder);
             ExceptionInfo[] exceptions = reader.ILProvider.GetExceptionInfos();
             var writer = new RichILStringToTextWriter(sw, exceptions);
 

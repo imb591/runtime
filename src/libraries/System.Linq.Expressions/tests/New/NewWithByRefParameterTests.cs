@@ -7,9 +7,9 @@ namespace System.Linq.Expressions.Tests
 {
     public class NewWithByRefParameterTests
     {
-        private readonly int Always2 = 2;
+        public readonly int Always2 = 2;
 
-        private class ByRefNewType
+        public class ByRefNewType
         {
             public ByRefNewType(ref int x, ref int y)
             {
@@ -23,7 +23,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private class OutNewType
+        public class OutNewType
         {
             public OutNewType(out int x)
             {
@@ -75,6 +75,12 @@ namespace System.Linq.Expressions.Tests
         public void CreateByRefAliasingCompiled()
         {
             CreateByRefAliasing(useInterpreter: CompilationType.Compile);
+        }
+
+        [Fact]
+        public void CreateByRefAliasingCompiledToMethod()
+        {
+            CreateByRefAliasing(useInterpreter: CompilationType.CompileToMethod);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]

@@ -61,7 +61,7 @@ namespace System.Linq.Expressions.Tests
         {
             ParameterExpression x = Expression.Parameter(typeof(int), "x");
             ParameterExpression y = Expression.Parameter(typeof(int), "y");
-            Expression call = Expression.Call(null, GetType().GetMethod(nameof(ComputeLambda), BindingFlags.Static | BindingFlags.NonPublic), y);
+            Expression call = Expression.Call(null, GetType().GetMethod(nameof(ComputeLambda), BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public), y);
             InvocationExpression ie = Expression.Invoke(call, x);
             Expression<Func<int, int, int>> lambda = Expression.Lambda<Func<int, int, int>>(ie, x, y);
 
@@ -70,7 +70,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(40, d(5, 8));
         }
 
-        private static Expression<Func<int, int>> ComputeLambda(int y)
+        public static Expression<Func<int, int>> ComputeLambda(int y)
         {
             if ((y & 1) != 0)
             {
@@ -810,7 +810,7 @@ namespace System.Linq.Expressions.Tests
 ");
         }
 
-        private struct Mutable
+        public struct Mutable
         {
             public bool Mutated;
 
@@ -911,7 +911,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidProgramException>(() => lambda.Compile(useInterpreter));
         }
 
-        private static int Add(ref int var, int val)
+        public static int Add(ref int var, int val)
         {
             return var += val;
         }
@@ -929,7 +929,7 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public void PrivateDelegate(CompilationType useInterpreter)
         {
-            AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), AssemblyBuilderAccess.RunAndCollect);
+            AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), AssemblyBuilderAccess.Run);
             ModuleBuilder module = assembly.DefineDynamicModule("Name");
             TypeBuilder builder = module.DefineType("Type", TypeAttributes.Class | TypeAttributes.NotPublic | TypeAttributes.Sealed | TypeAttributes.AnsiClass | TypeAttributes.AutoClass, typeof(MulticastDelegate));
             builder.DefineConstructor(MethodAttributes.RTSpecialName | MethodAttributes.HideBySig | MethodAttributes.Public, CallingConventions.Standard, new[] { typeof(object), typeof(IntPtr) }).SetImplementationFlags(MethodImplAttributes.Runtime | MethodImplAttributes.Managed);
@@ -969,12 +969,12 @@ namespace System.Linq.Expressions.Tests
             Assert.IsType<DynamicMethod>(complexfunc.Compile(preferInterpretation: true).Method);
         }
 
-        private interface IInterface
+        public interface IInterface
         {
             string B();
         }
 
-        private readonly struct GenericStruct<T> : IInterface
+        public readonly struct GenericStruct<T> : IInterface
         {
             public string B() => "B";
         }
