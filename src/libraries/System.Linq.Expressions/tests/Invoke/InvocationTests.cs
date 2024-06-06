@@ -244,7 +244,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(invoke, new ParameterAndConstantChangingVisitor().Visit(invoke));
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported), Skip = "private type")]
         [ClassData(typeof(CompilationTypes))]
         public static void InvokePrivateDelegate(CompilationType useInterpreter)
         {

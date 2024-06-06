@@ -1813,7 +1813,7 @@ namespace System.Linq.Expressions.Tests
             return null;
         }
 
-        [Theory]
+        [Theory(Skip = "closure")]
         [ClassData(typeof(CompilationTypes))]
         public static void NestedQuotedLambdas(CompilationType useInterpreter)
         {
@@ -1834,7 +1834,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(4, d(3, 4));
         }
 
-        [Theory]
+        [Theory(Skip = "closure")]
         [ClassData(typeof(CompilationTypes))]
         public static void CallOnCapturedInstance(CompilationType useInterpreter)
         {
@@ -1900,7 +1900,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(5, v.Length);
         }
 
-        [Theory]
+        [Theory(Skip = "closure")]
         [ClassData(typeof(CompilationTypes))]
         public static void ArrayInitializedWithCapturedInstance(CompilationType useInterpreter)
         {

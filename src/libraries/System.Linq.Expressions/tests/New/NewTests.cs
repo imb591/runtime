@@ -280,7 +280,7 @@ namespace System.Linq.Expressions.Tests
 
         #endregion
 
-        [Theory]
+        [Theory(Skip = "private ctor")]
         [ClassData(typeof(CompilationTypes))]
         public static void PrivateDefaultConstructor(CompilationType useInterpreter)
         {

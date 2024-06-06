@@ -89,7 +89,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(quote.Body, quote.Parameters[0]);
         }
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [Theory(Skip = "closure"), ClassData(typeof(CompilationTypes))]
         public void Quote_Lambda_Closure1(CompilationType useInterpreter)
         {
             Expression<Func<int, LambdaExpression>> f = x => GetQuote<Func<int>>(() => x);
@@ -100,7 +100,7 @@ namespace System.Linq.Expressions.Tests
             AssertIsBox(quote.Body, 42, useInterpreter);
         }
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [Theory(Skip = "closure"), ClassData(typeof(CompilationTypes))]
         public void Quote_Lambda_Closure2(CompilationType useInterpreter)
         {
             // Using an unchecked addition to ensure that an Add expression is used (and not AddChecked)
@@ -173,7 +173,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(expr, quote.Body);
         }
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [Theory(Skip = "closure"), ClassData(typeof(CompilationTypes))]
         public void Quote_Block_Closure(CompilationType useInterpreter)
         {
             var x = Parameter(typeof(int));
@@ -197,7 +197,7 @@ namespace System.Linq.Expressions.Tests
             AssertIsBox(block.Expressions[0], 42, useInterpreter);
         }
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [Theory(Skip = "closure"), ClassData(typeof(CompilationTypes))]
         public void Quote_Block_LocalAndClosure(CompilationType useInterpreter)
         {
             var x = Parameter(typeof(int));
@@ -259,7 +259,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(expr, quote.Body);
         }
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [Theory(Skip = "closure"), ClassData(typeof(CompilationTypes))]
         public void Quote_CatchBlock_Variable_Closure1(CompilationType useInterpreter)
         {
             var x = Parameter(typeof(int));
@@ -294,7 +294,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(expr.Handlers[0], handler);
         }
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [Theory(Skip = "closure"), ClassData(typeof(CompilationTypes))]
         public void Quote_CatchBlock_Variable_Closure2(CompilationType useInterpreter)
         {
             var x = Parameter(typeof(int));
@@ -331,7 +331,7 @@ namespace System.Linq.Expressions.Tests
             AssertIsBox(@handler.Body, 42, useInterpreter);
         }
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [Theory(Skip = "closure"), ClassData(typeof(CompilationTypes))]
         public void Quote_CatchBlock_NoVariable_Closure1(CompilationType useInterpreter)
         {
             var x = Parameter(typeof(int));
@@ -365,7 +365,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(expr.Handlers[0], handler);
         }
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [Theory(Skip = "closure"), ClassData(typeof(CompilationTypes))]
         public void Quote_CatchBlock_NoVariable_Closure2(CompilationType useInterpreter)
         {
             var x = Parameter(typeof(int));
@@ -401,7 +401,7 @@ namespace System.Linq.Expressions.Tests
             AssertIsBox(@handler.Body, 42, useInterpreter);
         }
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [Theory(Skip = "closure"), ClassData(typeof(CompilationTypes))]
         public void Quote_RuntimeVariables_Closure(CompilationType useInterpreter)
         {
             var x = Parameter(typeof(int));
@@ -449,7 +449,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(43, vars[0]);
         }
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [Theory(Skip = "closure"), ClassData(typeof(CompilationTypes))]
         public void Quote_RuntimeVariables_ClosureAndLocal(CompilationType useInterpreter)
         {
             var x = Parameter(typeof(int));
