@@ -24,7 +24,7 @@ namespace System.Linq.Expressions.Compiler
     /// contain multiple lambdas, the Compiler class is responsible for compiling the whole tree, individual
     /// lambdas are then compiled by the LambdaCompiler.
     /// </summary>
-    [RequiresDynamicCode(Expression.LambdaCompilerRequiresDynamicCode)]
+    [RequiresDynamicCode(ExpressionExtensions.LambdaCompilerRequiresDynamicCode)]
     internal sealed partial class LambdaCompiler : ILocalCache
     {
         private static int s_lambdaMethodIndex;
@@ -93,6 +93,7 @@ namespace System.Linq.Expressions.Compiler
             _boundConstants = tree.Constants[lambda];
 
             InitializeMethod();
+            _typeBuilder = null!;
         }
 
 #if FEATURE_COMPILE_TO_METHODBUILDER
@@ -118,7 +119,7 @@ namespace System.Linq.Expressions.Compiler
 
             _tree = tree;
             _lambda = lambda;
-            _typeBuilder = (TypeBuilder)method.DeclaringType;
+            _typeBuilder = (TypeBuilder)method.DeclaringType!;
             _method = method;
             _hasClosureArgument = hasClosureArgument;
 
@@ -162,7 +163,8 @@ namespace System.Linq.Expressions.Compiler
 
         internal ILGenerator IL => _ilg;
 
-        internal IParameterProvider Parameters => _lambda;
+        private ParameterProviderExtensions? _parameters;
+        internal ParameterProviderExtensions Parameters => _parameters ??= new ParameterProviderExtensions(_lambda);
 
 #if FEATURE_COMPILE_TO_METHODBUILDER
         internal bool CanEmitBoundConstants => _method is DynamicMethod;

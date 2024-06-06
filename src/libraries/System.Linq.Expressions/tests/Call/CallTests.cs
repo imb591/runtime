@@ -652,9 +652,10 @@ namespace System.Linq.Expressions.Tests
                     Enumerable.Range(0, 4).Select(i => Expression.Constant(i)).ToArray()));
         }
 
-        private static void VerifyGetArguments(MethodCallExpression call)
+        private static void VerifyGetArguments(MethodCallExpression mcall)
         {
-            var args = call.Arguments;
+            var args = mcall.Arguments;
+            IArgumentProvider call = mcall;
             Assert.Equal(args.Count, call.ArgumentCount);
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => call.GetArgument(-1));
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => call.GetArgument(args.Count));

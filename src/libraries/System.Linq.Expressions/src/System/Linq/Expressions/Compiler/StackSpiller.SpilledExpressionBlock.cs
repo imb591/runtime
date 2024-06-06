@@ -45,17 +45,24 @@ namespace System.Linq.Expressions.Compiler
     /// A special subtype of BlockExpression that indicates to the compiler
     /// that this block is a spilled expression and should not allow jumps in.
     /// </summary>
-    internal sealed class SpilledExpressionBlock : BlockN
+    internal sealed class SpilledExpressionBlock : Expression
     {
+        public BlockExpression InnerBlock { get; }
+
         internal SpilledExpressionBlock(IReadOnlyList<Expression> expressions)
-            : base(expressions)
         {
+            InnerBlock = Block(expressions);
         }
 
-        [ExcludeFromCodeCoverage(Justification = "Unreachable")]
-        internal override BlockExpression Rewrite(ReadOnlyCollection<ParameterExpression>? variables, Expression[] args)
+        public override ExpressionType NodeType => ExpressionType.Block;
+        public override Type Type => InnerBlock.Type;
+
+        protected override Expression Accept(ExpressionVisitor visitor)
         {
-            throw ContractUtils.Unreachable;
+            visitor.Visit(InnerBlock);
+            return this;
         }
+
+        public static explicit operator BlockExpression(SpilledExpressionBlock b) => b.InnerBlock;
     }
 }

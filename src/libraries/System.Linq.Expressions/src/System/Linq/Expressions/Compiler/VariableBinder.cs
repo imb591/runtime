@@ -13,7 +13,7 @@ namespace System.Linq.Expressions.Compiler
     /// Determines if variables are closed over in nested lambdas and need to
     /// be hoisted.
     /// </summary>
-    [RequiresDynamicCode(Expression.StrongBoxRequiresDynamicCode)]
+    [RequiresDynamicCode(ExpressionExtensions.StrongBoxRequiresDynamicCode)]
     internal sealed class VariableBinder : ExpressionVisitor
     {
         private readonly AnalyzedTree _tree = new AnalyzedTree();
@@ -33,7 +33,7 @@ namespace System.Linq.Expressions.Compiler
         {
         }
 
-        [return: NotNullIfNotNull(nameof(node))]
+        [return: NotNullIfNotNull("node")]
         public override Expression? Visit(Expression? node)
         {
             // When compiling deep trees, we run the risk of triggering a terminating StackOverflowException,
@@ -47,7 +47,7 @@ namespace System.Linq.Expressions.Compiler
             return base.Visit(node);
         }
 
-        protected internal override Expression VisitConstant(ConstantExpression node)
+        protected override Expression VisitConstant(ConstantExpression node)
         {
             // If we're in Quote, we can ignore constants completely
             if (_inQuote)
@@ -66,7 +66,7 @@ namespace System.Linq.Expressions.Compiler
             return node;
         }
 
-        protected internal override Expression VisitUnary(UnaryExpression node)
+        protected override Expression VisitUnary(UnaryExpression node)
         {
             if (node.NodeType == ExpressionType.Quote)
             {
@@ -82,7 +82,7 @@ namespace System.Linq.Expressions.Compiler
             return node;
         }
 
-        protected internal override Expression VisitLambda<T>(Expression<T> node)
+        protected override Expression VisitLambda<T>(Expression<T> node)
         {
             _scopes.Push(_tree.Scopes[node] = new CompilerScope(node, true));
             _constants.Push(_tree.Constants[node] = new BoundConstants());
@@ -92,9 +92,9 @@ namespace System.Linq.Expressions.Compiler
             return node;
         }
 
-        protected internal override Expression VisitInvocation(InvocationExpression node)
+        protected override Expression VisitInvocation(InvocationExpression node)
         {
-            LambdaExpression? lambda = node.LambdaOperand;
+            LambdaExpression? lambda = node.LambdaOperand();
 
             // optimization: inline code for literal lambda's directly
             if (lambda != null)
@@ -104,7 +104,7 @@ namespace System.Linq.Expressions.Compiler
                 Visit(MergeScopes(lambda));
                 _scopes.Pop();
                 // visit the invoke's arguments
-                for (int i = 0, n = node.ArgumentCount; i < n; i++)
+                for (int i = 0, n = node.Arguments.Count; i < n; i++)
                 {
                     Visit(node.GetArgument(i));
                 }
@@ -114,17 +114,31 @@ namespace System.Linq.Expressions.Compiler
             return base.VisitInvocation(node);
         }
 
-        protected internal override Expression VisitBlock(BlockExpression node)
+        protected override Expression VisitBlock(BlockExpression node)
         {
-            if (node.Variables.Count == 0)
+            return VisitBlock((BlockExpressionExt)node, node);
+        }
+
+        private Expression VisitBlock(BlockExpressionExt nodeBlock, Expression node)
+        {
+            if (nodeBlock.Variables.Count == 0)
             {
-                Visit(node.Expressions);
+                Visit(nodeBlock.Expressions);
                 return node;
             }
             _scopes.Push(_tree.Scopes[node] = new CompilerScope(node, false));
             Visit(MergeScopes(node));
             _scopes.Pop();
             return node;
+        }
+
+        protected override Expression VisitExtension(Expression node)
+        {
+            if (node is BlockWithByRefParametersExpression blockWithByRefParams)
+            {
+                return VisitBlock((BlockExpressionExt)blockWithByRefParams, blockWithByRefParams);
+            }
+            return base.VisitExtension(node);
         }
 
         protected override CatchBlock VisitCatchBlock(CatchBlock node)
@@ -155,7 +169,7 @@ namespace System.Linq.Expressions.Compiler
             }
             else
             {
-                body = ((BlockExpression)node).Expressions;
+                body = ((BlockExpressionExt)node).Expressions;
             }
 
             CompilerScope currentScope = _scopes.Peek();
@@ -164,7 +178,7 @@ namespace System.Linq.Expressions.Compiler
             // and the child block has the same type as the parent block.
             while (body.Count == 1 && body[0].NodeType == ExpressionType.Block)
             {
-                var block = (BlockExpression)body[0];
+                var block = (BlockExpressionExt)body[0];
 
                 if (block.Variables.Count > 0)
                 {
@@ -179,7 +193,7 @@ namespace System.Linq.Expressions.Compiler
                     }
 
                     // Otherwise, merge it
-                    currentScope.MergedScopes ??= new HashSet<BlockExpression>(ReferenceEqualityComparer.Instance);
+                    currentScope.MergedScopes ??= new HashSet<Expression>(ReferenceEqualityComparer.Instance);
                     currentScope.MergedScopes.Add(block);
                     foreach (ParameterExpression v in block.Variables)
                     {
@@ -192,7 +206,7 @@ namespace System.Linq.Expressions.Compiler
         }
 
 
-        protected internal override Expression VisitParameter(ParameterExpression node)
+        protected override Expression VisitParameter(ParameterExpression node)
         {
             Reference(node, VariableStorageKind.Local);
 
@@ -225,7 +239,7 @@ namespace System.Linq.Expressions.Compiler
             return node;
         }
 
-        protected internal override Expression VisitRuntimeVariables(RuntimeVariablesExpression node)
+        protected override Expression VisitRuntimeVariables(RuntimeVariablesExpression node)
         {
             foreach (ParameterExpression v in node.Variables)
             {

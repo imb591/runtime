@@ -255,11 +255,14 @@ namespace System.Linq.Expressions.Tests
 
     internal class CompilationTypes : IEnumerable<object[]>
     {
+        public static bool CanCompileToIL => true;
+        public static bool CanInterpret => true;
+
         public static IEnumerable<CompilationType> Types
         {
             get
             {
-                return LambdaExpression.CanCompileToIL ?
+                return CanCompileToIL ?
                     new CompilationType[]
                     {
                         CompilationType.Compile,
@@ -486,14 +489,14 @@ namespace System.Linq.Expressions.Tests
     {
         public static void Verify(this LambdaExpression expression, string il, string instructions)
         {
-            if (LambdaExpression.CanCompileToIL)
+            if (CompilationTypes.CanCompileToIL)
             {
                 expression.VerifyIL(il);
             }
 
             // LambdaExpression.CanCompileToIL is not directly required,
             // but this functionality relies on private reflection and that would not work with AOT
-            if (LambdaExpression.CanCompileToIL && LambdaExpression.CanInterpret)
+            if (CompilationTypes.CanCompileToIL && CompilationTypes.CanInterpret)
             {
                 expression.VerifyInstructions(instructions);
             }

@@ -9,7 +9,7 @@ namespace System.Linq.Expressions.Tests
 {
     public static class InterpreterTests
     {
-        private static readonly PropertyInfo s_debugView = typeof(LightLambda).GetPropertyAssert("DebugView");
+        private static readonly PropertyInfo s_debugView = Type.GetType("System.Linq.Expressions.Interpreter.LightLambda,System.Linq.Expressions", throwOnError: true).GetPropertyAssert("DebugView");
 
         // IsNotLinqExpressionsBuiltWithIsInterpretingOnly is not directly required,
         // but this functionality relies on private reflection and that would not work with AOT
@@ -179,7 +179,7 @@ namespace System.Linq.Expressions.Tests
         {
             Delegate d = expression.Compile(true);
             var thunk = (Func<object[], object>)d.Target;
-            var lambda = (LightLambda)thunk.Target;
+            var lambda = thunk.Target;
             var debugView = (string)s_debugView.GetValue(lambda);
             return debugView;
         }

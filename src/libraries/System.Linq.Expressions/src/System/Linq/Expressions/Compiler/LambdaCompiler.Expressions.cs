@@ -92,7 +92,16 @@ namespace System.Linq.Expressions.Compiler
                     EmitAssign((AssignBinaryExpression)node, CompilationFlags.EmitAsVoidType);
                     break;
                 case ExpressionType.Block:
-                    Emit((BlockExpression)node, UpdateEmitAsTypeFlag(flags, CompilationFlags.EmitAsVoidType));
+                    if (node is SpilledExpressionBlock spilled)
+                    {
+                        node = (BlockExpression)spilled;
+                    }
+                    var scope = node;
+                    if (node is BlockWithByRefParametersExpression blockWithByRefParams)
+                    {
+                        node = blockWithByRefParams.Statements;
+                    }
+                    Emit((BlockExpression)node, scope, UpdateEmitAsTypeFlag(flags, CompilationFlags.EmitAsVoidType));
                     break;
                 case ExpressionType.Throw:
                     EmitThrow((UnaryExpression)node, CompilationFlags.EmitAsVoidType);
@@ -176,7 +185,7 @@ namespace System.Linq.Expressions.Compiler
             // This is worth it because otherwise we end up with an extra call
             // to DynamicMethod.CreateDelegate, which is expensive.
             //
-            if (node.LambdaOperand != null)
+            if (node.LambdaOperand() != null)
             {
                 EmitInlinedInvoke(node, flags);
                 return;
@@ -186,7 +195,7 @@ namespace System.Linq.Expressions.Compiler
             if (typeof(LambdaExpression).IsAssignableFrom(expr.Type))
             {
                 // if the invoke target is a lambda expression tree, first compile it into a delegate
-                expr = Expression.Call(expr, LambdaExpression.GetCompileMethod(expr.Type));
+                expr = Expression.Call(expr, ExpressionExtensions.GetCompileMethod(expr.Type));
             }
 
             EmitMethodCall(expr, expr.Type.GetInvokeMethod(), node, CompilationFlags.EmitAsNoTail | CompilationFlags.EmitExpressionStart);
@@ -194,7 +203,7 @@ namespace System.Linq.Expressions.Compiler
 
         private void EmitInlinedInvoke(InvocationExpression invoke, CompilationFlags flags)
         {
-            LambdaExpression lambda = invoke.LambdaOperand!;
+            LambdaExpression lambda = invoke.LambdaOperand()!;
 
             // This is tricky: we need to emit the arguments outside of the
             // scope, but set them inside the scope. Fortunately, using the IL
@@ -237,7 +246,7 @@ namespace System.Linq.Expressions.Compiler
 
             // Emit indexes. We don't allow byref args, so no need to worry
             // about write-backs or EmitAddress
-            for (int i = 0, n = node.ArgumentCount; i < n; i++)
+            for (int i = 0, n = node.ArgumentCount(); i < n; i++)
             {
                 Expression arg = node.GetArgument(i);
                 EmitExpression(arg);
@@ -263,7 +272,7 @@ namespace System.Linq.Expressions.Compiler
 
             // Emit indexes. We don't allow byref args, so no need to worry
             // about write-backs or EmitAddress
-            for (int i = 0, n = index.ArgumentCount; i < n; i++)
+            for (int i = 0, n = index.ArgumentCount(); i < n; i++)
             {
                 Expression arg = index.GetArgument(i);
                 EmitExpression(arg);
@@ -632,7 +641,7 @@ namespace System.Linq.Expressions.Compiler
             }
             else
             {
-                Debug.Assert(node.ArgumentCount == 0, "Node with arguments must have a constructor.");
+                Debug.Assert(node.ArgumentCount() == 0, "Node with arguments must have a constructor.");
                 Debug.Assert(node.Type.IsValueType, "Only value type may have constructor not set.");
                 LocalBuilder temp = GetLocal(node.Type);
                 _ilg.Emit(OpCodes.Ldloca, temp);
@@ -700,7 +709,7 @@ namespace System.Linq.Expressions.Compiler
 
         private void EmitVariableAssignment(AssignBinaryExpression node, CompilationFlags flags)
         {
-            var variable = (ParameterExpression)node.Left;
+            var variable = (ParameterExpressionExt)node.Left;
             CompilationFlags emitAs = flags & CompilationFlags.EmitAsTypeMask;
 
             if (node.IsByRef)
@@ -726,14 +735,14 @@ namespace System.Linq.Expressions.Compiler
 
                 LocalBuilder value = GetLocal(variable.Type);
                 _ilg.Emit(OpCodes.Stloc, value);
-                _scope.EmitGet(variable);
+                _scope.EmitGet(variable.Parameter);
                 _ilg.Emit(OpCodes.Ldloc, value);
                 FreeLocal(value);
                 _ilg.EmitStoreValueIndirect(variable.Type);
             }
             else
             {
-                _scope.EmitSet(variable);
+                _scope.EmitSet(variable.Parameter);
             }
         }
 
@@ -762,8 +771,8 @@ namespace System.Linq.Expressions.Compiler
 
         private void EmitParameterExpression(Expression expr)
         {
-            ParameterExpression node = (ParameterExpression)expr;
-            _scope.EmitGet(node);
+            ParameterExpressionExt node = (ParameterExpressionExt)expr;
+            _scope.EmitGet(node.Parameter);
             if (node.IsByRef)
             {
                 _ilg.EmitLoadValueIndirect(node.Type);
@@ -869,6 +878,10 @@ namespace System.Linq.Expressions.Compiler
         private void EmitInstance(Expression instance, out Type type)
         {
             type = instance.Type;
+            if (instance is ParameterWithByRefTypeExpression byrefparam)
+            {
+                type = byrefparam.ParamType;
+            }
 
             // NB: Instance can be a ByRef type due to stack spilling introducing ref locals for
             //     accessing an instance of a value type. In that case, we don't have to take the

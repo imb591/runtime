@@ -36,7 +36,7 @@ namespace System.Linq.Expressions.Compiler
                     break;
 
                 case ExpressionType.Parameter:
-                    AddressOf((ParameterExpression)node, type);
+                    AddressOf((ParameterExpressionExt)node, type);
                     break;
 
                 case ExpressionType.MemberAccess:
@@ -80,17 +80,17 @@ namespace System.Linq.Expressions.Compiler
             }
         }
 
-        private void AddressOf(ParameterExpression node, Type type)
+        private void AddressOf(ParameterExpressionExt node, Type type)
         {
             if (TypeUtils.AreEquivalent(type, node.Type))
             {
                 if (node.IsByRef)
                 {
-                    _scope.EmitGet(node);
+                    _scope.EmitGet(node.Parameter);
                 }
                 else
                 {
-                    _scope.EmitAddressOf(node);
+                    _scope.EmitAddressOf(node.Parameter);
                 }
             }
             else
@@ -99,11 +99,11 @@ namespace System.Linq.Expressions.Compiler
 
                 if (node.Type.IsByRef && node.Type.GetElementType() == type)
                 {
-                    EmitExpression(node);
+                    EmitExpression(node.Parameter);
                 }
                 else
                 {
-                    EmitExpressionAddress(node, type);
+                    EmitExpressionAddress(node.Parameter, type);
                 }
             }
         }
@@ -191,7 +191,7 @@ namespace System.Linq.Expressions.Compiler
                 return;
             }
 
-            if (node.ArgumentCount == 1)
+            if (node.ArgumentCount() == 1)
             {
                 EmitExpression(node.Object!);
                 EmitExpression(node.GetArgument(0));
@@ -332,7 +332,7 @@ namespace System.Linq.Expressions.Compiler
 
             // Emit indexes. We don't allow byref args, so no need to worry
             // about write-backs or EmitAddress
-            int n = node.ArgumentCount;
+            int n = node.ArgumentCount();
             var args = new LocalBuilder[n];
             for (var i = 0; i < n; i++)
             {

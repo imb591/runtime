@@ -1229,6 +1229,11 @@ namespace System.Linq.Expressions
             return new InvalidProgramException();
         }
 
+        internal static Exception InvalidProgram(FormattableString s)
+        {
+            return new InvalidProgramException(s.ToString());
+        }
+
         /// <summary>
         /// InvalidOperationException with message like "Enumeration has either not started or has already finished."
         /// </summary>

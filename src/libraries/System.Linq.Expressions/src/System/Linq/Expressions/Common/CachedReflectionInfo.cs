@@ -154,13 +154,5 @@ namespace System.Linq.Expressions
         private static MethodInfo? s_RuntimeOps_CreateRuntimeVariables;
         public static MethodInfo RuntimeOps_CreateRuntimeVariables =>
             s_RuntimeOps_CreateRuntimeVariables ??= typeof(RuntimeOps).GetMethod(nameof(RuntimeOps.CreateRuntimeVariables), Type.EmptyTypes)!;
-
-        private static MethodInfo? s_RuntimeOps_MergeRuntimeVariables;
-        public static MethodInfo RuntimeOps_MergeRuntimeVariables =>
-            s_RuntimeOps_MergeRuntimeVariables ??= typeof(RuntimeOps).GetMethod(nameof(RuntimeOps.MergeRuntimeVariables))!;
-
-        private static MethodInfo? s_RuntimeOps_Quote;
-        public static MethodInfo RuntimeOps_Quote =>
-            s_RuntimeOps_Quote ??= typeof(RuntimeOps).GetMethod(nameof(RuntimeOps.Quote))!;
     }
 }

@@ -132,9 +132,10 @@ namespace System.Linq.Expressions.Tests
                     Enumerable.Range(0, 7).Select(i => Expression.Constant(i))));
         }
 
-        private static void VerifyGetArguments(InvocationExpression invoke)
+        private static void VerifyGetArguments(InvocationExpression iinvoke)
         {
-            var args = invoke.Arguments;
+            var args = iinvoke.Arguments;
+            IArgumentProvider invoke = iinvoke;
             Assert.Equal(args.Count, invoke.ArgumentCount);
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => invoke.GetArgument(-1));
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => invoke.GetArgument(args.Count));

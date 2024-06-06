@@ -17,20 +17,29 @@ namespace System.Linq.Expressions.Compiler
     {
         private void EmitBlockExpression(Expression expr, CompilationFlags flags)
         {
+            if (expr is SpilledExpressionBlock spilled)
+            {
+                expr = (BlockExpression)spilled;
+            }
+            var scope = expr;
+            if (expr is BlockWithByRefParametersExpression blockWithByRefParams)
+            {
+                expr = blockWithByRefParams.Statements;
+            }
             // emit body
-            Emit((BlockExpression)expr, UpdateEmitAsTypeFlag(flags, CompilationFlags.EmitAsDefaultType));
+            Emit((BlockExpression)expr, scope, UpdateEmitAsTypeFlag(flags, CompilationFlags.EmitAsDefaultType));
         }
 
-        private void Emit(BlockExpression node, CompilationFlags flags)
+        private void Emit(BlockExpression node, Expression scope, CompilationFlags flags)
         {
-            int count = node.ExpressionCount;
+            int count = node.ExpressionCount();
 
             if (count == 0)
             {
                 return;
             }
 
-            EnterScope(node);
+            EnterScope(scope);
 
             CompilationFlags emitAs = flags & CompilationFlags.EmitAsTypeMask;
 
@@ -79,7 +88,7 @@ namespace System.Linq.Expressions.Compiler
                 EmitExpressionAsType(node.GetExpression(count - 1), node.Type, tailCall);
             }
 
-            ExitScope(node);
+            ExitScope(scope);
         }
 
         private void EnterScope(object node)
@@ -114,6 +123,10 @@ namespace System.Linq.Expressions.Compiler
             if (block != null)
             {
                 return block.Variables.Count > 0;
+            }
+            if (node is BlockWithByRefParametersExpression blockWithByByRefParams)
+            {
+                return blockWithByByRefParams.Variables.Count > 0;
             }
             return ((CatchBlock)node).Variable != null;
         }
@@ -246,7 +259,7 @@ namespace System.Linq.Expressions.Compiler
 
             // Otherwise, get the type from the method.
             Type result = node.Comparison.GetParametersCached()[1].ParameterType.GetNonRefType();
-            if (node.IsLifted)
+            if (node.IsLifted())
             {
                 result = result.GetNullableType();
             }

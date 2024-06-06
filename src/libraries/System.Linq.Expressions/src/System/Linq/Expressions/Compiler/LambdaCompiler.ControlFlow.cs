@@ -220,12 +220,20 @@ namespace System.Linq.Expressions.Compiler
 
         private void DefineBlockLabels(Expression? node)
         {
-            var block = node as BlockExpression;
-            if (block == null || block is SpilledExpressionBlock)
+            if (node is SpilledExpressionBlock)
             {
                 return;
             }
-            for (int i = 0, n = block.ExpressionCount; i < n; i++)
+            if (node is BlockWithByRefParametersExpression blockWithByRefParams)
+            {
+                node = blockWithByRefParams.Statements;
+            }
+            var block = node as BlockExpression;
+            if (block == null)
+            {
+                return;
+            }
+            for (int i = 0, n = block.ExpressionCount(); i < n; i++)
             {
                 Expression e = block.GetExpression(i);
 
@@ -258,15 +266,23 @@ namespace System.Linq.Expressions.Compiler
                         _labelInfo.Add(label, new LabelInfo(_ilg, label, TypeUtils.AreReferenceAssignable(lambda.ReturnType, label.Type)));
                         return;
                     case ExpressionType.Block:
+                        if (expression is SpilledExpressionBlock spilled)
+                        {
+                            expression = (BlockExpression)spilled;
+                        }
+                        else if (expression is BlockWithByRefParametersExpression blockWithByRefParams)
+                        {
+                            expression = blockWithByRefParams.Statements;
+                        }
                         // Look in the last significant expression of a block
                         var body = (BlockExpression)expression;
                         // omit empty and debuginfo at the end of the block since they
                         // are not going to emit any IL
-                        if (body.ExpressionCount == 0)
+                        if (body.ExpressionCount() == 0)
                         {
                             return;
                         }
-                        for (int i = body.ExpressionCount - 1; i >= 0; i--)
+                        for (int i = body.ExpressionCount() - 1; i >= 0; i--)
                         {
                             expression = body.GetExpression(i);
                             if (Significant(expression))

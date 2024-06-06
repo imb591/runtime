@@ -153,9 +153,9 @@ namespace System.Linq.Expressions.Compiler
             EmitDelegateConstruction(impl);
         }
 
-        private static Type[] GetParameterTypes(LambdaExpression lambda, Type firstType)
+        private static Type[] GetParameterTypes(LambdaExpression lambda, Type? firstType)
         {
-            int count = lambda.ParameterCount;
+            int count = lambda.ParameterCount();
 
             Type[] result;
             int i;
@@ -215,7 +215,7 @@ namespace System.Linq.Expressions.Compiler
                 //
                 // If any arguments were ByRef, the address is on the stack and
                 // we'll be storing it into the variable, which has a ref type.
-                for (int i = _lambda.ParameterCount - 1; i >= 0; i--)
+                for (int i = _lambda.ParameterCount() - 1; i >= 0; i--)
                 {
                     _scope.EmitSet(_lambda.GetParameter(i));
                 }

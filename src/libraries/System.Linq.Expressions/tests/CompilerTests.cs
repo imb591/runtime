@@ -411,9 +411,9 @@ namespace System.Linq.Expressions.Tests
         {
             Delegate f = Expression.Lambda(e).Compile(CompilationType.Compile);
 
-            var c = f.Target as Closure;
+            var c = f.Target;
             Assert.NotNull(c);
-            Assert.Equal(expectedCount, c.Constants.Length);
+            Assert.Equal(expectedCount, ((dynamic)c).Constants.Length);
 
             object o = f.DynamicInvoke();
             Assert.Equal(expectedValue, o);

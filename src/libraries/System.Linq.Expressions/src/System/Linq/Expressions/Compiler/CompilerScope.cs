@@ -29,7 +29,7 @@ namespace System.Linq.Expressions.Compiler
     /// Instances are produced by VariableBinder, which does a tree walk
     /// looking for scope nodes: LambdaExpression, BlockExpression, and CatchBlock.
     /// </summary>
-    [RequiresDynamicCode(Expression.StrongBoxRequiresDynamicCode)]
+    [RequiresDynamicCode(ExpressionExtensions.StrongBoxRequiresDynamicCode)]
     internal sealed partial class CompilerScope
     {
         /// <summary>
@@ -74,7 +74,7 @@ namespace System.Linq.Expressions.Compiler
         ///
         /// Created lazily as we create hundreds of compiler scopes w/o merging scopes when compiling rules.
         /// </summary>
-        internal HashSet<BlockExpression>? MergedScopes;
+        internal HashSet<Expression>? MergedScopes;
 
         /// <summary>
         /// The scope's hoisted locals, if any.
@@ -97,12 +97,12 @@ namespace System.Linq.Expressions.Compiler
         {
             Node = node;
             IsMethod = isMethod;
-            IReadOnlyList<ParameterExpression> variables = GetVariables(node);
+            IReadOnlyList<ParameterExpressionExt> variables = GetVariables(node).ToList();
 
             Definitions = new Dictionary<ParameterExpression, VariableStorageKind>(variables.Count);
-            foreach (ParameterExpression v in variables)
+            foreach (ParameterExpressionExt v in variables)
             {
-                Definitions.Add(v, VariableStorageKind.Local);
+                Definitions.Add(v.Parameter, VariableStorageKind.Local);
             }
         }
 
@@ -293,7 +293,7 @@ namespace System.Linq.Expressions.Compiler
                 _closureHoistedLocals = _parent.NearestHoistedLocals;
             }
 
-            ReadOnlyCollection<ParameterExpression> hoistedVars = GetVariables().Where(p => Definitions[p] == VariableStorageKind.Hoisted).ToReadOnly();
+            ReadOnlyCollection<ParameterExpression> hoistedVars = GetVariables().Where(p => Definitions[p.Parameter] == VariableStorageKind.Hoisted).Select(p => p.Parameter).ToReadOnly();
 
             if (hoistedVars.Count > 0)
             {
@@ -396,7 +396,7 @@ namespace System.Linq.Expressions.Compiler
             return ReferenceCount.TryGetValue(v, out refCount) && ShouldCache(v, refCount);
         }
 
-        [RequiresDynamicCode(Expression.StrongBoxRequiresDynamicCode)]
+        [RequiresDynamicCode(ExpressionExtensions.StrongBoxRequiresDynamicCode)]
         private void CacheBoxToLocal(LambdaCompiler lc, ParameterExpression v)
         {
             Debug.Assert(ShouldCache(v) && !_locals.ContainsKey(v));
@@ -435,9 +435,9 @@ namespace System.Linq.Expressions.Compiler
         // Allocates slots for IL locals or IL arguments
         private void AllocateLocals(LambdaCompiler lc)
         {
-            foreach (ParameterExpression v in GetVariables())
+            foreach (ParameterExpressionExt v in GetVariables())
             {
-                if (Definitions[v] == VariableStorageKind.Local)
+                if (Definitions[v.Parameter] == VariableStorageKind.Local)
                 {
                     //
                     // If v is in lc.Parameters, it is a parameter.
@@ -447,7 +447,7 @@ namespace System.Linq.Expressions.Compiler
                     // is possibly a byref local if the parameter is byref.
                     //
                     Storage s;
-                    if (IsMethod && lc.Parameters.Contains(v))
+                    if (IsMethod && lc.Parameters.Contains(v.Parameter))
                     {
                         s = new ArgumentStorage(lc, v);
                     }
@@ -455,41 +455,55 @@ namespace System.Linq.Expressions.Compiler
                     {
                         s = new LocalStorage(lc, v);
                     }
-                    _locals.Add(v, s);
+                    _locals.Add(v.Parameter, s);
                 }
             }
         }
 
-        private IEnumerable<ParameterExpression> GetVariables() =>
+        private IEnumerable<ParameterExpressionExt> GetVariables() =>
             MergedScopes == null ? GetVariables(Node) : GetVariablesIncludingMerged();
 
-        private IEnumerable<ParameterExpression> GetVariablesIncludingMerged()
+        private IEnumerable<ParameterExpressionExt> GetVariablesIncludingMerged()
         {
-            foreach (ParameterExpression param in GetVariables(Node))
+            foreach (ParameterExpressionExt param in GetVariables(Node))
             {
                 yield return param;
             }
 
-            foreach (BlockExpression scope in MergedScopes!)
+            foreach (Expression scope in MergedScopes!)
             {
-                foreach (ParameterExpression param in scope.Variables)
+                if (scope is BlockExpression block)
                 {
-                    yield return param;
+                    foreach (ParameterExpression param in block.Variables)
+                    {
+                        yield return ParameterExpressionExt.Create(param);
+                    }
+                }
+                else if (scope is BlockWithByRefParametersExpression blockWithByRefParams)
+                {
+                    foreach (ParameterExpressionExt param in blockWithByRefParams.Variables)
+                    {
+                        yield return param;
+                    }
                 }
             }
         }
 
-        private static IReadOnlyList<ParameterExpression> GetVariables(object scope)
+        private static IEnumerable<ParameterExpressionExt> GetVariables(object scope)
         {
             if (scope is LambdaExpression lambda)
             {
-                return new ParameterList(lambda);
+                return lambda.Parameters.Select(ParameterExpressionExt.Create);
             }
             if (scope is BlockExpression block)
             {
-                return block.Variables;
+                return block.Variables.Select(ParameterExpressionExt.Create);
             }
-            return new[] { ((CatchBlock)scope).Variable! };
+            if (scope is BlockWithByRefParametersExpression blockWithByRefParams)
+            {
+                return blockWithByRefParams.Variables;
+            }
+            return new[] { ParameterExpressionExt.Create(((CatchBlock)scope).Variable!) };
         }
 
         private string? CurrentLambdaName
@@ -510,13 +524,13 @@ namespace System.Linq.Expressions.Compiler
         }
     }
 
-    internal static class ParameterProviderExtensions
+    internal class ParameterProviderExtensions
     {
-        public static int IndexOf(this IParameterProvider provider, ParameterExpression? parameter)
+        public int IndexOf(ParameterExpression? parameter)
         {
-            for (int i = 0, n = provider.ParameterCount; i < n; i++)
+            for (int i = 0, n = _provider.ParameterCount(); i < n; i++)
             {
-                if (provider.GetParameter(i) == parameter)
+                if (_provider.GetParameter(i) == parameter)
                 {
                     return i;
                 }
@@ -525,17 +539,21 @@ namespace System.Linq.Expressions.Compiler
             return -1;
         }
 
-        public static bool Contains(this IParameterProvider provider, ParameterExpression? parameter)
+        public bool Contains(ParameterExpression? parameter)
         {
-            return provider.IndexOf(parameter) >= 0;
+            return IndexOf(parameter) >= 0;
         }
+
+        private readonly LambdaExpression _provider;
+
+        public ParameterProviderExtensions(LambdaExpression provider) => _provider = provider;
     }
 
     internal sealed class ParameterList : IReadOnlyList<ParameterExpression>
     {
-        private readonly IParameterProvider _provider;
+        private readonly LambdaExpression _provider;
 
-        public ParameterList(IParameterProvider provider)
+        public ParameterList(LambdaExpression provider)
         {
             _provider = provider;
         }
@@ -548,11 +566,11 @@ namespace System.Linq.Expressions.Compiler
             }
         }
 
-        public int Count => _provider.ParameterCount;
+        public int Count => _provider.ParameterCount();
 
         public IEnumerator<ParameterExpression> GetEnumerator()
         {
-            for (int i = 0, n = _provider.ParameterCount; i < n; i++)
+            for (int i = 0, n = _provider.ParameterCount(); i < n; i++)
             {
                 yield return _provider.GetParameter(i);
             }

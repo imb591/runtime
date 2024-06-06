@@ -23,7 +23,7 @@ namespace System.Linq.Expressions.Compiler
         /// variable is no longer used, it should be returned by using the <see cref="Mark"/>
         /// and <see cref="Free"/> mechanism provided.
         /// </returns>
-        private ParameterExpression MakeTemp(Type type) => _tm.Temp(type);
+        private Expression MakeTemp(Type type) => _tm.Temp(type);
 
         /// <summary>
         /// Gets a watermark into the stack of used temporary variables. The returned
@@ -63,10 +63,10 @@ namespace System.Linq.Expressions.Compiler
         /// <param name="save">An expression that assigns the <paramref name="expression"/> to the created temporary variable.</param>
         /// <param name="byRef">Indicates whether the <paramref name="expression"/> represents a ByRef value.</param>
         /// <returns>The temporary variable holding the result of evaluating <paramref name="expression"/>.</returns>
-        private ParameterExpression ToTemp(Expression expression, out Expression save, bool byRef)
+        private Expression ToTemp(Expression expression, out Expression save, bool byRef)
         {
             Type tempType = byRef ? expression.Type.MakeByRefType() : expression.Type;
-            ParameterExpression temp = MakeTemp(tempType);
+            Expression temp = MakeTemp(tempType);
             save = AssignBinaryExpression.Make(temp, expression, byRef);
             return temp;
         }
@@ -85,17 +85,17 @@ namespace System.Linq.Expressions.Compiler
             /// <summary>
             /// List of free temporary variables. These can be recycled for new temporary variables.
             /// </summary>
-            private List<ParameterExpression>? _freeTemps;
+            private List<Expression>? _freeTemps;
 
             /// <summary>
             /// Stack of temporary variables that are currently in use.
             /// </summary>
-            private Stack<ParameterExpression>? _usedTemps;
+            private Stack<Expression>? _usedTemps;
 
             /// <summary>
             /// List of all temporary variables created by the stack spiller instance.
             /// </summary>
-            internal List<ParameterExpression> Temps { get; } = new List<ParameterExpression>();
+            internal List<ParameterExpressionExt> Temps { get; } = new List<ParameterExpressionExt>();
 
             /// <summary>
             /// Creates a temporary variable of the specified <paramref name="type"/>.
@@ -106,9 +106,9 @@ namespace System.Linq.Expressions.Compiler
             /// variable is no longer used, it should be returned by using the <see cref="Mark"/>
             /// and <see cref="Free"/> mechanism provided.
             /// </returns>
-            internal ParameterExpression Temp(Type type)
+            internal Expression Temp(Type type)
             {
-                ParameterExpression temp;
+                Expression temp;
 
                 if (_freeTemps != null)
                 {
@@ -125,8 +125,9 @@ namespace System.Linq.Expressions.Compiler
                 }
 
                 // Not on the free-list, create a brand new one.
-                temp = ParameterExpression.Make(type, "$temp$" + _temp++, isByRef: false);
-                Temps.Add(temp);
+                ParameterExpressionExt p = ExpressionExtensions.MakeParameterExt(type, "$temp$" + _temp++);
+                temp = p.TypedParameter;
+                Temps.Add(p);
 
                 return UseTemp(temp);
             }
@@ -138,12 +139,12 @@ namespace System.Linq.Expressions.Compiler
             /// </summary>
             /// <param name="temp">The temporary variable to mark as used.</param>
             /// <returns>The original temporary variable.</returns>
-            private ParameterExpression UseTemp(ParameterExpression temp)
+            private Expression UseTemp(Expression temp)
             {
                 Debug.Assert(_freeTemps == null || !_freeTemps.Contains(temp));
                 Debug.Assert(_usedTemps == null || !_usedTemps.Contains(temp));
 
-                _usedTemps ??= new Stack<ParameterExpression>();
+                _usedTemps ??= new Stack<Expression>();
 
                 _usedTemps.Push(temp);
 
@@ -155,11 +156,11 @@ namespace System.Linq.Expressions.Compiler
             /// <see cref="Temp"/> method to reuse temporary variables.
             /// </summary>
             /// <param name="temp">The temporary variable to mark as no longer in use.</param>
-            private void FreeTemp(ParameterExpression temp)
+            private void FreeTemp(Expression temp)
             {
                 Debug.Assert(_freeTemps == null || !_freeTemps.Contains(temp));
 
-                _freeTemps ??= new List<ParameterExpression>();
+                _freeTemps ??= new List<Expression>();
 
                 _freeTemps.Add(temp);
             }

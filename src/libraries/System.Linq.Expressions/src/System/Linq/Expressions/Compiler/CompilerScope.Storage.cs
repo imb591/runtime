@@ -13,9 +13,9 @@ namespace System.Linq.Expressions.Compiler
         private abstract class Storage
         {
             internal readonly LambdaCompiler Compiler;
-            internal readonly ParameterExpression Variable;
+            internal readonly ParameterExpressionExt Variable;
 
-            internal Storage(LambdaCompiler compiler, ParameterExpression variable)
+            internal Storage(LambdaCompiler compiler, ParameterExpressionExt variable)
             {
                 Compiler = compiler;
                 Variable = variable;
@@ -41,6 +41,11 @@ namespace System.Linq.Expressions.Compiler
             private readonly LocalBuilder _local;
 
             internal LocalStorage(LambdaCompiler compiler, ParameterExpression variable)
+                : this(compiler, ParameterExpressionExt.Create(variable))
+            {
+            }
+
+            internal LocalStorage(LambdaCompiler compiler, ParameterExpressionExt variable)
                 : base(compiler, variable)
             {
                 // ByRef variables are supported. This is used internally by
@@ -77,10 +82,15 @@ namespace System.Linq.Expressions.Compiler
         {
             private readonly int _argument;
 
-            internal ArgumentStorage(LambdaCompiler compiler, ParameterExpression p)
+            internal ArgumentStorage(LambdaCompiler compiler, ParameterExpressionExt p)
                 : base(compiler, p)
             {
-                _argument = compiler.GetLambdaArgument(compiler.Parameters.IndexOf(p));
+                _argument = compiler.GetLambdaArgument(compiler.Parameters.IndexOf(p.Parameter));
+            }
+
+            internal ArgumentStorage(LambdaCompiler compiler, ParameterExpression p)
+                : this(compiler, ParameterExpressionExt.Create(p))
+            {
             }
 
             internal override void EmitLoad()
@@ -99,7 +109,7 @@ namespace System.Linq.Expressions.Compiler
             }
         }
 
-        [RequiresDynamicCode(Expression.StrongBoxRequiresDynamicCode)]
+        [RequiresDynamicCode(ExpressionExtensions.StrongBoxRequiresDynamicCode)]
         private sealed class ElementBoxStorage : Storage
         {
             private readonly int _index;
@@ -108,7 +118,7 @@ namespace System.Linq.Expressions.Compiler
             private readonly FieldInfo _boxValueField;
 
             internal ElementBoxStorage(Storage array, int index, ParameterExpression variable)
-                : base(array.Compiler, variable)
+                : base(array.Compiler, ParameterExpressionExt.Create(variable))
             {
                 _array = array;
                 _index = index;
@@ -155,14 +165,14 @@ namespace System.Linq.Expressions.Compiler
             }
         }
 
-        [RequiresDynamicCode(Expression.StrongBoxRequiresDynamicCode)]
+        [RequiresDynamicCode(ExpressionExtensions.StrongBoxRequiresDynamicCode)]
         private sealed class LocalBoxStorage : Storage
         {
             private readonly LocalBuilder _boxLocal;
             private readonly FieldInfo _boxValueField;
 
             internal LocalBoxStorage(LambdaCompiler compiler, ParameterExpression variable)
-                : base(compiler, variable)
+                : base(compiler, ParameterExpressionExt.Create(variable))
             {
                 Type boxType = typeof(StrongBox<>).MakeGenericType(variable.Type);
                 _boxValueField = boxType.GetField("Value")!;

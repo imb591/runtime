@@ -37,7 +37,7 @@ namespace System.Linq.Expressions.Tests
 
                 if (appendInnerLambdas)
                 {
-                    var closure = (Closure)d.Target;
+                    dynamic closure = d.Target;
 
                     int i = 0;
                     foreach (object constant in closure.Constants)

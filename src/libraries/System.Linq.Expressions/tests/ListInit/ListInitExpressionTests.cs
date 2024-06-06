@@ -198,7 +198,7 @@ namespace System.Linq.Expressions.Tests
             NewExpression newExp = Expression.New(typeof(List<int>));
             ConstantExpression[] expressions = new[] { Expression.Constant(1), Expression.Constant(2), Expression.Constant(int.MaxValue) };
             ListInitExpression listInit = Expression.ListInit(newExp, expressions);
-            Assert.Equal(expressions, listInit.Initializers.Select(i => i.GetArgument(0)));
+            Assert.Equal(expressions, listInit.Initializers.Select(i => ((IArgumentProvider)i).GetArgument(0)));
         }
 
         [Fact]

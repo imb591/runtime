@@ -19,21 +19,7 @@ namespace System.Linq.Expressions.Compiler
 
         private void EmitQuote(UnaryExpression quote)
         {
-            // emit the quoted expression as a runtime constant
-            EmitConstant(quote.Operand, quote.Type);
-
-            // Heuristic: only emit the tree rewrite logic if we have hoisted
-            // locals.
-            if (_scope.NearestHoistedLocals != null)
-            {
-                // HoistedLocals is internal so emit as System.Object
-                EmitConstant(_scope.NearestHoistedLocals, typeof(object));
-                _scope.EmitGet(_scope.NearestHoistedLocals.SelfVariable);
-                _ilg.Emit(OpCodes.Call, RuntimeOps_Quote);
-
-                Debug.Assert(typeof(LambdaExpression).IsAssignableFrom(quote.Type));
-                _ilg.Emit(OpCodes.Castclass, quote.Type);
-            }
+            throw new NotSupportedException("Unable to emit Expression.Quote to MethodBuilder");
         }
 
         private void EmitThrowUnaryExpression(Expression expr)
