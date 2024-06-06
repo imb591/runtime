@@ -528,6 +528,10 @@ namespace System.Linq.Expressions.Compiler
     {
         public int IndexOf(ParameterExpression? parameter)
         {
+            if (_parameterMap != null)
+            {
+                return parameter == null ? - 1 : _parameterMap.GetValueOrDefault(parameter, -1);
+            }
             for (int i = 0, n = _provider.ParameterCount(); i < n; i++)
             {
                 if (_provider.GetParameter(i) == parameter)
@@ -545,8 +549,20 @@ namespace System.Linq.Expressions.Compiler
         }
 
         private readonly LambdaExpression _provider;
+        private readonly Dictionary<ParameterExpression, int>? _parameterMap;
 
-        public ParameterProviderExtensions(LambdaExpression provider) => _provider = provider;
+        public ParameterProviderExtensions(LambdaExpression provider)
+        {
+            _provider = provider;
+            if (provider.Parameters.Count > 32)
+            {
+                _parameterMap = new Dictionary<ParameterExpression, int>();
+                for (int i = 0; i < provider.Parameters.Count; ++i)
+                {
+                    _parameterMap[provider.Parameters[i]] = i;
+                }
+            }
+        }
     }
 
     internal sealed class ParameterList : IReadOnlyList<ParameterExpression>
