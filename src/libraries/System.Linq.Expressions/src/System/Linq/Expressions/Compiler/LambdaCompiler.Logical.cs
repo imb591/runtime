@@ -586,6 +586,12 @@ namespace System.Linq.Expressions.Compiler
 
             if (node.Method != null || node.IsLifted)
             {
+                // this branch is unreachable. The only calling point is EmitExpressionAndBranch
+                // which asserts the expression type is boolean - and since AndAlso/OrElse
+                // expressions have the type equal to types of both parameters, it must be
+                // a regular boolean expression, not lifted and without method
+                // (IsLifted branch is especially broken: EmitExpression can only emit bool? result in that case,
+                // and that breaks IL in EmitBranchOp expecting bool)
                 EmitExpression(node);
                 EmitBranchOp(branch, label);
                 return;

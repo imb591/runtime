@@ -18,7 +18,6 @@ namespace System.Linq.Expressions.Compiler
     {
         private readonly AnalyzedTree _tree = new AnalyzedTree();
         private readonly Stack<CompilerScope> _scopes = new Stack<CompilerScope>();
-        private readonly Stack<BoundConstants> _constants = new Stack<BoundConstants>();
         private readonly StackGuard _guard = new StackGuard();
         private bool _inQuote;
 
@@ -62,8 +61,7 @@ namespace System.Linq.Expressions.Compiler
                 return node;
             }
 
-            _constants.Peek().AddReference(node.Value!, node.Type);
-            return node;
+            throw Error.CannotCompileConstant(node.Value);
         }
 
         protected override Expression VisitUnary(UnaryExpression node)
@@ -85,9 +83,7 @@ namespace System.Linq.Expressions.Compiler
         protected override Expression VisitLambda<T>(Expression<T> node)
         {
             _scopes.Push(_tree.Scopes[node] = new CompilerScope(node, true));
-            _constants.Push(_tree.Constants[node] = new BoundConstants());
             Visit(MergeScopes(node));
-            _constants.Pop();
             _scopes.Pop();
             return node;
         }

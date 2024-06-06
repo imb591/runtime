@@ -64,7 +64,6 @@ namespace System.Linq.Expressions.Compiler
                 vars = vars.AddFirst(parent.SelfVariable);
             }
 
-            if (vars.Count != 0)
             {
                 Dictionary<Expression, int> indexes = new Dictionary<Expression, int>(vars.Count);
                 for (int i = 0; i < vars.Count; i++)
@@ -73,10 +72,6 @@ namespace System.Linq.Expressions.Compiler
                 }
 
                 Indexes = new ReadOnlyDictionary<Expression, int>(indexes);
-            }
-            else
-            {
-                Indexes = ReadOnlyDictionary<Expression, int>.Empty;
             }
 
             Parent = parent;

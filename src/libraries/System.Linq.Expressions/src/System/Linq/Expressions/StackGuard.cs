@@ -28,14 +28,6 @@ namespace System.Linq.Expressions
             throw new InsufficientExecutionStackException();
         }
 
-        public void RunOnEmptyStack<T1, T2>(Action<T1, T2> action, T1 arg1, T2 arg2) =>
-            RunOnEmptyStackCore(s =>
-            {
-                var t = ((Action<T1, T2>, T1, T2))s;
-                t.Item1(t.Item2, t.Item3);
-                return default(object);
-            }, (action, arg1, arg2));
-
         public void RunOnEmptyStack<T1, T2, T3>(Action<T1, T2, T3> action, T1 arg1, T2 arg2, T3 arg3) =>
             RunOnEmptyStackCore(s =>
             {

@@ -27,8 +27,6 @@ namespace System.Linq.Expressions.Compiler
     [RequiresDynamicCode(ExpressionExtensions.LambdaCompilerRequiresDynamicCode)]
     internal sealed partial class LambdaCompiler : ILocalCache
     {
-        private static int s_lambdaMethodIndex;
-
         private delegate void WriteBack(LambdaCompiler compiler);
 
         // Information on the entire lambda tree currently being compiled
@@ -57,44 +55,8 @@ namespace System.Linq.Expressions.Compiler
         // True if the method's first argument is of type Closure
         private readonly bool _hasClosureArgument;
 
-        // Runtime constants bound to the delegate
-        private readonly BoundConstants _boundConstants;
-
         // Free list of locals, so we reuse them rather than creating new ones
         private readonly KeyedStack<Type, LocalBuilder> _freeLocals = new KeyedStack<Type, LocalBuilder>();
-
-        /// <summary>
-        /// Creates a lambda compiler that will compile to a dynamic method
-        /// </summary>
-        private LambdaCompiler(AnalyzedTree tree, LambdaExpression lambda)
-        {
-            Type[] parameterTypes = GetParameterTypes(lambda, typeof(Closure));
-
-            int lambdaMethodIndex = Interlocked.Increment(ref s_lambdaMethodIndex);
-            var method = new DynamicMethod(lambda.Name ?? ("lambda_method" + lambdaMethodIndex.ToString()), lambda.ReturnType, parameterTypes, true);
-
-            _tree = tree;
-            _lambda = lambda;
-            _method = method;
-
-            // In a Win8 immersive process user code is not allowed to access non-W8P framework APIs through
-            // reflection or RefEmit. Framework code, however, is given an exemption.
-            // This is to make sure that user code cannot access non-W8P framework APIs via ExpressionTree.
-
-            // TODO: This API is not available, is there an alternative way to achieve the same.
-            // method.ProfileAPICheck = true;
-
-            _ilg = method.GetILGenerator();
-
-            _hasClosureArgument = true;
-
-            // These are populated by AnalyzeTree/VariableBinder
-            _scope = tree.Scopes[lambda];
-            _boundConstants = tree.Constants[lambda];
-
-            InitializeMethod();
-            _typeBuilder = null!;
-        }
 
 #if FEATURE_COMPILE_TO_METHODBUILDER
         /// <summary>
@@ -105,7 +67,7 @@ namespace System.Linq.Expressions.Compiler
             var scope = tree.Scopes[lambda];
             var hasClosureArgument = scope.NeedsClosure;
 
-            Type[] paramTypes = GetParameterTypes(lambda, hasClosureArgument ? typeof(Closure) : null);
+            Type[] paramTypes = GetParameterTypes(lambda, hasClosureArgument ? typeof(CTM_Closure) : null);
 
             method.SetReturnType(lambda.ReturnType);
             method.SetParameters(paramTypes);
@@ -127,7 +89,6 @@ namespace System.Linq.Expressions.Compiler
 
             // These are populated by AnalyzeTree/VariableBinder
             _scope = scope;
-            _boundConstants = tree.Constants[lambda];
 
             InitializeMethod();
         }
@@ -151,14 +112,12 @@ namespace System.Linq.Expressions.Compiler
 #endif
             // inlined scopes are associated with invocation, not with the lambda
             _scope = _tree.Scopes[invocation];
-            _boundConstants = parent._boundConstants;
         }
 
         private void InitializeMethod()
         {
             // See if we can find a return label, so we can emit better IL
             AddReturnLabel(_lambda);
-            _boundConstants.EmitCacheConstants(this);
         }
 
         internal ILGenerator IL => _ilg;
@@ -166,33 +125,7 @@ namespace System.Linq.Expressions.Compiler
         private ParameterProviderExtensions? _parameters;
         internal ParameterProviderExtensions Parameters => _parameters ??= new ParameterProviderExtensions(_lambda);
 
-#if FEATURE_COMPILE_TO_METHODBUILDER
-        internal bool CanEmitBoundConstants => _method is DynamicMethod;
-#endif
-
         #region Compiler entry points
-
-        /// <summary>
-        /// Compiler entry point
-        /// </summary>
-        /// <param name="lambda">LambdaExpression to compile.</param>
-        /// <returns>The compiled delegate.</returns>
-        internal static Delegate Compile(LambdaExpression lambda)
-        {
-            lambda.ValidateArgumentCount();
-
-            // 1. Bind lambda
-            AnalyzedTree tree = AnalyzeLambda(ref lambda);
-
-            // 2. Create lambda compiler
-            LambdaCompiler c = new LambdaCompiler(tree, lambda);
-
-            // 3. Emit
-            c.EmitLambdaBody();
-
-            // 4. Return the delegate.
-            return c.CreateDelegate();
-        }
 
 #if FEATURE_COMPILE_TO_METHODBUILDER
         /// <summary>
@@ -241,6 +174,7 @@ namespace System.Linq.Expressions.Compiler
         /// </summary>
         internal int GetLambdaArgument(int index)
         {
+            // _method.IsStatic == false is unreachable for CompileToMethod
             return index + (_hasClosureArgument ? 1 : 0) + (_method.IsStatic ? 0 : 1);
         }
 
@@ -258,13 +192,6 @@ namespace System.Linq.Expressions.Compiler
             Debug.Assert(_hasClosureArgument, "must have a Closure argument");
             Debug.Assert(_method.IsStatic, "must be a static method");
             _ilg.EmitLoadArg(0);
-        }
-
-        private Delegate CreateDelegate()
-        {
-            Debug.Assert(_method is DynamicMethod);
-
-            return _method.CreateDelegate(_lambda.Type, new Closure(_boundConstants.ToArray(), null));
         }
 
 #if FEATURE_COMPILE_TO_METHODBUILDER
@@ -285,15 +212,6 @@ namespace System.Linq.Expressions.Compiler
         private MemberExpression CreateLazyInitializedField<T>(string name)
         {
 #if FEATURE_COMPILE_TO_METHODBUILDER
-            if (_method is DynamicMethod)
-#else
-            Debug.Assert(_method is DynamicMethod);
-#endif
-            {
-                return Utils.GetStrongBoxValueField(Expression.Constant(new StrongBox<T>()));
-            }
-#if FEATURE_COMPILE_TO_METHODBUILDER
-            else
             {
                 return Expression.Field(null, CreateStaticField(name, typeof(T)));
             }

@@ -62,8 +62,6 @@ namespace System.Dynamic.Utils
             return true;
         }
 
-        public static Type GetReturnType(this MethodBase mi) => mi.IsConstructor ? mi.DeclaringType! : ((MethodInfo)mi).ReturnType;
-
         public static TypeCode GetTypeCode(this Type type) => Type.GetTypeCode(type);
         internal static ParameterInfo[] GetParametersCached(this MethodBase method)
         {

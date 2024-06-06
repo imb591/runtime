@@ -150,6 +150,7 @@ namespace System.Linq.Expressions.Compiler
             }
 
             _acrossBlockJump = true;
+            // _node == null branch is unreachable: a label with null target cannot be referenced
             if (_node != null && _node.Type != typeof(void))
             {
                 throw Error.NonLocalJumpWithValue(_node.Name);

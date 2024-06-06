@@ -23,7 +23,6 @@
     <Compile Include="System/Linq/Expressions/Compiler/AnalyzedTree.cs" />
     <Compile Include="System/Linq/Expressions/Compiler/CompilerScope.cs" />
     <Compile Include="System/Linq/Expressions/Compiler/CompilerScope.Storage.cs" />
-    <Compile Include="System/Linq/Expressions/Compiler/BoundConstants.cs" />
     <Compile Include="System/Linq/Expressions/Common/CachedReflectionInfo.cs" />
     <Compile Include="System/Linq/Expressions/Compiler/LambdaCompiler.Lambda.cs" />
     <Compile Include="System/Linq/Expressions/Compiler/LambdaCompiler.Expressions.cs" />

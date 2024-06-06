@@ -270,9 +270,11 @@ namespace System.Linq.Expressions.Compiler
             switch (resultType.GetTypeCode())
             {
                 case TypeCode.Byte:
+                    // IsChecked path is unreachable - impossible to constuct a checked arithmetic expression with type byte
                     _ilg.Emit(IsChecked(op) ? OpCodes.Conv_Ovf_U1 : OpCodes.Conv_U1);
                     break;
                 case TypeCode.SByte:
+                    // IsChecked path is unreachable - impossible to constuct a checked arithmetic expression with type sbyte
                     _ilg.Emit(IsChecked(op) ? OpCodes.Conv_Ovf_I1 : OpCodes.Conv_I1);
                     break;
                 case TypeCode.UInt16:

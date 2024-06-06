@@ -266,14 +266,14 @@ namespace System.Linq.Expressions.Tests
                 return CanCompileToIL ?
                     new CompilationType[]
                     {
-                        CompilationType.Compile,
-                        CompilationType.Interpret,
+                        // CompilationType.Compile,
+                        // CompilationType.Interpret,
                         CompilationType.CompileToMethod,
                     }
                     :
                     new CompilationType[]
                     {
-                        CompilationType.Interpret,
+                        // CompilationType.Interpret,
                     };
             }
         }

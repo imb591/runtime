@@ -25,12 +25,6 @@ namespace System.Linq.Expressions.Compiler
             internal abstract void EmitAddress();
             internal abstract void EmitStore();
 
-            internal virtual void EmitStore(Storage value)
-            {
-                value.EmitLoad();
-                EmitStore();
-            }
-
             internal virtual void FreeLocal()
             {
             }
@@ -67,6 +61,12 @@ namespace System.Linq.Expressions.Compiler
                 Compiler.IL.Emit(OpCodes.Stloc, _local);
             }
 
+            internal void EmitStore(Storage value)
+            {
+                value.EmitLoad();
+                EmitStore();
+            }
+
             internal override void EmitAddress()
             {
                 Compiler.IL.Emit(OpCodes.Ldloca, _local);
@@ -86,11 +86,6 @@ namespace System.Linq.Expressions.Compiler
                 : base(compiler, p)
             {
                 _argument = compiler.GetLambdaArgument(compiler.Parameters.IndexOf(p.Parameter));
-            }
-
-            internal ArgumentStorage(LambdaCompiler compiler, ParameterExpression p)
-                : this(compiler, ParameterExpressionExt.Create(p))
-            {
             }
 
             internal override void EmitLoad()
@@ -140,13 +135,6 @@ namespace System.Linq.Expressions.Compiler
                 EmitLoadBox();
                 Compiler.IL.Emit(OpCodes.Ldloc, value);
                 Compiler.FreeLocal(value);
-                Compiler.IL.Emit(OpCodes.Stfld, _boxValueField);
-            }
-
-            internal override void EmitStore(Storage value)
-            {
-                EmitLoadBox();
-                value.EmitLoad();
                 Compiler.IL.Emit(OpCodes.Stfld, _boxValueField);
             }
 
@@ -200,13 +188,6 @@ namespace System.Linq.Expressions.Compiler
                 Compiler.IL.Emit(OpCodes.Ldloc, _boxLocal);
                 Compiler.IL.Emit(OpCodes.Ldloc, value);
                 Compiler.FreeLocal(value);
-                Compiler.IL.Emit(OpCodes.Stfld, _boxValueField);
-            }
-
-            internal override void EmitStore(Storage value)
-            {
-                Compiler.IL.Emit(OpCodes.Ldloc, _boxLocal);
-                value.EmitLoad();
                 Compiler.IL.Emit(OpCodes.Stfld, _boxValueField);
             }
 

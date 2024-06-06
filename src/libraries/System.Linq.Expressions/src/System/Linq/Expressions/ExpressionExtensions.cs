@@ -41,9 +41,11 @@ public static class ExpressionExtensions
         protected override Expression VisitLambda<T>(Expression<T> node) => _spiller.Rewrite(node);
     }
 
+    // BCL internal prop
     internal static int ParameterCount(this LambdaExpression @this) => @this.Parameters.Count;
     internal static ParameterExpression GetParameter(this LambdaExpression @this, int i) => @this.Parameters[i];
 
+    // BCL internal prop
     internal static LambdaExpression? LambdaOperand(this InvocationExpression @this)
     {
         return (@this.Expression.NodeType == ExpressionType.Quote)
@@ -51,9 +53,11 @@ public static class ExpressionExtensions
             : (@this.Expression as LambdaExpression);
     }
 
+    // BCL internal prop
     internal static int ArgumentCount(this IArgumentProvider @this) => @this.ArgumentCount;
     internal static Expression GetArgument(this IArgumentProvider @this, int i) => @this.GetArgument(i);
 
+    // BCL internal prop
     internal static int ExpressionCount(this BlockExpression @this) => @this.Expressions.Count;
     internal static Expression GetExpression(this BlockExpression @this, int i) => @this.Expressions[i];
 
@@ -160,16 +164,19 @@ public static class ExpressionExtensions
         );
     }
 
+    // BCL internal prop
     internal static bool IsLifted(this SwitchExpression @this)
     {
         if (@this.SwitchValue.Type.IsNullableType())
         {
+            // Comparison == null is unreachable because the only calling point checks for that before calling
             return (@this.Comparison == null) ||
                    !TypeUtils.AreEquivalent(@this.SwitchValue.Type, @this.Comparison.GetParametersCached()[0].ParameterType.GetNonRefType());
         }
         return false;
     }
 
+    // BCL internal prop
     internal static bool IsLiftedLogical(this BinaryExpression @this)
     {
         Type left = @this.Left.Type;
@@ -270,20 +277,13 @@ public static class ExpressionExtensions
         if (lambdaExpressionType == typeof(LambdaExpression))
         {
             // use a hard-coded type directly so the method doesn't get trimmed
+            // (this branch is unreachable: InvokeExpression can't exist with a LambdaExpression-typed operand)
             return typeof(LambdaExpression).GetMethod("Compile", Type.EmptyTypes)!;
         }
 
         return (MethodInfo)lambdaExpressionType.GetMemberWithSameMetadataDefinitionAs(s_expressionCompileMethodInfo);
     }
     private static readonly MethodInfo s_expressionCompileMethodInfo = typeof(Expression<>).GetMethod("Compile", Type.EmptyTypes)!;
-
-    internal static void ValidateArgumentCount(this LambdaExpression lambda)
-    {
-        if (lambda.ParameterCount() >= ushort.MaxValue)
-        {
-            throw Error.InvalidProgram();
-        }
-    }
 
     internal const string StrongBoxRequiresDynamicCode = "Creating a StrongBox requires dynamic code generation.";
     internal const string LambdaCompilerRequiresDynamicCode = "Compiling a lambda expression requires dynamic code generation.";

@@ -408,6 +408,7 @@ namespace System.Linq.Expressions.Compiler
         // Creates IL locals for accessing closures
         private void EmitClosureAccess(LambdaCompiler lc, HoistedLocals? locals)
         {
+            // locals == null is unreachable (the only calling point checks for null)
             if (locals == null)
             {
                 return;
@@ -563,35 +564,5 @@ namespace System.Linq.Expressions.Compiler
                 }
             }
         }
-    }
-
-    internal sealed class ParameterList : IReadOnlyList<ParameterExpression>
-    {
-        private readonly LambdaExpression _provider;
-
-        public ParameterList(LambdaExpression provider)
-        {
-            _provider = provider;
-        }
-
-        public ParameterExpression this[int index]
-        {
-            get
-            {
-                return _provider.GetParameter(index);
-            }
-        }
-
-        public int Count => _provider.ParameterCount();
-
-        public IEnumerator<ParameterExpression> GetEnumerator()
-        {
-            for (int i = 0, n = _provider.ParameterCount(); i < n; i++)
-            {
-                yield return _provider.GetParameter(i);
-            }
-        }
-
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

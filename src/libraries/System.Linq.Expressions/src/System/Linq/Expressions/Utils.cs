@@ -54,13 +54,5 @@ namespace System.Linq.Expressions
                 3 => s_3,
                 _ => Expression.Constant(value),
             };
-
-        [DynamicDependency("Value", typeof(StrongBox<>))]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "The field will be preserved by the DynamicDependency")]
-        public static MemberExpression GetStrongBoxValueField(Expression strongbox)
-        {
-            return Expression.Field(strongbox, "Value");
-        }
     }
 }

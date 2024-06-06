@@ -66,10 +66,6 @@ namespace System.Linq.Expressions
         public static MethodInfo MethodBase_GetMethodFromHandle_RuntimeMethodHandle_RuntimeTypeHandle =>
             s_MethodBase_GetMethodFromHandle_RuntimeMethodHandle_RuntimeTypeHandle ??= typeof(MethodBase).GetMethod(nameof(MethodBase.GetMethodFromHandle), new[] { typeof(RuntimeMethodHandle), typeof(RuntimeTypeHandle) })!;
 
-        private static MethodInfo? s_MethodInfo_CreateDelegate_Type_Object;
-        public static MethodInfo MethodInfo_CreateDelegate_Type_Object =>
-            s_MethodInfo_CreateDelegate_Type_Object ??= typeof(MethodInfo).GetMethod(nameof(MethodInfo.CreateDelegate), new[] { typeof(Type), typeof(object) })!;
-
         private static MethodInfo? s_String_op_Equality_String_String;
         public static MethodInfo String_op_Equality_String_String =>
             s_String_op_Equality_String_String ??= typeof(string).GetMethod("op_Equality", new[] { typeof(string), typeof(string) })!;
@@ -130,29 +126,20 @@ namespace System.Linq.Expressions
         public static MethodInfo Decimal_op_Implicit_Char =>
             s_Decimal_op_Implicit_Char ??= typeof(decimal).GetMethod("op_Implicit", new[] { typeof(char) })!;
 
-        private static MethodInfo? s_Math_Pow_Double_Double;
-        public static MethodInfo Math_Pow_Double_Double =>
-            s_Math_Pow_Double_Double ??= typeof(Math).GetMethod(nameof(Math.Pow), new[] { typeof(double), typeof(double) })!;
-
-        // Closure and RuntimeOps helpers are used only in the compiler.
-        private static ConstructorInfo? s_Closure_ObjectArray_ObjectArray;
-        public static ConstructorInfo Closure_ObjectArray_ObjectArray =>
-            s_Closure_ObjectArray_ObjectArray ??= typeof(Closure).GetConstructor(new[] { typeof(object[]), typeof(object[]) })!;
-
-        private static FieldInfo? s_Closure_Constants;
-        public static FieldInfo Closure_Constants =>
-            s_Closure_Constants ??= typeof(Closure).GetField(nameof(Closure.Constants))!;
+        private static ConstructorInfo? s_Closure_ObjectArray;
+        public static ConstructorInfo Closure_ObjectArray =>
+            s_Closure_ObjectArray ??= typeof(CTM_Closure).GetConstructor(new[] { typeof(object[]) })!;
 
         private static FieldInfo? s_Closure_Locals;
         public static FieldInfo Closure_Locals =>
-            s_Closure_Locals ??= typeof(Closure).GetField(nameof(Closure.Locals))!;
+            s_Closure_Locals ??= typeof(CTM_Closure).GetField(nameof(CTM_Closure.Locals))!;
 
         private static MethodInfo? s_RuntimeOps_CreateRuntimeVariables_ObjectArray_Int64Array;
         public static MethodInfo RuntimeOps_CreateRuntimeVariables_ObjectArray_Int64Array =>
-            s_RuntimeOps_CreateRuntimeVariables_ObjectArray_Int64Array ??= typeof(RuntimeOps).GetMethod(nameof(RuntimeOps.CreateRuntimeVariables), new[] { typeof(object[]), typeof(long[]) })!;
+            s_RuntimeOps_CreateRuntimeVariables_ObjectArray_Int64Array ??= typeof(CTM_RuntimeOps).GetMethod(nameof(CTM_RuntimeOps.CreateRuntimeVariables), new[] { typeof(object[]), typeof(long[]) })!;
 
         private static MethodInfo? s_RuntimeOps_CreateRuntimeVariables;
         public static MethodInfo RuntimeOps_CreateRuntimeVariables =>
-            s_RuntimeOps_CreateRuntimeVariables ??= typeof(RuntimeOps).GetMethod(nameof(RuntimeOps.CreateRuntimeVariables), Type.EmptyTypes)!;
+            s_RuntimeOps_CreateRuntimeVariables ??= typeof(CTM_RuntimeOps).GetMethod(nameof(CTM_RuntimeOps.CreateRuntimeVariables), Type.EmptyTypes)!;
     }
 }

@@ -21,17 +21,6 @@ namespace System.Linq.Expressions.Compiler
         internal void EmitConstantArray<T>(T[] array)
         {
 #if FEATURE_COMPILE_TO_METHODBUILDER
-            // Emit as runtime constant if possible
-            // if not, emit into IL
-            if (_method is DynamicMethod)
-#else
-            Debug.Assert(_method is DynamicMethod);
-#endif
-            {
-                EmitConstant(array, typeof(T[]));
-            }
-#if FEATURE_COMPILE_TO_METHODBUILDER
-            else if (_typeBuilder != null)
             {
                 // store into field in our type builder, we will initialize
                 // the value only once.
@@ -45,42 +34,24 @@ namespace System.Linq.Expressions.Compiler
                 _ilg.MarkLabel(l);
                 _ilg.Emit(OpCodes.Ldsfld, fb);
             }
-            else
-            {
-                _ilg.EmitArray(array, this);
-            }
 #endif
         }
 
         private void EmitClosureCreation(LambdaCompiler inner)
         {
             bool closure = inner._scope.NeedsClosure;
-            bool boundConstants = inner._boundConstants.Count > 0;
 
-            if (!closure && !boundConstants)
+            if (!closure)
             {
                 _ilg.EmitNull();
                 return;
             }
 
             // new Closure(constantPool, currentHoistedLocals)
-            if (boundConstants)
-            {
-                _boundConstants.EmitConstant(this, inner._boundConstants.ToArray(), typeof(object[]));
-            }
-            else
-            {
-                _ilg.EmitNull();
-            }
-            if (closure)
             {
                 _scope.EmitGet(_scope.NearestHoistedLocals!.SelfVariable);
             }
-            else
-            {
-                _ilg.EmitNull();
-            }
-            _ilg.EmitNew(Closure_ObjectArray_ObjectArray);
+            _ilg.EmitNew(Closure_ObjectArray);
         }
 
         /// <summary>
@@ -92,22 +63,7 @@ namespace System.Linq.Expressions.Compiler
         private void EmitDelegateConstruction(LambdaCompiler inner)
         {
             Type delegateType = inner._lambda.Type;
-            DynamicMethod? dynamicMethod = inner._method as DynamicMethod;
 #if FEATURE_COMPILE_TO_METHODBUILDER
-            if (dynamicMethod != null)
-#else
-            Debug.Assert(dynamicMethod != null);
-#endif
-            {
-                // Emit MethodInfo.CreateDelegate instead because DynamicMethod is not in Windows 8 Profile
-                _boundConstants.EmitConstant(this, dynamicMethod, typeof(MethodInfo));
-                _ilg.EmitType(delegateType);
-                EmitClosureCreation(inner);
-                _ilg.Emit(OpCodes.Callvirt, MethodInfo_CreateDelegate_Type_Object);
-                _ilg.Emit(OpCodes.Castclass, delegateType);
-            }
-#if FEATURE_COMPILE_TO_METHODBUILDER
-            else
             {
                 // new DelegateType(closure)
                 EmitClosureCreation(inner);
@@ -128,15 +84,6 @@ namespace System.Linq.Expressions.Compiler
             // 1. Create the new compiler
             LambdaCompiler impl;
 #if FEATURE_COMPILE_TO_METHODBUILDER
-            if (_method is DynamicMethod)
-#else
-            Debug.Assert(_method is DynamicMethod);
-#endif
-            {
-                impl = new LambdaCompiler(_tree, lambda);
-            }
-#if FEATURE_COMPILE_TO_METHODBUILDER
-            else
             {
                 // When the lambda does not have a name or the name is empty, generate a unique name for it.
                 string name = String.IsNullOrEmpty(lambda.Name) ? GetUniqueMethodName() : lambda.Name;

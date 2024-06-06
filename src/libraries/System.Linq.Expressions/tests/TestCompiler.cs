@@ -82,37 +82,37 @@ namespace System.Linq.Expressions
 
         public static string AssemblyName(string className) => "CompiledExpressions" + className;
 
-        public static T Compile<T>(this Expression<T> expression, CompilationType compilationType, bool withoutVisitor = false)
+        public static T Compile<T>(this Expression<T> expression, CompilationType compilationType, bool withoutVisitor = false, ModuleBuilder module = null)
             where T : class, Delegate
         {
             return compilationType switch
             {
                 CompilationType.Interpret => expression.Compile(preferInterpretation: true),
                 CompilationType.Compile => expression.Compile(preferInterpretation: false),
-                CompilationType.CompileToMethod => (T)CompileToTestMethod(expression, withoutVisitor),
+                CompilationType.CompileToMethod => (T)CompileToTestMethod(expression, withoutVisitor, module),
                 CompilationType.WithoutPreference => expression.Compile(),
                 _ => throw new ArgumentOutOfRangeException(nameof(compilationType), compilationType, null),
             };
         }
 
-        public static Delegate Compile(this LambdaExpression expression, CompilationType compilationType, bool withoutVisitor = false)
+        public static Delegate Compile(this LambdaExpression expression, CompilationType compilationType, bool withoutVisitor = false, ModuleBuilder module = null)
         {
             return compilationType switch
             {
                 CompilationType.Interpret => expression.Compile(preferInterpretation: true),
                 CompilationType.Compile => expression.Compile(preferInterpretation: false),
-                CompilationType.CompileToMethod => CompileToTestMethod(expression, withoutVisitor),
+                CompilationType.CompileToMethod => CompileToTestMethod(expression, withoutVisitor, module),
                 CompilationType.WithoutPreference => expression.Compile(),
                 _ => throw new ArgumentOutOfRangeException(nameof(compilationType), compilationType, null),
             };
         }
 
-        public static Delegate CompileToTestMethod(this LambdaExpression expression, bool withoutVisitor = false)
+        public static Delegate CompileToTestMethod(this LambdaExpression expression, bool withoutVisitor = false, ModuleBuilder moduleBuilder = null)
         {
             int current = Interlocked.Increment(ref Counter);
             var assemblyName = new AssemblyName("CompiledExpressions" + current);
             var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
-            var moduleBuilder = assemblyBuilder.DefineDynamicModule("CompiledExpressions");
+            moduleBuilder ??= assemblyBuilder.DefineDynamicModule("CompiledExpressions");
             var typeBuilder = moduleBuilder.DefineType("C" + current);
             var methodBuilder = typeBuilder.DefineMethod("M", MethodAttributes.Public | MethodAttributes.Static);
             if (withoutVisitor)

@@ -344,15 +344,14 @@ namespace System.Linq.Expressions.Tests
                       IL_0009: newobj     instance void class [System.Private.CoreLib]System.Runtime.CompilerServices.StrongBox`1<int32>::.ctor(int32)
                       IL_000e: stelem.ref
                       IL_000f: stloc.0
-                      IL_0010: ldnull
-                      IL_0011: ldloc.0
-                      IL_0012: newobj     instance void class [CompileToMethod]System.Runtime.CompilerServices.Closure::.ctor(object[],object[])
-                      IL_0017: ldftn      int32 class [CompiledExpressionsVerifyIL_Closure2]VerifyIL_Closure2::lambda_method(class [CompileToMethod]System.Runtime.CompilerServices.Closure)
-                      IL_001d: newobj     instance void class [System.Private.CoreLib]System.Func`1<int32>::.ctor(object,native int)
-                      IL_0022: ret
+                      IL_0010: ldloc.0
+                      IL_0011: newobj     instance void class [CompileToMethod]System.Runtime.CompilerServices.CTM_Closure::.ctor(object[])
+                      IL_0016: ldftn      int32 class [CompiledExpressionsVerifyIL_Closure2]VerifyIL_Closure2::lambda_method(class [CompileToMethod]System.Runtime.CompilerServices.CTM_Closure)
+                      IL_001c: newobj     instance void class [System.Private.CoreLib]System.Func`1<int32>::.ctor(object,native int)
+                      IL_0021: ret
                   }
 
-                  .method int32 class [CompiledExpressionsVerifyIL_Closure2]VerifyIL_Closure2::lambda_method(class [CompileToMethod]System.Runtime.CompilerServices.Closure)
+                  .method int32 class [CompiledExpressionsVerifyIL_Closure2]VerifyIL_Closure2::lambda_method(class [CompileToMethod]System.Runtime.CompilerServices.CTM_Closure)
                   {
                       .maxstack 2
                       .locals init (
@@ -360,7 +359,7 @@ namespace System.Linq.Expressions.Tests
                       )
 
                       IL_0000: ldarg.0
-                      IL_0001: ldfld      class [CompileToMethod]System.Runtime.CompilerServices.Closure::Locals
+                      IL_0001: ldfld      class [CompileToMethod]System.Runtime.CompilerServices.CTM_Closure::Locals
                       IL_0006: stloc.0
                       IL_0007: ldloc.0
                       IL_0008: ldc.i4.0
@@ -445,15 +444,14 @@ namespace System.Linq.Expressions.Tests
                       IL_0009: newobj     instance void class [System.Private.CoreLib]System.Runtime.CompilerServices.StrongBox`1<int32>::.ctor(int32)
                       IL_000e: stelem.ref
                       IL_000f: stloc.0
-                      IL_0010: ldnull
-                      IL_0011: ldloc.0
-                      IL_0012: newobj     instance void class [CompileToMethod]System.Runtime.CompilerServices.Closure::.ctor(object[],object[])
-                      IL_0017: ldftn      int32 class [CompiledExpressionsVerifyIL_Closure3]VerifyIL_Closure3::lambda_method(class [CompileToMethod]System.Runtime.CompilerServices.Closure,int32)
-                      IL_001d: newobj     instance void class [System.Private.CoreLib]System.Func`2<int32,int32>::.ctor(object,native int)
-                      IL_0022: ret
+                      IL_0010: ldloc.0
+                      IL_0011: newobj     instance void class [CompileToMethod]System.Runtime.CompilerServices.CTM_Closure::.ctor(object[])
+                      IL_0016: ldftn      int32 class [CompiledExpressionsVerifyIL_Closure3]VerifyIL_Closure3::lambda_method(class [CompileToMethod]System.Runtime.CompilerServices.CTM_Closure,int32)
+                      IL_001c: newobj     instance void class [System.Private.CoreLib]System.Func`2<int32,int32>::.ctor(object,native int)
+                      IL_0021: ret
                   }
 
-                  .method int32 class [CompiledExpressionsVerifyIL_Closure3]VerifyIL_Closure3::lambda_method(class [CompileToMethod]System.Runtime.CompilerServices.Closure,int32)
+                  .method int32 class [CompiledExpressionsVerifyIL_Closure3]VerifyIL_Closure3::lambda_method(class [CompileToMethod]System.Runtime.CompilerServices.CTM_Closure,int32)
                   {
                       .maxstack 2
                       .locals init (
@@ -461,7 +459,7 @@ namespace System.Linq.Expressions.Tests
                       )
 
                       IL_0000: ldarg.0
-                      IL_0001: ldfld      class [CompileToMethod]System.Runtime.CompilerServices.Closure::Locals
+                      IL_0001: ldfld      class [CompileToMethod]System.Runtime.CompilerServices.CTM_Closure::Locals
                       IL_0006: stloc.0
                       IL_0007: ldloc.0
                       IL_0008: ldc.i4.0
@@ -521,15 +519,15 @@ namespace System.Linq.Expressions.Tests
             nExpected = nExpected
                 .Replace(
                     "::lambda_method(class [System.Linq.Expressions]System.Runtime.CompilerServices.Closure,",
-                    $"class [" + TestCompiler.AssemblyName(className) + "]" + className + "::M(");
+                    "class [" + TestCompiler.AssemblyName(className) + "]" + className + "::M(");
             nExpected = nExpected
                 .Replace(
                     "::lambda_method(class [System.Linq.Expressions]System.Runtime.CompilerServices.Closure",
-                    $"class [" + TestCompiler.AssemblyName(className) + "]" + className + "::M(");
+                    "class [" + TestCompiler.AssemblyName(className) + "]" + className + "::M(");
             nExpected = nExpected
                 .Replace(
                     "class [System.Linq.Expressions]System.Runtime.CompilerServices.RuntimeOps",
-                    $"class [CompileToMethod]{typeof(RuntimeOps).FullName}");
+                    $"class [CompileToMethod]{typeof(CTM_RuntimeOps).FullName}");
             int currentOffset = 0;
             bool innerMethod = false;
             var addressChanges = new Dictionary<int, int>();

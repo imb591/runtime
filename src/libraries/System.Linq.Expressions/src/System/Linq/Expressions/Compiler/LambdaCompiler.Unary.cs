@@ -11,16 +11,12 @@ namespace System.Linq.Expressions.Compiler
 {
     internal sealed partial class LambdaCompiler
     {
+        [System.Diagnostics.CodeAnalysis.DoesNotReturn]
         private void EmitQuoteUnaryExpression(Expression expr)
-        {
-            EmitQuote((UnaryExpression)expr);
-        }
-
-
-        private void EmitQuote(UnaryExpression quote)
         {
             throw new NotSupportedException("Unable to emit Expression.Quote to MethodBuilder");
         }
+
 
         private void EmitThrowUnaryExpression(Expression expr)
         {

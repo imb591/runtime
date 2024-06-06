@@ -13,8 +13,6 @@ namespace System.Linq.Expressions.Compiler
 {
     internal sealed partial class LambdaCompiler
     {
-        private static readonly FieldInfo s_callSiteTargetField = typeof(CallSite<>).GetField("Target")!;
-
         [Flags]
         internal enum CompilationFlags
         {
@@ -582,48 +580,18 @@ namespace System.Linq.Expressions.Compiler
             // Try to emit the constant directly into IL
             if (!_ilg.TryEmitConstant(value, type, this))
             {
-                _boundConstants.EmitConstant(this, value!, type);
+                throw Error.CannotCompileConstant(value);
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.DoesNotReturn]
         private void EmitDynamicExpression(Expression expr)
         {
 #if FEATURE_COMPILE_TO_METHODBUILDER
-            if (!(_method is DynamicMethod))
             {
                 throw Error.CannotCompileDynamic();
             }
-#else
-            Debug.Assert(_method is DynamicMethod);
 #endif
-
-            var node = (IDynamicExpression)expr;
-
-            object site = node.CreateCallSite();
-            Type siteType = site.GetType();
-
-            MethodInfo invoke = node.DelegateType.GetInvokeMethod();
-
-            // site.Target.Invoke(site, args)
-            EmitConstant(site, siteType);
-
-            // Emit the temp as type CallSite so we get more reuse
-            _ilg.Emit(OpCodes.Dup);
-            LocalBuilder siteTemp = GetLocal(siteType);
-            _ilg.Emit(OpCodes.Stloc, siteTemp);
-            _ilg.Emit(OpCodes.Ldfld, GetCallSiteTargetField(siteType));
-            _ilg.Emit(OpCodes.Ldloc, siteTemp);
-            FreeLocal(siteTemp);
-
-            List<WriteBack>? wb = EmitArguments(invoke, node, 1);
-            _ilg.Emit(OpCodes.Callvirt, invoke);
-            EmitWriteBack(wb);
-        }
-
-        private static FieldInfo GetCallSiteTargetField(Type siteType)
-        {
-            Debug.Assert(siteType.IsGenericType && siteType.GetGenericTypeDefinition() == typeof(CallSite<>));
-            return (FieldInfo)siteType.GetMemberWithSameMetadataDefinitionAs(s_callSiteTargetField);
         }
 
         private void EmitNewExpression(Expression expr)
@@ -1186,6 +1154,7 @@ namespace System.Linq.Expressions.Compiler
                                 EmitExpression(arg);
                                 if (!arg.Type.IsValueType)
                                 {
+                                    // this branch is unreachable: factory does not allow to create lifted binary expr with a reference type argument
                                     _ilg.Emit(OpCodes.Dup);
                                     _ilg.Emit(OpCodes.Ldnull);
                                     _ilg.Emit(OpCodes.Ceq);
@@ -1216,6 +1185,7 @@ namespace System.Linq.Expressions.Compiler
                             }
                             else
                             {
+                                // this branch is unreachable: factory does not allow to create lifted binary expr with a reference type return value
                                 _ilg.Emit(OpCodes.Ldnull);
                             }
                         }
@@ -1273,6 +1243,7 @@ namespace System.Linq.Expressions.Compiler
                             }
                             else
                             {
+                                // this branch is unreachable: factory does not allow to create lifted binary expr with a non-nullable type argument
                                 EmitExpression(arg);
                                 if (!arg.Type.IsValueType)
                                 {
@@ -1303,6 +1274,7 @@ namespace System.Linq.Expressions.Compiler
                         EmitMethodCallExpression(mc);
                         if (resultType.IsNullableType() && !TypeUtils.AreEquivalent(resultType, mc.Type))
                         {
+                            // this branch is unreachable: see goto default at the start of the switch case which covers exactly this
                             ConstructorInfo ci = TypeUtils.GetNullableConstructor(resultType);
                             _ilg.Emit(OpCodes.Newobj, ci);
                         }

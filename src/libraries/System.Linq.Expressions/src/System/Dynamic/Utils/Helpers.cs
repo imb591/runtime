@@ -9,19 +9,15 @@ namespace System.Dynamic.Utils
     // Miscellaneous helpers that don't belong anywhere else
     internal static class Helpers
     {
-        internal static T? CommonNode<T>(T first, T second, Func<T, T> parent) where T : class
+        internal static T? CommonNode<T>(T first, T second, Func<T, T?> parent) where T : class
         {
             EqualityComparer<T> cmp = EqualityComparer<T>.Default;
-            if (cmp.Equals(first, second))
-            {
-                return first;
-            }
             var set = new HashSet<T>(cmp);
-            for (T t = first; t != null; t = parent(t))
+            for (T? t = first; t != null; t = parent(t))
             {
                 set.Add(t);
             }
-            for (T t = second; t != null; t = parent(t))
+            for (T? t = second; t != null; t = parent(t))
             {
                 if (set.Contains(t))
                 {
