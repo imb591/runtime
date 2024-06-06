@@ -972,12 +972,21 @@ namespace System.Linq.Expressions.Compiler
             EmitExpression(binding.Expression);
             if (binding.Member is FieldInfo fi)
             {
+                if (fi.IsLiteral)
+                {
+                    throw Error.NotSupported(); // stfld causes MissingFieldException for literal fields (i.e. constants)
+                }
                 _ilg.Emit(OpCodes.Stfld, fi);
             }
             else
             {
                 Debug.Assert(binding.Member is PropertyInfo);
-                EmitCall(objectType, (binding.Member as PropertyInfo)!.GetSetMethod(nonPublic: true)!);
+                var setter = (binding.Member as PropertyInfo)!.GetSetMethod(nonPublic: true)!;
+                if (setter.IsStatic)
+                {
+                    throw Error.InvalidProgram($"Static property {binding.Member} in member initializer");
+                }
+                EmitCall(objectType, setter);
             }
         }
 
@@ -987,6 +996,14 @@ namespace System.Linq.Expressions.Compiler
             if (binding.Member is PropertyInfo && type.IsValueType)
             {
                 throw Error.CannotAutoInitializeValueTypeMemberThroughProperty(binding.Member);
+            }
+            if (binding.Member is PropertyInfo pi && pi.GetMethod != null && pi.GetMethod.IsStatic)
+            {
+                throw Error.InvalidProgram($"Static property {pi} in member initializer");
+            }
+            if (binding.Member is FieldInfo fi && fi.IsStatic)
+            {
+                throw Error.InvalidProgram($"Static field {fi} in member initializer");
             }
             if (type.IsValueType)
             {
@@ -1005,6 +1022,14 @@ namespace System.Linq.Expressions.Compiler
             if (binding.Member is PropertyInfo && type.IsValueType)
             {
                 throw Error.CannotAutoInitializeValueTypeElementThroughProperty(binding.Member);
+            }
+            if (binding.Member is PropertyInfo pi && pi.GetMethod != null && pi.GetMethod.IsStatic)
+            {
+                throw Error.InvalidProgram($"Static property {pi} in list initializer");
+            }
+            if (binding.Member is FieldInfo fi && fi.IsStatic)
+            {
+                throw Error.InvalidProgram($"Static field {fi} in list initializer");
             }
             if (type.IsValueType)
             {
