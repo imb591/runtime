@@ -20,7 +20,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckMemberAccessStructInstanceFieldTest(bool useInterpreter)
+        public static void CheckMemberAccessStructInstanceFieldTest(CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -35,7 +35,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckMemberAccessStructStaticFieldTest(bool useInterpreter)
+        public static void CheckMemberAccessStructStaticFieldTest(CompilationType useInterpreter)
         {
             FS.SI = 42;
             try
@@ -59,7 +59,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckMemberAccessStructConstFieldTest(bool useInterpreter)
+        public static void CheckMemberAccessStructConstFieldTest(CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -75,7 +75,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckMemberAccessStructStaticReadOnlyFieldTest(bool useInterpreter)
+        public static void CheckMemberAccessStructStaticReadOnlyFieldTest(CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -91,7 +91,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckMemberAccessStructInstancePropertyTest(bool useInterpreter)
+        public static void CheckMemberAccessStructInstancePropertyTest(CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -106,7 +106,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckMemberAccessStructStaticPropertyTest(bool useInterpreter)
+        public static void CheckMemberAccessStructStaticPropertyTest(CompilationType useInterpreter)
         {
             PS.SI = 42;
             try
@@ -129,7 +129,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void NullNullableValueException(bool useInterpreter)
+        public static void NullNullableValueException(CompilationType useInterpreter)
         {
             string localizedMessage = null;
             try
@@ -149,7 +149,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckMemberAccessClassInstanceFieldTest(bool useInterpreter)
+        public static void CheckMemberAccessClassInstanceFieldTest(CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -164,7 +164,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckMemberAccessClassStaticFieldTest(bool useInterpreter)
+        public static void CheckMemberAccessClassStaticFieldTest(CompilationType useInterpreter)
         {
             FC.SI = 42;
             try
@@ -188,7 +188,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckMemberAccessClassConstFieldTest(bool useInterpreter)
+        public static void CheckMemberAccessClassConstFieldTest(CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -204,7 +204,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckMemberAccessClassStaticReadOnlyFieldTest(bool useInterpreter)
+        public static void CheckMemberAccessClassStaticReadOnlyFieldTest(CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -296,7 +296,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckMemberAccessClassInstancePropertyTest(bool useInterpreter)
+        public static void CheckMemberAccessClassInstancePropertyTest(CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -311,7 +311,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckMemberAccessClassStaticPropertyTest(bool useInterpreter)
+        public static void CheckMemberAccessClassStaticPropertyTest(CompilationType useInterpreter)
         {
             PC.SI = 42;
             try
@@ -335,7 +335,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckMemberAccessClassInstanceFieldNullReferenceTest(bool useInterpreter)
+        public static void CheckMemberAccessClassInstanceFieldNullReferenceTest(CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -350,7 +350,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckMemberAccessClassInstanceFieldAssignNullReferenceTest(bool useInterpreter)
+        public static void CheckMemberAccessClassInstanceFieldAssignNullReferenceTest(CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -367,7 +367,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckMemberAccessClassInstancePropertyNullReferenceTest(bool useInterpreter)
+        public static void CheckMemberAccessClassInstancePropertyNullReferenceTest(CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -382,7 +382,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckMemberAccessClassInstanceIndexerNullReferenceTest(bool useInterpreter)
+        public static void CheckMemberAccessClassInstanceIndexerNullReferenceTest(CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -398,7 +398,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckMemberAccessClassInstanceIndexerAssignNullReferenceTest(bool useInterpreter)
+        public static void CheckMemberAccessClassInstanceIndexerAssignNullReferenceTest(CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(

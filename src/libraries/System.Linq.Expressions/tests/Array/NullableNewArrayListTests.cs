@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableBoolArrayListTest(bool useInterpreter)
+        public static void CheckNullableBoolArrayListTest(CompilationType useInterpreter)
         {
             bool?[][] array = new bool?[][]
                 {
@@ -36,7 +36,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableByteArrayListTest(bool useInterpreter)
+        public static void CheckNullableByteArrayListTest(CompilationType useInterpreter)
         {
             byte?[][] array = new byte?[][]
                 {
@@ -62,7 +62,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableCharArrayListTest(bool useInterpreter)
+        public static void CheckNullableCharArrayListTest(CompilationType useInterpreter)
         {
             char?[][] array = new char?[][]
                 {
@@ -88,7 +88,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableDecimalArrayListTest(bool useInterpreter)
+        public static void CheckNullableDecimalArrayListTest(CompilationType useInterpreter)
         {
             decimal?[][] array = new decimal?[][]
                 {
@@ -114,7 +114,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableDoubleArrayListTest(bool useInterpreter)
+        public static void CheckNullableDoubleArrayListTest(CompilationType useInterpreter)
         {
             double?[][] array = new double?[][]
                 {
@@ -140,7 +140,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableEnumArrayListTest(bool useInterpreter)
+        public static void CheckNullableEnumArrayListTest(CompilationType useInterpreter)
         {
             E?[][] array = new E?[][]
                 {
@@ -166,7 +166,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableLongEnumArrayListTest(bool useInterpreter)
+        public static void CheckNullableLongEnumArrayListTest(CompilationType useInterpreter)
         {
             El?[][] array = new El?[][]
                 {
@@ -192,7 +192,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableFloatArrayListTest(bool useInterpreter)
+        public static void CheckNullableFloatArrayListTest(CompilationType useInterpreter)
         {
             float?[][] array = new float?[][]
                 {
@@ -218,7 +218,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableIntArrayListTest(bool useInterpreter)
+        public static void CheckNullableIntArrayListTest(CompilationType useInterpreter)
         {
             int?[][] array = new int?[][]
                 {
@@ -244,7 +244,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableLongArrayListTest(bool useInterpreter)
+        public static void CheckNullableLongArrayListTest(CompilationType useInterpreter)
         {
             long?[][] array = new long?[][]
                 {
@@ -270,7 +270,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableStructArrayListTest(bool useInterpreter)
+        public static void CheckNullableStructArrayListTest(CompilationType useInterpreter)
         {
             S?[][] array = new S?[][]
                 {
@@ -296,7 +296,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableSByteArrayListTest(bool useInterpreter)
+        public static void CheckNullableSByteArrayListTest(CompilationType useInterpreter)
         {
             sbyte?[][] array = new sbyte?[][]
                 {
@@ -322,7 +322,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableStructWithStringArrayListTest(bool useInterpreter)
+        public static void CheckNullableStructWithStringArrayListTest(CompilationType useInterpreter)
         {
             Sc?[][] array = new Sc?[][]
                 {
@@ -348,7 +348,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableStructWithStringAndValueArrayListTest(bool useInterpreter)
+        public static void CheckNullableStructWithStringAndValueArrayListTest(CompilationType useInterpreter)
         {
             Scs?[][] array = new Scs?[][]
                 {
@@ -374,7 +374,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableShortArrayListTest(bool useInterpreter)
+        public static void CheckNullableShortArrayListTest(CompilationType useInterpreter)
         {
             short?[][] array = new short?[][]
                 {
@@ -400,7 +400,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableStructWithTwoValuesArrayListTest(bool useInterpreter)
+        public static void CheckNullableStructWithTwoValuesArrayListTest(CompilationType useInterpreter)
         {
             Sp?[][] array = new Sp?[][]
                 {
@@ -426,7 +426,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableStructWithValueArrayListTest(bool useInterpreter)
+        public static void CheckNullableStructWithValueArrayListTest(CompilationType useInterpreter)
         {
             Ss?[][] array = new Ss?[][]
                 {
@@ -452,7 +452,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableUIntArrayListTest(bool useInterpreter)
+        public static void CheckNullableUIntArrayListTest(CompilationType useInterpreter)
         {
             uint?[][] array = new uint?[][]
                 {
@@ -478,7 +478,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableULongArrayListTest(bool useInterpreter)
+        public static void CheckNullableULongArrayListTest(CompilationType useInterpreter)
         {
             ulong?[][] array = new ulong?[][]
                 {
@@ -504,7 +504,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableUShortArrayListTest(bool useInterpreter)
+        public static void CheckNullableUShortArrayListTest(CompilationType useInterpreter)
         {
             ushort?[][] array = new ushort?[][]
                 {
@@ -530,19 +530,19 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericNullableEnumArrayListTest(bool useInterpreter)
+        public static void CheckGenericNullableEnumArrayListTest(CompilationType useInterpreter)
         {
             CheckNullableGenericWithStructRestrictionArrayList<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericNullableStructArrayListTest(bool useInterpreter)
+        public static void CheckGenericNullableStructArrayListTest(CompilationType useInterpreter)
         {
             CheckNullableGenericWithStructRestrictionArrayList<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericNullableStructWithStringAndValueArrayListTest(bool useInterpreter)
+        public static void CheckGenericNullableStructWithStringAndValueArrayListTest(CompilationType useInterpreter)
         {
             CheckNullableGenericWithStructRestrictionArrayList<Scs>(useInterpreter);
         }
@@ -551,7 +551,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Generic helpers
 
-        private static void CheckNullableGenericWithStructRestrictionArrayList<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckNullableGenericWithStructRestrictionArrayList<Ts>(CompilationType useInterpreter) where Ts : struct
         {
             Ts?[][] array = new Ts?[][]
                 {
@@ -580,7 +580,7 @@ namespace System.Linq.Expressions.Tests
 
         #region  verifiers
 
-        private static void VerifyNullableBoolArrayList(bool?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableBoolArrayList(bool?[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<bool?[]>> e =
                 Expression.Lambda<Func<bool?[]>>(
@@ -595,7 +595,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableByteArrayList(byte?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableByteArrayList(byte?[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<byte?[]>> e =
                 Expression.Lambda<Func<byte?[]>>(
@@ -610,7 +610,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableCharArrayList(char?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableCharArrayList(char?[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<char?[]>> e =
                 Expression.Lambda<Func<char?[]>>(
@@ -625,7 +625,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableDecimalArrayList(decimal?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableDecimalArrayList(decimal?[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<decimal?[]>> e =
                 Expression.Lambda<Func<decimal?[]>>(
@@ -640,7 +640,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableDoubleArrayList(double?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableDoubleArrayList(double?[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<double?[]>> e =
                 Expression.Lambda<Func<double?[]>>(
@@ -655,7 +655,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableEnumArrayList(E?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableEnumArrayList(E?[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<E?[]>> e =
                 Expression.Lambda<Func<E?[]>>(
@@ -670,7 +670,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableLongEnumArrayList(El?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableLongEnumArrayList(El?[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<El?[]>> e =
                 Expression.Lambda<Func<El?[]>>(
@@ -685,7 +685,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableFloatArrayList(float?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableFloatArrayList(float?[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<float?[]>> e =
                 Expression.Lambda<Func<float?[]>>(
@@ -700,7 +700,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableIntArrayList(int?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableIntArrayList(int?[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<int?[]>> e =
                 Expression.Lambda<Func<int?[]>>(
@@ -715,7 +715,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableLongArrayList(long?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableLongArrayList(long?[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<long?[]>> e =
                 Expression.Lambda<Func<long?[]>>(
@@ -730,7 +730,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableStructArrayList(S?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableStructArrayList(S?[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<S?[]>> e =
                 Expression.Lambda<Func<S?[]>>(
@@ -745,7 +745,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableSByteArrayList(sbyte?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableSByteArrayList(sbyte?[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<sbyte?[]>> e =
                 Expression.Lambda<Func<sbyte?[]>>(
@@ -760,7 +760,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableStructWithStringArrayList(Sc?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableStructWithStringArrayList(Sc?[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<Sc?[]>> e =
                 Expression.Lambda<Func<Sc?[]>>(
@@ -775,7 +775,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableStructWithStringAndValueArrayList(Scs?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableStructWithStringAndValueArrayList(Scs?[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<Scs?[]>> e =
                 Expression.Lambda<Func<Scs?[]>>(
@@ -790,7 +790,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableShortArrayList(short?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableShortArrayList(short?[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<short?[]>> e =
                 Expression.Lambda<Func<short?[]>>(
@@ -805,7 +805,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableStructWithTwoValuesArrayList(Sp?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableStructWithTwoValuesArrayList(Sp?[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<Sp?[]>> e =
                 Expression.Lambda<Func<Sp?[]>>(
@@ -820,7 +820,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableStructWithValueArrayList(Ss?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableStructWithValueArrayList(Ss?[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<Ss?[]>> e =
                 Expression.Lambda<Func<Ss?[]>>(
@@ -835,7 +835,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableUIntArrayList(uint?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableUIntArrayList(uint?[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<uint?[]>> e =
                 Expression.Lambda<Func<uint?[]>>(
@@ -850,7 +850,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableULongArrayList(ulong?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableULongArrayList(ulong?[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<ulong?[]>> e =
                 Expression.Lambda<Func<ulong?[]>>(
@@ -865,7 +865,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableUShortArrayList(ushort?[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyNullableUShortArrayList(ushort?[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<ushort?[]>> e =
                 Expression.Lambda<Func<ushort?[]>>(
@@ -880,7 +880,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyNullableGenericWithStructRestrictionArrayList<Ts>(Ts?[] val, Expression[] exprs, bool useInterpreter) where Ts : struct
+        private static void VerifyNullableGenericWithStructRestrictionArrayList<Ts>(Ts?[] val, Expression[] exprs, CompilationType useInterpreter) where Ts : struct
         {
             Expression<Func<Ts?[]>> e =
                 Expression.Lambda<Func<Ts?[]>>(

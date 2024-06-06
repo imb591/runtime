@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedComparisonGreaterThanNullableByteTest(bool useInterpreter)
+        public static void CheckLiftedComparisonGreaterThanNullableByteTest(CompilationType useInterpreter)
         {
             byte?[] values = new byte?[] { null, 0, 1, byte.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -23,7 +23,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedComparisonGreaterThanNullableCharTest(bool useInterpreter)
+        public static void CheckLiftedComparisonGreaterThanNullableCharTest(CompilationType useInterpreter)
         {
             char?[] values = new char?[] { null, '\0', '\b', 'A', '\uffff' };
             for (int i = 0; i < values.Length; i++)
@@ -36,7 +36,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedComparisonGreaterThanNullableDecimalTest(bool useInterpreter)
+        public static void CheckLiftedComparisonGreaterThanNullableDecimalTest(CompilationType useInterpreter)
         {
             decimal?[] values = new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -49,7 +49,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedComparisonGreaterThanNullableDoubleTest(bool useInterpreter)
+        public static void CheckLiftedComparisonGreaterThanNullableDoubleTest(CompilationType useInterpreter)
         {
             double?[] values = new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -62,7 +62,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedComparisonGreaterThanNullableFloatTest(bool useInterpreter)
+        public static void CheckLiftedComparisonGreaterThanNullableFloatTest(CompilationType useInterpreter)
         {
             float?[] values = new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -75,7 +75,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedComparisonGreaterThanNullableIntTest(bool useInterpreter)
+        public static void CheckLiftedComparisonGreaterThanNullableIntTest(CompilationType useInterpreter)
         {
             int?[] values = new int?[] { null, 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -88,7 +88,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedComparisonGreaterThanNullableLongTest(bool useInterpreter)
+        public static void CheckLiftedComparisonGreaterThanNullableLongTest(CompilationType useInterpreter)
         {
             long?[] values = new long?[] { null, 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -101,7 +101,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedComparisonGreaterThanNullableSByteTest(bool useInterpreter)
+        public static void CheckLiftedComparisonGreaterThanNullableSByteTest(CompilationType useInterpreter)
         {
             sbyte?[] values = new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -114,7 +114,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedComparisonGreaterThanNullableShortTest(bool useInterpreter)
+        public static void CheckLiftedComparisonGreaterThanNullableShortTest(CompilationType useInterpreter)
         {
             short?[] values = new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -127,7 +127,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedComparisonGreaterThanNullableUIntTest(bool useInterpreter)
+        public static void CheckLiftedComparisonGreaterThanNullableUIntTest(CompilationType useInterpreter)
         {
             uint?[] values = new uint?[] { null, 0, 1, uint.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -140,7 +140,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedComparisonGreaterThanNullableULongTest(bool useInterpreter)
+        public static void CheckLiftedComparisonGreaterThanNullableULongTest(CompilationType useInterpreter)
         {
             ulong?[] values = new ulong?[] { null, 0, 1, ulong.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -153,7 +153,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedComparisonGreaterThanNullableUShortTest(bool useInterpreter)
+        public static void CheckLiftedComparisonGreaterThanNullableUShortTest(CompilationType useInterpreter)
         {
             ushort?[] values = new ushort?[] { null, 0, 1, ushort.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -169,7 +169,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyComparisonGreaterThanNullableByte(byte? a, byte? b, bool useInterpreter)
+        private static void VerifyComparisonGreaterThanNullableByte(byte? a, byte? b, CompilationType useInterpreter)
         {
             Expression<Func<bool?>> e =
                 Expression.Lambda<Func<bool?>>(
@@ -185,7 +185,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a == null || b == null ? null : expected, result);
         }
 
-        private static void VerifyComparisonGreaterThanNullableChar(char? a, char? b, bool useInterpreter)
+        private static void VerifyComparisonGreaterThanNullableChar(char? a, char? b, CompilationType useInterpreter)
         {
             Expression<Func<bool?>> e =
                 Expression.Lambda<Func<bool?>>(
@@ -201,7 +201,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a == null || b == null ? null : expected, result);
         }
 
-        private static void VerifyComparisonGreaterThanNullableDecimal(decimal? a, decimal? b, bool useInterpreter)
+        private static void VerifyComparisonGreaterThanNullableDecimal(decimal? a, decimal? b, CompilationType useInterpreter)
         {
             Expression<Func<bool?>> e =
                 Expression.Lambda<Func<bool?>>(
@@ -217,7 +217,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a == null || b == null ? null : expected, result);
         }
 
-        private static void VerifyComparisonGreaterThanNullableDouble(double? a, double? b, bool useInterpreter)
+        private static void VerifyComparisonGreaterThanNullableDouble(double? a, double? b, CompilationType useInterpreter)
         {
             Expression<Func<bool?>> e =
                 Expression.Lambda<Func<bool?>>(
@@ -233,7 +233,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a == null || b == null ? null : expected, result);
         }
 
-        private static void VerifyComparisonGreaterThanNullableFloat(float? a, float? b, bool useInterpreter)
+        private static void VerifyComparisonGreaterThanNullableFloat(float? a, float? b, CompilationType useInterpreter)
         {
             Expression<Func<bool?>> e =
                 Expression.Lambda<Func<bool?>>(
@@ -249,7 +249,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a == null || b == null ? null : expected, result);
         }
 
-        private static void VerifyComparisonGreaterThanNullableInt(int? a, int? b, bool useInterpreter)
+        private static void VerifyComparisonGreaterThanNullableInt(int? a, int? b, CompilationType useInterpreter)
         {
             Expression<Func<bool?>> e =
                 Expression.Lambda<Func<bool?>>(
@@ -265,7 +265,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a == null || b == null ? null : expected, result);
         }
 
-        private static void VerifyComparisonGreaterThanNullableLong(long? a, long? b, bool useInterpreter)
+        private static void VerifyComparisonGreaterThanNullableLong(long? a, long? b, CompilationType useInterpreter)
         {
             Expression<Func<bool?>> e =
                 Expression.Lambda<Func<bool?>>(
@@ -281,7 +281,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a == null || b == null ? null : expected, result);
         }
 
-        private static void VerifyComparisonGreaterThanNullableSByte(sbyte? a, sbyte? b, bool useInterpreter)
+        private static void VerifyComparisonGreaterThanNullableSByte(sbyte? a, sbyte? b, CompilationType useInterpreter)
         {
             Expression<Func<bool?>> e =
                 Expression.Lambda<Func<bool?>>(
@@ -297,7 +297,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a == null || b == null ? null : expected, result);
         }
 
-        private static void VerifyComparisonGreaterThanNullableShort(short? a, short? b, bool useInterpreter)
+        private static void VerifyComparisonGreaterThanNullableShort(short? a, short? b, CompilationType useInterpreter)
         {
             Expression<Func<bool?>> e =
                 Expression.Lambda<Func<bool?>>(
@@ -313,7 +313,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a == null || b == null ? null : expected, result);
         }
 
-        private static void VerifyComparisonGreaterThanNullableUInt(uint? a, uint? b, bool useInterpreter)
+        private static void VerifyComparisonGreaterThanNullableUInt(uint? a, uint? b, CompilationType useInterpreter)
         {
             Expression<Func<bool?>> e =
                 Expression.Lambda<Func<bool?>>(
@@ -329,7 +329,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a == null || b == null ? null : expected, result);
         }
 
-        private static void VerifyComparisonGreaterThanNullableULong(ulong? a, ulong? b, bool useInterpreter)
+        private static void VerifyComparisonGreaterThanNullableULong(ulong? a, ulong? b, CompilationType useInterpreter)
         {
             Expression<Func<bool?>> e =
                 Expression.Lambda<Func<bool?>>(
@@ -345,7 +345,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a == null || b == null ? null : expected, result);
         }
 
-        private static void VerifyComparisonGreaterThanNullableUShort(ushort? a, ushort? b, bool useInterpreter)
+        private static void VerifyComparisonGreaterThanNullableUShort(ushort? a, ushort? b, CompilationType useInterpreter)
         {
             Expression<Func<bool?>> e =
                 Expression.Lambda<Func<bool?>>(

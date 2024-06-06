@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryUnboxTest(bool useInterpreter)
+        public static void CheckUnaryUnboxTest(CompilationType useInterpreter)
         {
             VerifyUnbox(42, typeof(int), false, useInterpreter);
             VerifyUnbox(42, typeof(int?), false, useInterpreter);
@@ -29,7 +29,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyUnbox(object value, Type type, bool shouldThrow, bool useInterpreter)
+        private static void VerifyUnbox(object value, Type type, bool shouldThrow, CompilationType useInterpreter)
         {
             Expression<Func<object>> e =
                 Expression.Lambda<Func<object>>(

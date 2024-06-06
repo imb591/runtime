@@ -733,7 +733,7 @@ namespace System.Dynamic.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void BinaryCallSiteBinder_DynamicExpression(bool useInterpreter)
+        public void BinaryCallSiteBinder_DynamicExpression(CompilationType useInterpreter)
         {
             DynamicExpression expression = DynamicExpression.Dynamic(
                 new BinaryCallSiteBinder(),

@@ -12,7 +12,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertBoxingTest(bool useInterpreter)
+        public static void ConvertBoxingTest(CompilationType useInterpreter)
         {
             foreach (var e in ConvertBoxing())
             {
@@ -21,7 +21,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertUnboxingTest(bool useInterpreter)
+        public static void ConvertUnboxingTest(CompilationType useInterpreter)
         {
             foreach (var e in ConvertUnboxing())
             {
@@ -30,7 +30,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertDelegatesTest(bool useInterpreter)
+        public static void ConvertDelegatesTest(CompilationType useInterpreter)
         {
             foreach (var e in ConvertDelegates())
             {
@@ -39,7 +39,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertUnboxingInvalidCastTest(bool useInterpreter)
+        public static void ConvertUnboxingInvalidCastTest(CompilationType useInterpreter)
         {
             foreach (var e in ConvertUnboxingInvalidCast())
             {
@@ -48,7 +48,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryConvertBooleanToNumericTest(bool useInterpreter)
+        public static void CheckUnaryConvertBooleanToNumericTest(CompilationType useInterpreter)
         {
             foreach (var kv in ConvertBooleanToNumeric())
             {
@@ -57,7 +57,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertNullToNonNullableValueTest(bool useInterpreter)
+        public static void ConvertNullToNonNullableValueTest(CompilationType useInterpreter)
         {
             foreach (var e in ConvertNullToNonNullableValue())
             {
@@ -66,7 +66,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertNullToNullableValueTest(bool useInterpreter)
+        public static void ConvertNullToNullableValueTest(CompilationType useInterpreter)
         {
             foreach (var e in ConvertNullToNullableValue())
             {
@@ -75,7 +75,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertUnderlyingTypeToEnumTypeTest(bool useInterpreter)
+        public static void ConvertUnderlyingTypeToEnumTypeTest(CompilationType useInterpreter)
         {
             DayOfWeek enumValue = DayOfWeek.Monday;
             var value = (int)enumValue;
@@ -87,7 +87,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertUnderlyingTypeToNullableEnumTypeTest(bool useInterpreter)
+        public static void ConvertUnderlyingTypeToNullableEnumTypeTest(CompilationType useInterpreter)
         {
             DayOfWeek enumValue = DayOfWeek.Monday;
             var value = (int)enumValue;
@@ -100,7 +100,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertArrayToIncompatibleTypeTest(bool useInterpreter)
+        public static void ConvertArrayToIncompatibleTypeTest(CompilationType useInterpreter)
         {
             var arr = new object[] { "bar" };
 
@@ -380,7 +380,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyUnaryConvert(Expression e, object o, bool useInterpreter)
+        private static void VerifyUnaryConvert(Expression e, object o, CompilationType useInterpreter)
         {
             Expression<Func<object>> f =
                 Expression.Lambda<Func<object>>(
@@ -390,7 +390,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(o, c());
         }
 
-        private static void VerifyUnaryConvertThrows<T>(Expression e, bool useInterpreter)
+        private static void VerifyUnaryConvertThrows<T>(Expression e, CompilationType useInterpreter)
             where T : Exception
         {
             Expression<Func<object>> f =
@@ -401,7 +401,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<T>(() => c());
         }
 
-        private static void VerifyUnaryConvert(Expression e, bool useInterpreter)
+        private static void VerifyUnaryConvert(Expression e, CompilationType useInterpreter)
         {
             Expression<Func<object>> f =
                 Expression.Lambda<Func<object>>(

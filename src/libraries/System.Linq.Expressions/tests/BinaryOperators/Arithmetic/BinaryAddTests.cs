@@ -36,7 +36,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUShortAddTest(bool useInterpreter)
+        public static void CheckUShortAddTest(CompilationType useInterpreter)
         {
             ushort[] array = new ushort[] { 0, 1, ushort.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -50,7 +50,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckShortAddTest(bool useInterpreter)
+        public static void CheckShortAddTest(CompilationType useInterpreter)
         {
             short[] array = new short[] { 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -64,7 +64,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUIntAddTest(bool useInterpreter)
+        public static void CheckUIntAddTest(CompilationType useInterpreter)
         {
             uint[] array = new uint[] { 0, 1, uint.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -78,7 +78,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckIntAddTest(bool useInterpreter)
+        public static void CheckIntAddTest(CompilationType useInterpreter)
         {
             int[] array = new int[] { 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -92,7 +92,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckULongAddTest(bool useInterpreter)
+        public static void CheckULongAddTest(CompilationType useInterpreter)
         {
             ulong[] array = new ulong[] { 0, 1, ulong.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -106,7 +106,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLongAddTest(bool useInterpreter)
+        public static void CheckLongAddTest(CompilationType useInterpreter)
         {
             long[] array = new long[] { 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -120,7 +120,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckFloatAddTest(bool useInterpreter)
+        public static void CheckFloatAddTest(CompilationType useInterpreter)
         {
             float[] array = new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
             for (int i = 0; i < array.Length; i++)
@@ -133,7 +133,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckDoubleAddTest(bool useInterpreter)
+        public static void CheckDoubleAddTest(CompilationType useInterpreter)
         {
             double[] array = new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
             for (int i = 0; i < array.Length; i++)
@@ -146,7 +146,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckDecimalAddTest(bool useInterpreter)
+        public static void CheckDecimalAddTest(CompilationType useInterpreter)
         {
             decimal[] array = new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -189,7 +189,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidOperationException>(() => Expression.Add(aExp, bExp));
         }
 
-        private static void VerifyUShortAdd(ushort a, ushort b, bool useInterpreter)
+        private static void VerifyUShortAdd(ushort a, ushort b, CompilationType useInterpreter)
         {
             Expression<Func<ushort>> e =
                 Expression.Lambda<Func<ushort>>(
@@ -203,7 +203,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((ushort)(a + b)), f());
         }
 
-        private static void VerifyUShortAddOvf(ushort a, ushort b, bool useInterpreter)
+        private static void VerifyUShortAddOvf(ushort a, ushort b, CompilationType useInterpreter)
         {
             Expression<Func<ushort>> e =
                 Expression.Lambda<Func<ushort>>(
@@ -222,7 +222,7 @@ namespace System.Linq.Expressions.Tests
 
         }
 
-        private static void VerifyShortAdd(short a, short b, bool useInterpreter)
+        private static void VerifyShortAdd(short a, short b, CompilationType useInterpreter)
         {
             Expression<Func<short>> e =
                 Expression.Lambda<Func<short>>(
@@ -236,7 +236,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((short)(a + b)), f());
         }
 
-        private static void VerifyShortAddOvf(short a, short b, bool useInterpreter)
+        private static void VerifyShortAddOvf(short a, short b, CompilationType useInterpreter)
         {
             Expression<Func<short>> e =
                 Expression.Lambda<Func<short>>(
@@ -254,7 +254,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(expected, f());
         }
 
-        private static void VerifyUIntAdd(uint a, uint b, bool useInterpreter)
+        private static void VerifyUIntAdd(uint a, uint b, CompilationType useInterpreter)
         {
             Expression<Func<uint>> e =
                 Expression.Lambda<Func<uint>>(
@@ -268,7 +268,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked(a + b), f());
         }
 
-        private static void VerifyUIntAddOvf(uint a, uint b, bool useInterpreter)
+        private static void VerifyUIntAddOvf(uint a, uint b, CompilationType useInterpreter)
         {
             Expression<Func<uint>> e =
                 Expression.Lambda<Func<uint>>(
@@ -286,7 +286,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(expected, f());
         }
 
-        private static void VerifyIntAdd(int a, int b, bool useInterpreter)
+        private static void VerifyIntAdd(int a, int b, CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -300,7 +300,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked(a + b), f());
         }
 
-        private static void VerifyIntAddOvf(int a, int b, bool useInterpreter)
+        private static void VerifyIntAddOvf(int a, int b, CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -318,7 +318,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(expected, f());
         }
 
-        private static void VerifyULongAdd(ulong a, ulong b, bool useInterpreter)
+        private static void VerifyULongAdd(ulong a, ulong b, CompilationType useInterpreter)
         {
             Expression<Func<ulong>> e =
                 Expression.Lambda<Func<ulong>>(
@@ -332,7 +332,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked(a + b), f());
         }
 
-        private static void VerifyULongAddOvf(ulong a, ulong b, bool useInterpreter)
+        private static void VerifyULongAddOvf(ulong a, ulong b, CompilationType useInterpreter)
         {
             Expression<Func<ulong>> e =
                 Expression.Lambda<Func<ulong>>(
@@ -357,7 +357,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyLongAdd(long a, long b, bool useInterpreter)
+        private static void VerifyLongAdd(long a, long b, CompilationType useInterpreter)
         {
             Expression<Func<long>> e =
                 Expression.Lambda<Func<long>>(
@@ -371,7 +371,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked(a + b), f());
         }
 
-        private static void VerifyLongAddOvf(long a, long b, bool useInterpreter)
+        private static void VerifyLongAddOvf(long a, long b, CompilationType useInterpreter)
         {
             Expression<Func<long>> e =
                 Expression.Lambda<Func<long>>(
@@ -396,7 +396,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyFloatAdd(float a, float b, bool useInterpreter)
+        private static void VerifyFloatAdd(float a, float b, CompilationType useInterpreter)
         {
             Expression<Func<float>> e =
                 Expression.Lambda<Func<float>>(
@@ -421,7 +421,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyDoubleAdd(double a, double b, bool useInterpreter)
+        private static void VerifyDoubleAdd(double a, double b, CompilationType useInterpreter)
         {
             Expression<Func<double>> e =
                 Expression.Lambda<Func<double>>(
@@ -446,7 +446,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyDecimalAdd(decimal a, decimal b, bool useInterpreter)
+        private static void VerifyDecimalAdd(decimal a, decimal b, CompilationType useInterpreter)
         {
             Expression<Func<decimal>> e =
                 Expression.Lambda<Func<decimal>>(

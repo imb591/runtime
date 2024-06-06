@@ -11,7 +11,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckBoolArrayIndexTest(bool useInterpreter)
+        public static void CheckBoolArrayIndexTest(CompilationType useInterpreter)
         {
             CheckBoolArrayIndex(GenerateBoolArray(0), useInterpreter);
             CheckBoolArrayIndex(GenerateBoolArray(1), useInterpreter);
@@ -20,7 +20,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionBoolArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionBoolArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionBoolArrayIndex(null, -1, useInterpreter);
@@ -42,7 +42,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckByteArrayIndexTest(bool useInterpreter)
+        public static void CheckByteArrayIndexTest(CompilationType useInterpreter)
         {
             CheckByteArrayIndex(GenerateByteArray(0), useInterpreter);
             CheckByteArrayIndex(GenerateByteArray(1), useInterpreter);
@@ -51,7 +51,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionByteArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionByteArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionByteArrayIndex(null, -1, useInterpreter);
@@ -73,7 +73,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckCustomArrayIndexTest(bool useInterpreter)
+        public static void CheckCustomArrayIndexTest(CompilationType useInterpreter)
         {
             CheckCustomArrayIndex(GenerateCustomArray(0), useInterpreter);
             CheckCustomArrayIndex(GenerateCustomArray(1), useInterpreter);
@@ -82,7 +82,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionCustomArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionCustomArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionCustomArrayIndex(null, -1, useInterpreter);
@@ -104,7 +104,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckCharArrayIndexTest(bool useInterpreter)
+        public static void CheckCharArrayIndexTest(CompilationType useInterpreter)
         {
             CheckCharArrayIndex(GenerateCharArray(0), useInterpreter);
             CheckCharArrayIndex(GenerateCharArray(1), useInterpreter);
@@ -113,7 +113,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionCharArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionCharArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionCharArrayIndex(null, -1, useInterpreter);
@@ -135,7 +135,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckCustom2ArrayIndexTest(bool useInterpreter)
+        public static void CheckCustom2ArrayIndexTest(CompilationType useInterpreter)
         {
             CheckCustom2ArrayIndex(GenerateCustom2Array(0), useInterpreter);
             CheckCustom2ArrayIndex(GenerateCustom2Array(1), useInterpreter);
@@ -144,7 +144,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionCustom2ArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionCustom2ArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionCustom2ArrayIndex(null, -1, useInterpreter);
@@ -166,7 +166,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckDecimalArrayIndexTest(bool useInterpreter)
+        public static void CheckDecimalArrayIndexTest(CompilationType useInterpreter)
         {
             CheckDecimalArrayIndex(GenerateDecimalArray(0), useInterpreter);
             CheckDecimalArrayIndex(GenerateDecimalArray(1), useInterpreter);
@@ -175,7 +175,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionDecimalArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionDecimalArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionDecimalArrayIndex(null, -1, useInterpreter);
@@ -197,7 +197,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckDelegateArrayIndexTest(bool useInterpreter)
+        public static void CheckDelegateArrayIndexTest(CompilationType useInterpreter)
         {
             CheckDelegateArrayIndex(GenerateDelegateArray(0), useInterpreter);
             CheckDelegateArrayIndex(GenerateDelegateArray(1), useInterpreter);
@@ -206,7 +206,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionDelegateArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionDelegateArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionDelegateArrayIndex(null, -1, useInterpreter);
@@ -228,7 +228,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckDoubleArrayIndexTest(bool useInterpreter)
+        public static void CheckDoubleArrayIndexTest(CompilationType useInterpreter)
         {
             CheckDoubleArrayIndex(GenerateDoubleArray(0), useInterpreter);
             CheckDoubleArrayIndex(GenerateDoubleArray(1), useInterpreter);
@@ -237,7 +237,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionDoubleArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionDoubleArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionDoubleArrayIndex(null, -1, useInterpreter);
@@ -259,7 +259,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckEnumArrayIndexTest(bool useInterpreter)
+        public static void CheckEnumArrayIndexTest(CompilationType useInterpreter)
         {
             CheckEnumArrayIndex(GenerateEnumArray(0), useInterpreter);
             CheckEnumArrayIndex(GenerateEnumArray(1), useInterpreter);
@@ -268,7 +268,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionEnumArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionEnumArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionEnumArrayIndex(null, -1, useInterpreter);
@@ -290,7 +290,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckEnumLongArrayIndexTest(bool useInterpreter)
+        public static void CheckEnumLongArrayIndexTest(CompilationType useInterpreter)
         {
             CheckEnumLongArrayIndex(GenerateEnumLongArray(0), useInterpreter);
             CheckEnumLongArrayIndex(GenerateEnumLongArray(1), useInterpreter);
@@ -299,7 +299,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionEnumLongArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionEnumLongArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionEnumLongArrayIndex(null, -1, useInterpreter);
@@ -321,7 +321,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckFloatArrayIndexTest(bool useInterpreter)
+        public static void CheckFloatArrayIndexTest(CompilationType useInterpreter)
         {
             CheckFloatArrayIndex(GenerateFloatArray(0), useInterpreter);
             CheckFloatArrayIndex(GenerateFloatArray(1), useInterpreter);
@@ -330,7 +330,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionFloatArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionFloatArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionFloatArrayIndex(null, -1, useInterpreter);
@@ -352,7 +352,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckFuncArrayIndexTest(bool useInterpreter)
+        public static void CheckFuncArrayIndexTest(CompilationType useInterpreter)
         {
             CheckFuncArrayIndex(GenerateFuncArray(0), useInterpreter);
             CheckFuncArrayIndex(GenerateFuncArray(1), useInterpreter);
@@ -361,7 +361,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionFuncArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionFuncArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionFuncArrayIndex(null, -1, useInterpreter);
@@ -383,7 +383,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckInterfaceArrayIndexTest(bool useInterpreter)
+        public static void CheckInterfaceArrayIndexTest(CompilationType useInterpreter)
         {
             CheckInterfaceArrayIndex(GenerateInterfaceArray(0), useInterpreter);
             CheckInterfaceArrayIndex(GenerateInterfaceArray(1), useInterpreter);
@@ -392,7 +392,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionInterfaceArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionInterfaceArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionInterfaceArrayIndex(null, -1, useInterpreter);
@@ -414,7 +414,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckIEquatableCustomArrayIndexTest(bool useInterpreter)
+        public static void CheckIEquatableCustomArrayIndexTest(CompilationType useInterpreter)
         {
             CheckIEquatableCustomArrayIndex(GenerateIEquatableCustomArray(0), useInterpreter);
             CheckIEquatableCustomArrayIndex(GenerateIEquatableCustomArray(1), useInterpreter);
@@ -423,7 +423,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionIEquatableCustomArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionIEquatableCustomArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionIEquatableCustomArrayIndex(null, -1, useInterpreter);
@@ -445,7 +445,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckIEquatableCustom2ArrayIndexTest(bool useInterpreter)
+        public static void CheckIEquatableCustom2ArrayIndexTest(CompilationType useInterpreter)
         {
             CheckIEquatableCustom2ArrayIndex(GenerateIEquatableCustom2Array(0), useInterpreter);
             CheckIEquatableCustom2ArrayIndex(GenerateIEquatableCustom2Array(1), useInterpreter);
@@ -454,7 +454,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionIEquatableCustom2ArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionIEquatableCustom2ArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionIEquatableCustom2ArrayIndex(null, -1, useInterpreter);
@@ -476,7 +476,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckIntArrayIndexTest(bool useInterpreter)
+        public static void CheckIntArrayIndexTest(CompilationType useInterpreter)
         {
             CheckIntArrayIndex(GenerateIntArray(0), useInterpreter);
             CheckIntArrayIndex(GenerateIntArray(1), useInterpreter);
@@ -485,7 +485,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionIntArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionIntArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionIntArrayIndex(null, -1, useInterpreter);
@@ -507,7 +507,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckLongArrayIndexTest(bool useInterpreter)
+        public static void CheckLongArrayIndexTest(CompilationType useInterpreter)
         {
             CheckLongArrayIndex(GenerateLongArray(0), useInterpreter);
             CheckLongArrayIndex(GenerateLongArray(1), useInterpreter);
@@ -516,7 +516,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionLongArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionLongArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionLongArrayIndex(null, -1, useInterpreter);
@@ -538,7 +538,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckObjectArrayIndexTest(bool useInterpreter)
+        public static void CheckObjectArrayIndexTest(CompilationType useInterpreter)
         {
             CheckObjectArrayIndex(GenerateObjectArray(0), useInterpreter);
             CheckObjectArrayIndex(GenerateObjectArray(1), useInterpreter);
@@ -547,7 +547,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionObjectArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionObjectArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionObjectArrayIndex(null, -1, useInterpreter);
@@ -569,7 +569,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckStructArrayIndexTest(bool useInterpreter)
+        public static void CheckStructArrayIndexTest(CompilationType useInterpreter)
         {
             CheckStructArrayIndex(GenerateStructArray(0), useInterpreter);
             CheckStructArrayIndex(GenerateStructArray(1), useInterpreter);
@@ -578,7 +578,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionStructArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionStructArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionStructArrayIndex(null, -1, useInterpreter);
@@ -600,7 +600,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckSByteArrayIndexTest(bool useInterpreter)
+        public static void CheckSByteArrayIndexTest(CompilationType useInterpreter)
         {
             CheckSByteArrayIndex(GenerateSByteArray(0), useInterpreter);
             CheckSByteArrayIndex(GenerateSByteArray(1), useInterpreter);
@@ -609,7 +609,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionSByteArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionSByteArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionSByteArrayIndex(null, -1, useInterpreter);
@@ -631,7 +631,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckStructWithStringArrayIndexTest(bool useInterpreter)
+        public static void CheckStructWithStringArrayIndexTest(CompilationType useInterpreter)
         {
             CheckStructWithStringArrayIndex(GenerateStructWithStringArray(0), useInterpreter);
             CheckStructWithStringArrayIndex(GenerateStructWithStringArray(1), useInterpreter);
@@ -640,7 +640,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionStructWithStringArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionStructWithStringArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionStructWithStringArrayIndex(null, -1, useInterpreter);
@@ -662,7 +662,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckStructWithValueAndStringArrayIndexTest(bool useInterpreter)
+        public static void CheckStructWithValueAndStringArrayIndexTest(CompilationType useInterpreter)
         {
             CheckStructWithValueAndStringArrayIndex(GenerateStructWithValueAndStringArray(0), useInterpreter);
             CheckStructWithValueAndStringArrayIndex(GenerateStructWithValueAndStringArray(1), useInterpreter);
@@ -671,7 +671,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionStructWithValueAndStringArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionStructWithValueAndStringArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionStructWithValueAndStringArrayIndex(null, -1, useInterpreter);
@@ -693,7 +693,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckShortArrayIndexTest(bool useInterpreter)
+        public static void CheckShortArrayIndexTest(CompilationType useInterpreter)
         {
             CheckShortArrayIndex(GenerateShortArray(0), useInterpreter);
             CheckShortArrayIndex(GenerateShortArray(1), useInterpreter);
@@ -702,7 +702,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionShortArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionShortArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionShortArrayIndex(null, -1, useInterpreter);
@@ -724,7 +724,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckStructWithParametersArrayIndexTest(bool useInterpreter)
+        public static void CheckStructWithParametersArrayIndexTest(CompilationType useInterpreter)
         {
             CheckStructWithParametersArrayIndex(GenerateStructWithParametersArray(0), useInterpreter);
             CheckStructWithParametersArrayIndex(GenerateStructWithParametersArray(1), useInterpreter);
@@ -733,7 +733,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionStructWithParametersArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionStructWithParametersArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionStructWithParametersArrayIndex(null, -1, useInterpreter);
@@ -755,7 +755,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckStructWithStructArrayIndexTest(bool useInterpreter)
+        public static void CheckStructWithStructArrayIndexTest(CompilationType useInterpreter)
         {
             CheckStructWithStructArrayIndex(GenerateStructWithStructArray(0), useInterpreter);
             CheckStructWithStructArrayIndex(GenerateStructWithStructArray(1), useInterpreter);
@@ -764,7 +764,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionStructWithStructArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionStructWithStructArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionStructWithStructArrayIndex(null, -1, useInterpreter);
@@ -786,7 +786,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckStringArrayIndexTest(bool useInterpreter)
+        public static void CheckStringArrayIndexTest(CompilationType useInterpreter)
         {
             CheckStringArrayIndex(GenerateStringArray(0), useInterpreter);
             CheckStringArrayIndex(GenerateStringArray(1), useInterpreter);
@@ -795,7 +795,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionStringArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionStringArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionStringArrayIndex(null, -1, useInterpreter);
@@ -817,7 +817,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckUIntArrayIndexTest(bool useInterpreter)
+        public static void CheckUIntArrayIndexTest(CompilationType useInterpreter)
         {
             CheckUIntArrayIndex(GenerateUIntArray(0), useInterpreter);
             CheckUIntArrayIndex(GenerateUIntArray(1), useInterpreter);
@@ -826,7 +826,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionUIntArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionUIntArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionUIntArrayIndex(null, -1, useInterpreter);
@@ -848,7 +848,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckULongArrayIndexTest(bool useInterpreter)
+        public static void CheckULongArrayIndexTest(CompilationType useInterpreter)
         {
             CheckULongArrayIndex(GenerateULongArray(0), useInterpreter);
             CheckULongArrayIndex(GenerateULongArray(1), useInterpreter);
@@ -857,7 +857,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionULongArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionULongArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionULongArrayIndex(null, -1, useInterpreter);
@@ -879,7 +879,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckUShortArrayIndexTest(bool useInterpreter)
+        public static void CheckUShortArrayIndexTest(CompilationType useInterpreter)
         {
             CheckUShortArrayIndex(GenerateUShortArray(0), useInterpreter);
             CheckUShortArrayIndex(GenerateUShortArray(1), useInterpreter);
@@ -888,7 +888,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionUShortArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionUShortArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionUShortArrayIndex(null, -1, useInterpreter);
@@ -910,161 +910,161 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericCustomArrayIndexTest(bool useInterpreter)
+        public static void CheckGenericCustomArrayIndexTest(CompilationType useInterpreter)
         {
             CheckGenericArrayIndexTestHelper<C>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericCustomArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionGenericCustomArrayIndexTest(CompilationType useInterpreter)
         {
             CheckExceptionGenericArrayIndexTestHelper<C>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericEnumArrayIndexTest(bool useInterpreter)
+        public static void CheckGenericEnumArrayIndexTest(CompilationType useInterpreter)
         {
             CheckGenericArrayIndexTestHelper<E>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericEnumArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionGenericEnumArrayIndexTest(CompilationType useInterpreter)
         {
             CheckExceptionGenericArrayIndexTestHelper<E>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericObjectArrayIndexTest(bool useInterpreter)
+        public static void CheckGenericObjectArrayIndexTest(CompilationType useInterpreter)
         {
             CheckGenericArrayIndexTestHelper<object>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericObjectArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionGenericObjectArrayIndexTest(CompilationType useInterpreter)
         {
             CheckExceptionGenericArrayIndexTestHelper<object>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericStructArrayIndexTest(bool useInterpreter)
+        public static void CheckGenericStructArrayIndexTest(CompilationType useInterpreter)
         {
             CheckGenericArrayIndexTestHelper<S>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericStructArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionGenericStructArrayIndexTest(CompilationType useInterpreter)
         {
             CheckExceptionGenericArrayIndexTestHelper<S>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericStructWithValueAndStringArrayIndexTest(bool useInterpreter)
+        public static void CheckGenericStructWithValueAndStringArrayIndexTest(CompilationType useInterpreter)
         {
             CheckGenericArrayIndexTestHelper<Scs>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericStructWithValueAndStringArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionGenericStructWithValueAndStringArrayIndexTest(CompilationType useInterpreter)
         {
             CheckExceptionGenericArrayIndexTestHelper<Scs>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithClassRestrictionArrayIndexTest(bool useInterpreter)
+        public static void CheckGenericWithClassRestrictionArrayIndexTest(CompilationType useInterpreter)
         {
             CheckGenericWithClassRestrictionArrayIndexTestHelper<C>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericWithClassRestrictionArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionGenericWithClassRestrictionArrayIndexTest(CompilationType useInterpreter)
         {
             CheckExceptionGenericWithClassRestrictionArrayIndexTestHelper<C>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithObjectRestrictionArrayIndexTest(bool useInterpreter)
+        public static void CheckGenericWithObjectRestrictionArrayIndexTest(CompilationType useInterpreter)
         {
             CheckGenericWithClassRestrictionArrayIndexTestHelper<C>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericWithObjectRestrictionArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionGenericWithObjectRestrictionArrayIndexTest(CompilationType useInterpreter)
         {
             CheckExceptionGenericWithClassRestrictionArrayIndexTestHelper<C>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithSubClassRestrictionArrayIndexTest(bool useInterpreter)
+        public static void CheckGenericWithSubClassRestrictionArrayIndexTest(CompilationType useInterpreter)
         {
             CheckGenericWithSubClassRestrictionArrayIndexTestHelper<C>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericWithSubClassRestrictionArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionGenericWithSubClassRestrictionArrayIndexTest(CompilationType useInterpreter)
         {
             CheckExceptionGenericWithSubClassRestrictionArrayIndexTestHelper<C>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithNewClassRestrictionArrayIndexTest(bool useInterpreter)
+        public static void CheckGenericWithNewClassRestrictionArrayIndexTest(CompilationType useInterpreter)
         {
             CheckGenericWithNewClassRestrictionArrayIndexTestHelper<C>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericWithNewClassRestrictionArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionGenericWithNewClassRestrictionArrayIndexTest(CompilationType useInterpreter)
         {
             CheckExceptionGenericWithNewClassRestrictionArrayIndexTestHelper<C>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithSubClassNewRestrictionArrayIndexTest(bool useInterpreter)
+        public static void CheckGenericWithSubClassNewRestrictionArrayIndexTest(CompilationType useInterpreter)
         {
             CheckGenericWithSubClassNewRestrictionArrayIndexTestHelper<C>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericWithSubClassNewRestrictionArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionGenericWithSubClassNewRestrictionArrayIndexTest(CompilationType useInterpreter)
         {
             CheckExceptionGenericWithSubClassNewRestrictionArrayIndexTestHelper<C>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithSubClassNewObjectRestrictionArrayIndexTest(bool useInterpreter)
+        public static void CheckGenericWithSubClassNewObjectRestrictionArrayIndexTest(CompilationType useInterpreter)
         {
             CheckGenericWithNewClassRestrictionArrayIndexTestHelper<object>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericWithSubClassNewObjectRestrictionArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionGenericWithSubClassNewObjectRestrictionArrayIndexTest(CompilationType useInterpreter)
         {
             CheckExceptionGenericWithNewClassRestrictionArrayIndexTestHelper<object>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithStructRestrictionArrayIndexTest(bool useInterpreter)
+        public static void CheckGenericWithStructRestrictionArrayIndexTest(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionArrayIndexTestHelper<E>(useInterpreter);
             CheckGenericWithStructRestrictionArrayIndexTestHelper<S>(useInterpreter);
@@ -1073,7 +1073,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericWithStructRestrictionArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionGenericWithStructRestrictionArrayIndexTest(CompilationType useInterpreter)
         {
             CheckExceptionGenericWithStructRestrictionArrayIndexTestHelper<E>(useInterpreter);
             CheckExceptionGenericWithStructRestrictionArrayIndexTestHelper<S>(useInterpreter);
@@ -1084,14 +1084,14 @@ namespace System.Linq.Expressions.Tests
 
         #region Generic test helpers
 
-        private static void CheckGenericArrayIndexTestHelper<T>(bool useInterpreter)
+        private static void CheckGenericArrayIndexTestHelper<T>(CompilationType useInterpreter)
         {
             CheckGenericArrayIndex<T>(GenerateGenericArray<T>(0), useInterpreter);
             CheckGenericArrayIndex<T>(GenerateGenericArray<T>(1), useInterpreter);
             CheckGenericArrayIndex<T>(GenerateGenericArray<T>(5), useInterpreter);
         }
 
-        private static void CheckExceptionGenericArrayIndexTestHelper<T>(bool useInterpreter)
+        private static void CheckExceptionGenericArrayIndexTestHelper<T>(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionGenericArrayIndex<T>(null, -1, useInterpreter);
@@ -1107,14 +1107,14 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionGenericArrayIndex<T>(GenerateGenericArray<T>(5), 5, useInterpreter);
         }
 
-        private static void CheckGenericWithClassRestrictionArrayIndexTestHelper<Tc>(bool useInterpreter) where Tc : class
+        private static void CheckGenericWithClassRestrictionArrayIndexTestHelper<Tc>(CompilationType useInterpreter) where Tc : class
         {
             CheckGenericWithClassRestrictionArrayIndex<Tc>(GenerateGenericWithClassRestrictionArray<Tc>(0), useInterpreter);
             CheckGenericWithClassRestrictionArrayIndex<Tc>(GenerateGenericWithClassRestrictionArray<Tc>(1), useInterpreter);
             CheckGenericWithClassRestrictionArrayIndex<Tc>(GenerateGenericWithClassRestrictionArray<Tc>(5), useInterpreter);
         }
 
-        private static void CheckExceptionGenericWithClassRestrictionArrayIndexTestHelper<Tc>(bool useInterpreter) where Tc : class
+        private static void CheckExceptionGenericWithClassRestrictionArrayIndexTestHelper<Tc>(CompilationType useInterpreter) where Tc : class
         {
             // null arrays
             CheckExceptionGenericWithClassRestrictionArrayIndex<Tc>(null, -1, useInterpreter);
@@ -1130,14 +1130,14 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionGenericWithClassRestrictionArrayIndex<Tc>(GenerateGenericWithClassRestrictionArray<Tc>(5), 5, useInterpreter);
         }
 
-        private static void CheckGenericWithSubClassRestrictionArrayIndexTestHelper<Tc>(bool useInterpreter) where Tc : C
+        private static void CheckGenericWithSubClassRestrictionArrayIndexTestHelper<Tc>(CompilationType useInterpreter) where Tc : C
         {
             CheckGenericWithSubClassRestrictionArrayIndex<Tc>(GenerateGenericWithSubClassRestrictionArray<Tc>(0), useInterpreter);
             CheckGenericWithSubClassRestrictionArrayIndex<Tc>(GenerateGenericWithSubClassRestrictionArray<Tc>(1), useInterpreter);
             CheckGenericWithSubClassRestrictionArrayIndex<Tc>(GenerateGenericWithSubClassRestrictionArray<Tc>(5), useInterpreter);
         }
 
-        private static void CheckExceptionGenericWithSubClassRestrictionArrayIndexTestHelper<Tc>(bool useInterpreter) where Tc : C
+        private static void CheckExceptionGenericWithSubClassRestrictionArrayIndexTestHelper<Tc>(CompilationType useInterpreter) where Tc : C
         {
             // null arrays
             CheckExceptionGenericWithSubClassRestrictionArrayIndex<Tc>(null, -1, useInterpreter);
@@ -1153,14 +1153,14 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionGenericWithSubClassRestrictionArrayIndex<Tc>(GenerateGenericWithSubClassRestrictionArray<Tc>(5), 5, useInterpreter);
         }
 
-        private static void CheckGenericWithNewClassRestrictionArrayIndexTestHelper<Tcn>(bool useInterpreter) where Tcn : class, new()
+        private static void CheckGenericWithNewClassRestrictionArrayIndexTestHelper<Tcn>(CompilationType useInterpreter) where Tcn : class, new()
         {
             CheckGenericWithNewClassRestrictionArrayIndex<Tcn>(GenerateGenericWithNewClassRestrictionArray<Tcn>(0), useInterpreter);
             CheckGenericWithNewClassRestrictionArrayIndex<Tcn>(GenerateGenericWithNewClassRestrictionArray<Tcn>(1), useInterpreter);
             CheckGenericWithNewClassRestrictionArrayIndex<Tcn>(GenerateGenericWithNewClassRestrictionArray<Tcn>(5), useInterpreter);
         }
 
-        private static void CheckExceptionGenericWithNewClassRestrictionArrayIndexTestHelper<Tcn>(bool useInterpreter) where Tcn : class, new()
+        private static void CheckExceptionGenericWithNewClassRestrictionArrayIndexTestHelper<Tcn>(CompilationType useInterpreter) where Tcn : class, new()
         {
             // null arrays
             CheckExceptionGenericWithNewClassRestrictionArrayIndex<Tcn>(null, -1, useInterpreter);
@@ -1176,14 +1176,14 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionGenericWithNewClassRestrictionArrayIndex<Tcn>(GenerateGenericWithNewClassRestrictionArray<Tcn>(5), 5, useInterpreter);
         }
 
-        private static void CheckGenericWithSubClassNewRestrictionArrayIndexTestHelper<Tcn>(bool useInterpreter) where Tcn : C, new()
+        private static void CheckGenericWithSubClassNewRestrictionArrayIndexTestHelper<Tcn>(CompilationType useInterpreter) where Tcn : C, new()
         {
             CheckGenericWithSubClassNewRestrictionArrayIndex<Tcn>(GenerateGenericWithSubClassNewRestrictionArray<Tcn>(0), useInterpreter);
             CheckGenericWithSubClassNewRestrictionArrayIndex<Tcn>(GenerateGenericWithSubClassNewRestrictionArray<Tcn>(1), useInterpreter);
             CheckGenericWithSubClassNewRestrictionArrayIndex<Tcn>(GenerateGenericWithSubClassNewRestrictionArray<Tcn>(5), useInterpreter);
         }
 
-        private static void CheckExceptionGenericWithSubClassNewRestrictionArrayIndexTestHelper<Tcn>(bool useInterpreter) where Tcn : C, new()
+        private static void CheckExceptionGenericWithSubClassNewRestrictionArrayIndexTestHelper<Tcn>(CompilationType useInterpreter) where Tcn : C, new()
         {
             // null arrays
             CheckExceptionGenericWithSubClassNewRestrictionArrayIndex<Tcn>(null, -1, useInterpreter);
@@ -1199,14 +1199,14 @@ namespace System.Linq.Expressions.Tests
             CheckExceptionGenericWithSubClassNewRestrictionArrayIndex<Tcn>(GenerateGenericWithSubClassNewRestrictionArray<Tcn>(5), 5, useInterpreter);
         }
 
-        private static void CheckGenericWithStructRestrictionArrayIndexTestHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckGenericWithStructRestrictionArrayIndexTestHelper<Ts>(CompilationType useInterpreter) where Ts : struct
         {
             CheckGenericWithStructRestrictionArrayIndex<Ts>(GenerateGenericWithStructRestrictionArray<Ts>(0), useInterpreter);
             CheckGenericWithStructRestrictionArrayIndex<Ts>(GenerateGenericWithStructRestrictionArray<Ts>(1), useInterpreter);
             CheckGenericWithStructRestrictionArrayIndex<Ts>(GenerateGenericWithStructRestrictionArray<Ts>(5), useInterpreter);
         }
 
-        private static void CheckExceptionGenericWithStructRestrictionArrayIndexTestHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckExceptionGenericWithStructRestrictionArrayIndexTestHelper<Ts>(CompilationType useInterpreter) where Ts : struct
         {
             // null arrays
             CheckExceptionGenericWithStructRestrictionArrayIndex<Ts>(null, -1, useInterpreter);
@@ -1649,7 +1649,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Check array index
 
-        private static void CheckBoolArrayIndex(bool[] array, bool useInterpreter)
+        private static void CheckBoolArrayIndex(bool[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1660,7 +1660,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckByteArrayIndex(byte[] array, bool useInterpreter)
+        private static void CheckByteArrayIndex(byte[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1671,7 +1671,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckCustomArrayIndex(C[] array, bool useInterpreter)
+        private static void CheckCustomArrayIndex(C[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1682,7 +1682,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckCharArrayIndex(char[] array, bool useInterpreter)
+        private static void CheckCharArrayIndex(char[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1693,7 +1693,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckCustom2ArrayIndex(D[] array, bool useInterpreter)
+        private static void CheckCustom2ArrayIndex(D[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1704,7 +1704,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckDecimalArrayIndex(decimal[] array, bool useInterpreter)
+        private static void CheckDecimalArrayIndex(decimal[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1715,7 +1715,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckDelegateArrayIndex(Delegate[] array, bool useInterpreter)
+        private static void CheckDelegateArrayIndex(Delegate[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1726,7 +1726,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckDoubleArrayIndex(double[] array, bool useInterpreter)
+        private static void CheckDoubleArrayIndex(double[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1737,7 +1737,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckEnumArrayIndex(E[] array, bool useInterpreter)
+        private static void CheckEnumArrayIndex(E[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1748,7 +1748,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckEnumLongArrayIndex(El[] array, bool useInterpreter)
+        private static void CheckEnumLongArrayIndex(El[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1759,7 +1759,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckFloatArrayIndex(float[] array, bool useInterpreter)
+        private static void CheckFloatArrayIndex(float[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1770,7 +1770,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckFuncArrayIndex(Func<object>[] array, bool useInterpreter)
+        private static void CheckFuncArrayIndex(Func<object>[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1781,7 +1781,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckInterfaceArrayIndex(I[] array, bool useInterpreter)
+        private static void CheckInterfaceArrayIndex(I[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1792,7 +1792,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckIEquatableCustomArrayIndex(IEquatable<C>[] array, bool useInterpreter)
+        private static void CheckIEquatableCustomArrayIndex(IEquatable<C>[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1803,7 +1803,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckIEquatableCustom2ArrayIndex(IEquatable<D>[] array, bool useInterpreter)
+        private static void CheckIEquatableCustom2ArrayIndex(IEquatable<D>[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1814,7 +1814,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckIntArrayIndex(int[] array, bool useInterpreter)
+        private static void CheckIntArrayIndex(int[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1825,7 +1825,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckLongArrayIndex(long[] array, bool useInterpreter)
+        private static void CheckLongArrayIndex(long[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1836,7 +1836,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckObjectArrayIndex(object[] array, bool useInterpreter)
+        private static void CheckObjectArrayIndex(object[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1847,7 +1847,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckStructArrayIndex(S[] array, bool useInterpreter)
+        private static void CheckStructArrayIndex(S[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1858,7 +1858,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckSByteArrayIndex(sbyte[] array, bool useInterpreter)
+        private static void CheckSByteArrayIndex(sbyte[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1869,7 +1869,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckStructWithStringArrayIndex(Sc[] array, bool useInterpreter)
+        private static void CheckStructWithStringArrayIndex(Sc[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1880,7 +1880,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckStructWithValueAndStringArrayIndex(Scs[] array, bool useInterpreter)
+        private static void CheckStructWithValueAndStringArrayIndex(Scs[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1891,7 +1891,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckShortArrayIndex(short[] array, bool useInterpreter)
+        private static void CheckShortArrayIndex(short[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1902,7 +1902,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckStructWithParametersArrayIndex(Sp[] array, bool useInterpreter)
+        private static void CheckStructWithParametersArrayIndex(Sp[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1913,7 +1913,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckStructWithStructArrayIndex(Ss[] array, bool useInterpreter)
+        private static void CheckStructWithStructArrayIndex(Ss[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1924,7 +1924,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckStringArrayIndex(string[] array, bool useInterpreter)
+        private static void CheckStringArrayIndex(string[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1935,7 +1935,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckUIntArrayIndex(uint[] array, bool useInterpreter)
+        private static void CheckUIntArrayIndex(uint[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1946,7 +1946,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckULongArrayIndex(ulong[] array, bool useInterpreter)
+        private static void CheckULongArrayIndex(ulong[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1957,7 +1957,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckUShortArrayIndex(ushort[] array, bool useInterpreter)
+        private static void CheckUShortArrayIndex(ushort[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1968,7 +1968,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckGenericArrayIndex<T>(T[] array, bool useInterpreter)
+        private static void CheckGenericArrayIndex<T>(T[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1979,7 +1979,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckGenericWithClassRestrictionArrayIndex<Tc>(Tc[] array, bool useInterpreter) where Tc : class
+        private static void CheckGenericWithClassRestrictionArrayIndex<Tc>(Tc[] array, CompilationType useInterpreter) where Tc : class
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1990,7 +1990,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckGenericWithSubClassRestrictionArrayIndex<Tc>(Tc[] array, bool useInterpreter) where Tc : C
+        private static void CheckGenericWithSubClassRestrictionArrayIndex<Tc>(Tc[] array, CompilationType useInterpreter) where Tc : C
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -2001,7 +2001,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckGenericWithNewClassRestrictionArrayIndex<Tcn>(Tcn[] array, bool useInterpreter) where Tcn : class, new()
+        private static void CheckGenericWithNewClassRestrictionArrayIndex<Tcn>(Tcn[] array, CompilationType useInterpreter) where Tcn : class, new()
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -2012,7 +2012,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckGenericWithSubClassNewRestrictionArrayIndex<Tcn>(Tcn[] array, bool useInterpreter) where Tcn : C, new()
+        private static void CheckGenericWithSubClassNewRestrictionArrayIndex<Tcn>(Tcn[] array, CompilationType useInterpreter) where Tcn : C, new()
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -2023,7 +2023,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckGenericWithStructRestrictionArrayIndex<Ts>(Ts[] array, bool useInterpreter) where Ts : struct
+        private static void CheckGenericWithStructRestrictionArrayIndex<Ts>(Ts[] array, CompilationType useInterpreter) where Ts : struct
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -2038,7 +2038,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Check index expression
 
-        private static bool CheckBoolArrayIndexExpression(bool[] array, int index, bool useInterpreter)
+        private static bool CheckBoolArrayIndexExpression(bool[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<bool>> e =
                 Expression.Lambda<Func<bool>>(
@@ -2049,7 +2049,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckByteArrayIndexExpression(byte[] array, int index, bool useInterpreter)
+        private static bool CheckByteArrayIndexExpression(byte[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<byte>> e =
                 Expression.Lambda<Func<byte>>(
@@ -2060,7 +2060,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckCustomArrayIndexExpression(C[] array, int index, bool useInterpreter)
+        private static bool CheckCustomArrayIndexExpression(C[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<C>> e =
                 Expression.Lambda<Func<C>>(
@@ -2071,7 +2071,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckCharArrayIndexExpression(char[] array, int index, bool useInterpreter)
+        private static bool CheckCharArrayIndexExpression(char[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<char>> e =
                 Expression.Lambda<Func<char>>(
@@ -2082,7 +2082,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckCustom2ArrayIndexExpression(D[] array, int index, bool useInterpreter)
+        private static bool CheckCustom2ArrayIndexExpression(D[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<D>> e =
                 Expression.Lambda<Func<D>>(
@@ -2093,7 +2093,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckDecimalArrayIndexExpression(decimal[] array, int index, bool useInterpreter)
+        private static bool CheckDecimalArrayIndexExpression(decimal[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<decimal>> e =
                 Expression.Lambda<Func<decimal>>(
@@ -2104,7 +2104,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckDelegateArrayIndexExpression(Delegate[] array, int index, bool useInterpreter)
+        private static bool CheckDelegateArrayIndexExpression(Delegate[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<Delegate>> e =
                 Expression.Lambda<Func<Delegate>>(
@@ -2115,7 +2115,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckDoubleArrayIndexExpression(double[] array, int index, bool useInterpreter)
+        private static bool CheckDoubleArrayIndexExpression(double[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<double>> e =
                 Expression.Lambda<Func<double>>(
@@ -2126,7 +2126,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckEnumArrayIndexExpression(E[] array, int index, bool useInterpreter)
+        private static bool CheckEnumArrayIndexExpression(E[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<E>> e =
                 Expression.Lambda<Func<E>>(
@@ -2137,7 +2137,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckEnumLongArrayIndexExpression(El[] array, int index, bool useInterpreter)
+        private static bool CheckEnumLongArrayIndexExpression(El[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<El>> e =
                 Expression.Lambda<Func<El>>(
@@ -2148,7 +2148,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckFloatArrayIndexExpression(float[] array, int index, bool useInterpreter)
+        private static bool CheckFloatArrayIndexExpression(float[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<float>> e =
                 Expression.Lambda<Func<float>>(
@@ -2159,7 +2159,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckFuncArrayIndexExpression(Func<object>[] array, int index, bool useInterpreter)
+        private static bool CheckFuncArrayIndexExpression(Func<object>[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<Func<object>>> e =
                 Expression.Lambda<Func<Func<object>>>(
@@ -2170,7 +2170,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckInterfaceArrayIndexExpression(I[] array, int index, bool useInterpreter)
+        private static bool CheckInterfaceArrayIndexExpression(I[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<I>> e =
                 Expression.Lambda<Func<I>>(
@@ -2181,7 +2181,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckIEquatableCustomArrayIndexExpression(IEquatable<C>[] array, int index, bool useInterpreter)
+        private static bool CheckIEquatableCustomArrayIndexExpression(IEquatable<C>[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<IEquatable<C>>> e =
                 Expression.Lambda<Func<IEquatable<C>>>(
@@ -2192,7 +2192,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckIEquatableCustom2ArrayIndexExpression(IEquatable<D>[] array, int index, bool useInterpreter)
+        private static bool CheckIEquatableCustom2ArrayIndexExpression(IEquatable<D>[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<IEquatable<D>>> e =
                 Expression.Lambda<Func<IEquatable<D>>>(
@@ -2203,7 +2203,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckIntArrayIndexExpression(int[] array, int index, bool useInterpreter)
+        private static bool CheckIntArrayIndexExpression(int[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -2214,7 +2214,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckLongArrayIndexExpression(long[] array, int index, bool useInterpreter)
+        private static bool CheckLongArrayIndexExpression(long[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<long>> e =
                 Expression.Lambda<Func<long>>(
@@ -2225,7 +2225,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckObjectArrayIndexExpression(object[] array, int index, bool useInterpreter)
+        private static bool CheckObjectArrayIndexExpression(object[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<object>> e =
                 Expression.Lambda<Func<object>>(
@@ -2236,7 +2236,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckStructArrayIndexExpression(S[] array, int index, bool useInterpreter)
+        private static bool CheckStructArrayIndexExpression(S[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<S>> e =
                 Expression.Lambda<Func<S>>(
@@ -2247,7 +2247,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckSByteArrayIndexExpression(sbyte[] array, int index, bool useInterpreter)
+        private static bool CheckSByteArrayIndexExpression(sbyte[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<sbyte>> e =
                 Expression.Lambda<Func<sbyte>>(
@@ -2258,7 +2258,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckStructWithStringArrayIndexExpression(Sc[] array, int index, bool useInterpreter)
+        private static bool CheckStructWithStringArrayIndexExpression(Sc[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<Sc>> e =
                 Expression.Lambda<Func<Sc>>(
@@ -2269,7 +2269,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckStructWithValueAndStringArrayIndexExpression(Scs[] array, int index, bool useInterpreter)
+        private static bool CheckStructWithValueAndStringArrayIndexExpression(Scs[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<Scs>> e =
                 Expression.Lambda<Func<Scs>>(
@@ -2280,7 +2280,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckShortArrayIndexExpression(short[] array, int index, bool useInterpreter)
+        private static bool CheckShortArrayIndexExpression(short[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<short>> e =
                 Expression.Lambda<Func<short>>(
@@ -2291,7 +2291,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckStructWithParametersArrayIndexExpression(Sp[] array, int index, bool useInterpreter)
+        private static bool CheckStructWithParametersArrayIndexExpression(Sp[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<Sp>> e =
                 Expression.Lambda<Func<Sp>>(
@@ -2302,7 +2302,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckStructWithStructArrayIndexExpression(Ss[] array, int index, bool useInterpreter)
+        private static bool CheckStructWithStructArrayIndexExpression(Ss[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<Ss>> e =
                 Expression.Lambda<Func<Ss>>(
@@ -2313,7 +2313,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckStringArrayIndexExpression(string[] array, int index, bool useInterpreter)
+        private static bool CheckStringArrayIndexExpression(string[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<string>> e =
                 Expression.Lambda<Func<string>>(
@@ -2324,7 +2324,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckUIntArrayIndexExpression(uint[] array, int index, bool useInterpreter)
+        private static bool CheckUIntArrayIndexExpression(uint[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<uint>> e =
                 Expression.Lambda<Func<uint>>(
@@ -2335,7 +2335,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckULongArrayIndexExpression(ulong[] array, int index, bool useInterpreter)
+        private static bool CheckULongArrayIndexExpression(ulong[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<ulong>> e =
                 Expression.Lambda<Func<ulong>>(
@@ -2346,7 +2346,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckUShortArrayIndexExpression(ushort[] array, int index, bool useInterpreter)
+        private static bool CheckUShortArrayIndexExpression(ushort[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<ushort>> e =
                 Expression.Lambda<Func<ushort>>(
@@ -2357,7 +2357,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckGenericArrayIndexExpression<T>(T[] array, int index, bool useInterpreter)
+        private static bool CheckGenericArrayIndexExpression<T>(T[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<T>> e =
                 Expression.Lambda<Func<T>>(
@@ -2368,7 +2368,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckGenericWithClassRestrictionArrayIndexExpression<Tc>(Tc[] array, int index, bool useInterpreter) where Tc : class
+        private static bool CheckGenericWithClassRestrictionArrayIndexExpression<Tc>(Tc[] array, int index, CompilationType useInterpreter) where Tc : class
         {
             Expression<Func<Tc>> e =
                 Expression.Lambda<Func<Tc>>(
@@ -2379,7 +2379,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckGenericWithSubClassRestrictionArrayIndexExpression<Tc>(Tc[] array, int index, bool useInterpreter) where Tc : C
+        private static bool CheckGenericWithSubClassRestrictionArrayIndexExpression<Tc>(Tc[] array, int index, CompilationType useInterpreter) where Tc : C
         {
             Expression<Func<Tc>> e =
                 Expression.Lambda<Func<Tc>>(
@@ -2390,7 +2390,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckGenericWithNewClassRestrictionArrayIndexExpression<Tcn>(Tcn[] array, int index, bool useInterpreter) where Tcn : class, new()
+        private static bool CheckGenericWithNewClassRestrictionArrayIndexExpression<Tcn>(Tcn[] array, int index, CompilationType useInterpreter) where Tcn : class, new()
         {
             Expression<Func<Tcn>> e =
                 Expression.Lambda<Func<Tcn>>(
@@ -2401,7 +2401,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckGenericWithSubClassNewRestrictionArrayIndexExpression<Tcn>(Tcn[] array, int index, bool useInterpreter) where Tcn : C, new()
+        private static bool CheckGenericWithSubClassNewRestrictionArrayIndexExpression<Tcn>(Tcn[] array, int index, CompilationType useInterpreter) where Tcn : C, new()
         {
             Expression<Func<Tcn>> e =
                 Expression.Lambda<Func<Tcn>>(
@@ -2412,7 +2412,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckGenericWithStructRestrictionArrayIndexExpression<Ts>(Ts[] array, int index, bool useInterpreter) where Ts : struct
+        private static bool CheckGenericWithStructRestrictionArrayIndexExpression<Ts>(Ts[] array, int index, CompilationType useInterpreter) where Ts : struct
         {
             Expression<Func<Ts>> e =
                 Expression.Lambda<Func<Ts>>(
@@ -2427,7 +2427,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Check exception array index
 
-        private static void CheckExceptionBoolArrayIndex(bool[] array, int index, bool useInterpreter)
+        private static void CheckExceptionBoolArrayIndex(bool[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckBoolArrayIndexExpression(array, index, useInterpreter));
@@ -2435,7 +2435,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckBoolArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionByteArrayIndex(byte[] array, int index, bool useInterpreter)
+        private static void CheckExceptionByteArrayIndex(byte[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckByteArrayIndexExpression(array, index, useInterpreter));
@@ -2443,7 +2443,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckByteArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionCustomArrayIndex(C[] array, int index, bool useInterpreter)
+        private static void CheckExceptionCustomArrayIndex(C[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckCustomArrayIndexExpression(array, index, useInterpreter));
@@ -2451,7 +2451,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckCustomArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionCharArrayIndex(char[] array, int index, bool useInterpreter)
+        private static void CheckExceptionCharArrayIndex(char[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckCharArrayIndexExpression(array, index, useInterpreter));
@@ -2459,7 +2459,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckCharArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionCustom2ArrayIndex(D[] array, int index, bool useInterpreter)
+        private static void CheckExceptionCustom2ArrayIndex(D[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckCustom2ArrayIndexExpression(array, index, useInterpreter));
@@ -2467,7 +2467,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckCustom2ArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionDecimalArrayIndex(decimal[] array, int index, bool useInterpreter)
+        private static void CheckExceptionDecimalArrayIndex(decimal[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckDecimalArrayIndexExpression(array, index, useInterpreter));
@@ -2475,7 +2475,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckDecimalArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionDelegateArrayIndex(Delegate[] array, int index, bool useInterpreter)
+        private static void CheckExceptionDelegateArrayIndex(Delegate[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckDelegateArrayIndexExpression(array, index, useInterpreter));
@@ -2483,7 +2483,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckDelegateArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionDoubleArrayIndex(double[] array, int index, bool useInterpreter)
+        private static void CheckExceptionDoubleArrayIndex(double[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckDoubleArrayIndexExpression(array, index, useInterpreter));
@@ -2491,7 +2491,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckDoubleArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionEnumArrayIndex(E[] array, int index, bool useInterpreter)
+        private static void CheckExceptionEnumArrayIndex(E[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckEnumArrayIndexExpression(array, index, useInterpreter));
@@ -2499,7 +2499,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckEnumArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionEnumLongArrayIndex(El[] array, int index, bool useInterpreter)
+        private static void CheckExceptionEnumLongArrayIndex(El[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckEnumLongArrayIndexExpression(array, index, useInterpreter));
@@ -2507,7 +2507,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckEnumLongArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionFloatArrayIndex(float[] array, int index, bool useInterpreter)
+        private static void CheckExceptionFloatArrayIndex(float[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckFloatArrayIndexExpression(array, index, useInterpreter));
@@ -2515,7 +2515,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckFloatArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionFuncArrayIndex(Func<object>[] array, int index, bool useInterpreter)
+        private static void CheckExceptionFuncArrayIndex(Func<object>[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckFuncArrayIndexExpression(array, index, useInterpreter));
@@ -2523,7 +2523,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckFuncArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionInterfaceArrayIndex(I[] array, int index, bool useInterpreter)
+        private static void CheckExceptionInterfaceArrayIndex(I[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckInterfaceArrayIndexExpression(array, index, useInterpreter));
@@ -2531,7 +2531,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckInterfaceArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionIEquatableCustomArrayIndex(IEquatable<C>[] array, int index, bool useInterpreter)
+        private static void CheckExceptionIEquatableCustomArrayIndex(IEquatable<C>[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckIEquatableCustomArrayIndexExpression(array, index, useInterpreter));
@@ -2539,7 +2539,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckIEquatableCustomArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionIEquatableCustom2ArrayIndex(IEquatable<D>[] array, int index, bool useInterpreter)
+        private static void CheckExceptionIEquatableCustom2ArrayIndex(IEquatable<D>[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckIEquatableCustom2ArrayIndexExpression(array, index, useInterpreter));
@@ -2547,7 +2547,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckIEquatableCustom2ArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionIntArrayIndex(int[] array, int index, bool useInterpreter)
+        private static void CheckExceptionIntArrayIndex(int[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckIntArrayIndexExpression(array, index, useInterpreter));
@@ -2555,7 +2555,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckIntArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionLongArrayIndex(long[] array, int index, bool useInterpreter)
+        private static void CheckExceptionLongArrayIndex(long[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckLongArrayIndexExpression(array, index, useInterpreter));
@@ -2563,7 +2563,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckLongArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionObjectArrayIndex(object[] array, int index, bool useInterpreter)
+        private static void CheckExceptionObjectArrayIndex(object[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckObjectArrayIndexExpression(array, index, useInterpreter));
@@ -2571,7 +2571,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckObjectArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionStructArrayIndex(S[] array, int index, bool useInterpreter)
+        private static void CheckExceptionStructArrayIndex(S[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckStructArrayIndexExpression(array, index, useInterpreter));
@@ -2579,7 +2579,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckStructArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionSByteArrayIndex(sbyte[] array, int index, bool useInterpreter)
+        private static void CheckExceptionSByteArrayIndex(sbyte[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckSByteArrayIndexExpression(array, index, useInterpreter));
@@ -2587,7 +2587,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckSByteArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionStructWithStringArrayIndex(Sc[] array, int index, bool useInterpreter)
+        private static void CheckExceptionStructWithStringArrayIndex(Sc[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckStructWithStringArrayIndexExpression(array, index, useInterpreter));
@@ -2595,7 +2595,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckStructWithStringArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionStructWithValueAndStringArrayIndex(Scs[] array, int index, bool useInterpreter)
+        private static void CheckExceptionStructWithValueAndStringArrayIndex(Scs[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckStructWithValueAndStringArrayIndexExpression(array, index, useInterpreter));
@@ -2603,7 +2603,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckStructWithValueAndStringArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionShortArrayIndex(short[] array, int index, bool useInterpreter)
+        private static void CheckExceptionShortArrayIndex(short[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckShortArrayIndexExpression(array, index, useInterpreter));
@@ -2611,7 +2611,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckShortArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionStructWithParametersArrayIndex(Sp[] array, int index, bool useInterpreter)
+        private static void CheckExceptionStructWithParametersArrayIndex(Sp[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckStructWithParametersArrayIndexExpression(array, index, useInterpreter));
@@ -2619,7 +2619,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckStructWithParametersArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionStructWithStructArrayIndex(Ss[] array, int index, bool useInterpreter)
+        private static void CheckExceptionStructWithStructArrayIndex(Ss[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckStructWithStructArrayIndexExpression(array, index, useInterpreter));
@@ -2627,7 +2627,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckStructWithStructArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionStringArrayIndex(string[] array, int index, bool useInterpreter)
+        private static void CheckExceptionStringArrayIndex(string[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckStringArrayIndexExpression(array, index, useInterpreter));
@@ -2635,7 +2635,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckStringArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionUIntArrayIndex(uint[] array, int index, bool useInterpreter)
+        private static void CheckExceptionUIntArrayIndex(uint[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckUIntArrayIndexExpression(array, index, useInterpreter));
@@ -2643,7 +2643,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckUIntArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionULongArrayIndex(ulong[] array, int index, bool useInterpreter)
+        private static void CheckExceptionULongArrayIndex(ulong[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckULongArrayIndexExpression(array, index, useInterpreter));
@@ -2651,7 +2651,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckULongArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionUShortArrayIndex(ushort[] array, int index, bool useInterpreter)
+        private static void CheckExceptionUShortArrayIndex(ushort[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckUShortArrayIndexExpression(array, index, useInterpreter));
@@ -2659,7 +2659,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckUShortArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionGenericArrayIndex<T>(T[] array, int index, bool useInterpreter)
+        private static void CheckExceptionGenericArrayIndex<T>(T[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckGenericArrayIndexExpression(array, index, useInterpreter));
@@ -2667,7 +2667,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckGenericArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionGenericWithClassRestrictionArrayIndex<Tc>(Tc[] array, int index, bool useInterpreter) where Tc : class
+        private static void CheckExceptionGenericWithClassRestrictionArrayIndex<Tc>(Tc[] array, int index, CompilationType useInterpreter) where Tc : class
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckGenericWithClassRestrictionArrayIndexExpression(array, index, useInterpreter));
@@ -2675,7 +2675,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckGenericWithClassRestrictionArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionGenericWithSubClassRestrictionArrayIndex<Tc>(Tc[] array, int index, bool useInterpreter) where Tc : C
+        private static void CheckExceptionGenericWithSubClassRestrictionArrayIndex<Tc>(Tc[] array, int index, CompilationType useInterpreter) where Tc : C
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckGenericWithSubClassRestrictionArrayIndexExpression(array, index, useInterpreter));
@@ -2683,7 +2683,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckGenericWithSubClassRestrictionArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionGenericWithNewClassRestrictionArrayIndex<Tcn>(Tcn[] array, int index, bool useInterpreter) where Tcn : class, new()
+        private static void CheckExceptionGenericWithNewClassRestrictionArrayIndex<Tcn>(Tcn[] array, int index, CompilationType useInterpreter) where Tcn : class, new()
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckGenericWithNewClassRestrictionArrayIndexExpression(array, index, useInterpreter));
@@ -2691,7 +2691,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckGenericWithNewClassRestrictionArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionGenericWithSubClassNewRestrictionArrayIndex<Tcn>(Tcn[] array, int index, bool useInterpreter) where Tcn : C, new()
+        private static void CheckExceptionGenericWithSubClassNewRestrictionArrayIndex<Tcn>(Tcn[] array, int index, CompilationType useInterpreter) where Tcn : C, new()
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckGenericWithSubClassNewRestrictionArrayIndexExpression(array, index, useInterpreter));
@@ -2699,7 +2699,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckGenericWithSubClassNewRestrictionArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionGenericWithStructRestrictionArrayIndex<Ts>(Ts[] array, int index, bool useInterpreter) where Ts : struct
+        private static void CheckExceptionGenericWithStructRestrictionArrayIndex<Ts>(Ts[] array, int index, CompilationType useInterpreter) where Ts : struct
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckGenericWithStructRestrictionArrayIndexExpression(array, index, useInterpreter));
@@ -2772,7 +2772,7 @@ namespace System.Linq.Expressions.Tests
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported))]
         [ActiveIssue("https://github.com/mono/mono/issues/14930", TestRuntimes.Mono)]
         [ClassData(typeof(CompilationTypes))]
-        public static void NonZeroBasedOneDimensionalArrayIndex(bool useInterpreter)
+        public static void NonZeroBasedOneDimensionalArrayIndex(CompilationType useInterpreter)
         {
             Array arrayObj = Array.CreateInstance(typeof(int), new[] { 3 }, new[] { -1 });
             arrayObj.SetValue(5, -1);
@@ -2794,7 +2794,7 @@ namespace System.Linq.Expressions.Tests
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported))]
         [ActiveIssue("https://github.com/mono/mono/issues/14930", TestRuntimes.Mono)]
         [ClassData(typeof(CompilationTypes))]
-        public static void NonZeroBasedOneDimensionalArrayIndexMethod(bool useInterpreter)
+        public static void NonZeroBasedOneDimensionalArrayIndexMethod(CompilationType useInterpreter)
         {
             Array arrayObj = Array.CreateInstance(typeof(int), new[] { 3 }, new[] { -1 });
             arrayObj.SetValue(5, -1);
@@ -2814,7 +2814,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void HighRankArrayIndex(bool useInterpreter)
+        public static void HighRankArrayIndex(CompilationType useInterpreter)
         {
             string[,,,,,,,,,] arrayObj = {{{{{{{{{{"hugz"}}}}}}}}}};
             ConstantExpression array = Expression.Constant(arrayObj);

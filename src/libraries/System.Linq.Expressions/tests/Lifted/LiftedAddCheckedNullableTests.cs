@@ -11,7 +11,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedAddCheckedNullableByteTest(bool useInterpreter)
+        public static void CheckLiftedAddCheckedNullableByteTest(CompilationType useInterpreter)
         {
             byte?[] values = new byte?[] { null, 0, 1, byte.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -24,7 +24,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedAddCheckedNullableCharTest(bool useInterpreter)
+        public static void CheckLiftedAddCheckedNullableCharTest(CompilationType useInterpreter)
         {
             char?[] values = new char?[] { null, '\0', '\b', 'A', '\uffff' };
             for (int i = 0; i < values.Length; i++)
@@ -37,7 +37,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedAddCheckedNullableDecimalTest(bool useInterpreter)
+        public static void CheckLiftedAddCheckedNullableDecimalTest(CompilationType useInterpreter)
         {
             decimal?[] values = new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -50,7 +50,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedAddCheckedNullableDoubleTest(bool useInterpreter)
+        public static void CheckLiftedAddCheckedNullableDoubleTest(CompilationType useInterpreter)
         {
             double?[] values = new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -63,7 +63,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedAddCheckedNullableFloatTest(bool useInterpreter)
+        public static void CheckLiftedAddCheckedNullableFloatTest(CompilationType useInterpreter)
         {
             float?[] values = new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -76,7 +76,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedAddCheckedNullableIntTest(bool useInterpreter)
+        public static void CheckLiftedAddCheckedNullableIntTest(CompilationType useInterpreter)
         {
             int?[] values = new int?[] { null, 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -89,7 +89,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedAddCheckedNullableLongTest(bool useInterpreter)
+        public static void CheckLiftedAddCheckedNullableLongTest(CompilationType useInterpreter)
         {
             long?[] values = new long?[] { null, 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -102,7 +102,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedAddCheckedNullableSByteTest(bool useInterpreter)
+        public static void CheckLiftedAddCheckedNullableSByteTest(CompilationType useInterpreter)
         {
             sbyte?[] values = new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -115,7 +115,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedAddCheckedNullableShortTest(bool useInterpreter)
+        public static void CheckLiftedAddCheckedNullableShortTest(CompilationType useInterpreter)
         {
             short?[] values = new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -128,7 +128,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedAddCheckedNullableUIntTest(bool useInterpreter)
+        public static void CheckLiftedAddCheckedNullableUIntTest(CompilationType useInterpreter)
         {
             uint?[] values = new uint?[] { null, 0, 1, uint.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -141,7 +141,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedAddCheckedNullableULongTest(bool useInterpreter)
+        public static void CheckLiftedAddCheckedNullableULongTest(CompilationType useInterpreter)
         {
             ulong?[] values = new ulong?[] { null, 0, 1, ulong.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -154,7 +154,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedAddCheckedNullableUShortTest(bool useInterpreter)
+        public static void CheckLiftedAddCheckedNullableUShortTest(CompilationType useInterpreter)
         {
             ushort?[] values = new ushort?[] { null, 0, 1, ushort.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -167,7 +167,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedAddCheckedNullableNumberTest(bool useInterpreter)
+        public static void CheckLiftedAddCheckedNullableNumberTest(CompilationType useInterpreter)
         {
             AssertExtensions.ThrowsOnAot<NotSupportedException>(() =>
             {
@@ -265,7 +265,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyAddCheckedNullableByte(byte? a, byte? b, bool useInterpreter)
+        private static void VerifyAddCheckedNullableByte(byte? a, byte? b, CompilationType useInterpreter)
         {
             Expression<Func<byte?>> e =
                 Expression.Lambda<Func<byte?>>(
@@ -282,7 +282,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(expected, f());
         }
 
-        private static void VerifyAddCheckedNullableChar(char? a, char? b, bool useInterpreter)
+        private static void VerifyAddCheckedNullableChar(char? a, char? b, CompilationType useInterpreter)
         {
             Expression<Func<char?>> e =
                 Expression.Lambda<Func<char?>>(
@@ -299,7 +299,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(expected, f());
         }
 
-        private static void VerifyAddCheckedNullableDecimal(decimal? a, decimal? b, bool useInterpreter)
+        private static void VerifyAddCheckedNullableDecimal(decimal? a, decimal? b, CompilationType useInterpreter)
         {
             Expression<Func<decimal?>> e =
                 Expression.Lambda<Func<decimal?>>(
@@ -323,7 +323,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyAddCheckedNullableDouble(double? a, double? b, bool useInterpreter)
+        private static void VerifyAddCheckedNullableDouble(double? a, double? b, CompilationType useInterpreter)
         {
             Expression<Func<double?>> e =
                 Expression.Lambda<Func<double?>>(
@@ -336,7 +336,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a + b, f());
         }
 
-        private static void VerifyAddCheckedNullableFloat(float? a, float? b, bool useInterpreter)
+        private static void VerifyAddCheckedNullableFloat(float? a, float? b, CompilationType useInterpreter)
         {
             Expression<Func<float?>> e =
                 Expression.Lambda<Func<float?>>(
@@ -349,7 +349,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a + b, f());
         }
 
-        private static void VerifyAddCheckedNullableInt(int? a, int? b, bool useInterpreter)
+        private static void VerifyAddCheckedNullableInt(int? a, int? b, CompilationType useInterpreter)
         {
             Expression<Func<int?>> e =
                 Expression.Lambda<Func<int?>>(
@@ -366,7 +366,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal((int?)expected, f());
         }
 
-        private static void VerifyAddCheckedNullableLong(long? a, long? b, bool useInterpreter)
+        private static void VerifyAddCheckedNullableLong(long? a, long? b, CompilationType useInterpreter)
         {
             Expression<Func<long?>> e =
                 Expression.Lambda<Func<long?>>(
@@ -391,7 +391,7 @@ namespace System.Linq.Expressions.Tests
 
         }
 
-        private static void VerifyAddCheckedNullableSByte(sbyte? a, sbyte? b, bool useInterpreter)
+        private static void VerifyAddCheckedNullableSByte(sbyte? a, sbyte? b, CompilationType useInterpreter)
         {
             Expression<Func<sbyte?>> e =
                 Expression.Lambda<Func<sbyte?>>(
@@ -408,7 +408,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(expected, f());
         }
 
-        private static void VerifyAddCheckedNullableShort(short? a, short? b, bool useInterpreter)
+        private static void VerifyAddCheckedNullableShort(short? a, short? b, CompilationType useInterpreter)
         {
             Expression<Func<short?>> e =
                 Expression.Lambda<Func<short?>>(
@@ -425,7 +425,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(expected, f());
         }
 
-        private static void VerifyAddCheckedNullableUInt(uint? a, uint? b, bool useInterpreter)
+        private static void VerifyAddCheckedNullableUInt(uint? a, uint? b, CompilationType useInterpreter)
         {
             Expression<Func<uint?>> e =
                 Expression.Lambda<Func<uint?>>(
@@ -442,7 +442,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(expected, f());
         }
 
-        private static void VerifyAddCheckedNullableULong(ulong? a, ulong? b, bool useInterpreter)
+        private static void VerifyAddCheckedNullableULong(ulong? a, ulong? b, CompilationType useInterpreter)
         {
             Expression<Func<ulong?>> e =
                 Expression.Lambda<Func<ulong?>>(
@@ -466,7 +466,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyAddCheckedNullableUShort(ushort? a, ushort? b, bool useInterpreter)
+        private static void VerifyAddCheckedNullableUShort(ushort? a, ushort? b, CompilationType useInterpreter)
         {
             Expression<Func<ushort?>> e =
                 Expression.Lambda<Func<ushort?>>(
@@ -483,7 +483,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(expected, f());
         }
 
-        private static void VerifyAddCheckedNullableNumber(Number? a, Number? b, bool useInterpreter)
+        private static void VerifyAddCheckedNullableNumber(Number? a, Number? b, CompilationType useInterpreter)
         {
             Expression<Func<Number?>> e =
                 Expression.Lambda<Func<Number?>>(

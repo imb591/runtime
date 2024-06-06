@@ -8,7 +8,7 @@ namespace System.Linq.Expressions.Tests
     public static class UnaryArithmeticNegateNullableOneOffTests
     {
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void UnaryArithmeticNegateNullableStackBalance(bool useInterpreter)
+        public static void UnaryArithmeticNegateNullableStackBalance(CompilationType useInterpreter)
         {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
                 Expression.Negate(

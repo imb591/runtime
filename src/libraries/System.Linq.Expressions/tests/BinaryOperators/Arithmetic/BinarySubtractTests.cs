@@ -36,7 +36,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUShortSubtractTest(bool useInterpreter)
+        public static void CheckUShortSubtractTest(CompilationType useInterpreter)
         {
             ushort[] array = new ushort[] { 0, 1, ushort.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -50,7 +50,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckShortSubtractTest(bool useInterpreter)
+        public static void CheckShortSubtractTest(CompilationType useInterpreter)
         {
             short[] array = new short[] { 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -64,7 +64,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUIntSubtractTest(bool useInterpreter)
+        public static void CheckUIntSubtractTest(CompilationType useInterpreter)
         {
             uint[] array = new uint[] { 0, 1, uint.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -78,7 +78,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckIntSubtractTest(bool useInterpreter)
+        public static void CheckIntSubtractTest(CompilationType useInterpreter)
         {
             int[] array = new int[] { 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -92,7 +92,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckULongSubtractTest(bool useInterpreter)
+        public static void CheckULongSubtractTest(CompilationType useInterpreter)
         {
             ulong[] array = new ulong[] { 0, 1, ulong.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -106,7 +106,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLongSubtractTest(bool useInterpreter)
+        public static void CheckLongSubtractTest(CompilationType useInterpreter)
         {
             long[] array = new long[] { 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -120,7 +120,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckFloatSubtractTest(bool useInterpreter)
+        public static void CheckFloatSubtractTest(CompilationType useInterpreter)
         {
             float[] array = new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
             for (int i = 0; i < array.Length; i++)
@@ -133,7 +133,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckDoubleSubtractTest(bool useInterpreter)
+        public static void CheckDoubleSubtractTest(CompilationType useInterpreter)
         {
             double[] array = new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
             for (int i = 0; i < array.Length; i++)
@@ -146,7 +146,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckDecimalSubtractTest(bool useInterpreter)
+        public static void CheckDecimalSubtractTest(CompilationType useInterpreter)
         {
             decimal[] array = new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -189,7 +189,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidOperationException>(() => Expression.Subtract(aExp, bExp));
         }
 
-        private static void VerifyUShortSubtract(ushort a, ushort b, bool useInterpreter)
+        private static void VerifyUShortSubtract(ushort a, ushort b, CompilationType useInterpreter)
         {
             Expression<Func<ushort>> e =
                 Expression.Lambda<Func<ushort>>(
@@ -202,7 +202,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((ushort)(a - b)), f());
         }
 
-        private static void VerifyUShortSubtractOvf(ushort a, ushort b, bool useInterpreter)
+        private static void VerifyUShortSubtractOvf(ushort a, ushort b, CompilationType useInterpreter)
         {
             Expression<Func<ushort>> e =
                 Expression.Lambda<Func<ushort>>(
@@ -226,7 +226,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyShortSubtract(short a, short b, bool useInterpreter)
+        private static void VerifyShortSubtract(short a, short b, CompilationType useInterpreter)
         {
             Expression<Func<short>> e =
                 Expression.Lambda<Func<short>>(
@@ -239,7 +239,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((short)(a - b)), f());
         }
 
-        private static void VerifyShortSubtractOvf(short a, short b, bool useInterpreter)
+        private static void VerifyShortSubtractOvf(short a, short b, CompilationType useInterpreter)
         {
             Expression<Func<short>> e =
                 Expression.Lambda<Func<short>>(
@@ -263,7 +263,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyUIntSubtract(uint a, uint b, bool useInterpreter)
+        private static void VerifyUIntSubtract(uint a, uint b, CompilationType useInterpreter)
         {
             Expression<Func<uint>> e =
                 Expression.Lambda<Func<uint>>(
@@ -276,7 +276,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked(a - b), f());
         }
 
-        private static void VerifyUIntSubtractOvf(uint a, uint b, bool useInterpreter)
+        private static void VerifyUIntSubtractOvf(uint a, uint b, CompilationType useInterpreter)
         {
             Expression<Func<uint>> e =
                 Expression.Lambda<Func<uint>>(
@@ -301,7 +301,7 @@ namespace System.Linq.Expressions.Tests
 
         }
 
-        private static void VerifyIntSubtract(int a, int b, bool useInterpreter)
+        private static void VerifyIntSubtract(int a, int b, CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -314,7 +314,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked(a - b), f());
         }
 
-        private static void VerifyIntSubtractOvf(int a, int b, bool useInterpreter)
+        private static void VerifyIntSubtractOvf(int a, int b, CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -338,7 +338,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyULongSubtract(ulong a, ulong b, bool useInterpreter)
+        private static void VerifyULongSubtract(ulong a, ulong b, CompilationType useInterpreter)
         {
             Expression<Func<ulong>> e =
                 Expression.Lambda<Func<ulong>>(
@@ -351,7 +351,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked(a - b), f());
         }
 
-        private static void VerifyULongSubtractOvf(ulong a, ulong b, bool useInterpreter)
+        private static void VerifyULongSubtractOvf(ulong a, ulong b, CompilationType useInterpreter)
         {
             Expression<Func<ulong>> e =
                 Expression.Lambda<Func<ulong>>(
@@ -376,7 +376,7 @@ namespace System.Linq.Expressions.Tests
 
         }
 
-        private static void VerifyLongSubtract(long a, long b, bool useInterpreter)
+        private static void VerifyLongSubtract(long a, long b, CompilationType useInterpreter)
         {
             Expression<Func<long>> e =
                 Expression.Lambda<Func<long>>(
@@ -389,7 +389,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked(a - b), f());
         }
 
-        private static void VerifyLongSubtractOvf(long a, long b, bool useInterpreter)
+        private static void VerifyLongSubtractOvf(long a, long b, CompilationType useInterpreter)
         {
             Expression<Func<long>> e =
                 Expression.Lambda<Func<long>>(
@@ -413,7 +413,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyFloatSubtract(float a, float b, bool useInterpreter)
+        private static void VerifyFloatSubtract(float a, float b, CompilationType useInterpreter)
         {
             Expression<Func<float>> e =
                 Expression.Lambda<Func<float>>(
@@ -426,7 +426,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a - b, f());
         }
 
-        private static void VerifyDoubleSubtract(double a, double b, bool useInterpreter)
+        private static void VerifyDoubleSubtract(double a, double b, CompilationType useInterpreter)
         {
             Expression<Func<double>> e =
                 Expression.Lambda<Func<double>>(
@@ -439,7 +439,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a - b, f());
         }
 
-        private static void VerifyDecimalSubtract(decimal a, decimal b, bool useInterpreter)
+        private static void VerifyDecimalSubtract(decimal a, decimal b, CompilationType useInterpreter)
         {
             Expression<Func<decimal>> e =
                 Expression.Lambda<Func<decimal>>(
@@ -474,7 +474,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void Subtract_MultipleOverloads_CorrectlyResolvesOperator1(bool useInterpreter)
+        public static void Subtract_MultipleOverloads_CorrectlyResolvesOperator1(CompilationType useInterpreter)
         {
             BinaryExpression subtract = Expression.Subtract(Expression.Constant(new DateTime(100)), Expression.Constant(new DateTime(10)));
             Func<TimeSpan> lambda = Expression.Lambda<Func<TimeSpan>>(subtract).Compile(useInterpreter);
@@ -483,7 +483,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void Subtract_MultipleOverloads_CorrectlyResolvesOperator2(bool useInterpreter)
+        public static void Subtract_MultipleOverloads_CorrectlyResolvesOperator2(CompilationType useInterpreter)
         {
             BinaryExpression subtract = Expression.Subtract(Expression.Constant(new DateTime(100)), Expression.Constant(new TimeSpan(10)));
             Func<DateTime> lambda = Expression.Lambda<Func<DateTime>>(subtract).Compile(useInterpreter);

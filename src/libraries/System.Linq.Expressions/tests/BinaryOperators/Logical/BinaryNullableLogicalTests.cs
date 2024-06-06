@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableBoolAndTest(bool useInterpreter)
+        public static void CheckNullableBoolAndTest(CompilationType useInterpreter)
         {
             bool?[] array = new bool?[] { null, true, false };
             for (int i = 0; i < array.Length; i++)
@@ -23,7 +23,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableBoolAndAlsoTest(bool useInterpreter)
+        public static void CheckNullableBoolAndAlsoTest(CompilationType useInterpreter)
         {
             bool?[] array = new bool?[] { null, true, false };
             for (int i = 0; i < array.Length; i++)
@@ -36,7 +36,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableBoolOrTest(bool useInterpreter)
+        public static void CheckNullableBoolOrTest(CompilationType useInterpreter)
         {
             bool?[] array = new bool?[] { null, true, false };
             for (int i = 0; i < array.Length; i++)
@@ -49,7 +49,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableBoolOrElseTest(bool useInterpreter)
+        public static void CheckNullableBoolOrElseTest(CompilationType useInterpreter)
         {
             bool?[] array = new bool?[] { null, true, false };
             for (int i = 0; i < array.Length; i++)
@@ -65,7 +65,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyNullableBoolAnd(bool? a, bool? b, bool useInterpreter)
+        private static void VerifyNullableBoolAnd(bool? a, bool? b, CompilationType useInterpreter)
         {
             Expression<Func<bool?>> e =
                 Expression.Lambda<Func<bool?>>(
@@ -78,7 +78,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a & b, f());
         }
 
-        private static void VerifyNullableBoolAndAlso(bool? a, bool? b, bool useInterpreter)
+        private static void VerifyNullableBoolAndAlso(bool? a, bool? b, CompilationType useInterpreter)
         {
             Expression<Func<bool?>> e =
                 Expression.Lambda<Func<bool?>>(
@@ -91,7 +91,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a & b, f());
         }
 
-        private static void VerifyNullableBoolOr(bool? a, bool? b, bool useInterpreter)
+        private static void VerifyNullableBoolOr(bool? a, bool? b, CompilationType useInterpreter)
         {
             Expression<Func<bool?>> e =
                 Expression.Lambda<Func<bool?>>(
@@ -104,7 +104,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a | b, f());
         }
 
-        private static void VerifyNullableBoolOrElse(bool? a, bool? b, bool useInterpreter)
+        private static void VerifyNullableBoolOrElse(bool? a, bool? b, CompilationType useInterpreter)
         {
             Expression<Func<bool?>> e =
                 Expression.Lambda<Func<bool?>>(

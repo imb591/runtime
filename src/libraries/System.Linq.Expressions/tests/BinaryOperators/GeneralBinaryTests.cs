@@ -146,7 +146,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<ArgumentNullException>(() => Expression.MakeBinary(type, Expression.Variable(typeof(object)), null, false, null, null));
         }
 
-        internal static void CompileBinaryExpression(BinaryExpression expression, bool useInterpreter, bool expected)
+        internal static void CompileBinaryExpression(BinaryExpression expression, CompilationType useInterpreter, bool expected)
         {
             Expression<Func<bool>> e = Expression.Lambda<Func<bool>>(expression, Enumerable.Empty<ParameterExpression>());
             Func<bool> f = e.Compile(useInterpreter);
@@ -243,7 +243,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory, PerCompilationType(nameof(NonConversionBinaryTypesAndValues))]
         public static void ConversionIgnoredWhenIrrelevant(
-            ExpressionType type, object lhs, object rhs, bool useInterpreter)
+            ExpressionType type, object lhs, object rhs, CompilationType useInterpreter)
         {
             // The types of binary expression that can't have a converter just ignore any lambda
             // passed in. This probably shouldn't be the case (an ArgumentException would be
@@ -268,7 +268,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(NumericMethodAllowedBinaryTypesAndValues))]
-        public static void MethodOfOpenGeneric(ExpressionType type, bool useInterpreter)
+        public static void MethodOfOpenGeneric(ExpressionType type, CompilationType useInterpreter)
         {
             ParameterExpression left = Expression.Parameter(typeof(int));
             ConstantExpression right = Expression.Constant(2);
@@ -287,7 +287,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(BooleanMethodAllowedBinaryTypesAndValues))]
-        public static void MethodOfOpenGenericBoolean(ExpressionType type, bool useInterpreter)
+        public static void MethodOfOpenGenericBoolean(ExpressionType type, CompilationType useInterpreter)
         {
             GenericClassWithNonGenericMethod<bool> value = new GenericClassWithNonGenericMethod<bool>();
             ConstantExpression left = Expression.Constant(value);

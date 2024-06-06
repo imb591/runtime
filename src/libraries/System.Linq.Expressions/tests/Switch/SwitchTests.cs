@@ -11,7 +11,7 @@ namespace System.Linq.Expressions.Tests
     {
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void IntSwitch1(bool useInterpreter)
+        public void IntSwitch1(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(int));
             ParameterExpression p1 = Expression.Parameter(typeof(string));
@@ -32,7 +32,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void NullableIntSwitch1(bool useInterpreter)
+        public void NullableIntSwitch1(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(int?));
             ParameterExpression p1 = Expression.Parameter(typeof(string));
@@ -53,7 +53,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void SwitchToGotos(bool useInterpreter)
+        public void SwitchToGotos(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(int));
             ParameterExpression p1 = Expression.Parameter(typeof(string));
@@ -93,7 +93,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void SwitchToGotosOutOfTry(bool useInterpreter)
+        public void SwitchToGotosOutOfTry(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(char));
             ParameterExpression p1 = Expression.Parameter(typeof(string));
@@ -137,7 +137,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void NullableIntSwitch2(bool useInterpreter)
+        public void NullableIntSwitch2(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(int?));
             ParameterExpression p1 = Expression.Parameter(typeof(string));
@@ -160,7 +160,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void IntSwitch2(bool useInterpreter)
+        public void IntSwitch2(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(byte));
             ParameterExpression p1 = Expression.Parameter(typeof(string));
@@ -181,7 +181,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void IntSwitch3(bool useInterpreter)
+        public void IntSwitch3(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(uint));
             ParameterExpression p1 = Expression.Parameter(typeof(string));
@@ -204,7 +204,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void LongSwitch(bool useInterpreter)
+        public void LongSwitch(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(long));
             ParameterExpression p1 = Expression.Parameter(typeof(string));
@@ -227,7 +227,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void ULongSwitch(bool useInterpreter)
+        public void ULongSwitch(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(ulong));
             ParameterExpression p1 = Expression.Parameter(typeof(string));
@@ -250,7 +250,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void SparseULongSwitch(bool useInterpreter)
+        public void SparseULongSwitch(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(ulong));
             ParameterExpression p1 = Expression.Parameter(typeof(string));
@@ -277,7 +277,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void SparseLongSwitch(bool useInterpreter)
+        public void SparseLongSwitch(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(long));
             ParameterExpression p1 = Expression.Parameter(typeof(string));
@@ -304,7 +304,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void StringSwitch(bool useInterpreter)
+        public void StringSwitch(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(string));
             SwitchExpression s = Expression.Switch(p,
@@ -322,7 +322,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void StringSwitchTailCall(bool useInterpreter)
+        public void StringSwitchTailCall(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(string));
             SwitchExpression s = Expression.Switch(p,
@@ -340,7 +340,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void StringSwitchTailCallButNotLast(bool useInterpreter)
+        public void StringSwitchTailCallButNotLast(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(string));
             SwitchExpression s = Expression.Switch(p,
@@ -359,7 +359,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void StringSwitch1(bool useInterpreter)
+        public void StringSwitch1(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(string));
             ParameterExpression p1 = Expression.Parameter(typeof(string));
@@ -381,7 +381,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void StringSwitchNotConstant(bool useInterpreter)
+        public void StringSwitchNotConstant(CompilationType useInterpreter)
         {
             Expression<Func<string>> expr1 = () => new string('a', 5);
             Expression<Func<string>> expr2 = () => new string('q', 5);
@@ -402,7 +402,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void ObjectSwitch1(bool useInterpreter)
+        public void ObjectSwitch1(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(object));
             ParameterExpression p1 = Expression.Parameter(typeof(string));
@@ -426,7 +426,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void DefaultOnlySwitch(bool useInterpreter)
+        public void DefaultOnlySwitch(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(int));
             SwitchExpression s = Expression.Switch(p, Expression.Constant(42));
@@ -457,7 +457,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void NoDefaultOrCasesSwitch(bool useInterpreter)
+        public void NoDefaultOrCasesSwitch(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(int));
             SwitchExpression s = Expression.Switch(p);
@@ -489,7 +489,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void DefaultOnlySwitchWithSideEffect(bool useInterpreter)
+        public void DefaultOnlySwitchWithSideEffect(CompilationType useInterpreter)
         {
             bool changed = false;
             ParameterExpression pOut = Expression.Parameter(typeof(bool).MakeByRefType(), "changed");
@@ -508,7 +508,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void NoDefaultOrCasesSwitchWithSideEffect(bool useInterpreter)
+        public void NoDefaultOrCasesSwitchWithSideEffect(CompilationType useInterpreter)
         {
             bool changed = false;
             ParameterExpression pOut = Expression.Parameter(typeof(bool).MakeByRefType(), "changed");
@@ -532,7 +532,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void SwitchWithComparison(bool useInterpreter)
+        public void SwitchWithComparison(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(string));
             ParameterExpression p1 = Expression.Parameter(typeof(string));
@@ -639,7 +639,7 @@ namespace System.Linq.Expressions.Tests
         static bool WithinTen(int x, int y) => Math.Abs(x - y) < 10;
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void LiftedCall(bool useInterpreter)
+        public void LiftedCall(CompilationType useInterpreter)
         {
             Func<int> f = Expression.Lambda<Func<int>>(
                 Expression.Switch(
@@ -717,7 +717,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void MismatchingAllowedIfExplicitlyVoidIntgralValueType(bool useInterpreter)
+        public void MismatchingAllowedIfExplicitlyVoidIntgralValueType(CompilationType useInterpreter)
         {
             Expression.Lambda<Action>(
                 Expression.Switch(
@@ -732,7 +732,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void MismatchingAllowedIfExplicitlyVoidStringValueType(bool useInterpreter)
+        public void MismatchingAllowedIfExplicitlyVoidStringValueType(CompilationType useInterpreter)
         {
             Expression.Lambda<Action>(
                 Expression.Switch(
@@ -747,7 +747,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void MismatchingAllowedIfExplicitlyVoidDateTimeValueType(bool useInterpreter)
+        public void MismatchingAllowedIfExplicitlyVoidDateTimeValueType(CompilationType useInterpreter)
         {
             Expression.Lambda<Action>(
                 Expression.Switch(
@@ -897,7 +897,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void SwitchOnString(bool useInterpreter)
+        public void SwitchOnString(CompilationType useInterpreter)
         {
             var values = new string[] { "foobar", "foo", "bar", "baz", "qux", "quux", "corge", "grault", "garply", "waldo", "fred", "plugh", "xyzzy", "thud" };
 
@@ -925,7 +925,7 @@ namespace System.Linq.Expressions.Tests
 
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void SwitchOnStringEqualsMethod(bool useInterpreter)
+        public void SwitchOnStringEqualsMethod(CompilationType useInterpreter)
         {
             var values = new string[] { "foobar", "foo", "bar", "baz", "qux", "quux", "corge", "grault", "garply", "waldo", "fred", "plugh", "xyzzy", "thud", null };
 
@@ -967,7 +967,7 @@ namespace System.Linq.Expressions.Tests
         private delegate void TwoOutAction(int input, ref int x, ref int y);
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void JumpBetweenCases(bool useInterpreter)
+        public void JumpBetweenCases(CompilationType useInterpreter)
         {
             LabelTarget label = Expression.Label();
             ParameterExpression xParam = Expression.Parameter(typeof(int).MakeByRefType());

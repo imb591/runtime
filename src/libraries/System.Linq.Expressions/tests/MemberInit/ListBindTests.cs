@@ -100,7 +100,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(NonAddableListExpressions))]
-        public void NonAddableListType(MemberListBinding listBinding, bool useInterpreter)
+        public void NonAddableListType(MemberListBinding listBinding, CompilationType useInterpreter)
         {
             Func<ListWrapper<int>> func = Expression.Lambda<Func<ListWrapper<int>>>(
                 Expression.MemberInit(
@@ -149,7 +149,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType("ZeroInitializerExpressions")]
-        public void ZeroInitializersIsValid(MemberListBinding binding, bool useInterpreter)
+        public void ZeroInitializersIsValid(MemberListBinding binding, CompilationType useInterpreter)
         {
             Func<ListWrapper<int>> func = Expression.Lambda<Func<ListWrapper<int>>>(
                 Expression.MemberInit(
@@ -172,7 +172,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void StaticListProperty(bool useInterpreter)
+        public void StaticListProperty(CompilationType useInterpreter)
         {
             PropertyInfo property = typeof(ListWrapper<int>).GetProperty(nameof(ListWrapper<int>.StaticListProperty));
             Expression<Func<ListWrapper<int>>> exp = Expression.Lambda<Func<ListWrapper<int>>>(
@@ -192,7 +192,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void StaticListField(bool useInterpreter)
+        public void StaticListField(CompilationType useInterpreter)
         {
             FieldInfo field = typeof(ListWrapper<int>).GetField(nameof(ListWrapper<int>.StaticListField));
             Expression<Func<ListWrapper<int>>> exp = Expression.Lambda<Func<ListWrapper<int>>>(
@@ -212,7 +212,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void InitializeVoidAdd(bool useInterperter)
+        public void InitializeVoidAdd(CompilationType useInterperter)
         {
             Expression<Func<ListWrapper<int>>> listInit = () => new ListWrapper<int> { ListProperty = { 1, 4, 9, 16 } };
             Func<ListWrapper<int>> func = listInit.Compile(useInterperter);
@@ -220,7 +220,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void InitializeNonVoidAdd(bool useInterpreter)
+        public void InitializeNonVoidAdd(CompilationType useInterpreter)
         {
             Expression<Func<ListWrapper<int>>> hashInit = () => new ListWrapper<int> { HashSetField = { 1, 4, 9, 16 } };
             Func<ListWrapper<int>> func = hashInit.Compile(useInterpreter);

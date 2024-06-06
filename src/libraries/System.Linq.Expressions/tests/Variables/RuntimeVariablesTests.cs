@@ -11,7 +11,7 @@ namespace System.Linq.Expressions.Tests
     {
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void ReadAndReturnVars(bool useInterpreter)
+        public void ReadAndReturnVars(CompilationType useInterpreter)
         {
             ParameterExpression x = Expression.Variable(typeof(int));
             ParameterExpression y = Expression.Variable(typeof(decimal));
@@ -33,7 +33,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void IRuntimeVariablesListChecksBounds(bool useInterpreter)
+        public void IRuntimeVariablesListChecksBounds(CompilationType useInterpreter)
         {
             ParameterExpression x = Expression.Variable(typeof(int));
             ParameterExpression y = Expression.Variable(typeof(int));
@@ -52,7 +52,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void ReadAndWriteVars(bool useInterpreter)
+        public void ReadAndWriteVars(CompilationType useInterpreter)
         {
             ParameterExpression x = Expression.Variable(typeof(int));
             ParameterExpression y = Expression.Variable(typeof(decimal));
@@ -82,7 +82,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void AliasingAllowed(bool useInterpreter)
+        public void AliasingAllowed(CompilationType useInterpreter)
         {
             ParameterExpression x = Expression.Variable(typeof(int));
             ParameterExpression r = Expression.Variable(typeof(IRuntimeVariables));
@@ -107,7 +107,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void MixedScope(bool useInterpreter)
+        public void MixedScope(CompilationType useInterpreter)
         {
             ParameterExpression x = Expression.Variable(typeof(int));
             ParameterExpression y = Expression.Variable(typeof(int));
@@ -141,7 +141,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void ZeroVariables(bool useInterpreter)
+        public void ZeroVariables(CompilationType useInterpreter)
         {
             IRuntimeVariables vars = Expression.Lambda<Func<IRuntimeVariables>>(Expression.RuntimeVariables()).Compile(useInterpreter)();
             Assert.Equal(0, vars.Count);

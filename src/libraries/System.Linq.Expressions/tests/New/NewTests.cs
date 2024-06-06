@@ -14,7 +14,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewCustomTest(bool useInterpreter)
+        public static void CheckNewCustomTest(CompilationType useInterpreter)
         {
             Expression<Func<C>> e =
                 Expression.Lambda<Func<C>>(
@@ -27,7 +27,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewEnumTest(bool useInterpreter)
+        public static void CheckNewEnumTest(CompilationType useInterpreter)
         {
             Expression<Func<E>> e =
                 Expression.Lambda<Func<E>>(
@@ -40,7 +40,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewNullableEnumTest(bool useInterpreter)
+        public static void CheckNewNullableEnumTest(CompilationType useInterpreter)
         {
             Expression<Func<E?>> e =
                 Expression.Lambda<Func<E?>>(
@@ -53,7 +53,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewNullableIntTest(bool useInterpreter)
+        public static void CheckNewNullableIntTest(CompilationType useInterpreter)
         {
             Expression<Func<int?>> e =
                 Expression.Lambda<Func<int?>>(
@@ -66,7 +66,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewStructTest(bool useInterpreter)
+        public static void CheckNewStructTest(CompilationType useInterpreter)
         {
             Expression<Func<S>> e =
                 Expression.Lambda<Func<S>>(
@@ -79,7 +79,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewStructWithParameterlessConstructorByTypeTest(bool useInterpreter)
+        public static void CheckNewStructWithParameterlessConstructorByTypeTest(CompilationType useInterpreter)
         {
             Expression<Func<ValueTypeWithParameterlessConstructor>> e =
                 Expression.Lambda<Func<ValueTypeWithParameterlessConstructor>>(
@@ -92,7 +92,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewStructWithParameterlessConstructorByConstructorInfoTest(bool useInterpreter)
+        public static void CheckNewStructWithParameterlessConstructorByConstructorInfoTest(CompilationType useInterpreter)
         {
             ConstructorInfo ctorInfo = typeof(ValueTypeWithParameterlessConstructor).GetConstructor(Type.EmptyTypes);
             Assert.NotNull(ctorInfo);
@@ -108,7 +108,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewNullableStructWithParameterlessConstructorTest(bool useInterpreter)
+        public static void CheckNewNullableStructWithParameterlessConstructorTest(CompilationType useInterpreter)
         {
             Expression<Func<ValueTypeWithParameterlessConstructorThatThrows?>> e =
                 Expression.Lambda<Func<ValueTypeWithParameterlessConstructorThatThrows?>>(
@@ -121,7 +121,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewNullableStructTest(bool useInterpreter)
+        public static void CheckNewNullableStructTest(CompilationType useInterpreter)
         {
             Expression<Func<S?>> e =
                 Expression.Lambda<Func<S?>>(
@@ -134,7 +134,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewStructWithStringTest(bool useInterpreter)
+        public static void CheckNewStructWithStringTest(CompilationType useInterpreter)
         {
             Expression<Func<Sc>> e =
                 Expression.Lambda<Func<Sc>>(
@@ -147,7 +147,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewNullableStructWithStringTest(bool useInterpreter)
+        public static void CheckNewNullableStructWithStringTest(CompilationType useInterpreter)
         {
             Expression<Func<Sc?>> e =
                 Expression.Lambda<Func<Sc?>>(
@@ -160,7 +160,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewStructWithStringAndFieldTest(bool useInterpreter)
+        public static void CheckNewStructWithStringAndFieldTest(CompilationType useInterpreter)
         {
             Expression<Func<Scs>> e =
                 Expression.Lambda<Func<Scs>>(
@@ -173,7 +173,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewNullableStructWithStringAndFieldTest(bool useInterpreter)
+        public static void CheckNewNullableStructWithStringAndFieldTest(CompilationType useInterpreter)
         {
             Expression<Func<Scs?>> e =
                 Expression.Lambda<Func<Scs?>>(
@@ -186,7 +186,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewStructWithTwoValuesTest(bool useInterpreter)
+        public static void CheckNewStructWithTwoValuesTest(CompilationType useInterpreter)
         {
             Expression<Func<Sp>> e =
                 Expression.Lambda<Func<Sp>>(
@@ -199,7 +199,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewNullableStructWithTwoValuesTest(bool useInterpreter)
+        public static void CheckNewNullableStructWithTwoValuesTest(CompilationType useInterpreter)
         {
             Expression<Func<Sp?>> e =
                 Expression.Lambda<Func<Sp?>>(
@@ -212,42 +212,42 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewGenericWithStructRestrictionWithEnumTest(bool useInterpreter)
+        public static void CheckNewGenericWithStructRestrictionWithEnumTest(CompilationType useInterpreter)
         {
             CheckNewGenericWithStructRestrictionHelper<E>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewGenericWithStructRestrictionWithStructTest(bool useInterpreter)
+        public static void CheckNewGenericWithStructRestrictionWithStructTest(CompilationType useInterpreter)
         {
             CheckNewGenericWithStructRestrictionHelper<S>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewGenericWithStructRestrictionWithStructWithStringAndFieldTest(bool useInterpreter)
+        public static void CheckNewGenericWithStructRestrictionWithStructWithStringAndFieldTest(CompilationType useInterpreter)
         {
             CheckNewGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewNullableGenericWithStructRestrictionWithEnumTest(bool useInterpreter)
+        public static void CheckNewNullableGenericWithStructRestrictionWithEnumTest(CompilationType useInterpreter)
         {
             CheckNewNullableGenericWithStructRestrictionHelper<E>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewNullableGenericWithStructRestrictionWithStructTest(bool useInterpreter)
+        public static void CheckNewNullableGenericWithStructRestrictionWithStructTest(CompilationType useInterpreter)
         {
             CheckNewNullableGenericWithStructRestrictionHelper<S>(useInterpreter);
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNewNullableGenericWithStructRestrictionWithStructWithStringAndFieldTest(bool useInterpreter)
+        public static void CheckNewNullableGenericWithStructRestrictionWithStructWithStringAndFieldTest(CompilationType useInterpreter)
         {
             CheckNewNullableGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
@@ -256,7 +256,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Generic helpers
 
-        private static void CheckNewGenericWithStructRestrictionHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckNewGenericWithStructRestrictionHelper<Ts>(CompilationType useInterpreter) where Ts : struct
         {
             Expression<Func<Ts>> e =
                 Expression.Lambda<Func<Ts>>(
@@ -267,7 +267,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(new Ts(), f());
         }
 
-        private static void CheckNewNullableGenericWithStructRestrictionHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckNewNullableGenericWithStructRestrictionHelper<Ts>(CompilationType useInterpreter) where Ts : struct
         {
             Expression<Func<Ts?>> e =
                 Expression.Lambda<Func<Ts?>>(
@@ -282,7 +282,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void PrivateDefaultConstructor(bool useInterpreter)
+        public static void PrivateDefaultConstructor(CompilationType useInterpreter)
         {
             Assert.Equal("Test instance", TestPrivateDefaultConstructor.GetInstanceFunc(useInterpreter)().ToString());
         }
@@ -291,7 +291,7 @@ namespace System.Linq.Expressions.Tests
         {
             private TestPrivateDefaultConstructor() { }
 
-            public static Func<TestPrivateDefaultConstructor> GetInstanceFunc(bool useInterpreter)
+            public static Func<TestPrivateDefaultConstructor> GetInstanceFunc(CompilationType useInterpreter)
             {
                 Expression<Func<TestPrivateDefaultConstructor>> lambda = Expression.Lambda<Func<TestPrivateDefaultConstructor>>(Expression.New(typeof(TestPrivateDefaultConstructor)), new ParameterExpression[] { });
                 return lambda.Compile(useInterpreter);
@@ -326,7 +326,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void Compile_AbstractCtor_ThrowsInvalidOperationException(bool useInterpretation)
+        public static void Compile_AbstractCtor_ThrowsInvalidOperationException(CompilationType useInterpretation)
         {
             ConstructorInfo ctor = typeof(AbstractCtor).GetTypeInfo().DeclaredConstructors.Single();
             Expression<Func<AbstractCtor>> f = Expression.Lambda<Func<AbstractCtor>>(Expression.New(ctor));

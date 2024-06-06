@@ -36,7 +36,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableUShortMultiplyTest(bool useInterpreter)
+        public static void CheckNullableUShortMultiplyTest(CompilationType useInterpreter)
         {
             ushort?[] array = { 0, 1, ushort.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -50,7 +50,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableShortMultiplyTest(bool useInterpreter)
+        public static void CheckNullableShortMultiplyTest(CompilationType useInterpreter)
         {
             short?[] array = { 0, 1, -1, short.MinValue, short.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -64,7 +64,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableUIntMultiplyTest(bool useInterpreter)
+        public static void CheckNullableUIntMultiplyTest(CompilationType useInterpreter)
         {
             uint?[] array = { 0, 1, uint.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -78,7 +78,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableIntMultiplyTest(bool useInterpreter)
+        public static void CheckNullableIntMultiplyTest(CompilationType useInterpreter)
         {
             int?[] array = { 0, 1, -1, int.MinValue, int.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -92,7 +92,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableULongMultiplyTest(bool useInterpreter)
+        public static void CheckNullableULongMultiplyTest(CompilationType useInterpreter)
         {
             ulong?[] array = { 0, 1, ulong.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -106,7 +106,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableLongMultiplyTest(bool useInterpreter)
+        public static void CheckNullableLongMultiplyTest(CompilationType useInterpreter)
         {
             long?[] array = { 0, 1, -1, long.MinValue, long.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -120,7 +120,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableFloatMultiplyTest(bool useInterpreter)
+        public static void CheckNullableFloatMultiplyTest(CompilationType useInterpreter)
         {
             float?[] array = { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN, null };
             for (int i = 0; i < array.Length; i++)
@@ -134,7 +134,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableDoubleMultiplyTest(bool useInterpreter)
+        public static void CheckNullableDoubleMultiplyTest(CompilationType useInterpreter)
         {
             double?[] array = { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN, null };
             for (int i = 0; i < array.Length; i++)
@@ -148,7 +148,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableDecimalMultiplyTest(bool useInterpreter)
+        public static void CheckNullableDecimalMultiplyTest(CompilationType useInterpreter)
         {
             decimal?[] array = { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -194,7 +194,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidOperationException>(() => Expression.MultiplyChecked(aExp, bExp));
         }
 
-        private static void VerifyNullableUShortMultiply(ushort? a, ushort? b, bool useInterpreter)
+        private static void VerifyNullableUShortMultiply(ushort? a, ushort? b, CompilationType useInterpreter)
         {
             Expression<Func<ushort?>> e =
                 Expression.Lambda<Func<ushort?>>(
@@ -207,7 +207,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((ushort?)(a * b)), f());
         }
 
-        private static void VerifyNullableUShortMultiplyOvf(ushort? a, ushort? b, bool useInterpreter)
+        private static void VerifyNullableUShortMultiplyOvf(ushort? a, ushort? b, CompilationType useInterpreter)
         {
             Expression<Func<ushort?>> e =
                 Expression.Lambda<Func<ushort?>>(
@@ -230,7 +230,7 @@ namespace System.Linq.Expressions.Tests
 
             Assert.Equal(expected, f());
         }
-        private static void VerifyNullableShortMultiply(short? a, short? b, bool useInterpreter)
+        private static void VerifyNullableShortMultiply(short? a, short? b, CompilationType useInterpreter)
         {
             Expression<Func<short?>> e =
                 Expression.Lambda<Func<short?>>(
@@ -243,7 +243,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((short?)(a * b)), f());
         }
 
-        private static void VerifyNullableShortMultiplyOvf(short? a, short? b, bool useInterpreter)
+        private static void VerifyNullableShortMultiplyOvf(short? a, short? b, CompilationType useInterpreter)
         {
             Expression<Func<short?>> e =
                 Expression.Lambda<Func<short?>>(
@@ -267,7 +267,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyNullableUIntMultiply(uint? a, uint? b, bool useInterpreter)
+        private static void VerifyNullableUIntMultiply(uint? a, uint? b, CompilationType useInterpreter)
         {
             Expression<Func<uint?>> e =
                 Expression.Lambda<Func<uint?>>(
@@ -280,7 +280,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked(a * b), f());
         }
 
-        private static void VerifyNullableUIntMultiplyOvf(uint? a, uint? b, bool useInterpreter)
+        private static void VerifyNullableUIntMultiplyOvf(uint? a, uint? b, CompilationType useInterpreter)
         {
             Expression<Func<uint?>> e =
                 Expression.Lambda<Func<uint?>>(
@@ -304,7 +304,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyNullableIntMultiply(int? a, int? b, bool useInterpreter)
+        private static void VerifyNullableIntMultiply(int? a, int? b, CompilationType useInterpreter)
         {
             Expression<Func<int?>> e =
                 Expression.Lambda<Func<int?>>(
@@ -317,7 +317,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked(a * b), f());
         }
 
-        private static void VerifyNullableIntMultiplyOvf(int? a, int? b, bool useInterpreter)
+        private static void VerifyNullableIntMultiplyOvf(int? a, int? b, CompilationType useInterpreter)
         {
             Expression<Func<int?>> e =
                 Expression.Lambda<Func<int?>>(
@@ -341,7 +341,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyNullableULongMultiply(ulong? a, ulong? b, bool useInterpreter)
+        private static void VerifyNullableULongMultiply(ulong? a, ulong? b, CompilationType useInterpreter)
         {
             Expression<Func<ulong?>> e =
                 Expression.Lambda<Func<ulong?>>(
@@ -354,7 +354,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked(a * b), f());
         }
 
-        private static void VerifyNullableULongMultiplyOvf(ulong? a, ulong? b, bool useInterpreter)
+        private static void VerifyNullableULongMultiplyOvf(ulong? a, ulong? b, CompilationType useInterpreter)
         {
             Expression<Func<ulong?>> e =
                 Expression.Lambda<Func<ulong?>>(
@@ -378,7 +378,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyNullableLongMultiply(long? a, long? b, bool useInterpreter)
+        private static void VerifyNullableLongMultiply(long? a, long? b, CompilationType useInterpreter)
         {
             Expression<Func<long?>> e =
                 Expression.Lambda<Func<long?>>(
@@ -391,7 +391,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked(a * b), f());
         }
 
-        private static void VerifyNullableLongMultiplyOvf(long? a, long? b, bool useInterpreter)
+        private static void VerifyNullableLongMultiplyOvf(long? a, long? b, CompilationType useInterpreter)
         {
             Expression<Func<long?>> e =
                 Expression.Lambda<Func<long?>>(
@@ -415,7 +415,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyNullableFloatMultiply(float? a, float? b, bool useInterpreter)
+        private static void VerifyNullableFloatMultiply(float? a, float? b, CompilationType useInterpreter)
         {
             Expression<Func<float?>> e =
                 Expression.Lambda<Func<float?>>(
@@ -428,7 +428,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a * b, f());
         }
 
-        private static void VerifyNullableFloatMultiplyOvf(float? a, float? b, bool useInterpreter)
+        private static void VerifyNullableFloatMultiplyOvf(float? a, float? b, CompilationType useInterpreter)
         {
             Expression<Func<float?>> e =
                 Expression.Lambda<Func<float?>>(
@@ -441,7 +441,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a * b, f());
         }
 
-        private static void VerifyNullableDoubleMultiply(double? a, double? b, bool useInterpreter)
+        private static void VerifyNullableDoubleMultiply(double? a, double? b, CompilationType useInterpreter)
         {
             Expression<Func<double?>> e =
                 Expression.Lambda<Func<double?>>(
@@ -454,7 +454,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a * b, f());
         }
 
-        private static void VerifyNullableDoubleMultiplyOvf(double? a, double? b, bool useInterpreter)
+        private static void VerifyNullableDoubleMultiplyOvf(double? a, double? b, CompilationType useInterpreter)
         {
             Expression<Func<double?>> e =
                 Expression.Lambda<Func<double?>>(
@@ -467,7 +467,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a * b, f());
         }
 
-        private static void VerifyNullableDecimalMultiply(decimal? a, decimal? b, bool useInterpreter)
+        private static void VerifyNullableDecimalMultiply(decimal? a, decimal? b, CompilationType useInterpreter)
         {
             Expression<Func<decimal?>> e =
                 Expression.Lambda<Func<decimal?>>(
@@ -491,7 +491,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyNullableDecimalMultiplyOvf(decimal? a, decimal? b, bool useInterpreter)
+        private static void VerifyNullableDecimalMultiplyOvf(decimal? a, decimal? b, CompilationType useInterpreter)
         {
             Expression<Func<decimal?>> e =
                 Expression.Lambda<Func<decimal?>>(

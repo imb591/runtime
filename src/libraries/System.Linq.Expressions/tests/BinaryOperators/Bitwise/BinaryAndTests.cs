@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckByteAndTest(bool useInterpreter)
+        public static void CheckByteAndTest(CompilationType useInterpreter)
         {
             byte[] array = new byte[] { 0, 1, byte.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -23,7 +23,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckSByteAndTest(bool useInterpreter)
+        public static void CheckSByteAndTest(CompilationType useInterpreter)
         {
             sbyte[] array = new sbyte[] { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -36,7 +36,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUShortAndTest(bool useInterpreter)
+        public static void CheckUShortAndTest(CompilationType useInterpreter)
         {
             ushort[] array = new ushort[] { 0, 1, ushort.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -49,7 +49,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckShortAndTest(bool useInterpreter)
+        public static void CheckShortAndTest(CompilationType useInterpreter)
         {
             short[] array = new short[] { 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -62,7 +62,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUIntAndTest(bool useInterpreter)
+        public static void CheckUIntAndTest(CompilationType useInterpreter)
         {
             uint[] array = new uint[] { 0, 1, uint.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -75,7 +75,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckIntAndTest(bool useInterpreter)
+        public static void CheckIntAndTest(CompilationType useInterpreter)
         {
             int[] array = new int[] { 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -88,7 +88,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckULongAndTest(bool useInterpreter)
+        public static void CheckULongAndTest(CompilationType useInterpreter)
         {
             ulong[] array = new ulong[] { 0, 1, ulong.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -101,7 +101,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLongAndTest(bool useInterpreter)
+        public static void CheckLongAndTest(CompilationType useInterpreter)
         {
             long[] array = new long[] { 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -117,7 +117,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyByteAnd(byte a, byte b, bool useInterpreter)
+        private static void VerifyByteAnd(byte a, byte b, CompilationType useInterpreter)
         {
             Expression<Func<byte>> e =
                 Expression.Lambda<Func<byte>>(
@@ -130,7 +130,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((byte)(a & b), f());
         }
 
-        private static void VerifySByteAnd(sbyte a, sbyte b, bool useInterpreter)
+        private static void VerifySByteAnd(sbyte a, sbyte b, CompilationType useInterpreter)
         {
             Expression<Func<sbyte>> e =
                 Expression.Lambda<Func<sbyte>>(
@@ -143,7 +143,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((sbyte)(a & b), f());
         }
 
-        private static void VerifyUShortAnd(ushort a, ushort b, bool useInterpreter)
+        private static void VerifyUShortAnd(ushort a, ushort b, CompilationType useInterpreter)
         {
             Expression<Func<ushort>> e =
                 Expression.Lambda<Func<ushort>>(
@@ -156,7 +156,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((ushort)(a & b), f());
         }
 
-        private static void VerifyShortAnd(short a, short b, bool useInterpreter)
+        private static void VerifyShortAnd(short a, short b, CompilationType useInterpreter)
         {
             Expression<Func<short>> e =
                 Expression.Lambda<Func<short>>(
@@ -169,7 +169,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((short)(a & b), f());
         }
 
-        private static void VerifyUIntAnd(uint a, uint b, bool useInterpreter)
+        private static void VerifyUIntAnd(uint a, uint b, CompilationType useInterpreter)
         {
             Expression<Func<uint>> e =
                 Expression.Lambda<Func<uint>>(
@@ -182,7 +182,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a & b, f());
         }
 
-        private static void VerifyIntAnd(int a, int b, bool useInterpreter)
+        private static void VerifyIntAnd(int a, int b, CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -195,7 +195,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a & b, f());
         }
 
-        private static void VerifyULongAnd(ulong a, ulong b, bool useInterpreter)
+        private static void VerifyULongAnd(ulong a, ulong b, CompilationType useInterpreter)
         {
             Expression<Func<ulong>> e =
                 Expression.Lambda<Func<ulong>>(
@@ -208,7 +208,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a & b, f());
         }
 
-        private static void VerifyLongAnd(long a, long b, bool useInterpreter)
+        private static void VerifyLongAnd(long a, long b, CompilationType useInterpreter)
         {
             Expression<Func<long>> e =
                 Expression.Lambda<Func<long>>(

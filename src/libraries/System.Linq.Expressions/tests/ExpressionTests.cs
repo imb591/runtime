@@ -371,21 +371,21 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void CompileIrreduciebleExtension(bool useInterpreter)
+        public void CompileIrreduciebleExtension(CompilationType useInterpreter)
         {
             Expression<Action> exp = Expression.Lambda<Action>(new IrreducibleWithTypeAndNodeType());
             AssertExtensions.Throws<ArgumentException>(null, () => exp.Compile(useInterpreter));
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void CompileIrreduciebleStrangeNodeTypeExtension(bool useInterpreter)
+        public void CompileIrreduciebleStrangeNodeTypeExtension(CompilationType useInterpreter)
         {
             Expression<Action> exp = Expression.Lambda<Action>(new IrreduceibleWithTypeAndStrangeNodeType());
             AssertExtensions.Throws<ArgumentException>(null, () => exp.Compile(useInterpreter));
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void CompileReducibleStrangeNodeTypeExtension(bool useInterpreter)
+        public void CompileReducibleStrangeNodeTypeExtension(CompilationType useInterpreter)
         {
             Expression<Func<int>> exp = Expression.Lambda<Func<int>>(new ReducesFromStrangeNodeType());
             Assert.Equal(3, exp.Compile(useInterpreter)());

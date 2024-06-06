@@ -117,7 +117,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(ZeroInitializerInits))]
-        public void ZeroInitializers(Expression init, bool useInterpreter)
+        public void ZeroInitializers(Expression init, CompilationType useInterpreter)
         {
             Expression<Func<List<int>>> exp = Expression.Lambda<Func<List<int>>>(init);
             Func<List<int>> func = exp.Compile(useInterpreter);
@@ -180,7 +180,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void GenericAddMethod(bool useInterpreter)
+        public void GenericAddMethod(CompilationType useInterpreter)
         {
             NewExpression newExp = Expression.New(typeof(AnyTypeList));
             MethodInfo adder = typeof(AnyTypeList).GetMethod(nameof(AnyTypeList.Add)).MakeGenericMethod(typeof(int));
@@ -214,7 +214,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void InitializeVoidAdd(bool useInterpreter)
+        public void InitializeVoidAdd(CompilationType useInterpreter)
         {
             Expression<Func<List<int>>> listInit = () => new List<int> { 1, 2, 4, 16, 42 };
             Func<List<int>> func = listInit.Compile(useInterpreter);
@@ -223,7 +223,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void InitializeNonVoidAdd(bool useInterpreter)
+        public void InitializeNonVoidAdd(CompilationType useInterpreter)
         {
             Expression<Func<HashSet<int>>> hashInit = () => new HashSet<int> { 1, 2, 4, 16, 42 };
             Func<HashSet<int>> func = hashInit.Compile(useInterpreter);
@@ -232,7 +232,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void InitializeTwoParameterAdd(bool useInterpreter)
+        public void InitializeTwoParameterAdd(CompilationType useInterpreter)
         {
             Expression<Func<Dictionary<string, int>>> dictInit = () => new Dictionary<string, int>
             {
@@ -332,7 +332,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void ValueTypeList(bool useInterpreter)
+        public void ValueTypeList(CompilationType useInterpreter)
         {
             Expression<Func<ListValueType>> lambda = Expression.Lambda<Func<ListValueType>>(
                 Expression.ListInit(
@@ -348,7 +348,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void EmptyValueTypeList(bool useInterpreter)
+        public void EmptyValueTypeList(CompilationType useInterpreter)
         {
             Expression<Func<ListValueType>> lambda = Expression.Lambda<Func<ListValueType>>(
                 Expression.ListInit(

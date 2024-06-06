@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckBoolArrayConstantTest(bool useInterpreter)
+        public static void CheckBoolArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (bool[] value in new bool[][] { null, new bool[0], new bool[] { true, false }, new bool[100] })
             {
@@ -19,7 +19,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckByteArrayConstantTest(bool useInterpreter)
+        public static void CheckByteArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (byte[] value in new byte[][] { null, new byte[0], new byte[] { 0, 1, byte.MaxValue }, new byte[100] })
             {
@@ -28,7 +28,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckCustomArrayConstantTest(bool useInterpreter)
+        public static void CheckCustomArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (C[] value in new C[][] { null, new C[] { null, new C(), new D(), new D(0), new D(5) }, new C[10] })
             {
@@ -37,7 +37,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckCharArrayConstantTest(bool useInterpreter)
+        public static void CheckCharArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (char[] value in new char[][] { null, new char[0], new char[] { '\0', '\b', 'A', '\uffff' }, new char[100] })
             {
@@ -46,7 +46,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckCustom2ArrayConstantTest(bool useInterpreter)
+        public static void CheckCustom2ArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (D[] value in new D[][] { null, new D[] { null, new D(), new D(0), new D(5) }, new D[10] })
             {
@@ -55,7 +55,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckDecimalArrayConstantTest(bool useInterpreter)
+        public static void CheckDecimalArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (decimal[] value in new decimal[][] { null, new decimal[0], new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue }, new decimal[100] })
             {
@@ -64,7 +64,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckDelegateArrayConstantTest(bool useInterpreter)
+        public static void CheckDelegateArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (Delegate[] value in new Delegate[][] { null, new Delegate[0], new Delegate[] { null, (Func<object>)delegate () { return null; }, (Func<int, int>)delegate (int i) { return i + 1; }, (Action<object>)delegate { } }, new Delegate[100] })
             {
@@ -73,7 +73,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckDoubleArrayConstantTest(bool useInterpreter)
+        public static void CheckDoubleArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (double[] value in new double[][] { null, new double[0], new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN }, new double[100] })
             {
@@ -82,7 +82,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckEnumArrayConstantTest(bool useInterpreter)
+        public static void CheckEnumArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (E[] value in new E[][] { null, new E[0], new E[] { (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }, new E[100] })
             {
@@ -91,7 +91,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckEnumLongArrayConstantTest(bool useInterpreter)
+        public static void CheckEnumLongArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (El[] value in new El[][] { null, new El[0], new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }, new El[100] })
             {
@@ -100,7 +100,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckFloatArrayConstantTest(bool useInterpreter)
+        public static void CheckFloatArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (float[] value in new float[][] { null, new float[0], new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN }, new float[100] })
             {
@@ -109,7 +109,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckFuncOfObjectConstantTest(bool useInterpreter)
+        public static void CheckFuncOfObjectConstantTest(CompilationType useInterpreter)
         {
             foreach (Func<object>[] value in new Func<object>[][] { null, new Func<object>[0], new Func<object>[] { null, (Func<object>)delegate () { return null; } }, new Func<object>[100] })
             {
@@ -118,7 +118,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckInterfaceArrayConstantTest(bool useInterpreter)
+        public static void CheckInterfaceArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (I[] value in new I[][] { null, new I[0], new I[] { null, new C(), new D(), new D(0), new D(5) }, new I[100] })
             {
@@ -127,7 +127,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckIEquatableOfCustomConstantTest(bool useInterpreter)
+        public static void CheckIEquatableOfCustomConstantTest(CompilationType useInterpreter)
         {
             foreach (IEquatable<C>[] value in new IEquatable<C>[][] { null, new IEquatable<C>[0], new IEquatable<C>[] { null, new C(), new D(), new D(0), new D(5) }, new IEquatable<C>[100] })
             {
@@ -136,7 +136,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckIEquatableOfCustom2ConstantTest(bool useInterpreter)
+        public static void CheckIEquatableOfCustom2ConstantTest(CompilationType useInterpreter)
         {
             foreach (IEquatable<D>[] value in new IEquatable<D>[][] { null, new IEquatable<D>[0], new IEquatable<D>[] { null, new D(), new D(0), new D(5) }, new IEquatable<D>[100] })
             {
@@ -145,7 +145,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckIntArrayConstantTest(bool useInterpreter)
+        public static void CheckIntArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (int[] value in new int[][] { null, new int[0], new int[] { 0, 1, -1, int.MinValue, int.MaxValue }, new int[100] })
             {
@@ -154,7 +154,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLongArrayConstantTest(bool useInterpreter)
+        public static void CheckLongArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (long[] value in new long[][] { null, new long[0], new long[] { 0, 1, -1, long.MinValue, long.MaxValue }, new long[100] })
             {
@@ -163,7 +163,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckObjectArrayConstantTest(bool useInterpreter)
+        public static void CheckObjectArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (object[] value in new object[][] { null, new object[0], new object[] { null, new object(), new C(), new D(3) }, new object[100] })
             {
@@ -172,7 +172,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckStructArrayConstantTest(bool useInterpreter)
+        public static void CheckStructArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (S[] value in new S[][] { null, new S[] { default(S), new S() }, new S[10] })
             {
@@ -181,7 +181,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckSByteArrayConstantTest(bool useInterpreter)
+        public static void CheckSByteArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (sbyte[] value in new sbyte[][] { null, new sbyte[0], new sbyte[] { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }, new sbyte[100] })
             {
@@ -190,7 +190,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckStructWithStringArrayConstantTest(bool useInterpreter)
+        public static void CheckStructWithStringArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (Sc[] value in new Sc[][] { null, new Sc[0], new Sc[] { default(Sc), new Sc(), new Sc(null) }, new Sc[100] })
             {
@@ -199,7 +199,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckStructWithStringAndFieldArrayConstantTest(bool useInterpreter)
+        public static void CheckStructWithStringAndFieldArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (Scs[] value in new Scs[][] { null, new Scs[0], new Scs[] { default(Scs), new Scs(), new Scs(null, new S()) }, new Scs[100] })
             {
@@ -208,7 +208,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckShortArrayConstantTest(bool useInterpreter)
+        public static void CheckShortArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (short[] value in new short[][] { null, new short[0], new short[] { 0, 1, -1, short.MinValue, short.MaxValue }, new short[100] })
             {
@@ -217,7 +217,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckStructWithTwoValuesArrayConstantTest(bool useInterpreter)
+        public static void CheckStructWithTwoValuesArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (Sp[] value in new Sp[][] { null, new Sp[0], new Sp[] { default(Sp), new Sp(), new Sp(5, 5.0) }, new Sp[100] })
             {
@@ -226,7 +226,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckStructWithValueArrayConstantTest(bool useInterpreter)
+        public static void CheckStructWithValueArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (Ss[] value in new Ss[][] { null, new Ss[0], new Ss[] { default(Ss), new Ss(), new Ss(new S()) }, new Ss[100] })
             {
@@ -235,7 +235,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckStringArrayConstantTest(bool useInterpreter)
+        public static void CheckStringArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (string[] value in new string[][] { null, new string[0], new string[] { null, "", "a", "foo" }, new string[100] })
             {
@@ -244,7 +244,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUIntArrayConstantTest(bool useInterpreter)
+        public static void CheckUIntArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (uint[] value in new uint[][] { null, new uint[0], new uint[] { 0, 1, uint.MaxValue }, new uint[100] })
             {
@@ -253,7 +253,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckULongArrayConstantTest(bool useInterpreter)
+        public static void CheckULongArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (ulong[] value in new ulong[][] { null, new ulong[0], new ulong[] { 0, 1, ulong.MaxValue }, new ulong[100] })
             {
@@ -262,7 +262,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUShortArrayConstantTest(bool useInterpreter)
+        public static void CheckUShortArrayConstantTest(CompilationType useInterpreter)
         {
             foreach (ushort[] value in new ushort[][] { null, new ushort[0], new ushort[] { 0, 1, ushort.MaxValue }, new ushort[100] })
             {
@@ -271,85 +271,85 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithStructRestrictionWithEnumArrayConstantTest(bool useInterpreter)
+        public static void CheckGenericWithStructRestrictionWithEnumArrayConstantTest(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionArrayConstantHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithStructRestrictionWithStructArrayConstantTest(bool useInterpreter)
+        public static void CheckGenericWithStructRestrictionWithStructArrayConstantTest(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionArrayConstantHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithStructRestrictionWithStructWithStringAndValueArrayConstantTest(bool useInterpreter)
+        public static void CheckGenericWithStructRestrictionWithStructWithStringAndValueArrayConstantTest(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionArrayConstantHelper<Scs>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithCustomArrayTest(bool useInterpreter)
+        public static void CheckGenericWithCustomArrayTest(CompilationType useInterpreter)
         {
             CheckGenericArrayHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithEnumArrayTest(bool useInterpreter)
+        public static void CheckGenericWithEnumArrayTest(CompilationType useInterpreter)
         {
             CheckGenericArrayHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithObjectArrayTest(bool useInterpreter)
+        public static void CheckGenericWithObjectArrayTest(CompilationType useInterpreter)
         {
             CheckGenericArrayHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithStructArrayTest(bool useInterpreter)
+        public static void CheckGenericWithStructArrayTest(CompilationType useInterpreter)
         {
             CheckGenericArrayHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithStructWithStringAndValueArrayTest(bool useInterpreter)
+        public static void CheckGenericWithStructWithStringAndValueArrayTest(CompilationType useInterpreter)
         {
             CheckGenericArrayHelper<Scs>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithClassRestrictionWithCustomTest(bool useInterpreter)
+        public static void CheckGenericWithClassRestrictionWithCustomTest(CompilationType useInterpreter)
         {
             CheckGenericWithClassRestrictionArrayHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithClassRestrictionWithObjectTest(bool useInterpreter)
+        public static void CheckGenericWithClassRestrictionWithObjectTest(CompilationType useInterpreter)
         {
             CheckGenericWithClassRestrictionArrayHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithClassAndNewRestrictionWithCustomTest(bool useInterpreter)
+        public static void CheckGenericWithClassAndNewRestrictionWithCustomTest(CompilationType useInterpreter)
         {
             CheckGenericWithClassAndNewRestrictionArrayHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithClassAndNewRestrictionWithObjectTest(bool useInterpreter)
+        public static void CheckGenericWithClassAndNewRestrictionWithObjectTest(CompilationType useInterpreter)
         {
             CheckGenericWithClassAndNewRestrictionArrayHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithSubClassRestrictionTest(bool useInterpreter)
+        public static void CheckGenericWithSubClassRestrictionTest(CompilationType useInterpreter)
         {
             CheckGenericWithSubClassRestrictionHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithSubClassAndNewRestrictionTest(bool useInterpreter)
+        public static void CheckGenericWithSubClassAndNewRestrictionTest(CompilationType useInterpreter)
         {
             CheckGenericWithSubClassAndNewRestrictionHelper<C>(useInterpreter);
         }
@@ -358,7 +358,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Generic helpers
 
-        private static void CheckGenericWithStructRestrictionArrayConstantHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckGenericWithStructRestrictionArrayConstantHelper<Ts>(CompilationType useInterpreter) where Ts : struct
         {
             foreach (Ts[] value in new Ts[][] { null, new Ts[0], new Ts[] { default(Ts), new Ts() }, new Ts[100] })
             {
@@ -366,7 +366,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericArrayHelper<T>(bool useInterpreter)
+        private static void CheckGenericArrayHelper<T>(CompilationType useInterpreter)
         {
             foreach (T[] value in new T[][] { null, new T[0], new T[] { default(T) }, new T[100] })
             {
@@ -374,7 +374,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithClassRestrictionArrayHelper<Tc>(bool useInterpreter) where Tc : class
+        private static void CheckGenericWithClassRestrictionArrayHelper<Tc>(CompilationType useInterpreter) where Tc : class
         {
             foreach (Tc[] value in new Tc[][] { null, new Tc[0], new Tc[] { null, default(Tc) }, new Tc[100] })
             {
@@ -382,7 +382,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithClassAndNewRestrictionArrayHelper<Tcn>(bool useInterpreter) where Tcn : class, new()
+        private static void CheckGenericWithClassAndNewRestrictionArrayHelper<Tcn>(CompilationType useInterpreter) where Tcn : class, new()
         {
             foreach (Tcn[] value in new Tcn[][] { null, new Tcn[0], new Tcn[] { null, default(Tcn), new Tcn() }, new Tcn[100] })
             {
@@ -390,7 +390,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithSubClassRestrictionHelper<TC>(bool useInterpreter) where TC : C
+        private static void CheckGenericWithSubClassRestrictionHelper<TC>(CompilationType useInterpreter) where TC : C
         {
             foreach (TC[] value in new TC[][] { null, new TC[0], new TC[] { null, default(TC), (TC)new C() }, new TC[100] })
             {
@@ -398,7 +398,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithSubClassAndNewRestrictionHelper<TCn>(bool useInterpreter) where TCn : C, new()
+        private static void CheckGenericWithSubClassAndNewRestrictionHelper<TCn>(CompilationType useInterpreter) where TCn : C, new()
         {
             foreach (TCn[] value in new TCn[][] { null, new TCn[0], new TCn[] { null, default(TCn), new TCn(), (TCn)new C() }, new TCn[100] })
             {
@@ -410,7 +410,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyBoolArrayConstant(bool[] value, bool useInterpreter)
+        private static void VerifyBoolArrayConstant(bool[] value, CompilationType useInterpreter)
         {
             Expression<Func<bool[]>> e =
                 Expression.Lambda<Func<bool[]>>(
@@ -420,7 +420,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyByteArrayConstant(byte[] value, bool useInterpreter)
+        private static void VerifyByteArrayConstant(byte[] value, CompilationType useInterpreter)
         {
             Expression<Func<byte[]>> e =
                 Expression.Lambda<Func<byte[]>>(
@@ -430,7 +430,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyCustomArrayConstant(C[] value, bool useInterpreter)
+        private static void VerifyCustomArrayConstant(C[] value, CompilationType useInterpreter)
         {
             Expression<Func<C[]>> e =
                 Expression.Lambda<Func<C[]>>(
@@ -440,7 +440,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyCharArrayConstant(char[] value, bool useInterpreter)
+        private static void VerifyCharArrayConstant(char[] value, CompilationType useInterpreter)
         {
             Expression<Func<char[]>> e =
                 Expression.Lambda<Func<char[]>>(
@@ -450,7 +450,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyCustom2ArrayConstant(D[] value, bool useInterpreter)
+        private static void VerifyCustom2ArrayConstant(D[] value, CompilationType useInterpreter)
         {
             Expression<Func<D[]>> e =
                 Expression.Lambda<Func<D[]>>(
@@ -460,7 +460,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyDecimalArrayConstant(decimal[] value, bool useInterpreter)
+        private static void VerifyDecimalArrayConstant(decimal[] value, CompilationType useInterpreter)
         {
             Expression<Func<decimal[]>> e =
                 Expression.Lambda<Func<decimal[]>>(
@@ -470,7 +470,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyDelegateArrayConstant(Delegate[] value, bool useInterpreter)
+        private static void VerifyDelegateArrayConstant(Delegate[] value, CompilationType useInterpreter)
         {
             Expression<Func<Delegate[]>> e =
                 Expression.Lambda<Func<Delegate[]>>(
@@ -480,7 +480,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyDoubleArrayConstant(double[] value, bool useInterpreter)
+        private static void VerifyDoubleArrayConstant(double[] value, CompilationType useInterpreter)
         {
             Expression<Func<double[]>> e =
                 Expression.Lambda<Func<double[]>>(
@@ -490,7 +490,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyEnumArrayConstant(E[] value, bool useInterpreter)
+        private static void VerifyEnumArrayConstant(E[] value, CompilationType useInterpreter)
         {
             Expression<Func<E[]>> e =
                 Expression.Lambda<Func<E[]>>(
@@ -500,7 +500,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyEnumLongArrayConstant(El[] value, bool useInterpreter)
+        private static void VerifyEnumLongArrayConstant(El[] value, CompilationType useInterpreter)
         {
             Expression<Func<El[]>> e =
                 Expression.Lambda<Func<El[]>>(
@@ -510,7 +510,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyFloatArrayConstant(float[] value, bool useInterpreter)
+        private static void VerifyFloatArrayConstant(float[] value, CompilationType useInterpreter)
         {
             Expression<Func<float[]>> e =
                 Expression.Lambda<Func<float[]>>(
@@ -520,7 +520,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyFuncOfObjectConstant(Func<object>[] value, bool useInterpreter)
+        private static void VerifyFuncOfObjectConstant(Func<object>[] value, CompilationType useInterpreter)
         {
             Expression<Func<Func<object>[]>> e =
                 Expression.Lambda<Func<Func<object>[]>>(
@@ -530,7 +530,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyInterfaceArrayConstant(I[] value, bool useInterpreter)
+        private static void VerifyInterfaceArrayConstant(I[] value, CompilationType useInterpreter)
         {
             Expression<Func<I[]>> e =
                 Expression.Lambda<Func<I[]>>(
@@ -540,7 +540,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyIEquatableOfCustomConstant(IEquatable<C>[] value, bool useInterpreter)
+        private static void VerifyIEquatableOfCustomConstant(IEquatable<C>[] value, CompilationType useInterpreter)
         {
             Expression<Func<IEquatable<C>[]>> e =
                 Expression.Lambda<Func<IEquatable<C>[]>>(
@@ -550,7 +550,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyIEquatableOfCustom2Constant(IEquatable<D>[] value, bool useInterpreter)
+        private static void VerifyIEquatableOfCustom2Constant(IEquatable<D>[] value, CompilationType useInterpreter)
         {
             Expression<Func<IEquatable<D>[]>> e =
                 Expression.Lambda<Func<IEquatable<D>[]>>(
@@ -560,7 +560,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyIntArrayConstant(int[] value, bool useInterpreter)
+        private static void VerifyIntArrayConstant(int[] value, CompilationType useInterpreter)
         {
             Expression<Func<int[]>> e =
                 Expression.Lambda<Func<int[]>>(
@@ -570,7 +570,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyLongArrayConstant(long[] value, bool useInterpreter)
+        private static void VerifyLongArrayConstant(long[] value, CompilationType useInterpreter)
         {
             Expression<Func<long[]>> e =
                 Expression.Lambda<Func<long[]>>(
@@ -580,7 +580,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyObjectArrayConstant(object[] value, bool useInterpreter)
+        private static void VerifyObjectArrayConstant(object[] value, CompilationType useInterpreter)
         {
             Expression<Func<object[]>> e =
                 Expression.Lambda<Func<object[]>>(
@@ -590,7 +590,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyStructArrayConstant(S[] value, bool useInterpreter)
+        private static void VerifyStructArrayConstant(S[] value, CompilationType useInterpreter)
         {
             Expression<Func<S[]>> e =
                 Expression.Lambda<Func<S[]>>(
@@ -600,7 +600,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifySByteArrayConstant(sbyte[] value, bool useInterpreter)
+        private static void VerifySByteArrayConstant(sbyte[] value, CompilationType useInterpreter)
         {
             Expression<Func<sbyte[]>> e =
                 Expression.Lambda<Func<sbyte[]>>(
@@ -610,7 +610,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyStructWithStringArrayConstant(Sc[] value, bool useInterpreter)
+        private static void VerifyStructWithStringArrayConstant(Sc[] value, CompilationType useInterpreter)
         {
             Expression<Func<Sc[]>> e =
                 Expression.Lambda<Func<Sc[]>>(
@@ -620,7 +620,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyStructWithStringAndFieldArrayConstant(Scs[] value, bool useInterpreter)
+        private static void VerifyStructWithStringAndFieldArrayConstant(Scs[] value, CompilationType useInterpreter)
         {
             Expression<Func<Scs[]>> e =
                 Expression.Lambda<Func<Scs[]>>(
@@ -630,7 +630,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyShortArrayConstant(short[] value, bool useInterpreter)
+        private static void VerifyShortArrayConstant(short[] value, CompilationType useInterpreter)
         {
             Expression<Func<short[]>> e =
                 Expression.Lambda<Func<short[]>>(
@@ -640,7 +640,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyStructWithTwoValuesArrayConstant(Sp[] value, bool useInterpreter)
+        private static void VerifyStructWithTwoValuesArrayConstant(Sp[] value, CompilationType useInterpreter)
         {
             Expression<Func<Sp[]>> e =
                 Expression.Lambda<Func<Sp[]>>(
@@ -650,7 +650,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyStructWithValueArrayConstant(Ss[] value, bool useInterpreter)
+        private static void VerifyStructWithValueArrayConstant(Ss[] value, CompilationType useInterpreter)
         {
             Expression<Func<Ss[]>> e =
                 Expression.Lambda<Func<Ss[]>>(
@@ -660,7 +660,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyStringArrayConstant(string[] value, bool useInterpreter)
+        private static void VerifyStringArrayConstant(string[] value, CompilationType useInterpreter)
         {
             Expression<Func<string[]>> e =
                 Expression.Lambda<Func<string[]>>(
@@ -670,7 +670,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyUIntArrayConstant(uint[] value, bool useInterpreter)
+        private static void VerifyUIntArrayConstant(uint[] value, CompilationType useInterpreter)
         {
             Expression<Func<uint[]>> e =
                 Expression.Lambda<Func<uint[]>>(
@@ -680,7 +680,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyULongArrayConstant(ulong[] value, bool useInterpreter)
+        private static void VerifyULongArrayConstant(ulong[] value, CompilationType useInterpreter)
         {
             Expression<Func<ulong[]>> e =
                 Expression.Lambda<Func<ulong[]>>(
@@ -690,7 +690,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyUShortArrayConstant(ushort[] value, bool useInterpreter)
+        private static void VerifyUShortArrayConstant(ushort[] value, CompilationType useInterpreter)
         {
             Expression<Func<ushort[]>> e =
                 Expression.Lambda<Func<ushort[]>>(
@@ -700,7 +700,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyGenericArrayWithStructRestriction<Ts>(Ts[] value, bool useInterpreter) where Ts : struct
+        private static void VerifyGenericArrayWithStructRestriction<Ts>(Ts[] value, CompilationType useInterpreter) where Ts : struct
         {
             Expression<Func<Ts[]>> e =
                 Expression.Lambda<Func<Ts[]>>(
@@ -710,7 +710,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyGenericArray<T>(T[] value, bool useInterpreter)
+        private static void VerifyGenericArray<T>(T[] value, CompilationType useInterpreter)
         {
             Expression<Func<T[]>> e =
                 Expression.Lambda<Func<T[]>>(
@@ -720,7 +720,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyGenericWithClassRestrictionArray<Tc>(Tc[] value, bool useInterpreter) where Tc : class
+        private static void VerifyGenericWithClassRestrictionArray<Tc>(Tc[] value, CompilationType useInterpreter) where Tc : class
         {
             Expression<Func<Tc[]>> e =
                 Expression.Lambda<Func<Tc[]>>(
@@ -730,7 +730,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyGenericWithClassAndNewRestrictionArray<Tcn>(Tcn[] value, bool useInterpreter) where Tcn : class, new()
+        private static void VerifyGenericWithClassAndNewRestrictionArray<Tcn>(Tcn[] value, CompilationType useInterpreter) where Tcn : class, new()
         {
             Expression<Func<Tcn[]>> e =
                 Expression.Lambda<Func<Tcn[]>>(
@@ -740,7 +740,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyGenericWithSubClassRestrictionArray<TC>(TC[] value, bool useInterpreter) where TC : C
+        private static void VerifyGenericWithSubClassRestrictionArray<TC>(TC[] value, CompilationType useInterpreter) where TC : C
         {
             Expression<Func<TC[]>> e =
                 Expression.Lambda<Func<TC[]>>(
@@ -750,7 +750,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyGenericWithSubClassAndNewRestrictionArray<TCn>(TCn[] value, bool useInterpreter) where TCn : C, new()
+        private static void VerifyGenericWithSubClassAndNewRestrictionArray<TCn>(TCn[] value, CompilationType useInterpreter) where TCn : C, new()
         {
             Expression<Func<TCn[]>> e =
                 Expression.Lambda<Func<TCn[]>>(

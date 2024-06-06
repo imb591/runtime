@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaAddByteTest(bool useInterpreter)
+        public static void LambdaAddByteTest(CompilationType useInterpreter)
         {
             byte[] values = new byte[] { 0, 1, byte.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -23,7 +23,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaAddDecimalTest(bool useInterpreter)
+        public static void LambdaAddDecimalTest(CompilationType useInterpreter)
         {
             decimal[] values = new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -36,7 +36,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaAddDoubleTest(bool useInterpreter)
+        public static void LambdaAddDoubleTest(CompilationType useInterpreter)
         {
             double[] values = new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -49,7 +49,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaAddFloatTest(bool useInterpreter)
+        public static void LambdaAddFloatTest(CompilationType useInterpreter)
         {
             float[] values = new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -62,7 +62,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaAddIntTest(bool useInterpreter)
+        public static void LambdaAddIntTest(CompilationType useInterpreter)
         {
             int[] values = new int[] { 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -75,7 +75,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaAddLongTest(bool useInterpreter)
+        public static void LambdaAddLongTest(CompilationType useInterpreter)
         {
             long[] values = new long[] { 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -88,7 +88,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaAddShortTest(bool useInterpreter)
+        public static void LambdaAddShortTest(CompilationType useInterpreter)
         {
             short[] values = new short[] { 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -101,7 +101,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaAddUIntTest(bool useInterpreter)
+        public static void LambdaAddUIntTest(CompilationType useInterpreter)
         {
             uint[] values = new uint[] { 0, 1, uint.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -114,7 +114,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaAddULongTest(bool useInterpreter)
+        public static void LambdaAddULongTest(CompilationType useInterpreter)
         {
             ulong[] values = new ulong[] { 0, 1, ulong.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -127,7 +127,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaAddUShortTest(bool useInterpreter)
+        public static void LambdaAddUShortTest(CompilationType useInterpreter)
         {
             ushort[] values = new ushort[] { 0, 1, ushort.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -145,7 +145,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify byte
 
-        private static void VerifyAddByte(byte a, byte b, bool useInterpreter)
+        private static void VerifyAddByte(byte a, byte b, CompilationType useInterpreter)
         {
             byte expected = unchecked((byte)(a + b));
 
@@ -238,7 +238,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify decimal
 
-        private static void VerifyAddDecimal(decimal a, decimal b, bool useInterpreter)
+        private static void VerifyAddDecimal(decimal a, decimal b, CompilationType useInterpreter)
         {
             bool overflows;
             decimal expected;
@@ -384,7 +384,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify double
 
-        private static void VerifyAddDouble(double a, double b, bool useInterpreter)
+        private static void VerifyAddDouble(double a, double b, CompilationType useInterpreter)
         {
             double expected = a + b;
 
@@ -477,7 +477,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify float
 
-        private static void VerifyAddFloat(float a, float b, bool useInterpreter)
+        private static void VerifyAddFloat(float a, float b, CompilationType useInterpreter)
         {
             float expected = a + b;
 
@@ -570,7 +570,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify int
 
-        private static void VerifyAddInt(int a, int b, bool useInterpreter)
+        private static void VerifyAddInt(int a, int b, CompilationType useInterpreter)
         {
             int expected = unchecked(a + b);
 
@@ -663,7 +663,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify long
 
-        private static void VerifyAddLong(long a, long b, bool useInterpreter)
+        private static void VerifyAddLong(long a, long b, CompilationType useInterpreter)
         {
             long expected = unchecked(a + b);
 
@@ -756,7 +756,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify short
 
-        private static void VerifyAddShort(short a, short b, bool useInterpreter)
+        private static void VerifyAddShort(short a, short b, CompilationType useInterpreter)
         {
             short expected = unchecked((short)(a + b));
 
@@ -849,7 +849,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify uint
 
-        private static void VerifyAddUInt(uint a, uint b, bool useInterpreter)
+        private static void VerifyAddUInt(uint a, uint b, CompilationType useInterpreter)
         {
             uint expected = unchecked(a + b);
 
@@ -951,7 +951,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify ulong
 
-        private static void VerifyAddULong(ulong a, ulong b, bool useInterpreter)
+        private static void VerifyAddULong(ulong a, ulong b, CompilationType useInterpreter)
         {
             ulong expected = unchecked(a + b);
 
@@ -1044,7 +1044,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify ushort
 
-        private static void VerifyAddUShort(ushort a, ushort b, bool useInterpreter)
+        private static void VerifyAddUShort(ushort a, ushort b, CompilationType useInterpreter)
         {
             ushort expected = unchecked((ushort)(a + b));
 

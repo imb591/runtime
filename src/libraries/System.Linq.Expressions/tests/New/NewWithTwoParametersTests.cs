@@ -11,7 +11,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNewWithTwoParametersStructWithValueTest(bool useInterpreter)
+        public static void CheckNewWithTwoParametersStructWithValueTest(CompilationType useInterpreter)
         {
             int[] array1 = { 0, 1, -1, int.MinValue, int.MaxValue };
             double[] array2 = { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
@@ -25,7 +25,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNewWithTwoParametersCustom2Test(bool useInterpreter)
+        public static void CheckNewWithTwoParametersCustom2Test(CompilationType useInterpreter)
         {
             int[] array1 = { 0, 1, -1, int.MinValue, int.MaxValue };
             string[] array2 = { null, "", "a", "foo" };
@@ -39,7 +39,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNewWithTwoParametersStructWithStringAndValueTest(bool useInterpreter)
+        public static void CheckNewWithTwoParametersStructWithStringAndValueTest(CompilationType useInterpreter)
         {
             string[] array1 = { null, "", "a", "foo" };
             S[] array2 = { default(S), new S() };
@@ -56,7 +56,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verifier methods
 
-        private static void VerifyNewWithTwoParametersStructWithValue(int a, double b, bool useInterpreter)
+        private static void VerifyNewWithTwoParametersStructWithValue(int a, double b, CompilationType useInterpreter)
         {
             ConstructorInfo constructor = typeof(Sp).GetConstructor(new[] { typeof(int), typeof(double) });
             Expression[] exprArgs = { Expression.Constant(a, typeof(int)), Expression.Constant(b, typeof(double)) };
@@ -69,7 +69,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(new Sp(a, b), f());
         }
 
-        private static void VerifyNewWithTwoParametersCustom2(int a, string b, bool useInterpreter)
+        private static void VerifyNewWithTwoParametersCustom2(int a, string b, CompilationType useInterpreter)
         {
             ConstructorInfo constructor = typeof(D).GetConstructor(new[] { typeof(int), typeof(string) });
             Expression[] exprArgs = { Expression.Constant(a, typeof(int)), Expression.Constant(b, typeof(string)) };
@@ -82,7 +82,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(new D(a, b), f());
         }
 
-        private static void VerifyNewWithTwoParametersStructWithStringAndValue(string a, S b, bool useInterpreter)
+        private static void VerifyNewWithTwoParametersStructWithStringAndValue(string a, S b, CompilationType useInterpreter)
         {
             ConstructorInfo constructor = typeof(Scs).GetConstructor(new[] { typeof(string), typeof(S) });
             Expression[] exprArgs = { Expression.Constant(a, typeof(string)), Expression.Constant(b, typeof(S)) };

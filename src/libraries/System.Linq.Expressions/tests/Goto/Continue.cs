@@ -26,7 +26,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void ContinueVoidNoValue(bool useInterpreter)
+        public void ContinueVoidNoValue(CompilationType useInterpreter)
         {
             LabelTarget target = Expression.Label();
             Expression block = Expression.Block(
@@ -39,7 +39,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void ContinueExplicitVoidNoValue(bool useInterpreter)
+        public void ContinueExplicitVoidNoValue(CompilationType useInterpreter)
         {
             LabelTarget target = Expression.Label();
             Expression block = Expression.Block(
@@ -90,14 +90,14 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void UndefinedLabel(bool useInterpreter)
+        public void UndefinedLabel(CompilationType useInterpreter)
         {
             Expression<Action> continueNowhere = Expression.Lambda<Action>(Expression.Continue(Expression.Label()));
             Assert.Throws<InvalidOperationException>(() => continueNowhere.Compile(useInterpreter));
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void AmbiguousJump(bool useInterpreter)
+        public void AmbiguousJump(CompilationType useInterpreter)
         {
             LabelTarget target = Expression.Label();
             Expression<Action> exp = Expression.Lambda<Action>(
@@ -111,7 +111,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void MultipleDefinitionsInSeparateBlocks(bool useInterpreter)
+        public void MultipleDefinitionsInSeparateBlocks(CompilationType useInterpreter)
         {
             LabelTarget target = Expression.Label();
             Func<int> add = Expression.Lambda<Func<int>>(
@@ -134,7 +134,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void JumpIntoExpression(bool useInterpreter)
+        public void JumpIntoExpression(CompilationType useInterpreter)
         {
             LabelTarget target = Expression.Label();
             Expression<Func<bool>> isInt = Expression.Lambda<Func<bool>>(

@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaUnaryNotByteTest(bool useInterpreter)
+        public static void CheckLambdaUnaryNotByteTest(CompilationType useInterpreter)
         {
             foreach (byte value in new byte[] { 0, 1, byte.MaxValue })
             {
@@ -19,7 +19,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaUnaryNotIntTest(bool useInterpreter)
+        public static void CheckLambdaUnaryNotIntTest(CompilationType useInterpreter)
         {
             foreach (int value in new int[] { 0, 1, -1, int.MinValue, int.MaxValue })
             {
@@ -28,7 +28,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaUnaryNotLongTest(bool useInterpreter)
+        public static void CheckLambdaUnaryNotLongTest(CompilationType useInterpreter)
         {
             foreach (long value in new long[] { 0, 1, -1, long.MinValue, long.MaxValue })
             {
@@ -37,7 +37,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaUnaryNotSByteTest(bool useInterpreter)
+        public static void CheckLambdaUnaryNotSByteTest(CompilationType useInterpreter)
         {
             foreach (sbyte value in new sbyte[] { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
             {
@@ -46,7 +46,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaUnaryNotShortTest(bool useInterpreter)
+        public static void CheckLambdaUnaryNotShortTest(CompilationType useInterpreter)
         {
             foreach (short value in new short[] { 0, 1, -1, short.MinValue, short.MaxValue })
             {
@@ -55,7 +55,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaUnaryNotUIntTest(bool useInterpreter)
+        public static void CheckLambdaUnaryNotUIntTest(CompilationType useInterpreter)
         {
             foreach (uint value in new uint[] { 0, 1, uint.MaxValue })
             {
@@ -64,7 +64,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaUnaryNotULongTest(bool useInterpreter)
+        public static void CheckLambdaUnaryNotULongTest(CompilationType useInterpreter)
         {
             foreach (ulong value in new ulong[] { 0, 1, ulong.MaxValue })
             {
@@ -73,7 +73,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaUnaryNotUShortTest(bool useInterpreter)
+        public static void CheckLambdaUnaryNotUShortTest(CompilationType useInterpreter)
         {
             foreach (ushort value in new ushort[] { 0, 1, ushort.MaxValue })
             {
@@ -85,7 +85,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyUnaryNotByte(byte value, bool useInterpreter)
+        private static void VerifyUnaryNotByte(byte value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(byte), "p");
 
@@ -139,7 +139,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f4()(value));
         }
 
-        private static void VerifyUnaryNotInt(int value, bool useInterpreter)
+        private static void VerifyUnaryNotInt(int value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(int), "p");
 
@@ -193,7 +193,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f4()(value));
         }
 
-        private static void VerifyUnaryNotLong(long value, bool useInterpreter)
+        private static void VerifyUnaryNotLong(long value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(long), "p");
 
@@ -247,7 +247,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f4()(value));
         }
 
-        private static void VerifyUnaryNotSByte(sbyte value, bool useInterpreter)
+        private static void VerifyUnaryNotSByte(sbyte value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(sbyte), "p");
 
@@ -301,7 +301,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f4()(value));
         }
 
-        private static void VerifyUnaryNotShort(short value, bool useInterpreter)
+        private static void VerifyUnaryNotShort(short value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(short), "p");
 
@@ -355,7 +355,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f4()(value));
         }
 
-        private static void VerifyUnaryNotUInt(uint value, bool useInterpreter)
+        private static void VerifyUnaryNotUInt(uint value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(uint), "p");
 
@@ -409,7 +409,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f4()(value));
         }
 
-        private static void VerifyUnaryNotULong(ulong value, bool useInterpreter)
+        private static void VerifyUnaryNotULong(ulong value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(ulong), "p");
 
@@ -463,7 +463,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f4()(value));
         }
 
-        private static void VerifyUnaryNotUShort(ushort value, bool useInterpreter)
+        private static void VerifyUnaryNotUShort(ushort value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(ushort), "p");
 

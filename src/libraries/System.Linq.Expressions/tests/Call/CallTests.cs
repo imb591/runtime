@@ -52,7 +52,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void UnboxReturnsReference(bool useInterpreter)
+        public static void UnboxReturnsReference(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(object));
             UnaryExpression unbox = Expression.Unbox(p, typeof(Mutable));
@@ -68,7 +68,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void ArrayWriteBack(bool useInterpreter)
+        public static void ArrayWriteBack(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(Mutable[]));
             BinaryExpression indexed = Expression.ArrayIndex(p, Expression.Constant(0));
@@ -83,7 +83,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void EnumArgAndReturn(bool useInterpreter)
+        public static void EnumArgAndReturn(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(NonGenericClass.E1));
             MethodCallExpression call = Expression.Call(typeof(NonGenericClass).GetMethod("FooEnum"), p);
@@ -95,7 +95,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void MultiRankArrayWriteBack(bool useInterpreter)
+        public static void MultiRankArrayWriteBack(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(Mutable[,]));
             MethodCallExpression indexed = Expression.ArrayIndex(p, Expression.Constant(0), Expression.Constant(0));
@@ -110,7 +110,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void ArrayAccessWriteBack(bool useInterpreter)
+        public static void ArrayAccessWriteBack(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(Mutable[]));
             IndexExpression indexed = Expression.ArrayAccess(p, Expression.Constant(0));
@@ -125,7 +125,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void MultiRankArrayAccessWriteBack(bool useInterpreter)
+        public static void MultiRankArrayAccessWriteBack(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(Mutable[,]));
             IndexExpression indexed = Expression.ArrayAccess(p, Expression.Constant(0), Expression.Constant(0));
@@ -140,7 +140,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void IndexedPropertyAccessNoWriteBack(bool useInterpreter)
+        public static void IndexedPropertyAccessNoWriteBack(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(List<Mutable>));
             IndexExpression indexed = Expression.Property(p, typeof(List<Mutable>).GetProperty("Item"), Expression.Constant(0));
@@ -154,7 +154,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void FieldAccessWriteBack(bool useInterpreter)
+        public static void FieldAccessWriteBack(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(Wrapper<Mutable>));
             MemberExpression member = Expression.Field(p, typeof(Wrapper<Mutable>).GetField("Field"));
@@ -169,7 +169,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void PropertyAccessNoWriteBack(bool useInterpreter)
+        public static void PropertyAccessNoWriteBack(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(Wrapper<Mutable>));
             MemberExpression member = Expression.Property(p, typeof(Wrapper<Mutable>).GetProperty("Property"));
@@ -183,7 +183,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void ReadonlyFieldAccessWriteBack(bool useInterpreter)
+        public static void ReadonlyFieldAccessWriteBack(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(Wrapper<Mutable>));
             MemberExpression member = Expression.Field(p, typeof(Wrapper<Mutable>).GetField("ReadOnlyField"));
@@ -198,7 +198,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void ConstFieldAccessWriteBack(bool useInterpreter)
+        public static void ConstFieldAccessWriteBack(CompilationType useInterpreter)
         {
             MemberExpression member = Expression.Field(null, typeof(Wrapper<Mutable>).GetField("Zero"));
             MethodCallExpression call = Expression.Call(member, typeof(int).GetMethod("GetType"));
@@ -210,7 +210,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CallByRefMutableStructPropertyWriteBack(bool useInterpreter)
+        public static void CallByRefMutableStructPropertyWriteBack(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(Mutable));
             MemberExpression x = Expression.Property(p, "X");
@@ -224,7 +224,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CallByRefMutableStructIndexWriteBack(bool useInterpreter)
+        public static void CallByRefMutableStructIndexWriteBack(CompilationType useInterpreter)
         {
             // Should not produce tail-call, but should still succeed
             ParameterExpression p = Expression.Parameter(typeof(Mutable));
@@ -238,7 +238,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CallByRefAttemptTailCall(bool useInterpreter)
+        public static void CallByRefAttemptTailCall(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(Mutable));
             IndexExpression x = Expression.MakeIndex(p, typeof(Mutable).GetProperty("Item"), new[] { Expression.Constant(0) });
@@ -253,7 +253,7 @@ namespace System.Linq.Expressions.Tests
         [Theory]
         [ClassData(typeof(CompilationTypes))]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/51949", TestPlatforms.tvOS)]
-        public static void Call_InstanceNullInside_ThrowsNullReferenceExceptionOnInvocation(bool useInterpreter)
+        public static void Call_InstanceNullInside_ThrowsNullReferenceExceptionOnInvocation(CompilationType useInterpreter)
         {
             Expression call = Expression.Call(Expression.Constant(null, typeof(NonGenericClass)), typeof(NonGenericClass).GetMethod(nameof(NonGenericClass.InstanceMethod)));
             Action compiledDelegate = Expression.Lambda<Action>(call).Compile(useInterpreter);
@@ -291,7 +291,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(Call_NoParameters_TestData))]
-        public static void Call_NoParameters(Expression instance, MethodInfo method, object expected, bool useInterpreter)
+        public static void Call_NoParameters(Expression instance, MethodInfo method, object expected, CompilationType useInterpreter)
         {
             Expression call = Expression.Call(instance, method);
             Delegate compiledDelegate = Expression.Lambda(call).Compile(useInterpreter);
@@ -667,7 +667,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void EnumReturnType0(bool useInterpreter)
+        public static void EnumReturnType0(CompilationType useInterpreter)
         {
             Expression<Func<DayOfWeek[]>> expr = () => new[] { ToDayOfWeek0() };
             Assert.Equal(DayOfWeek.Monday, expr.Compile(useInterpreter)()[0]);
@@ -675,7 +675,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void EnumReturnType1(bool useInterpreter)
+        public static void EnumReturnType1(CompilationType useInterpreter)
         {
             Expression<Func<DayOfWeek[]>> expr = () => new[] { ToDayOfWeek1(1) };
             Assert.Equal(DayOfWeek.Monday, expr.Compile(useInterpreter)()[0]);
@@ -683,7 +683,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void EnumReturnType2(bool useInterpreter)
+        public static void EnumReturnType2(CompilationType useInterpreter)
         {
             Expression<Func<DayOfWeek[]>> expr = () => new[] { ToDayOfWeek2(0, 1) };
             Assert.Equal(DayOfWeek.Monday, expr.Compile(useInterpreter)()[0]);
@@ -695,7 +695,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void NullableEnumReturnType0(bool useInterpreter)
+        public static void NullableEnumReturnType0(CompilationType useInterpreter)
         {
             Expression<Func<DayOfWeek?[]>> expr = () => new[] { ToDayOfWeekOpt0() };
             Assert.Equal(DayOfWeek.Monday, expr.Compile(useInterpreter)()[0].Value);
@@ -703,7 +703,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void NullableEnumReturnType1(bool useInterpreter)
+        public static void NullableEnumReturnType1(CompilationType useInterpreter)
         {
             Expression<Func<DayOfWeek?[]>> expr = () => new[] { ToDayOfWeekOpt1(1) };
             Assert.Equal(DayOfWeek.Monday, expr.Compile(useInterpreter)()[0].Value);
@@ -711,7 +711,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void NullableEnumReturnType2(bool useInterpreter)
+        public static void NullableEnumReturnType2(CompilationType useInterpreter)
         {
             Expression<Func<DayOfWeek?[]>> expr = () => new[] { ToDayOfWeekOpt2(0, 1) };
             Assert.Equal(DayOfWeek.Monday, expr.Compile(useInterpreter)()[0].Value);

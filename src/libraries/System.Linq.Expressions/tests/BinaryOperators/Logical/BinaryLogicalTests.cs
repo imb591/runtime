@@ -15,7 +15,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckBoolAndTest(bool useInterpreter)
+        public static void CheckBoolAndTest(CompilationType useInterpreter)
         {
             bool[] array = new bool[] { true, false };
             for (int i = 0; i < array.Length; i++)
@@ -28,7 +28,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckBoolAndAlsoTest(bool useInterpreter)
+        public static void CheckBoolAndAlsoTest(CompilationType useInterpreter)
         {
             bool[] array = new bool[] { true, false };
             for (int i = 0; i < array.Length; i++)
@@ -41,7 +41,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckBoolOrTest(bool useInterpreter)
+        public static void CheckBoolOrTest(CompilationType useInterpreter)
         {
             bool[] array = new bool[] { true, false };
             for (int i = 0; i < array.Length; i++)
@@ -54,7 +54,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckBoolOrElseTest(bool useInterpreter)
+        public static void CheckBoolOrElseTest(CompilationType useInterpreter)
         {
             bool[] array = new bool[] { true, false };
             for (int i = 0; i < array.Length; i++)
@@ -70,7 +70,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyBoolAnd(bool a, bool b, bool useInterpreter)
+        private static void VerifyBoolAnd(bool a, bool b, CompilationType useInterpreter)
         {
             Expression<Func<bool>> e =
                 Expression.Lambda<Func<bool>>(
@@ -83,7 +83,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a & b, f());
         }
 
-        private static void VerifyBoolAndAlso(bool a, bool b, bool useInterpreter)
+        private static void VerifyBoolAndAlso(bool a, bool b, CompilationType useInterpreter)
         {
             Expression<Func<bool>> e =
                 Expression.Lambda<Func<bool>>(
@@ -96,7 +96,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a && b, f());
         }
 
-        private static void VerifyBoolOr(bool a, bool b, bool useInterpreter)
+        private static void VerifyBoolOr(bool a, bool b, CompilationType useInterpreter)
         {
             Expression<Func<bool>> e =
                 Expression.Lambda<Func<bool>>(
@@ -109,7 +109,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a | b, f());
         }
 
-        private static void VerifyBoolOrElse(bool a, bool b, bool useInterpreter)
+        private static void VerifyBoolOrElse(bool a, bool b, CompilationType useInterpreter)
         {
             Expression<Func<bool>> e =
                 Expression.Lambda<Func<bool>>(
@@ -133,7 +133,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(AndAlso_TestData))]
-        public static void AndAlso_UserDefinedOperator(int leftValue, int rightValue, int expectedValue, bool calledMethod, bool useInterpreter)
+        public static void AndAlso_UserDefinedOperator(int leftValue, int rightValue, int expectedValue, bool calledMethod, CompilationType useInterpreter)
         {
             TrueFalseClass left = new TrueFalseClass(leftValue);
             TrueFalseClass right = new TrueFalseClass(rightValue);
@@ -154,7 +154,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(AndAlso_TestData))]
-        public static void AndAlso_UserDefinedOperatorTailCall(int leftValue, int rightValue, int expectedValue, bool calledMethod, bool useInterpreter)
+        public static void AndAlso_UserDefinedOperatorTailCall(int leftValue, int rightValue, int expectedValue, bool calledMethod, CompilationType useInterpreter)
         {
             TrueFalseClass left = new TrueFalseClass(leftValue);
             TrueFalseClass right = new TrueFalseClass(rightValue);
@@ -175,7 +175,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void AndAlso_UserDefinedOperator_HasMethodNotOperator(bool useInterpreter)
+        public static void AndAlso_UserDefinedOperator_HasMethodNotOperator(CompilationType useInterpreter)
         {
             BinaryExpression expression = Expression.AndAlso(Expression.Constant(new NamedMethods(5)), Expression.Constant(new NamedMethods(3)));
             Func<NamedMethods> lambda = Expression.Lambda<Func<NamedMethods>>(expression).Compile(useInterpreter);
@@ -184,7 +184,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(AndAlso_TestData))]
-        public static void AndAlso_Method(int leftValue, int rightValue, int expectedValue, bool calledMethod, bool useInterpreter)
+        public static void AndAlso_Method(int leftValue, int rightValue, int expectedValue, bool calledMethod, CompilationType useInterpreter)
         {
             MethodInfo method = typeof(TrueFalseClass).GetMethod(nameof(TrueFalseClass.AndMethod));
 
@@ -215,7 +215,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(OrElse_TestData))]
-        public static void OrElse_UserDefinedOperator(int leftValue, int rightValue, int expectedValue, bool calledMethod, bool useInterpreter)
+        public static void OrElse_UserDefinedOperator(int leftValue, int rightValue, int expectedValue, bool calledMethod, CompilationType useInterpreter)
         {
             TrueFalseClass left = new TrueFalseClass(leftValue);
             TrueFalseClass right = new TrueFalseClass(rightValue);
@@ -236,7 +236,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(OrElse_TestData))]
-        public static void OrElse_UserDefinedOperatorTailCall(int leftValue, int rightValue, int expectedValue, bool calledMethod, bool useInterpreter)
+        public static void OrElse_UserDefinedOperatorTailCall(int leftValue, int rightValue, int expectedValue, bool calledMethod, CompilationType useInterpreter)
         {
             TrueFalseClass left = new TrueFalseClass(leftValue);
             TrueFalseClass right = new TrueFalseClass(rightValue);
@@ -257,7 +257,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void OrElse_UserDefinedOperator_HasMethodNotOperator(bool useInterpreter)
+        public static void OrElse_UserDefinedOperator_HasMethodNotOperator(CompilationType useInterpreter)
         {
             BinaryExpression expression = Expression.OrElse(Expression.Constant(new NamedMethods(0)), Expression.Constant(new NamedMethods(3)));
             Func<NamedMethods> lambda = Expression.Lambda<Func<NamedMethods>>(expression).Compile(useInterpreter);
@@ -266,7 +266,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(OrElse_TestData))]
-        public static void OrElse_Method(int leftValue, int rightValue, int expectedValue, bool calledMethod, bool useInterpreter)
+        public static void OrElse_Method(int leftValue, int rightValue, int expectedValue, bool calledMethod, CompilationType useInterpreter)
         {
             MethodInfo method = typeof(TrueFalseClass).GetMethod(nameof(TrueFalseClass.OrMethod));
 

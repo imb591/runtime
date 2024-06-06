@@ -12,7 +12,7 @@ namespace System.Linq.Expressions.Tests
     public class UnaryQuoteTests
     {
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void QuotePreservesTypingOfBlock(bool useInterpreter)
+        public void QuotePreservesTypingOfBlock(CompilationType useInterpreter)
         {
             ParameterExpression x = Parameter(typeof(int));
 
@@ -49,7 +49,7 @@ namespace System.Linq.Expressions.Tests
         public static Type Quote2(Expression<Func<object>> e) => e.Body.Type;
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void Quote_Lambda_Action(bool useInterpreter)
+        public void Quote_Lambda_Action(CompilationType useInterpreter)
         {
             Expression<Func<LambdaExpression>> f = () => GetQuote<Action>(() => Nop());
 
@@ -63,7 +63,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void Quote_Lambda_Action_MakeUnary(bool useInterpreter)
+        public void Quote_Lambda_Action_MakeUnary(CompilationType useInterpreter)
         {
             Expression<Action> e = () => Nop();
             UnaryExpression q = MakeUnary(ExpressionType.Quote, e, null);
@@ -79,7 +79,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void Quote_Lambda_IdentityFunc(bool useInterpreter)
+        public void Quote_Lambda_IdentityFunc(CompilationType useInterpreter)
         {
             Expression<Func<LambdaExpression>> f = () => GetQuote<Func<int, int>>(x => x);
 
@@ -90,7 +90,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void Quote_Lambda_Closure1(bool useInterpreter)
+        public void Quote_Lambda_Closure1(CompilationType useInterpreter)
         {
             Expression<Func<int, LambdaExpression>> f = x => GetQuote<Func<int>>(() => x);
 
@@ -101,7 +101,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void Quote_Lambda_Closure2(bool useInterpreter)
+        public void Quote_Lambda_Closure2(CompilationType useInterpreter)
         {
             // Using an unchecked addition to ensure that an Add expression is used (and not AddChecked)
             Expression<Func<int, Func<int, LambdaExpression>>> f = x => y => GetQuote<Func<int>>(() => unchecked(x + y));
@@ -118,7 +118,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void Quote_Block_Action(bool useInterpreter)
+        public void Quote_Block_Action(CompilationType useInterpreter)
         {
             var expr =
                 Block(
@@ -134,7 +134,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void Quote_Block_Local(bool useInterpreter)
+        public void Quote_Block_Local(CompilationType useInterpreter)
         {
             var x = Parameter(typeof(int));
 
@@ -154,7 +154,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void Quote_Block_Local_Shadow(bool useInterpreter)
+        public void Quote_Block_Local_Shadow(CompilationType useInterpreter)
         {
             var x = Parameter(typeof(int));
 
@@ -174,7 +174,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void Quote_Block_Closure(bool useInterpreter)
+        public void Quote_Block_Closure(CompilationType useInterpreter)
         {
             var x = Parameter(typeof(int));
 
@@ -198,7 +198,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void Quote_Block_LocalAndClosure(bool useInterpreter)
+        public void Quote_Block_LocalAndClosure(CompilationType useInterpreter)
         {
             var x = Parameter(typeof(int));
             var y = Parameter(typeof(int));
@@ -238,7 +238,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void Quote_CatchBlock_Local(bool useInterpreter)
+        public void Quote_CatchBlock_Local(CompilationType useInterpreter)
         {
             var ex = Parameter(typeof(Exception));
 
@@ -260,7 +260,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void Quote_CatchBlock_Variable_Closure1(bool useInterpreter)
+        public void Quote_CatchBlock_Variable_Closure1(CompilationType useInterpreter)
         {
             var x = Parameter(typeof(int));
             var ex = Parameter(typeof(Exception));
@@ -295,7 +295,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void Quote_CatchBlock_Variable_Closure2(bool useInterpreter)
+        public void Quote_CatchBlock_Variable_Closure2(CompilationType useInterpreter)
         {
             var x = Parameter(typeof(int));
             var ex = Parameter(typeof(Exception));
@@ -332,7 +332,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void Quote_CatchBlock_NoVariable_Closure1(bool useInterpreter)
+        public void Quote_CatchBlock_NoVariable_Closure1(CompilationType useInterpreter)
         {
             var x = Parameter(typeof(int));
 
@@ -366,7 +366,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void Quote_CatchBlock_NoVariable_Closure2(bool useInterpreter)
+        public void Quote_CatchBlock_NoVariable_Closure2(CompilationType useInterpreter)
         {
             var x = Parameter(typeof(int));
 
@@ -402,7 +402,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void Quote_RuntimeVariables_Closure(bool useInterpreter)
+        public void Quote_RuntimeVariables_Closure(CompilationType useInterpreter)
         {
             var x = Parameter(typeof(int));
 
@@ -424,7 +424,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void Quote_RuntimeVariables_Local(bool useInterpreter)
+        public void Quote_RuntimeVariables_Local(CompilationType useInterpreter)
         {
             var x = Parameter(typeof(int));
 
@@ -450,7 +450,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void Quote_RuntimeVariables_ClosureAndLocal(bool useInterpreter)
+        public void Quote_RuntimeVariables_ClosureAndLocal(CompilationType useInterpreter)
         {
             var x = Parameter(typeof(int));
             var y = Parameter(typeof(int));
@@ -512,9 +512,9 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(typeof(Expression<Func<int>>), q.Type);
         }
 
-        private void AssertIsBox<T>(Expression expression, T value, bool isInterpreted)
+        private void AssertIsBox<T>(Expression expression, T value, CompilationType isInterpreted)
         {
-            if (isInterpreted)
+            if (isInterpreted == CompilationType.Interpret)
             {
                 // See https://github.com/dotnet/runtime/issues/18278 for the difference between
                 // runtime expression quoting in the compiler and the interpreter.

@@ -38,7 +38,7 @@ namespace System.Linq.Expressions.Tests
             int arg20);
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void Lambda(bool useInterpreter)
+        public void Lambda(CompilationType useInterpreter)
         {
             ParameterExpression paramI = Expression.Parameter(typeof(int), "i");
             ParameterExpression paramJ = Expression.Parameter(typeof(double), "j");
@@ -57,7 +57,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void InvokeComputedLambda(bool useInterpreter)
+        public void InvokeComputedLambda(CompilationType useInterpreter)
         {
             ParameterExpression x = Expression.Parameter(typeof(int), "x");
             ParameterExpression y = Expression.Parameter(typeof(int), "y");
@@ -81,7 +81,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void HighArityDelegate(bool useInterpreter)
+        public void HighArityDelegate(CompilationType useInterpreter)
         {
             ParameterExpression[] paramList = Enumerable.Range(0, 20).Select(_ => Expression.Variable(typeof(int))).ToArray();
             Expression<IcosanaryInt32Func> exp = Expression.Lambda<IcosanaryInt32Func>(
@@ -392,7 +392,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void AutoQuote(bool useInterpreter)
+        public void AutoQuote(CompilationType useInterpreter)
         {
             ParameterExpression param = Expression.Parameter(typeof(int));
             Expression<Func<int, int>> inner = Expression.Lambda<Func<int, int>>(
@@ -408,7 +408,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void NestedCompile(bool useInterpreter)
+        public void NestedCompile(CompilationType useInterpreter)
         {
             ParameterExpression param = Expression.Parameter(typeof(int));
             Expression<Func<int, int>> inner = Expression.Lambda<Func<int, int>>(
@@ -423,14 +423,14 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void AnyTypeCanBeReturnedVoid(bool useInterpreter)
+        public void AnyTypeCanBeReturnedVoid(CompilationType useInterpreter)
         {
             Action act = Expression.Lambda<Action>(Expression.Constant("foo")).Compile(useInterpreter);
             act();
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void NameNeedNotBeValidCSharpLabel(bool useInterpreter)
+        public void NameNeedNotBeValidCSharpLabel(CompilationType useInterpreter)
         {
             string name = "1, 2, 3, 4. This is not a valid C\u266F label!\"'<>.\uffff";
             var exp = (Expression<Func<int>>)Expression.Lambda(Expression.Constant(21), name, Array.Empty<ParameterExpression>());
@@ -569,7 +569,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void CurriedFunctions(bool useInterpreter)
+        public void CurriedFunctions(CompilationType useInterpreter)
         {
             Expression<Func<int, Func<int>>> f1 = x => () => x;
             Func<int, Func<int>> d1 = f1.Compile(useInterpreter);
@@ -595,7 +595,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void CurriedFunctionsReadWrite(bool useInterpreter)
+        public void CurriedFunctionsReadWrite(CompilationType useInterpreter)
         {
             // Generate code like:
             //
@@ -639,7 +639,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void CurriedFunctionsUsingRef(bool useInterpreter)
+        public void CurriedFunctionsUsingRef(CompilationType useInterpreter)
         {
             Expression<Func<int, Func<int>>> f1 = x => () => x * Add(ref x, 1);
             Func<int, Func<int>> d1 = f1.Compile(useInterpreter);
@@ -655,7 +655,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void CurriedFunctionsReadWriteThroughRef(bool useInterpreter)
+        public void CurriedFunctionsReadWriteThroughRef(CompilationType useInterpreter)
         {
             // Generate code like:
             //
@@ -702,7 +702,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void CurriedFunctionsVariableCaptureSemantics(bool useInterpreter)
+        public void CurriedFunctionsVariableCaptureSemantics(CompilationType useInterpreter)
         {
             ParameterExpression x = Expression.Parameter(typeof(int));
             ParameterExpression f = Expression.Parameter(typeof(Func<int>));
@@ -782,7 +782,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported)), ClassData(typeof(CompilationTypes))]
-        public void AboveByteMaxArityArg(bool useInterpreter)
+        public void AboveByteMaxArityArg(CompilationType useInterpreter)
         {
             ParameterExpression[] pars = Enumerable.Range(0, 300).Select(_ => Expression.Parameter(typeof(int))).ToArray();
             LambdaExpression lambda = Expression.Lambda(pars.Last(), pars);
@@ -858,7 +858,7 @@ namespace System.Linq.Expressions.Tests
             int arg298, Mutable arg299);
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void AboveByteMaxArityArgAddress(bool useInterpreter)
+        public void AboveByteMaxArityArgAddress(CompilationType useInterpreter)
         {
             ParameterExpression parToMutate = Expression.Parameter(typeof(Mutable));
             ParameterExpression[] pars = Enumerable.Range(0, 299)
@@ -904,7 +904,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported)), ClassData(typeof(CompilationTypes))]
-        public void ExcessiveArity(bool useInterpreter)
+        public void ExcessiveArity(CompilationType useInterpreter)
         {
             ParameterExpression[] pars = Enumerable.Range(0, ushort.MaxValue).Select(_ => Expression.Parameter(typeof(int))).ToArray();
             LambdaExpression lambda = Expression.Lambda(pars.Last(), pars);
@@ -927,7 +927,7 @@ namespace System.Linq.Expressions.Tests
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
         [ClassData(typeof(CompilationTypes))]
-        public void PrivateDelegate(bool useInterpreter)
+        public void PrivateDelegate(CompilationType useInterpreter)
         {
             AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), AssemblyBuilderAccess.RunAndCollect);
             ModuleBuilder module = assembly.DefineDynamicModule("Name");
@@ -979,11 +979,11 @@ namespace System.Linq.Expressions.Tests
             public string B() => "B";
         }
 
-        [Fact]
-        public void MethodOnGenericStructImplementingInterface()
+        [Theory, ClassData(typeof(CompilationTypes))]
+        public void MethodOnGenericStructImplementingInterface(CompilationType useInterpreter)
         {
             Expression<Func<GenericStruct<string>, string>> funcE = x => x.B();
-            Func<GenericStruct<string>, string> f = funcE.Compile();
+            Func<GenericStruct<string>, string> f = funcE.Compile(useInterpreter);
             Assert.Equal("B", f(new GenericStruct<string>()));
         }
     }

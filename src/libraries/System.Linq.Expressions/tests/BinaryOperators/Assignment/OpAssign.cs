@@ -11,7 +11,7 @@ namespace System.Linq.Expressions.Tests
     {
         [Theory]
         [PerCompilationType(nameof(AssignAndEquivalentMethods))]
-        public void AssignmentEquivalents(MethodInfo nonAssign, MethodInfo assign, Type type, bool useInterpreter)
+        public void AssignmentEquivalents(MethodInfo nonAssign, MethodInfo assign, Type type, CompilationType useInterpreter)
         {
             Func<Expression, Expression, Expression> withoutAssignment = (Func<Expression, Expression, Expression>)nonAssign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
             Func<Expression, Expression, Expression> withAssignment = (Func<Expression, Expression, Expression>)assign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
@@ -66,7 +66,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(AssignAndEquivalentMethods))]
-        public void AssignmentEquivalentsWithMemberAccess(MethodInfo nonAssign, MethodInfo assign, Type type, bool useInterpreter)
+        public void AssignmentEquivalentsWithMemberAccess(MethodInfo nonAssign, MethodInfo assign, Type type, CompilationType useInterpreter)
         {
             Func<Expression, Expression, Expression> withoutAssignment = (Func<Expression, Expression, Expression>)nonAssign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
             Func<Expression, Expression, Expression> withAssignment = (Func<Expression, Expression, Expression>)assign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
@@ -98,7 +98,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(AssignAndEquivalentMethods))]
-        public void AssignmentEquivalentsWithStaticMemberAccess(MethodInfo nonAssign, MethodInfo assign, Type type, bool useInterpreter)
+        public void AssignmentEquivalentsWithStaticMemberAccess(MethodInfo nonAssign, MethodInfo assign, Type type, CompilationType useInterpreter)
         {
             Func<Expression, Expression, Expression> withoutAssignment = (Func<Expression, Expression, Expression>)nonAssign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
             Func<Expression, Expression, Expression> withAssignment = (Func<Expression, Expression, Expression>)assign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
@@ -125,7 +125,7 @@ namespace System.Linq.Expressions.Tests
         }
         [Theory]
         [PerCompilationType(nameof(AssignAndEquivalentMethods))]
-        public void AssignmentEquivalentsWithIndexAccess(MethodInfo nonAssign, MethodInfo assign, Type type, bool useInterpreter)
+        public void AssignmentEquivalentsWithIndexAccess(MethodInfo nonAssign, MethodInfo assign, Type type, CompilationType useInterpreter)
         {
             Func<Expression, Expression, Expression> withoutAssignment = (Func<Expression, Expression, Expression>)nonAssign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
             Func<Expression, Expression, Expression> withAssignment = (Func<Expression, Expression, Expression>)assign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
@@ -452,7 +452,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(AssignExpressionTypesArguments))]
-        public void ConvertAssignment(ExpressionType type, bool useInterpreter)
+        public void ConvertAssignment(ExpressionType type, CompilationType useInterpreter)
         {
             var lhs = Expression.Parameter(typeof(int));
             var rhs = Expression.Constant(25);
@@ -522,7 +522,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void CanAssignOpIfOpReturnNotAssignableButConversionFixes(bool useInterpreter)
+        public void CanAssignOpIfOpReturnNotAssignableButConversionFixes(CompilationType useInterpreter)
         {
             var lhs = Expression.Parameter(typeof(AddsToSomethingElse));
             var rhs = Expression.Constant(new AddsToSomethingElse(3));
@@ -536,7 +536,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(AssignExpressionTypesArguments))]
-        public void ConvertOpAssignToMember(ExpressionType type, bool useInterpreter)
+        public void ConvertOpAssignToMember(ExpressionType type, CompilationType useInterpreter)
         {
             Box<int> box = new Box<int>(25);
             Expression<Func<int, int>> doubleIt = x => x * 2;
@@ -556,7 +556,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(AssignExpressionTypesArguments))]
-        public void ConvertOpAssignToArrayIndex(ExpressionType type, bool useInterpreter)
+        public void ConvertOpAssignToArrayIndex(ExpressionType type, CompilationType useInterpreter)
         {
             int[] array = {0, 0, 25, 0};
             Expression<Func<int, int>> doubleIt = x => x * 2;
@@ -580,7 +580,7 @@ namespace System.Linq.Expressions.Tests
         private delegate int BothByRefInts(ref int x, ref int y);
 
         [Theory, PerCompilationType(nameof(AssignExpressionMethodInfoUsingFactoriesArguments))]
-        public void MethodNoConvertOpWriteByRefParameter(Func<Expression, Expression, MethodInfo, BinaryExpression> factory, bool useInterpreter)
+        public void MethodNoConvertOpWriteByRefParameter(Func<Expression, Expression, MethodInfo, BinaryExpression> factory, CompilationType useInterpreter)
         {
             var pX = Expression.Parameter(typeof(int).MakeByRefType());
             var pY = Expression.Parameter(typeof(int));
@@ -594,7 +594,7 @@ namespace System.Linq.Expressions.Tests
         private delegate AddsToSomethingElse ByRefSomeElse(ref AddsToSomethingElse x, AddsToSomethingElse y);
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void ConvertOpWriteByRefParameterOverloadedOperator(bool useInterpreter)
+        public void ConvertOpWriteByRefParameterOverloadedOperator(CompilationType useInterpreter)
         {
             var pX = Expression.Parameter(typeof(AddsToSomethingElse).MakeByRefType());
             var pY = Expression.Parameter(typeof(AddsToSomethingElse));
@@ -626,11 +626,13 @@ namespace System.Linq.Expressions.Tests
                 var rightOperand = Expression.Parameter(typeof(int));
                 var expr = Expression.RightShiftAssign(leftOperand, rightOperand);
                 var lambda = Expression.Lambda<RightShiftAssignDelegate<T>>(expr, leftOperand, rightOperand);
-                CompileAndInvoke(lambda, left, right, expected, preferInterpretation: false);
-                CompileAndInvoke(lambda, left, right, expected, preferInterpretation: true);
+                foreach (var useInterpreter in CompilationTypes.Types)
+                {
+                    CompileAndInvoke(lambda, left, right, expected, useInterpreter);
+                }
             }
 
-            static void CompileAndInvoke<T>(Expression<RightShiftAssignDelegate<T>> expr, T left, int right, T expected, bool preferInterpretation)
+            static void CompileAndInvoke<T>(Expression<RightShiftAssignDelegate<T>> expr, T left, int right, T expected, CompilationType preferInterpretation)
             {
                 expr.Compile(preferInterpretation).Invoke(ref left, right);
                 Assert.Equal(expected, left);

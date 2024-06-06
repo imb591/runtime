@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
     {
         public static IEnumerable<object[]> TestData()
         {
-            foreach (bool useInterpreter in new bool[] { true, false })
+            foreach (CompilationType useInterpreter in CompilationTypes.Types)
             {
                 yield return new object[] { new bool[] { true, false }, useInterpreter };
                 yield return new object[] { new byte[] { 0, 1, byte.MaxValue }, useInterpreter };
@@ -48,7 +48,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [MemberData(nameof(TestData))]
-        public static void Equal(Array array, bool useInterpreter)
+        public static void Equal(Array array, CompilationType useInterpreter)
         {
             Type type = array.GetType().GetElementType();
             for (int i = 0; i < array.Length; i++)
@@ -65,7 +65,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [MemberData(nameof(TestData))]
-        public static void NotEqual(Array array, bool useInterpreter)
+        public static void NotEqual(Array array, CompilationType useInterpreter)
         {
             Type type = array.GetType().GetElementType();
             for (int i = 0; i < array.Length; i++)
@@ -81,7 +81,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void Equal_Constant_DefaultString(bool useInterpreter)
+        public static void Equal_Constant_DefaultString(CompilationType useInterpreter)
         {
             var array = new Expression[] { Expression.Constant("bar", typeof(string)), Expression.Constant(null, typeof(string)), Expression.Default(typeof(string)) };
             var isNull = new bool[] { false, true, true };
@@ -96,7 +96,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void Equal_Constant_DefaultNullable(bool useInterpreter)
+        public static void Equal_Constant_DefaultNullable(CompilationType useInterpreter)
         {
             var array = new Expression[] { Expression.Constant(42, typeof(int?)), Expression.Constant(null, typeof(int?)), Expression.Default(typeof(int?)) };
             var isNull = new bool[] { false, true, true };
@@ -167,7 +167,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void Update_ReferenceEquals(bool useInterpreter)
+        public static void Update_ReferenceEquals(CompilationType useInterpreter)
         {
             TestClass testClass1 = new TestClass();
             TestClass testClass2 = new TestClass();
@@ -180,7 +180,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void Update_ReferenceNotEquals(bool useInterpreter)
+        public static void Update_ReferenceNotEquals(CompilationType useInterpreter)
         {
             TestClass testClass1 = new TestClass();
             TestClass testClass2 = new TestClass();
@@ -215,7 +215,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CanPerformEqualityOnNullableWithoutOperatorsToConstantNull(bool useInterpreter)
+        public static void CanPerformEqualityOnNullableWithoutOperatorsToConstantNull(CompilationType useInterpreter)
         {
             var nullConst = Expression.Constant(null, typeof(UselessValue?));
             var uvConst = Expression.Constant(new UselessValue(), typeof(UselessValue?));
@@ -229,7 +229,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CanPerformInequalityOnNullableWithoutOperatorsToConstantNull(bool useInterpreter)
+        public static void CanPerformInequalityOnNullableWithoutOperatorsToConstantNull(CompilationType useInterpreter)
         {
             var nullConst = Expression.Constant(null, typeof(UselessValue?));
             var uvConst = Expression.Constant(new UselessValue(), typeof(UselessValue?));
@@ -253,7 +253,7 @@ namespace System.Linq.Expressions.Tests
         // that type code got incorrectly used.
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CanCompareDBNullEqual(bool useInterpreter)
+        public static void CanCompareDBNullEqual(CompilationType useInterpreter)
         {
             var x = Expression.Parameter(typeof(DBNull));
             var y = Expression.Parameter(typeof(DBNull));
@@ -265,7 +265,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CanCompareDBNullNotEqual(bool useInterpreter)
+        public static void CanCompareDBNullNotEqual(CompilationType useInterpreter)
         {
             var x = Expression.Parameter(typeof(DBNull));
             var y = Expression.Parameter(typeof(DBNull));

@@ -14,7 +14,7 @@ namespace System.Linq.Expressions.Tests
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported))]
         [ActiveIssue("https://github.com/mono/mono/issues/14920", TestRuntimes.Mono)]
         [ClassData(typeof(CompilationTypes))]
-        public static void ArrayAccess_MultiDimensionalOf1(bool useInterpreter)
+        public static void ArrayAccess_MultiDimensionalOf1(CompilationType useInterpreter)
         {
             Type arrayType = typeof(int).MakeArrayType(1);
             ConstructorInfo arrayCtor = arrayType.GetTypeInfo().DeclaredConstructors.Single(ctor => ctor.GetParameters().Length == 2);
@@ -33,7 +33,7 @@ namespace System.Linq.Expressions.Tests
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported))]
         [ActiveIssue("https://github.com/mono/mono/issues/14920", TestRuntimes.Mono)]
         [ClassData(typeof(CompilationTypes))]
-        public static void ArrayIndex_MultiDimensionalOf1(bool useInterpreter)
+        public static void ArrayIndex_MultiDimensionalOf1(CompilationType useInterpreter)
         {
             Type arrayType = typeof(int).MakeArrayType(1);
             ConstructorInfo arrayCtor = arrayType.GetTypeInfo().DeclaredConstructors.Single(ctor => ctor.GetParameters().Length == 2);
@@ -81,7 +81,7 @@ namespace System.Linq.Expressions.Tests
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported))]
         [ActiveIssue("https://github.com/mono/mono/issues/14921", TestRuntimes.Mono)]
         [ClassData(typeof(CompilationTypes))]
-        public static void NonZeroBasedOneDimensionalArrayAccess(bool useInterpreter)
+        public static void NonZeroBasedOneDimensionalArrayAccess(CompilationType useInterpreter)
         {
             Array arrayObj = Array.CreateInstance(typeof(int), new[] { 3 }, new[] { -1 });
             arrayObj.SetValue(5, -1);
@@ -110,7 +110,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(Ranks))]
-        public static void DifferentRanks(int rank, bool useInterpreter)
+        public static void DifferentRanks(int rank, CompilationType useInterpreter)
         {
             Array arrayObj = Array.CreateInstance(typeof(string), Enumerable.Repeat(1, rank).ToArray());
             arrayObj.SetValue("solitary value", Enumerable.Repeat(0, rank).ToArray());

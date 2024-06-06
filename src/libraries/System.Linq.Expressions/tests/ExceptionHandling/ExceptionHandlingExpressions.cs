@@ -46,7 +46,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void ThrowNullSameAsRethrow(bool useInterpreter)
+        public void ThrowNullSameAsRethrow(CompilationType useInterpreter)
         {
             UnaryExpression rethrow = Expression.Rethrow();
             UnaryExpression nullThrow = Expression.Throw(null);
@@ -112,7 +112,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void TypedThrowNullSameAsRethrow(bool useInterpreter)
+        public void TypedThrowNullSameAsRethrow(CompilationType useInterpreter)
         {
             UnaryExpression rethrow = Expression.Rethrow(typeof(int));
             UnaryExpression nullThrow = Expression.Throw(null, typeof(int));
@@ -130,7 +130,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void CannotRethrowOutsideCatch(bool useInterpreter)
+        public void CannotRethrowOutsideCatch(CompilationType useInterpreter)
         {
             LambdaExpression rethrowNothing = Expression.Lambda<Action>(Expression.Rethrow());
             Assert.Throws<InvalidOperationException>(() => rethrowNothing.Compile(useInterpreter));
@@ -138,7 +138,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void CannotRethrowWithinFinallyWithinCatch(bool useInterpreter)
+        public void CannotRethrowWithinFinallyWithinCatch(CompilationType useInterpreter)
         {
             LambdaExpression rethrowFinally = Expression.Lambda<Action>(
                 Expression.TryCatch(
@@ -156,7 +156,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void CannotRethrowWithinFaultWithinCatch(bool useInterpreter)
+        public void CannotRethrowWithinFaultWithinCatch(CompilationType useInterpreter)
         {
             LambdaExpression rethrowFinally = Expression.Lambda<Action>(
                 Expression.TryCatch(
@@ -174,7 +174,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void CanCatchAndThrowNonExceptions(bool useInterpreter)
+        public void CanCatchAndThrowNonExceptions(CompilationType useInterpreter)
         {
             TryExpression throwCatchString = Expression.TryCatch(
                 Expression.Throw(Expression.Constant("Hello")),
@@ -184,7 +184,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void CanCatchAndUseNonExceptions(bool useInterpreter)
+        public void CanCatchAndUseNonExceptions(CompilationType useInterpreter)
         {
             ParameterExpression ex = Expression.Variable(typeof(string));
             TryExpression throwCatchString = Expression.TryCatch(
@@ -196,7 +196,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void DontCatchInternallWrappedExceptions(bool useInterpreter)
+        public void DontCatchInternallWrappedExceptions(CompilationType useInterpreter)
         {
             TryExpression throwCatch = Expression.TryCatch(
                 Expression.Throw(Expression.Constant("Boo!")),
@@ -207,7 +207,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void ThrownNonExceptionPassesThroughNonMatchingHandlers(bool useInterpreter)
+        public void ThrownNonExceptionPassesThroughNonMatchingHandlers(CompilationType useInterpreter)
         {
             ParameterExpression ex = Expression.Variable(typeof(object));
             TryExpression nested = Expression.TryCatch(
@@ -224,7 +224,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
         [ActiveIssue("https://github.com/mono/mono/issues/14925", TestRuntimes.Mono)]
-        public void ExpressionsUnwrapeExternallyThrownRuntimeWrappedException(bool useInterpreter)
+        public void ExpressionsUnwrapeExternallyThrownRuntimeWrappedException(CompilationType useInterpreter)
         {
             ParameterExpression exRWE = Expression.Variable(typeof(RuntimeWrappedException));
             ParameterExpression exEx = Expression.Variable(typeof(Exception));
@@ -242,7 +242,7 @@ namespace System.Linq.Expressions.Tests
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
         [ClassData(typeof(CompilationTypes))]
-        public void CatchFromExternallyThrownString(bool useInterpreter)
+        public void CatchFromExternallyThrownString(CompilationType useInterpreter)
         {
             foreach (bool assemblyWraps in new []{false, true})
             {
@@ -276,7 +276,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void ThrowNullThrowsNRE(bool useInterpreter)
+        public void ThrowNullThrowsNRE(CompilationType useInterpreter)
         {
             Action throwNull = Expression.Lambda<Action>(
                 Expression.Throw(Expression.Constant(null, typeof(Expression)))
@@ -286,7 +286,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void ThrowNullThrowsCatchableNRE(bool useInterpreter)
+        public void ThrowNullThrowsCatchableNRE(CompilationType useInterpreter)
         {
             Func<int> throwCatchNull = Expression.Lambda<Func<int>>(
                 Expression.TryCatch(
@@ -301,7 +301,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void CanCatchExceptionAsObject(bool useInterpreter)
+        public void CanCatchExceptionAsObject(CompilationType useInterpreter)
         {
             Func<int> throwCatchAsObject = Expression.Lambda<Func<int>>(
                 Expression.TryCatch(
@@ -315,7 +315,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void CanCatchExceptionAsObjectObtainingException(bool useInterpreter)
+        public void CanCatchExceptionAsObjectObtainingException(CompilationType useInterpreter)
         {
             Exception testException = new Exception();
             ParameterExpression param = Expression.Parameter(typeof(object));
@@ -331,7 +331,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void CanAccessExceptionCaught(bool useInterpreter)
+        public void CanAccessExceptionCaught(CompilationType useInterpreter)
         {
             ParameterExpression variable = Expression.Variable(typeof(Exception));
             TryExpression throwCatch = Expression.TryCatch(
@@ -343,7 +343,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void FromMakeMethods(bool useInterpreter)
+        public void FromMakeMethods(CompilationType useInterpreter)
         {
             TryExpression tryExp = Expression.MakeTry(
                 typeof(int),
@@ -444,7 +444,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void NonExceptionDerivedExceptionWrapped(bool useInterpreter)
+        public void NonExceptionDerivedExceptionWrapped(CompilationType useInterpreter)
         {
             Action throwWrapped = Expression.Lambda<Action>(Expression.Throw(Expression.Constant("Hello"))).Compile(useInterpreter);
             RuntimeWrappedException rwe = Assert.Throws<RuntimeWrappedException>(throwWrapped);
@@ -453,7 +453,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void FinallyDoesNotDetermineValue(bool useInterpreter)
+        public void FinallyDoesNotDetermineValue(CompilationType useInterpreter)
         {
             TryExpression finally2 = Expression.TryFinally(Expression.Constant(1), Expression.Constant(2));
             Assert.Equal(1, Expression.Lambda<Func<int>>(finally2).Compile(useInterpreter)());
@@ -461,7 +461,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void FinallyDoesNotNeedToMatchType(bool useInterpreter)
+        public void FinallyDoesNotNeedToMatchType(CompilationType useInterpreter)
         {
             TryExpression finally2 = Expression.TryFinally(Expression.Constant(1), Expression.Constant(""));
             Assert.Equal(1, Expression.Lambda<Func<int>>(finally2).Compile(useInterpreter)());
@@ -469,7 +469,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void FinallyCanBeVoid(bool useInterpreter)
+        public void FinallyCanBeVoid(CompilationType useInterpreter)
         {
             TryExpression finally2 = Expression.TryFinally(Expression.Constant(1), Expression.Empty());
             Assert.Equal(1, Expression.Lambda<Func<int>>(finally2).Compile(useInterpreter)());
@@ -477,7 +477,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void FinallyCanBeNonVoidWithVoidTry(bool useInterpreter)
+        public void FinallyCanBeNonVoidWithVoidTry(CompilationType useInterpreter)
         {
             TryExpression finally2 = Expression.TryFinally(Expression.Empty(), Expression.Constant(0));
             Expression.Lambda<Action>(finally2).Compile(useInterpreter)();
@@ -485,7 +485,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void FinallyDoesNotDetermineValueNothingCaught(bool useInterpreter)
+        public void FinallyDoesNotDetermineValueNothingCaught(CompilationType useInterpreter)
         {
             TryExpression finally2 = Expression.TryCatchFinally(
                 Expression.Constant(1),
@@ -497,7 +497,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void FinallyDoesNotDetermineValueSomethingCaught(bool useInterpreter)
+        public void FinallyDoesNotDetermineValueSomethingCaught(CompilationType useInterpreter)
         {
             TryExpression finally2 = Expression.TryCatchFinally(
                 Expression.Throw(Expression.Constant(new ArgumentException()), typeof(int)),
@@ -508,7 +508,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void FaultNotTriggeredOnNoThrow(bool useInterpreter)
+        public void FaultNotTriggeredOnNoThrow(CompilationType useInterpreter)
         {
             ParameterExpression variable = Expression.Parameter(typeof(int));
             LabelTarget target = Expression.Label(typeof(int));
@@ -526,7 +526,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void FaultNotTriggeredOnNoThrowNonVoid(bool useInterpreter)
+        public void FaultNotTriggeredOnNoThrowNonVoid(CompilationType useInterpreter)
         {
             Func<int> func = Expression.Lambda<Func<int>>(
                 Expression.TryFault(
@@ -538,7 +538,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void FaultTriggeredOnThrow(bool useInterpreter)
+        public void FaultTriggeredOnThrow(CompilationType useInterpreter)
         {
             ParameterExpression variable = Expression.Parameter(typeof(int));
             LabelTarget target = Expression.Label(typeof(int));
@@ -559,7 +559,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void FinallyAndFaultAfterManyLabels(bool useInterpreter)
+        public void FinallyAndFaultAfterManyLabels(CompilationType useInterpreter)
         {
             // There is a caching optimisation used below a certain number of faults or
             // finally, so go past that to catch any regressions in the non-optimised
@@ -588,7 +588,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void FinallyTriggeredOnNoThrow(bool useInterpreter)
+        public void FinallyTriggeredOnNoThrow(CompilationType useInterpreter)
         {
             ParameterExpression variable = Expression.Parameter(typeof(int));
             LabelTarget target = Expression.Label(typeof(int));
@@ -606,7 +606,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void ExceptionInFinallyReplacesException(bool useInterpreter)
+        public void ExceptionInFinallyReplacesException(CompilationType useInterpreter)
         {
             Action act = Expression.Lambda<Action>(
                 Expression.TryFinally(
@@ -618,7 +618,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void ExceptionInFaultReplacesException(bool useInterpreter)
+        public void ExceptionInFaultReplacesException(CompilationType useInterpreter)
         {
             Action act = Expression.Lambda<Action>(
                 Expression.TryFault(
@@ -631,7 +631,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void FinallyTriggeredOnThrow(bool useInterpreter)
+        public void FinallyTriggeredOnThrow(CompilationType useInterpreter)
         {
             ParameterExpression variable = Expression.Parameter(typeof(int));
             LabelTarget target = Expression.Label(typeof(int));
@@ -653,7 +653,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void CatchChaining(bool useInterpreter)
+        public void CatchChaining(CompilationType useInterpreter)
         {
             TryExpression chain = Expression.TryCatch(
                 Expression.Throw(Expression.Constant(new DerivedTestException()), typeof(int)),
@@ -666,7 +666,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void UserEmulatedFaultThroughCatch(bool useInterpreter)
+        public void UserEmulatedFaultThroughCatch(CompilationType useInterpreter)
         {
             ParameterExpression variable = Expression.Parameter(typeof(int));
             Func<int> func = Expression.Lambda<Func<int>>(
@@ -686,7 +686,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void UserEmulatedFaultThroughCatchVoid(bool useInterpreter)
+        public void UserEmulatedFaultThroughCatchVoid(CompilationType useInterpreter)
         {
             StringBuilder output = new StringBuilder();
             ConstantExpression builder = Expression.Constant(output);
@@ -727,7 +727,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void ExplicitType(bool useInterpreter)
+        public void ExplicitType(CompilationType useInterpreter)
         {
             TryExpression explicitType = Expression.MakeTry(typeof(object), Expression.Constant("hello"), Expression.Empty(), null, null);
             Assert.Equal(typeof(object), explicitType.Type);
@@ -791,7 +791,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void FilterOnCatch(bool useInterpreter)
+        public void FilterOnCatch(CompilationType useInterpreter)
         {
             TryExpression tryExp = Expression.TryCatch(
                 Expression.Throw(Expression.Constant(new TestException()), typeof(int)),
@@ -803,7 +803,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void FilterCanAccessException(bool useInterpreter)
+        public void FilterCanAccessException(CompilationType useInterpreter)
         {
             ParameterExpression exception = Expression.Variable(typeof(TestException));
             TryExpression tryExp = Expression.TryCatch(
@@ -816,7 +816,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void FilterOverwriteExceptionVisibleToHandler(bool useInterpreter)
+        public void FilterOverwriteExceptionVisibleToHandler(CompilationType useInterpreter)
         {
             ParameterExpression exception = Expression.Variable(typeof(TestException));
             TryExpression tryExp = Expression.TryCatch(
@@ -834,7 +834,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void FilterOverwriteExceptionNotVisibleToNextFilterOrHandler(bool useInterpreter)
+        public void FilterOverwriteExceptionNotVisibleToNextFilterOrHandler(CompilationType useInterpreter)
         {
             ParameterExpression exception = Expression.Variable(typeof(TestException));
             TryExpression tryExp = Expression.TryCatch(
@@ -857,7 +857,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void FilterBeforeInnerFinally(bool useInterpreter)
+        public void FilterBeforeInnerFinally(CompilationType useInterpreter)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -905,7 +905,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void FilterBeforeInnerFault(bool useInterpreter)
+        public void FilterBeforeInnerFault(CompilationType useInterpreter)
         {
             StringBuilder sb = new StringBuilder();
             ConstantExpression builder = Expression.Constant(sb);
@@ -930,7 +930,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
         [ActiveIssue("https://github.com/mono/mono/issues/14924", TestRuntimes.Mono)]
-        public void ExceptionThrownInFilter(bool useInterpreter)
+        public void ExceptionThrownInFilter(CompilationType useInterpreter)
         {
             // An exception in a filter should be eaten and the filter fail.
 
@@ -950,8 +950,8 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(9, func());
         }
 
-        [Theory, InlineData(true)]
-        public void TryFinallyWithinFilter(bool useInterpreter)
+        [Theory, InlineData(CompilationType.Interpret)]
+        public void TryFinallyWithinFilter(CompilationType useInterpreter)
         {
             TryExpression tryExp = Expression.TryCatch(
                 Expression.Throw(Expression.Constant(new TestException()), typeof(int)),
@@ -977,7 +977,7 @@ namespace System.Linq.Expressions.Tests
         [Fact, ActiveIssue("https://github.com/dotnet/runtime/issues/20083")]
         public void TryFinallyWithinFilterCompiled()
         {
-            TryFinallyWithinFilter(false);
+            TryFinallyWithinFilter(CompilationType.Compile);
         }
 
         [Fact]
@@ -1006,16 +1006,16 @@ namespace System.Linq.Expressions.Tests
             Expression<Func<int>> lambda = Expression.Lambda<Func<int>>(tryExp);
             if (PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly)
             {
-                Assert.Throws<InvalidOperationException>(() => lambda.Compile(false));
+                Assert.Throws<InvalidOperationException>(() => lambda.Compile(CompilationType.Compile));
             }
             else
             {
-                lambda.Compile(true);
+                lambda.Compile(CompilationType.Interpret);
             }
         }
 
-        [Theory, InlineData(true)]
-        public void TryCatchWithinFilter(bool useInterpreter)
+        [Theory, InlineData(CompilationType.Interpret)]
+        public void TryCatchWithinFilter(CompilationType useInterpreter)
         {
             TryExpression tryExp = Expression.TryCatch(
                 Expression.Throw(Expression.Constant(new TestException()), typeof(int)),
@@ -1041,11 +1041,11 @@ namespace System.Linq.Expressions.Tests
         [Fact, ActiveIssue("https://github.com/dotnet/runtime/issues/20083")]
         public void TryCatchWithinFilterCompiled()
         {
-            TryCatchWithinFilter(false);
+            TryCatchWithinFilter(CompilationType.Compile);
         }
 
-        [Theory, InlineData(true)]
-        public void TryCatchThrowingWithinFilter(bool useInterpreter)
+        [Theory, InlineData(CompilationType.Interpret)]
+        public void TryCatchThrowingWithinFilter(CompilationType useInterpreter)
         {
             TryExpression tryExp = Expression.TryCatch(
                 Expression.Throw(Expression.Constant(new TestException()), typeof(int)),
@@ -1071,7 +1071,7 @@ namespace System.Linq.Expressions.Tests
         [Fact, ActiveIssue("https://github.com/dotnet/runtime/issues/20083")]
         public void TryCatchThrowingWithinFilterCompiled()
         {
-            TryCatchThrowingWithinFilter(false);
+            TryCatchThrowingWithinFilter(CompilationType.Compile);
         }
 
         private bool MethodWithManyArguments(
@@ -1083,7 +1083,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void DeepExceptionFilter(bool useInterpreter)
+        public void DeepExceptionFilter(CompilationType useInterpreter)
         {
             // An expression where the deepest use of the stack is within filters.
             MethodCallExpression deepFalse = Expression.Call(
@@ -1146,7 +1146,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void JumpOutOfExceptionFilter(bool useInterpreter)
+        public void JumpOutOfExceptionFilter(CompilationType useInterpreter)
         {
             LabelTarget target = Expression.Label();
             Expression<Func<int>> tryExp = Expression.Lambda<Func<int>>(
@@ -1169,7 +1169,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void JumpOutOfFinally(bool useInterpreter)
+        public void JumpOutOfFinally(CompilationType useInterpreter)
         {
             LabelTarget target = Expression.Label();
             Expression<Func<int>> tryExp = Expression.Lambda<Func<int>>(
@@ -1188,7 +1188,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void JumpIntoTry(bool useInterpreter)
+        public void JumpIntoTry(CompilationType useInterpreter)
         {
             LabelTarget target = Expression.Label();
             Expression<Action> tryExp = Expression.Lambda<Action>(
@@ -1201,7 +1201,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void JumpOutOfTry(bool useInterpreter)
+        public void JumpOutOfTry(CompilationType useInterpreter)
         {
             LabelTarget target = Expression.Label();
             Expression<Action> tryExp = Expression.Lambda<Action>(
@@ -1217,7 +1217,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void JumpOutOfTryToPreviousLabel(bool useInterpreter)
+        public void JumpOutOfTryToPreviousLabel(CompilationType useInterpreter)
         {
             LabelTarget skipStart = Expression.Label();
             LabelTarget skipToEnd = Expression.Label(typeof(int));
@@ -1235,7 +1235,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void JumpOutOfTryToPreviousLabelInOtherBlock(bool useInterpreter)
+        public void JumpOutOfTryToPreviousLabelInOtherBlock(CompilationType useInterpreter)
         {
             LabelTarget skipStart = Expression.Label();
             LabelTarget skipToEnd = Expression.Label(typeof(int));
@@ -1256,7 +1256,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void JumpOutOfCatch(bool useInterpreter)
+        public void JumpOutOfCatch(CompilationType useInterpreter)
         {
             LabelTarget target = Expression.Label(typeof(int));
             Expression<Func<int>> tryExp = Expression.Lambda<Func<int>>(
@@ -1274,7 +1274,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void JumpOutOfCatchToPreviousLabel(bool useInterpreter)
+        public void JumpOutOfCatchToPreviousLabel(CompilationType useInterpreter)
         {
             LabelTarget skipStart = Expression.Label();
             LabelTarget skipToEnd = Expression.Label(typeof(int));
@@ -1311,7 +1311,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void CanReturnAnythingFromExplicitVoid(bool useInterpreter)
+        public void CanReturnAnythingFromExplicitVoid(CompilationType useInterpreter)
         {
             TryExpression tryExp = Expression.MakeTry(
                 typeof(void),
@@ -1329,7 +1329,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void CanReturnAnythingFromExplicitVoidVoidBody(bool useInterpreter)
+        public void CanReturnAnythingFromExplicitVoidVoidBody(CompilationType useInterpreter)
         {
             TryExpression tryExp = Expression.MakeTry(
                 typeof(void),
@@ -1347,7 +1347,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void CanReturnAnythingFromExplicitVoidVoidThrowingBody(bool useInterpreter)
+        public void CanReturnAnythingFromExplicitVoidVoidThrowingBody(CompilationType useInterpreter)
         {
             TryExpression tryExp = Expression.MakeTry(
                 typeof(void),
@@ -1365,7 +1365,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void CanReturnAnythingFromExplicitVoidTypedThrowingBody(bool useInterpreter)
+        public void CanReturnAnythingFromExplicitVoidTypedThrowingBody(CompilationType useInterpreter)
         {
             TryExpression tryExp = Expression.MakeTry(
                 typeof(void),
@@ -1383,7 +1383,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void CanReturnAnythingFromExplicitVoidCatch(bool useInterpreter)
+        public void CanReturnAnythingFromExplicitVoidCatch(CompilationType useInterpreter)
         {
             TryExpression tryExp = Expression.MakeTry(
                 typeof(void),

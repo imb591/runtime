@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaMultiplyNullableDecimalTest(bool useInterpreter)
+        public static void LambdaMultiplyNullableDecimalTest(CompilationType useInterpreter)
         {
             decimal?[] values = new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -23,7 +23,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaMultiplyNullableDoubleTest(bool useInterpreter)
+        public static void LambdaMultiplyNullableDoubleTest(CompilationType useInterpreter)
         {
             double?[] values = new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -36,7 +36,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaMultiplyNullableFloatTest(bool useInterpreter)
+        public static void LambdaMultiplyNullableFloatTest(CompilationType useInterpreter)
         {
             float?[] values = new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -49,7 +49,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaMultiplyNullableIntTest(bool useInterpreter)
+        public static void LambdaMultiplyNullableIntTest(CompilationType useInterpreter)
         {
             int?[] values = new int?[] { null, 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -62,7 +62,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaMultiplyNullableLongTest(bool useInterpreter)
+        public static void LambdaMultiplyNullableLongTest(CompilationType useInterpreter)
         {
             long?[] values = new long?[] { null, 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -75,7 +75,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaMultiplyNullableShortTest(bool useInterpreter)
+        public static void LambdaMultiplyNullableShortTest(CompilationType useInterpreter)
         {
             short?[] values = new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -88,7 +88,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaMultiplyNullableUIntTest(bool useInterpreter)
+        public static void LambdaMultiplyNullableUIntTest(CompilationType useInterpreter)
         {
             uint?[] values = new uint?[] { null, 0, 1, uint.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -101,7 +101,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaMultiplyNullableULongTest(bool useInterpreter)
+        public static void LambdaMultiplyNullableULongTest(CompilationType useInterpreter)
         {
             ulong?[] values = new ulong?[] { null, 0, 1, ulong.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -114,7 +114,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaMultiplyNullableUShortTest(bool useInterpreter)
+        public static void LambdaMultiplyNullableUShortTest(CompilationType useInterpreter)
         {
             ushort?[] values = new ushort?[] { null, 0, 1, ushort.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -132,7 +132,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify decimal?
 
-        private static void VerifyMultiplyNullableDecimal(decimal? a, decimal? b, bool useInterpreter)
+        private static void VerifyMultiplyNullableDecimal(decimal? a, decimal? b, CompilationType useInterpreter)
         {
             bool overflows;
             decimal? expected;
@@ -278,7 +278,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify double?
 
-        private static void VerifyMultiplyNullableDouble(double? a, double? b, bool useInterpreter)
+        private static void VerifyMultiplyNullableDouble(double? a, double? b, CompilationType useInterpreter)
         {
             double? expected = a * b;
 
@@ -371,7 +371,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify float?
 
-        private static void VerifyMultiplyNullableFloat(float? a, float? b, bool useInterpreter)
+        private static void VerifyMultiplyNullableFloat(float? a, float? b, CompilationType useInterpreter)
         {
             float? expected = a * b;
 
@@ -464,7 +464,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify int?
 
-        private static void VerifyMultiplyNullableInt(int? a, int? b, bool useInterpreter)
+        private static void VerifyMultiplyNullableInt(int? a, int? b, CompilationType useInterpreter)
         {
             int? expected = unchecked(a * b);
 
@@ -557,7 +557,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify long?
 
-        private static void VerifyMultiplyNullableLong(long? a, long? b, bool useInterpreter)
+        private static void VerifyMultiplyNullableLong(long? a, long? b, CompilationType useInterpreter)
         {
             long? expected = unchecked(a * b);
 
@@ -650,7 +650,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify short?
 
-        private static void VerifyMultiplyNullableShort(short? a, short? b, bool useInterpreter)
+        private static void VerifyMultiplyNullableShort(short? a, short? b, CompilationType useInterpreter)
         {
             short? expected = unchecked((short?)(a * b));
             ParameterExpression p0 = Expression.Parameter(typeof(short?), "p0");
@@ -742,7 +742,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify uint?
 
-        private static void VerifyMultiplyNullableUInt(uint? a, uint? b, bool useInterpreter)
+        private static void VerifyMultiplyNullableUInt(uint? a, uint? b, CompilationType useInterpreter)
         {
             uint? expected = unchecked(a * b);
 
@@ -835,7 +835,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify ulong?
 
-        private static void VerifyMultiplyNullableULong(ulong? a, ulong? b, bool useInterpreter)
+        private static void VerifyMultiplyNullableULong(ulong? a, ulong? b, CompilationType useInterpreter)
         {
             ulong? expected = unchecked(a * b);
 
@@ -928,7 +928,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify ushort?
 
-        private static void VerifyMultiplyNullableUShort(ushort? a, ushort? b, bool useInterpreter)
+        private static void VerifyMultiplyNullableUShort(ushort? a, ushort? b, CompilationType useInterpreter)
         {
             ushort? expected = unchecked((ushort?)(a * b));
 

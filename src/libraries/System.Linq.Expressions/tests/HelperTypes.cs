@@ -246,27 +246,36 @@ namespace System.Linq.Expressions.Tests
         public static int SI { get; set; }
     }
 
+    public enum CompilationType
+    {
+        Compile,
+        Interpret,
+        WithoutPreference,
+    }
+
     internal class CompilationTypes : IEnumerable<object[]>
     {
-        private static IEnumerable<object[]> Booleans
+        public static IEnumerable<CompilationType> Types
         {
             get
             {
                 return LambdaExpression.CanCompileToIL ?
-                    new[]
+                    new CompilationType[]
                     {
-                        new object[] {false},
-                        new object[] {true},
+                        CompilationType.Compile,
+                        CompilationType.Interpret,
                     }
                     :
-                    new[]
+                    new CompilationType[]
                     {
-                        new object[] {true},
+                        CompilationType.Interpret,
                     };
             }
         }
 
-        public IEnumerator<object[]> GetEnumerator() => Booleans.GetEnumerator();
+        private static IEnumerable<object[]> XunitTypes => Types.Select(t => new object[] { t });
+
+        public IEnumerator<object[]> GetEnumerator() => XunitTypes.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }

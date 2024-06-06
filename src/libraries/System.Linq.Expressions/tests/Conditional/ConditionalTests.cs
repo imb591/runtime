@@ -22,7 +22,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void Conditional(bool useInterpreter)
+        public void Conditional(CompilationType useInterpreter)
         {
             Expression<Func<int, int, int>> f = (x, y) => x > 5 ? x : y;
             Func<int, int, int> d = f.Compile(useInterpreter);
@@ -138,7 +138,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void AnyTypesAllowedWithExplicitVoid(bool useInterpreter)
+        public void AnyTypesAllowedWithExplicitVoid(CompilationType useInterpreter)
         {
             Action act = Expression.Lambda<Action>(
                 Expression.Condition(Expression.Constant(true), Expression.Constant(0), Expression.Constant(0L), typeof(void))
@@ -152,7 +152,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(ConditionalValues))]
-        public void ConditionalSelectsCorrectExpression(bool test, object ifTrue, object ifFalse, object expected, bool useInterpreter)
+        public void ConditionalSelectsCorrectExpression(bool test, object ifTrue, object ifFalse, object expected, CompilationType useInterpreter)
         {
             Func<object> func = Expression.Lambda<Func<object>>(
                 Expression.Convert(
@@ -169,7 +169,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(ConditionalValues))]
-        public void InvertedConditionalSelectsCorrectExpression(bool test, object ifTrue, object ifFalse, object expected, bool useInterpreter)
+        public void InvertedConditionalSelectsCorrectExpression(bool test, object ifTrue, object ifFalse, object expected, CompilationType useInterpreter)
         {
             Func<object> func = Expression.Lambda<Func<object>>(
                 Expression.Convert(
@@ -187,7 +187,7 @@ namespace System.Linq.Expressions.Tests
 
 
         [Theory, PerCompilationType(nameof(ConditionalValues))]
-        public void ConditionalWithMethodSelectsCorrectExpression(bool test, object ifTrue, object ifFalse, object expected, bool useInterpreter)
+        public void ConditionalWithMethodSelectsCorrectExpression(bool test, object ifTrue, object ifFalse, object expected, CompilationType useInterpreter)
         {
             Func<object> func = Expression.Lambda<Func<object>>(
                 Expression.Convert(
@@ -204,7 +204,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(ConditionalValuesWithTypes))]
-        public void ConditionalSelectsCorrectExpressionWithType(bool test, object ifTrue, object ifFalse, object expected, Type type, bool useInterpreter)
+        public void ConditionalSelectsCorrectExpressionWithType(bool test, object ifTrue, object ifFalse, object expected, Type type, CompilationType useInterpreter)
         {
             Func<object> func = Expression.Lambda<Func<object>>(
                 Expression.Condition(
@@ -274,7 +274,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void TurnOnNullableComparedWithConstantNull(bool useInterpreter)
+        public void TurnOnNullableComparedWithConstantNull(CompilationType useInterpreter)
         {
             Func<int> func = Expression.Lambda<Func<int>>(
                     Expression.Condition(
@@ -285,7 +285,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void TurnOnReferenceComparedWithConstantNull(bool useInterpreter)
+        public void TurnOnReferenceComparedWithConstantNull(CompilationType useInterpreter)
         {
             Func<int> func = Expression.Lambda<Func<int>>(
                     Expression.Condition(
@@ -296,7 +296,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void TurnOnConstantNullComparedWithNullable(bool useInterpreter)
+        public void TurnOnConstantNullComparedWithNullable(CompilationType useInterpreter)
         {
             Func<int> func = Expression.Lambda<Func<int>>(
                     Expression.Condition(
@@ -307,7 +307,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void TurnOnConstantNullComparedWithReference(bool useInterpreter)
+        public void TurnOnConstantNullComparedWithReference(CompilationType useInterpreter)
         {
             Func<int> func = Expression.Lambda<Func<int>>(
                     Expression.Condition(

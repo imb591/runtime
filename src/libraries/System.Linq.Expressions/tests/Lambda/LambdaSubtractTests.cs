@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaSubtractDecimalTest(bool useInterpreter)
+        public static void LambdaSubtractDecimalTest(CompilationType useInterpreter)
         {
             decimal[] values = new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -23,7 +23,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaSubtractDoubleTest(bool useInterpreter)
+        public static void LambdaSubtractDoubleTest(CompilationType useInterpreter)
         {
             double[] values = new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -36,7 +36,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaSubtractFloatTest(bool useInterpreter)
+        public static void LambdaSubtractFloatTest(CompilationType useInterpreter)
         {
             float[] values = new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -49,7 +49,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaSubtractIntTest(bool useInterpreter)
+        public static void LambdaSubtractIntTest(CompilationType useInterpreter)
         {
             int[] values = new int[] { 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -62,7 +62,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaSubtractLongTest(bool useInterpreter)
+        public static void LambdaSubtractLongTest(CompilationType useInterpreter)
         {
             long[] values = new long[] { 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -75,7 +75,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaSubtractShortTest(bool useInterpreter)
+        public static void LambdaSubtractShortTest(CompilationType useInterpreter)
         {
             short[] values = new short[] { 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -88,7 +88,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaSubtractUIntTest(bool useInterpreter)
+        public static void LambdaSubtractUIntTest(CompilationType useInterpreter)
         {
             uint[] values = new uint[] { 0, 1, uint.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -101,7 +101,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaSubtractULongTest(bool useInterpreter)
+        public static void LambdaSubtractULongTest(CompilationType useInterpreter)
         {
             ulong[] values = new ulong[] { 0, 1, ulong.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -114,7 +114,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaSubtractUShortTest(bool useInterpreter)
+        public static void LambdaSubtractUShortTest(CompilationType useInterpreter)
         {
             ushort[] values = new ushort[] { 0, 1, ushort.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -132,7 +132,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify decimal
 
-        private static void VerifySubtractDecimal(decimal a, decimal b, bool useInterpreter)
+        private static void VerifySubtractDecimal(decimal a, decimal b, CompilationType useInterpreter)
         {
             decimal expected = 0;
             bool overflowed = false;
@@ -276,7 +276,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify double
 
-        private static void VerifySubtractDouble(double a, double b, bool useInterpreter)
+        private static void VerifySubtractDouble(double a, double b, CompilationType useInterpreter)
         {
             double expected = a - b;
 
@@ -369,7 +369,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify float
 
-        private static void VerifySubtractFloat(float a, float b, bool useInterpreter)
+        private static void VerifySubtractFloat(float a, float b, CompilationType useInterpreter)
         {
             float expected = a - b;
 
@@ -462,7 +462,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify int
 
-        private static void VerifySubtractInt(int a, int b, bool useInterpreter)
+        private static void VerifySubtractInt(int a, int b, CompilationType useInterpreter)
         {
             int expected = unchecked(a - b);
 
@@ -555,7 +555,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify long
 
-        private static void VerifySubtractLong(long a, long b, bool useInterpreter)
+        private static void VerifySubtractLong(long a, long b, CompilationType useInterpreter)
         {
             long expected = unchecked(a - b);
 
@@ -648,7 +648,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify short
 
-        private static void VerifySubtractShort(short a, short b, bool useInterpreter)
+        private static void VerifySubtractShort(short a, short b, CompilationType useInterpreter)
         {
             short expected = unchecked((short)(a - b));
 
@@ -741,7 +741,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify uint
 
-        private static void VerifySubtractUInt(uint a, uint b, bool useInterpreter)
+        private static void VerifySubtractUInt(uint a, uint b, CompilationType useInterpreter)
         {
             uint expected = unchecked(a - b);
 
@@ -834,7 +834,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify ulong
 
-        private static void VerifySubtractULong(ulong a, ulong b, bool useInterpreter)
+        private static void VerifySubtractULong(ulong a, ulong b, CompilationType useInterpreter)
         {
             ulong expected = unchecked(a - b);
 
@@ -927,7 +927,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify ushort
 
-        private static void VerifySubtractUShort(ushort a, ushort b, bool useInterpreter)
+        private static void VerifySubtractUShort(ushort a, ushort b, CompilationType useInterpreter)
         {
             ushort expected = unchecked((ushort)(a - b));
 

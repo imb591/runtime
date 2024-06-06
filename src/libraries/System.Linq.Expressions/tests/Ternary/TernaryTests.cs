@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryBoolTest(bool useInterpreter)
+        public static void CheckTernaryBoolTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             bool[] array2 = new bool[] { true, false };
@@ -27,7 +27,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryByteTest(bool useInterpreter)
+        public static void CheckTernaryByteTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             byte[] array2 = new byte[] { 0, 1, byte.MaxValue };
@@ -44,7 +44,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryCustomTest(bool useInterpreter)
+        public static void CheckTernaryCustomTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             C[] array2 = new C[] { null, new C(), new D(), new D(0), new D(5) };
@@ -61,7 +61,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryCharTest(bool useInterpreter)
+        public static void CheckTernaryCharTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             char[] array2 = new char[] { '\0', '\b', 'A', '\uffff' };
@@ -78,7 +78,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryCustom2Test(bool useInterpreter)
+        public static void CheckTernaryCustom2Test(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             D[] array2 = new D[] { null, new D(), new D(0), new D(5) };
@@ -95,7 +95,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryDecimalTest(bool useInterpreter)
+        public static void CheckTernaryDecimalTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             decimal[] array2 = new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
@@ -112,7 +112,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryDelegateTest(bool useInterpreter)
+        public static void CheckTernaryDelegateTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             Delegate[] array2 = new Delegate[] { null, (Func<object>)delegate () { return null; }, (Func<int, int>)delegate (int i) { return i + 1; }, (Action<object>)delegate { } };
@@ -129,7 +129,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryDoubleTest(bool useInterpreter)
+        public static void CheckTernaryDoubleTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             double[] array2 = new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
@@ -146,7 +146,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryEnumTest(bool useInterpreter)
+        public static void CheckTernaryEnumTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             E[] array2 = new E[] { (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue };
@@ -163,7 +163,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryEnumLongTest(bool useInterpreter)
+        public static void CheckTernaryEnumLongTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             El[] array2 = new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue };
@@ -180,7 +180,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryFloatTest(bool useInterpreter)
+        public static void CheckTernaryFloatTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             float[] array2 = new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
@@ -197,7 +197,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryFuncOfObjectTest(bool useInterpreter)
+        public static void CheckTernaryFuncOfObjectTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             Func<object>[] array2 = new Func<object>[] { null, (Func<object>)delegate () { return null; } };
@@ -214,7 +214,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryInterfaceTest(bool useInterpreter)
+        public static void CheckTernaryInterfaceTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             I[] array2 = new I[] { null, new C(), new D(), new D(0), new D(5) };
@@ -231,7 +231,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryIEquatableOfCustomTest(bool useInterpreter)
+        public static void CheckTernaryIEquatableOfCustomTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             IEquatable<C>[] array2 = new IEquatable<C>[] { null, new C(), new D(), new D(0), new D(5) };
@@ -248,7 +248,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryIEquatableOfCustom2Test(bool useInterpreter)
+        public static void CheckTernaryIEquatableOfCustom2Test(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             IEquatable<D>[] array2 = new IEquatable<D>[] { null, new D(), new D(0), new D(5) };
@@ -265,7 +265,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryIntTest(bool useInterpreter)
+        public static void CheckTernaryIntTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             int[] array2 = new int[] { 0, 1, -1, int.MinValue, int.MaxValue };
@@ -282,7 +282,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryLongTest(bool useInterpreter)
+        public static void CheckTernaryLongTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             long[] array2 = new long[] { 0, 1, -1, long.MinValue, long.MaxValue };
@@ -299,7 +299,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryObjectTest(bool useInterpreter)
+        public static void CheckTernaryObjectTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             object[] array2 = new object[] { null, new object(), new C(), new D(3) };
@@ -316,7 +316,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryStructTest(bool useInterpreter)
+        public static void CheckTernaryStructTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             S[] array2 = new S[] { default(S), new S() };
@@ -333,7 +333,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernarySByteTest(bool useInterpreter)
+        public static void CheckTernarySByteTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             sbyte[] array2 = new sbyte[] { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue };
@@ -350,7 +350,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryStructWithStringTest(bool useInterpreter)
+        public static void CheckTernaryStructWithStringTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             Sc[] array2 = new Sc[] { default(Sc), new Sc(), new Sc(null) };
@@ -367,7 +367,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryStructWithStringAndFieldTest(bool useInterpreter)
+        public static void CheckTernaryStructWithStringAndFieldTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             Scs[] array2 = new Scs[] { default(Scs), new Scs(), new Scs(null, new S()) };
@@ -384,7 +384,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryShortTest(bool useInterpreter)
+        public static void CheckTernaryShortTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             short[] array2 = new short[] { 0, 1, -1, short.MinValue, short.MaxValue };
@@ -401,7 +401,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryStructWithTwoValuesTest(bool useInterpreter)
+        public static void CheckTernaryStructWithTwoValuesTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             Sp[] array2 = new Sp[] { default(Sp), new Sp(), new Sp(5, 5.0) };
@@ -418,7 +418,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryStructWithValueTest(bool useInterpreter)
+        public static void CheckTernaryStructWithValueTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             Ss[] array2 = new Ss[] { default(Ss), new Ss(), new Ss(new S()) };
@@ -435,7 +435,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryStringTest(bool useInterpreter)
+        public static void CheckTernaryStringTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             string[] array2 = new string[] { null, "", "a", "foo" };
@@ -452,7 +452,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryUIntTest(bool useInterpreter)
+        public static void CheckTernaryUIntTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             uint[] array2 = new uint[] { 0, 1, uint.MaxValue };
@@ -469,7 +469,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryULongTest(bool useInterpreter)
+        public static void CheckTernaryULongTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             ulong[] array2 = new ulong[] { 0, 1, ulong.MaxValue };
@@ -486,7 +486,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryUShortTest(bool useInterpreter)
+        public static void CheckTernaryUShortTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             ushort[] array2 = new ushort[] { 0, 1, ushort.MaxValue };
@@ -503,85 +503,85 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryGenericWithCustomTest(bool useInterpreter)
+        public static void CheckTernaryGenericWithCustomTest(CompilationType useInterpreter)
         {
             CheckTernaryGenericHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryGenericWithEnumTest(bool useInterpreter)
+        public static void CheckTernaryGenericWithEnumTest(CompilationType useInterpreter)
         {
             CheckTernaryGenericHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryGenericWithObjectTest(bool useInterpreter)
+        public static void CheckTernaryGenericWithObjectTest(CompilationType useInterpreter)
         {
             CheckTernaryGenericHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryGenericWithStructTest(bool useInterpreter)
+        public static void CheckTernaryGenericWithStructTest(CompilationType useInterpreter)
         {
             CheckTernaryGenericHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryGenericWithStructWithStringAndFieldTest(bool useInterpreter)
+        public static void CheckTernaryGenericWithStructWithStringAndFieldTest(CompilationType useInterpreter)
         {
             CheckTernaryGenericHelper<Scs>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryGenericWithClassRestrictionWithCustomTest(bool useInterpreter)
+        public static void CheckTernaryGenericWithClassRestrictionWithCustomTest(CompilationType useInterpreter)
         {
             CheckTernaryGenericWithClassRestrictionHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryGenericWithClassRestrictionWithObjectTest(bool useInterpreter)
+        public static void CheckTernaryGenericWithClassRestrictionWithObjectTest(CompilationType useInterpreter)
         {
             CheckTernaryGenericWithClassRestrictionHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryGenericWithSubClassRestrictionWithCustomTest(bool useInterpreter)
+        public static void CheckTernaryGenericWithSubClassRestrictionWithCustomTest(CompilationType useInterpreter)
         {
             CheckTernaryGenericWithSubClassRestrictionHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryGenericWithClassAndNewRestrictionWithCustomTest(bool useInterpreter)
+        public static void CheckTernaryGenericWithClassAndNewRestrictionWithCustomTest(CompilationType useInterpreter)
         {
             CheckTernaryGenericWithClassAndNewRestrictionHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryGenericWithClassAndNewRestrictionWithObjectTest(bool useInterpreter)
+        public static void CheckTernaryGenericWithClassAndNewRestrictionWithObjectTest(CompilationType useInterpreter)
         {
             CheckTernaryGenericWithClassAndNewRestrictionHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryGenericWithSubClassAndNewRestrictionWithCustomTest(bool useInterpreter)
+        public static void CheckTernaryGenericWithSubClassAndNewRestrictionWithCustomTest(CompilationType useInterpreter)
         {
             CheckTernaryGenericWithSubClassAndNewRestrictionHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryGenericWithStructRestrictionWithEnumTest(bool useInterpreter)
+        public static void CheckTernaryGenericWithStructRestrictionWithEnumTest(CompilationType useInterpreter)
         {
             CheckTernaryGenericWithStructRestrictionHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryGenericWithStructRestrictionWithStructTest(bool useInterpreter)
+        public static void CheckTernaryGenericWithStructRestrictionWithStructTest(CompilationType useInterpreter)
         {
             CheckTernaryGenericWithStructRestrictionHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryGenericWithStructRestrictionWithStructWithStringAndFieldTest(bool useInterpreter)
+        public static void CheckTernaryGenericWithStructRestrictionWithStructWithStringAndFieldTest(CompilationType useInterpreter)
         {
             CheckTernaryGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
@@ -590,7 +590,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Generic helpers
 
-        private static void CheckTernaryGenericHelper<T>(bool useInterpreter)
+        private static void CheckTernaryGenericHelper<T>(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             T[] array2 = new T[] { default(T) };
@@ -606,7 +606,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckTernaryGenericWithClassRestrictionHelper<Tc>(bool useInterpreter) where Tc : class
+        private static void CheckTernaryGenericWithClassRestrictionHelper<Tc>(CompilationType useInterpreter) where Tc : class
         {
             bool[] array1 = new bool[] { false, true };
             Tc[] array2 = new Tc[] { null, default(Tc) };
@@ -622,7 +622,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckTernaryGenericWithSubClassRestrictionHelper<TC>(bool useInterpreter) where TC : C
+        private static void CheckTernaryGenericWithSubClassRestrictionHelper<TC>(CompilationType useInterpreter) where TC : C
         {
             bool[] array1 = new bool[] { false, true };
             TC[] array2 = new TC[] { null, default(TC), (TC)new C() };
@@ -638,7 +638,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckTernaryGenericWithClassAndNewRestrictionHelper<Tcn>(bool useInterpreter) where Tcn : class, new()
+        private static void CheckTernaryGenericWithClassAndNewRestrictionHelper<Tcn>(CompilationType useInterpreter) where Tcn : class, new()
         {
             bool[] array1 = new bool[] { false, true };
             Tcn[] array2 = new Tcn[] { null, default(Tcn), new Tcn() };
@@ -654,7 +654,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckTernaryGenericWithSubClassAndNewRestrictionHelper<TCn>(bool useInterpreter) where TCn : C, new()
+        private static void CheckTernaryGenericWithSubClassAndNewRestrictionHelper<TCn>(CompilationType useInterpreter) where TCn : C, new()
         {
             bool[] array1 = new bool[] { false, true };
             TCn[] array2 = new TCn[] { null, default(TCn), new TCn(), (TCn)new C() };
@@ -670,7 +670,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckTernaryGenericWithStructRestrictionHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckTernaryGenericWithStructRestrictionHelper<Ts>(CompilationType useInterpreter) where Ts : struct
         {
             bool[] array1 = new bool[] { false, true };
             Ts[] array2 = new Ts[] { default(Ts), new Ts() };
@@ -690,7 +690,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyBool(bool condition, bool a, bool b, bool useInterpreter)
+        private static void VerifyBool(bool condition, bool a, bool b, CompilationType useInterpreter)
         {
             Expression<Func<bool>> e =
                 Expression.Lambda<Func<bool>>(
@@ -704,7 +704,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyByte(bool condition, byte a, byte b, bool useInterpreter)
+        private static void VerifyByte(bool condition, byte a, byte b, CompilationType useInterpreter)
         {
             Expression<Func<byte>> e =
                 Expression.Lambda<Func<byte>>(
@@ -718,7 +718,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyCustom(bool condition, C a, C b, bool useInterpreter)
+        private static void VerifyCustom(bool condition, C a, C b, CompilationType useInterpreter)
         {
             Expression<Func<C>> e =
                 Expression.Lambda<Func<C>>(
@@ -732,7 +732,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(condition ? a : b, f());
         }
 
-        private static void VerifyChar(bool condition, char a, char b, bool useInterpreter)
+        private static void VerifyChar(bool condition, char a, char b, CompilationType useInterpreter)
         {
             Expression<Func<char>> e =
                 Expression.Lambda<Func<char>>(
@@ -746,7 +746,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyCustom2(bool condition, D a, D b, bool useInterpreter)
+        private static void VerifyCustom2(bool condition, D a, D b, CompilationType useInterpreter)
         {
             Expression<Func<D>> e =
                 Expression.Lambda<Func<D>>(
@@ -760,7 +760,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(condition ? a : b, f());
         }
 
-        private static void VerifyDecimal(bool condition, decimal a, decimal b, bool useInterpreter)
+        private static void VerifyDecimal(bool condition, decimal a, decimal b, CompilationType useInterpreter)
         {
             Expression<Func<decimal>> e =
                 Expression.Lambda<Func<decimal>>(
@@ -774,7 +774,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyDelegate(bool condition, Delegate a, Delegate b, bool useInterpreter)
+        private static void VerifyDelegate(bool condition, Delegate a, Delegate b, CompilationType useInterpreter)
         {
             Expression<Func<Delegate>> e =
                 Expression.Lambda<Func<Delegate>>(
@@ -788,7 +788,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(condition ? a : b, f());
         }
 
-        private static void VerifyDouble(bool condition, double a, double b, bool useInterpreter)
+        private static void VerifyDouble(bool condition, double a, double b, CompilationType useInterpreter)
         {
             Expression<Func<double>> e =
                 Expression.Lambda<Func<double>>(
@@ -802,7 +802,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyEnum(bool condition, E a, E b, bool useInterpreter)
+        private static void VerifyEnum(bool condition, E a, E b, CompilationType useInterpreter)
         {
             Expression<Func<E>> e =
                 Expression.Lambda<Func<E>>(
@@ -816,7 +816,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyEnumLong(bool condition, El a, El b, bool useInterpreter)
+        private static void VerifyEnumLong(bool condition, El a, El b, CompilationType useInterpreter)
         {
             Expression<Func<El>> e =
                 Expression.Lambda<Func<El>>(
@@ -830,7 +830,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyFloat(bool condition, float a, float b, bool useInterpreter)
+        private static void VerifyFloat(bool condition, float a, float b, CompilationType useInterpreter)
         {
             Expression<Func<float>> e =
                 Expression.Lambda<Func<float>>(
@@ -844,7 +844,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyFuncOfObject(bool condition, Func<object> a, Func<object> b, bool useInterpreter)
+        private static void VerifyFuncOfObject(bool condition, Func<object> a, Func<object> b, CompilationType useInterpreter)
         {
             Expression<Func<Func<object>>> e =
                 Expression.Lambda<Func<Func<object>>>(
@@ -858,7 +858,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(condition ? a : b, f());
         }
 
-        private static void VerifyInterface(bool condition, I a, I b, bool useInterpreter)
+        private static void VerifyInterface(bool condition, I a, I b, CompilationType useInterpreter)
         {
             Expression<Func<I>> e =
                 Expression.Lambda<Func<I>>(
@@ -872,7 +872,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(condition ? a : b, f());
         }
 
-        private static void VerifyIEquatableOfCustom(bool condition, IEquatable<C> a, IEquatable<C> b, bool useInterpreter)
+        private static void VerifyIEquatableOfCustom(bool condition, IEquatable<C> a, IEquatable<C> b, CompilationType useInterpreter)
         {
             Expression<Func<IEquatable<C>>> e =
                 Expression.Lambda<Func<IEquatable<C>>>(
@@ -886,7 +886,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(condition ? a : b, f());
         }
 
-        private static void VerifyIEquatableOfCustom2(bool condition, IEquatable<D> a, IEquatable<D> b, bool useInterpreter)
+        private static void VerifyIEquatableOfCustom2(bool condition, IEquatable<D> a, IEquatable<D> b, CompilationType useInterpreter)
         {
             Expression<Func<IEquatable<D>>> e =
                 Expression.Lambda<Func<IEquatable<D>>>(
@@ -900,7 +900,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(condition ? a : b, f());
         }
 
-        private static void VerifyInt(bool condition, int a, int b, bool useInterpreter)
+        private static void VerifyInt(bool condition, int a, int b, CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -914,7 +914,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyLong(bool condition, long a, long b, bool useInterpreter)
+        private static void VerifyLong(bool condition, long a, long b, CompilationType useInterpreter)
         {
             Expression<Func<long>> e =
                 Expression.Lambda<Func<long>>(
@@ -928,7 +928,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyObject(bool condition, object a, object b, bool useInterpreter)
+        private static void VerifyObject(bool condition, object a, object b, CompilationType useInterpreter)
         {
             Expression<Func<object>> e =
                 Expression.Lambda<Func<object>>(
@@ -942,7 +942,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(condition ? a : b, f());
         }
 
-        private static void VerifyStruct(bool condition, S a, S b, bool useInterpreter)
+        private static void VerifyStruct(bool condition, S a, S b, CompilationType useInterpreter)
         {
             Expression<Func<S>> e =
                 Expression.Lambda<Func<S>>(
@@ -956,7 +956,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifySByte(bool condition, sbyte a, sbyte b, bool useInterpreter)
+        private static void VerifySByte(bool condition, sbyte a, sbyte b, CompilationType useInterpreter)
         {
             Expression<Func<sbyte>> e =
                 Expression.Lambda<Func<sbyte>>(
@@ -970,7 +970,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyStructWithString(bool condition, Sc a, Sc b, bool useInterpreter)
+        private static void VerifyStructWithString(bool condition, Sc a, Sc b, CompilationType useInterpreter)
         {
             Expression<Func<Sc>> e =
                 Expression.Lambda<Func<Sc>>(
@@ -984,7 +984,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyStructWithStringAndField(bool condition, Scs a, Scs b, bool useInterpreter)
+        private static void VerifyStructWithStringAndField(bool condition, Scs a, Scs b, CompilationType useInterpreter)
         {
             Expression<Func<Scs>> e =
                 Expression.Lambda<Func<Scs>>(
@@ -998,7 +998,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyShort(bool condition, short a, short b, bool useInterpreter)
+        private static void VerifyShort(bool condition, short a, short b, CompilationType useInterpreter)
         {
             Expression<Func<short>> e =
                 Expression.Lambda<Func<short>>(
@@ -1012,7 +1012,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyStructWithTwoValues(bool condition, Sp a, Sp b, bool useInterpreter)
+        private static void VerifyStructWithTwoValues(bool condition, Sp a, Sp b, CompilationType useInterpreter)
         {
             Expression<Func<Sp>> e =
                 Expression.Lambda<Func<Sp>>(
@@ -1026,7 +1026,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyStructWithValue(bool condition, Ss a, Ss b, bool useInterpreter)
+        private static void VerifyStructWithValue(bool condition, Ss a, Ss b, CompilationType useInterpreter)
         {
             Expression<Func<Ss>> e =
                 Expression.Lambda<Func<Ss>>(
@@ -1040,7 +1040,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyString(bool condition, string a, string b, bool useInterpreter)
+        private static void VerifyString(bool condition, string a, string b, CompilationType useInterpreter)
         {
             Expression<Func<string>> e =
                 Expression.Lambda<Func<string>>(
@@ -1054,7 +1054,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(condition ? a : b, f());
         }
 
-        private static void VerifyUInt(bool condition, uint a, uint b, bool useInterpreter)
+        private static void VerifyUInt(bool condition, uint a, uint b, CompilationType useInterpreter)
         {
             Expression<Func<uint>> e =
                 Expression.Lambda<Func<uint>>(
@@ -1068,7 +1068,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyULong(bool condition, ulong a, ulong b, bool useInterpreter)
+        private static void VerifyULong(bool condition, ulong a, ulong b, CompilationType useInterpreter)
         {
             Expression<Func<ulong>> e =
                 Expression.Lambda<Func<ulong>>(
@@ -1082,7 +1082,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyUShort(bool condition, ushort a, ushort b, bool useInterpreter)
+        private static void VerifyUShort(bool condition, ushort a, ushort b, CompilationType useInterpreter)
         {
             Expression<Func<ushort>> e =
                 Expression.Lambda<Func<ushort>>(
@@ -1096,7 +1096,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyGeneric<T>(bool condition, T a, T b, bool useInterpreter)
+        private static void VerifyGeneric<T>(bool condition, T a, T b, CompilationType useInterpreter)
         {
             Expression<Func<T>> e =
                 Expression.Lambda<Func<T>>(
@@ -1115,7 +1115,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyGenericWithClassRestriction<Tc>(bool condition, Tc a, Tc b, bool useInterpreter) where Tc : class
+        private static void VerifyGenericWithClassRestriction<Tc>(bool condition, Tc a, Tc b, CompilationType useInterpreter) where Tc : class
         {
             Expression<Func<Tc>> e =
                 Expression.Lambda<Func<Tc>>(
@@ -1129,7 +1129,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(condition ? a : b, f());
         }
 
-        private static void VerifyGenericWithSubClassRestriction<TC>(bool condition, TC a, TC b, bool useInterpreter) where TC : class
+        private static void VerifyGenericWithSubClassRestriction<TC>(bool condition, TC a, TC b, CompilationType useInterpreter) where TC : class
         {
             Expression<Func<TC>> e =
                 Expression.Lambda<Func<TC>>(
@@ -1143,7 +1143,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(condition ? a : b, f());
         }
 
-        private static void VerifyGenericWithClassAndNewRestriction<Tcn>(bool condition, Tcn a, Tcn b, bool useInterpreter) where Tcn : class
+        private static void VerifyGenericWithClassAndNewRestriction<Tcn>(bool condition, Tcn a, Tcn b, CompilationType useInterpreter) where Tcn : class
         {
             Expression<Func<Tcn>> e =
                 Expression.Lambda<Func<Tcn>>(
@@ -1157,7 +1157,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(condition ? a : b, f());
         }
 
-        private static void VerifyGenericWithSubClassAndNewRestriction<TCn>(bool condition, TCn a, TCn b, bool useInterpreter) where TCn : class
+        private static void VerifyGenericWithSubClassAndNewRestriction<TCn>(bool condition, TCn a, TCn b, CompilationType useInterpreter) where TCn : class
         {
             Expression<Func<TCn>> e =
                 Expression.Lambda<Func<TCn>>(
@@ -1171,7 +1171,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(condition ? a : b, f());
         }
 
-        private static void VerifyGenericWithStructRestriction<Ts>(bool condition, Ts a, Ts b, bool useInterpreter)
+        private static void VerifyGenericWithStructRestriction<Ts>(bool condition, Ts a, Ts b, CompilationType useInterpreter)
         {
             Expression<Func<Ts>> e =
                 Expression.Lambda<Func<Ts>>(

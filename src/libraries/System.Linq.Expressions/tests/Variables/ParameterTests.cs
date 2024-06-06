@@ -80,7 +80,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ValueData))]
-        public void CanWriteAndReadBack(object value, bool useInterpreter)
+        public void CanWriteAndReadBack(object value, CompilationType useInterpreter)
         {
             Type type = value.GetType();
             ParameterExpression param = Expression.Parameter(type);
@@ -101,7 +101,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void CanUseAsLambdaParameter(bool useInterpreter)
+        public void CanUseAsLambdaParameter(CompilationType useInterpreter)
         {
             ParameterExpression param = Expression.Parameter(typeof(int));
             Func<int, int> addOne = Expression.Lambda<Func<int, int>>(
@@ -115,7 +115,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void CanUseAsLambdaByRefParameter(bool useInterpreter)
+        public void CanUseAsLambdaByRefParameter(CompilationType useInterpreter)
         {
             ParameterExpression param = Expression.Parameter(typeof(int).MakeByRefType());
             ByRefFunc<int> addOneInPlace = Expression.Lambda<ByRefFunc<int>>(
@@ -129,7 +129,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void CanUseAsLambdaByRefParameter_String(bool useInterpreter)
+        public void CanUseAsLambdaByRefParameter_String(CompilationType useInterpreter)
         {
             ParameterExpression param = Expression.Parameter(typeof(string).MakeByRefType());
             ByRefFunc<string> f = Expression.Lambda<ByRefFunc<string>>(
@@ -143,7 +143,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void CanUseAsLambdaByRefParameter_Char(bool useInterpreter)
+        public void CanUseAsLambdaByRefParameter_Char(CompilationType useInterpreter)
         {
             ParameterExpression param = Expression.Parameter(typeof(char).MakeByRefType());
             ByRefFunc<char> f = Expression.Lambda<ByRefFunc<char>>(
@@ -157,7 +157,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void CanUseAsLambdaByRefParameter_Bool(bool useInterpreter)
+        public void CanUseAsLambdaByRefParameter_Bool(CompilationType useInterpreter)
         {
             ParameterExpression param = Expression.Parameter(typeof(bool).MakeByRefType());
             ByRefFunc<bool> f = Expression.Lambda<ByRefFunc<bool>>(
@@ -176,7 +176,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void CanReadFromRefParameter(bool useInterpreter)
+        public void CanReadFromRefParameter(CompilationType useInterpreter)
         {
             AssertCanReadFromRefParameter<byte>(byte.MaxValue, useInterpreter);
             AssertCanReadFromRefParameter<sbyte>(sbyte.MaxValue, useInterpreter);
@@ -218,7 +218,7 @@ namespace System.Linq.Expressions.Tests
 
         public delegate T ByRefReadFunc<T>(ref T arg);
 
-        private void AssertCanReadFromRefParameter<T>(T value, bool useInterpreter)
+        private void AssertCanReadFromRefParameter<T>(T value, CompilationType useInterpreter)
         {
             ParameterExpression @ref = Expression.Parameter(typeof(T).MakeByRefType());
 
@@ -235,7 +235,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void CanWriteToRefParameter(bool useInterpreter)
+        public void CanWriteToRefParameter(CompilationType useInterpreter)
         {
             AssertCanWriteToRefParameter<byte>(byte.MaxValue, useInterpreter);
             AssertCanWriteToRefParameter<sbyte>(sbyte.MaxValue, useInterpreter);
@@ -275,7 +275,7 @@ namespace System.Linq.Expressions.Tests
             AssertCanWriteToRefParameter<DateTime?>(new DateTime(1983, 2, 11), useInterpreter);
         }
 
-        private void AssertCanWriteToRefParameter<T>(T value, bool useInterpreter, T original = default(T))
+        private void AssertCanWriteToRefParameter<T>(T value, CompilationType useInterpreter, T original = default(T))
         {
             ParameterExpression @ref = Expression.Parameter(typeof(T).MakeByRefType());
             ParameterExpression val = Expression.Parameter(typeof(T));
@@ -310,7 +310,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [MemberData(nameof(ReadAndWriteRefCases))]
-        public void ReadAndWriteRefParameters(bool useInterpreter, object value, object increment, object result)
+        public void ReadAndWriteRefParameters(CompilationType useInterpreter, object value, object increment, object result)
         {
             Type type = value.GetType();
 
@@ -319,7 +319,7 @@ namespace System.Linq.Expressions.Tests
             method.MakeGenericMethod(type).Invoke(null, new object[] { useInterpreter, value, increment, result });
         }
 
-        private static void AssertReadAndWriteRefParameters<T>(bool useInterpreter, T value, T increment, T result)
+        private static void AssertReadAndWriteRefParameters<T>(CompilationType useInterpreter, T value, T increment, T result)
         {
             ParameterExpression param = Expression.Parameter(typeof(T).MakeByRefType());
             ByRefFunc<T> addOneInPlace = Expression.Lambda<ByRefFunc<T>>(
@@ -333,7 +333,7 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> ReadAndWriteRefCases()
         {
-            foreach (var useInterpreter in new[] { true, false })
+            foreach (var useInterpreter in CompilationTypes.Types)
             {
                 yield return new object[] { useInterpreter, (short)41, (short)1, (short)42 };
                 yield return new object[] { useInterpreter, (ushort)41, (ushort)1, (ushort)42 };

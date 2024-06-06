@@ -124,7 +124,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void MemberAssignmentFromMember(bool useInterpreter)
+        public void MemberAssignmentFromMember(CompilationType useInterpreter)
         {
             PropertyAndFields result = Expression.Lambda<Func<PropertyAndFields>>(
                 Expression.MemberInit(
@@ -145,7 +145,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void MemberAssignmentFromMethodInfo(bool useInterpreter)
+        public void MemberAssignmentFromMethodInfo(CompilationType useInterpreter)
         {
             PropertyAndFields result = Expression.Lambda<Func<PropertyAndFields>>(
                 Expression.MemberInit(
@@ -162,7 +162,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
         [ActiveIssue("https://github.com/mono/mono/issues/14918", TestRuntimes.Mono)]
-        public void ConstantField(bool useInterpreter)
+        public void ConstantField(CompilationType useInterpreter)
         {
             MemberInfo member = typeof(PropertyAndFields).GetMember(nameof(PropertyAndFields.ConstantString))[0];
             Expression<Func<PropertyAndFields>> attemptAssignToConstant = Expression.Lambda<Func<PropertyAndFields>>(
@@ -176,7 +176,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void ReadonlyField(bool useInterpreter)
+        public void ReadonlyField(CompilationType useInterpreter)
         {
             MemberInfo member = typeof(PropertyAndFields).GetMember(nameof(PropertyAndFields.ReadonlyStringField))[0];
             Expression<Func<PropertyAndFields>> assignToReadonly = Expression.Lambda<Func<PropertyAndFields>>(
@@ -208,7 +208,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void StaticField(bool useInterpreter)
+        public void StaticField(CompilationType useInterpreter)
         {
             MemberInfo member = typeof(PropertyAndFields).GetMember(nameof(PropertyAndFields.StaticStringField))[0];
             Expression<Func<PropertyAndFields>> assignToReadonly = Expression.Lambda<Func<PropertyAndFields>>(
@@ -224,7 +224,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void StaticProperty(bool useInterpreter)
+        public void StaticProperty(CompilationType useInterpreter)
         {
             MemberInfo member = typeof(PropertyAndFields).GetMember(nameof(PropertyAndFields.StaticStringProperty))[0];
             Expression<Func<PropertyAndFields>> assignToStaticProperty = Expression.Lambda<Func<PropertyAndFields>>(

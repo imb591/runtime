@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
     {
         public static IEnumerable<object[]> TestData()
         {
-            foreach (bool useInterpreter in new bool[] { true, false })
+            foreach (CompilationType useInterpreter in CompilationTypes.Types)
             {
                 yield return new object[] { new bool?[] { null, true, false }, new bool[] { true, false }, useInterpreter };
                 yield return new object[] { new byte?[] { null, 0, 1, byte.MaxValue }, new byte[] { 0, 1, byte.MaxValue }, useInterpreter };
@@ -68,7 +68,7 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> ImplicitNumericConversionData()
         {
-            foreach (bool useInterpreter in new bool[] { true, false })
+            foreach (CompilationType useInterpreter in CompilationTypes.Types)
             {
                 yield return new object[] { new byte?[] { null, 1 }, new object[] { (byte)2, (short)3, (ushort)3, (int)4, (uint)4, (long)5, (ulong)5, (float)3.14, (double)3.14, (decimal)49.95 }, useInterpreter };
                 yield return new object[] { new sbyte?[] { null, 1 }, new object[] { (sbyte)2, (short)3, (int)4, (long)5, (float)3.14, (double)3.14, (decimal)49.95 }, useInterpreter };
@@ -87,7 +87,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [MemberData(nameof(TestData))]
-        public static void Coalesce(Array array1, Array array2, bool useInterpreter)
+        public static void Coalesce(Array array1, Array array2, CompilationType useInterpreter)
         {
             Type type1 = array1.GetType().GetElementType();
             Type type2 = array2.GetType().GetElementType();
@@ -103,7 +103,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [MemberData(nameof(ImplicitNumericConversionData))]
-        public static void ImplicitNumericConversions(Array array1, Array array2, bool useInterpreter)
+        public static void ImplicitNumericConversions(Array array1, Array array2, CompilationType useInterpreter)
         {
             Type type1 = array1.GetType().GetElementType();
             for (int i = 0; i < array1.Length; i++)
@@ -132,60 +132,60 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericCustomWithClassRestrictionCoalesceTest(bool useInterpreter)
+        public static void CheckGenericCustomWithClassRestrictionCoalesceTest(CompilationType useInterpreter)
         {
             CheckGenericWithClassRestrictionCoalesceHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericObjectWithClassRestrictionCoalesceTest(bool useInterpreter)
+        public static void CheckGenericObjectWithClassRestrictionCoalesceTest(CompilationType useInterpreter)
         {
             CheckGenericWithClassRestrictionCoalesceHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericCustomWithSubClassRestrictionCoalesceTest(bool useInterpreter)
+        public static void CheckGenericCustomWithSubClassRestrictionCoalesceTest(CompilationType useInterpreter)
         {
             CheckGenericWithSubClassRestrictionCoalesceHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericCustomWithClassAndNewRestrictionCoalesceTest(bool useInterpreter)
+        public static void CheckGenericCustomWithClassAndNewRestrictionCoalesceTest(CompilationType useInterpreter)
         {
             CheckGenericWithClassAndNewRestrictionCoalesceHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericObjectWithClassAndNewRestrictionCoalesceTest(bool useInterpreter)
+        public static void CheckGenericObjectWithClassAndNewRestrictionCoalesceTest(CompilationType useInterpreter)
         {
             CheckGenericWithClassAndNewRestrictionCoalesceHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericCustomWithSubClassAndNewRestrictionCoalesceTest(bool useInterpreter)
+        public static void CheckGenericCustomWithSubClassAndNewRestrictionCoalesceTest(CompilationType useInterpreter)
         {
             CheckGenericWithSubClassAndNewRestrictionCoalesceHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericEnumWithStructRestrictionCoalesceTest(bool useInterpreter)
+        public static void CheckGenericEnumWithStructRestrictionCoalesceTest(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionCoalesceHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericStructWithStructRestrictionCoalesceTest(bool useInterpreter)
+        public static void CheckGenericStructWithStructRestrictionCoalesceTest(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionCoalesceHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericStructWithStringAndFieldWithStructRestrictionCoalesceTest(bool useInterpreter)
+        public static void CheckGenericStructWithStringAndFieldWithStructRestrictionCoalesceTest(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionCoalesceHelper<Scs>(useInterpreter);
         }
 
-        private static void CheckGenericWithClassRestrictionCoalesceHelper<Tc>(bool useInterpreter) where Tc : class
+        private static void CheckGenericWithClassRestrictionCoalesceHelper<Tc>(CompilationType useInterpreter) where Tc : class
         {
             Tc[] array1 = new Tc[] { null, default(Tc) };
             Tc[] array2 = new Tc[] { null, default(Tc) };
@@ -199,7 +199,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithSubClassRestrictionCoalesceHelper<TC>(bool useInterpreter) where TC : C
+        private static void CheckGenericWithSubClassRestrictionCoalesceHelper<TC>(CompilationType useInterpreter) where TC : C
         {
             TC[] array1 = new TC[] { null, default(TC), (TC)new C() };
             TC[] array2 = new TC[] { null, default(TC), (TC)new C() };
@@ -212,7 +212,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithClassAndNewRestrictionCoalesceHelper<Tcn>(bool useInterpreter) where Tcn : class, new()
+        private static void CheckGenericWithClassAndNewRestrictionCoalesceHelper<Tcn>(CompilationType useInterpreter) where Tcn : class, new()
         {
             Tcn[] array1 = new Tcn[] { null, default(Tcn), new Tcn() };
             Tcn[] array2 = new Tcn[] { null, default(Tcn), new Tcn() };
@@ -225,7 +225,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithSubClassAndNewRestrictionCoalesceHelper<TCn>(bool useInterpreter) where TCn : C, new()
+        private static void CheckGenericWithSubClassAndNewRestrictionCoalesceHelper<TCn>(CompilationType useInterpreter) where TCn : C, new()
         {
             TCn[] array1 = new TCn[] { null, default(TCn), new TCn(), (TCn)new C() };
             TCn[] array2 = new TCn[] { null, default(TCn), new TCn(), (TCn)new C() };
@@ -238,7 +238,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithStructRestrictionCoalesceHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckGenericWithStructRestrictionCoalesceHelper<Ts>(CompilationType useInterpreter) where Ts : struct
         {
             Ts?[] array1 = new Ts?[] { null, default(Ts), new Ts() };
             Ts[] array2 = new Ts[] { default(Ts), new Ts() };
@@ -252,24 +252,24 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericEnumWithStructRestrictionCoalesce_NullableTest(bool useInterpreter)
+        public static void CheckGenericEnumWithStructRestrictionCoalesce_NullableTest(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionCoalesce_NullableHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericStructWithStructRestrictionCoalesce_NullableTest(bool useInterpreter)
+        public static void CheckGenericStructWithStructRestrictionCoalesce_NullableTest(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionCoalesce_NullableHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericStructWithStringAndFieldWithStructRestrictionCoalesce_NullableTest(bool useInterpreter)
+        public static void CheckGenericStructWithStringAndFieldWithStructRestrictionCoalesce_NullableTest(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionCoalesce_NullableHelper<Scs>(useInterpreter);
         }
 
-        private static void CheckGenericWithStructRestrictionCoalesce_NullableHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckGenericWithStructRestrictionCoalesce_NullableHelper<Ts>(CompilationType useInterpreter) where Ts : struct
         {
             Ts?[] array = new Ts?[] { null, default(Ts), new Ts() };
             for (int i = 0; i < array.Length; i++)
@@ -281,7 +281,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyCoalesce(object obj1, Type type1, object obj2, Type type2, bool useInterpreter, object expected = null)
+        private static void VerifyCoalesce(object obj1, Type type1, object obj2, Type type2, CompilationType useInterpreter, object expected = null)
         {
             BinaryExpression expression = Expression.Coalesce(Expression.Constant(obj1, type1), Expression.Constant(obj2, type2));
             Delegate lambda = Expression.Lambda(expression).Compile(useInterpreter);
@@ -307,8 +307,10 @@ namespace System.Linq.Expressions.Tests
 
             // Compile and evaluate with interpretation flag and without
             // in case there are bugs in the compiler/interpreter.
-            Assert.Equal(2, conversion.Compile(false).Invoke(1.1));
-            Assert.Equal(2, conversion.Compile(true).Invoke(1.1));
+            foreach (var useInterpreter in CompilationTypes.Types)
+            {
+                Assert.Equal(2, conversion.Compile(useInterpreter).Invoke(1.1));
+            }
         }
 
         [Fact]
@@ -357,7 +359,7 @@ namespace System.Linq.Expressions.Tests
         [Theory]
         [InlinePerCompilationType(null, "YY")]
         [InlinePerCompilationType("abc", "abcdef")]
-        public static void Conversion_String(string parameter, string expected, bool useInterpreter)
+        public static void Conversion_String(string parameter, string expected, CompilationType useInterpreter)
         {
             Expression<Func<string, string>> conversion = x => x + "def";
             ParameterExpression parameterExpression = Expression.Parameter(typeof(string));
@@ -370,7 +372,7 @@ namespace System.Linq.Expressions.Tests
         [Theory]
         [InlinePerCompilationType(null, 5)]
         [InlinePerCompilationType(5, 10)]
-        public static void Conversion_NullableInt(int? parameter, int? expected, bool useInterpreter)
+        public static void Conversion_NullableInt(int? parameter, int? expected, CompilationType useInterpreter)
         {
             Expression<Func<int?, int?>> conversion = x => x * 2;
             ParameterExpression parameterExpression = Expression.Parameter(typeof(int?));
@@ -441,7 +443,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CoalesceToWiderReference(bool useInterpreter)
+        public static void CoalesceToWiderReference(CompilationType useInterpreter)
         {
             Func<object> func = Expression.Lambda<Func<object>>(
                 Expression.Coalesce(
@@ -459,7 +461,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CoalesceToNarrowerReference(bool useInterpreter)
+        public static void CoalesceToNarrowerReference(CompilationType useInterpreter)
         {
             Func<object> func = Expression.Lambda<Func<object>>(
                 Expression.Coalesce(
@@ -477,7 +479,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CoalesceReferenceToValueType(bool useInterpreter)
+        public static void CoalesceReferenceToValueType(CompilationType useInterpreter)
         {
             Func<object> func = Expression.Lambda<Func<object>>(
                 Expression.Coalesce(
@@ -524,7 +526,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CoalesceWideningLeft(bool useInterpreter)
+        public static void CoalesceWideningLeft(CompilationType useInterpreter)
         {
             ParameterExpression x = Expression.Parameter(typeof(int?));
             ParameterExpression y = Expression.Parameter(typeof(long));
@@ -534,7 +536,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CoalesceWideningLeftNullableRight(bool useInterpreter)
+        public static void CoalesceWideningLeftNullableRight(CompilationType useInterpreter)
         {
             ParameterExpression x = Expression.Parameter(typeof(int?));
             ParameterExpression y = Expression.Parameter(typeof(long?));
@@ -546,7 +548,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CoalesceWideningRight(bool useInterpreter)
+        public static void CoalesceWideningRight(CompilationType useInterpreter)
         {
             ParameterExpression x = Expression.Parameter(typeof(long?));
             ParameterExpression y = Expression.Parameter(typeof(int));
@@ -556,7 +558,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CoalesceWideningRightNullable(bool useInterpreter)
+        public static void CoalesceWideningRightNullable(CompilationType useInterpreter)
         {
             ParameterExpression x = Expression.Parameter(typeof(long?));
             ParameterExpression y = Expression.Parameter(typeof(int?));

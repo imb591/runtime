@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3737, "https://github.com/dotnet/runtime/issues/15397")]
-        public static void CheckUnaryArithmeticOnesComplementNullableShortTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticOnesComplementNullableShortTest(CompilationType useInterpreter)
         {
             short?[] values = new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -20,7 +20,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3737, "https://github.com/dotnet/runtime/issues/15397")]
-        public static void CheckUnaryArithmeticOnesComplementNullableUShortTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticOnesComplementNullableUShortTest(CompilationType useInterpreter)
         {
             ushort?[] values = new ushort?[] { null, 0, 1, ushort.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -30,7 +30,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3737, "https://github.com/dotnet/runtime/issues/15397")]
-        public static void CheckUnaryArithmeticOnesComplementNullableIntTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticOnesComplementNullableIntTest(CompilationType useInterpreter)
         {
             int?[] values = new int?[] { null, 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -40,7 +40,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3737, "https://github.com/dotnet/runtime/issues/15397")]
-        public static void CheckUnaryArithmeticOnesComplementNullableUIntTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticOnesComplementNullableUIntTest(CompilationType useInterpreter)
         {
             uint?[] values = new uint?[] { null, 0, 1, uint.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -50,7 +50,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3737, "https://github.com/dotnet/runtime/issues/15397")]
-        public static void CheckUnaryArithmeticOnesComplementNullableLongTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticOnesComplementNullableLongTest(CompilationType useInterpreter)
         {
             long?[] values = new long?[] { null, 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -60,7 +60,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3737, "https://github.com/dotnet/runtime/issues/15397")]
-        public static void CheckUnaryArithmeticOnesComplementNullableULongTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticOnesComplementNullableULongTest(CompilationType useInterpreter)
         {
             ulong?[] values = new ulong?[] { null, 0, 1, ulong.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -70,7 +70,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3737, "https://github.com/dotnet/runtime/issues/15397")]
-        public static void CheckUnaryArithmeticOnesComplementNullableByteTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticOnesComplementNullableByteTest(CompilationType useInterpreter)
         {
             byte?[] values = new byte?[] { null, 0, 1, byte.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -80,7 +80,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3737, "https://github.com/dotnet/runtime/issues/15397")]
-        public static void CheckUnaryArithmeticOnesComplementNullableSByteTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticOnesComplementNullableSByteTest(CompilationType useInterpreter)
         {
             sbyte?[] values = new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -100,7 +100,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyArithmeticOnesComplementNullableShort(short? value, bool useInterpreter)
+        private static void VerifyArithmeticOnesComplementNullableShort(short? value, CompilationType useInterpreter)
         {
             Expression<Func<short?>> e =
                 Expression.Lambda<Func<short?>>(
@@ -110,7 +110,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((short?)(~value), f());
         }
 
-        private static void VerifyArithmeticOnesComplementNullableUShort(ushort? value, bool useInterpreter)
+        private static void VerifyArithmeticOnesComplementNullableUShort(ushort? value, CompilationType useInterpreter)
         {
             Expression<Func<ushort?>> e =
                 Expression.Lambda<Func<ushort?>>(
@@ -120,7 +120,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((ushort?)(~value)), f());
         }
 
-        private static void VerifyArithmeticOnesComplementNullableInt(int? value, bool useInterpreter)
+        private static void VerifyArithmeticOnesComplementNullableInt(int? value, CompilationType useInterpreter)
         {
             Expression<Func<int?>> e =
                 Expression.Lambda<Func<int?>>(
@@ -130,7 +130,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((int?)(~value), f());
         }
 
-        private static void VerifyArithmeticOnesComplementNullableUInt(uint? value, bool useInterpreter)
+        private static void VerifyArithmeticOnesComplementNullableUInt(uint? value, CompilationType useInterpreter)
         {
             Expression<Func<uint?>> e =
                 Expression.Lambda<Func<uint?>>(
@@ -140,7 +140,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((uint?)(~value), f());
         }
 
-        private static void VerifyArithmeticOnesComplementNullableLong(long? value, bool useInterpreter)
+        private static void VerifyArithmeticOnesComplementNullableLong(long? value, CompilationType useInterpreter)
         {
             Expression<Func<long?>> e =
                 Expression.Lambda<Func<long?>>(
@@ -150,7 +150,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((long?)(~value), f());
         }
 
-        private static void VerifyArithmeticOnesComplementNullableULong(ulong? value, bool useInterpreter)
+        private static void VerifyArithmeticOnesComplementNullableULong(ulong? value, CompilationType useInterpreter)
         {
             Expression<Func<ulong?>> e =
                 Expression.Lambda<Func<ulong?>>(
@@ -160,7 +160,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((ulong?)(~value), f());
         }
 
-        private static void VerifyArithmeticOnesComplementNullableByte(byte? value, bool useInterpreter)
+        private static void VerifyArithmeticOnesComplementNullableByte(byte? value, CompilationType useInterpreter)
         {
             Expression<Func<byte?>> e =
                 Expression.Lambda<Func<byte?>>(
@@ -170,7 +170,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((byte?)(~value)), f());
         }
 
-        private static void VerifyArithmeticOnesComplementNullableSByte(sbyte? value, bool useInterpreter)
+        private static void VerifyArithmeticOnesComplementNullableSByte(sbyte? value, CompilationType useInterpreter)
         {
             Expression<Func<sbyte?>> e =
                 Expression.Lambda<Func<sbyte?>>(

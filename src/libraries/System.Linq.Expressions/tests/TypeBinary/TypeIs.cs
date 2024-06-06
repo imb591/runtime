@@ -29,7 +29,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void TypePointer(bool useInterpreter)
+        public void TypePointer(CompilationType useInterpreter)
         {
             Expression exp = Expression.Constant(0);
             Type pointer = typeof(int*);
@@ -85,25 +85,25 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ExpressionAndTypeCombinations))]
-        public void ExpressionEvaluationCompiled(Expression expression, Type type, bool useInterpreter)
+        public void ExpressionEvaluationCompiled(Expression expression, Type type, CompilationType useInterpreter)
         {
             bool expected = expression.Type == typeof(void)
                 ? type == typeof(void)
-                : type.IsInstanceOfType(Expression.Lambda<Func<object>>(Expression.Convert(expression, typeof(object))).Compile()());
+                : type.IsInstanceOfType(Expression.Lambda<Func<object>>(Expression.Convert(expression, typeof(object))).Compile(CompilationType.WithoutPreference)());
 
             Assert.Equal(expected, Expression.Lambda<Func<bool>>(Expression.TypeIs(expression, type)).Compile(useInterpreter)());
         }
 
         [Theory]
         [PerCompilationType(nameof(ExpressionAndTypeCombinations))]
-        public void ExpressionEvaluationWithParameter(Expression expression, Type type, bool useInterpreter)
+        public void ExpressionEvaluationWithParameter(Expression expression, Type type, CompilationType useInterpreter)
         {
             if (expression.Type == typeof(void))
                 return; // Can't have void parameter.
 
             bool expected = expression.Type == typeof(void)
                 ? type == typeof(void)
-                : type.IsInstanceOfType(Expression.Lambda<Func<object>>(Expression.Convert(expression, typeof(object))).Compile()());
+                : type.IsInstanceOfType(Expression.Lambda<Func<object>>(Expression.Convert(expression, typeof(object))).Compile(CompilationType.WithoutPreference)());
 
             ParameterExpression param = Expression.Parameter(expression.Type);
 

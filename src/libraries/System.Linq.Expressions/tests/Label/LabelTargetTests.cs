@@ -117,7 +117,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void LableNameNeedNotBeValidCSharpLabel(bool useInterpreter)
+        public void LableNameNeedNotBeValidCSharpLabel(CompilationType useInterpreter)
         {
             LabelTarget target = Expression.Label("1, 2, 3, 4. This is not a valid C\u266F label!\"'<>.\uffff");
             Expression.Lambda<Action>(
@@ -131,7 +131,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void LableNameNeedNotBeValidCSharpLabelWithValue(bool useInterpreter)
+        public void LableNameNeedNotBeValidCSharpLabelWithValue(CompilationType useInterpreter)
         {
             LabelTarget target = Expression.Label(typeof(int), "1, 2, 3, 4. This is not a valid C\u266F label!\"'<>.\uffff");
             Func<int> func = Expression.Lambda<Func<int>>(

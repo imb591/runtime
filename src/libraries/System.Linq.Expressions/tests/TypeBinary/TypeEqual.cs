@@ -29,7 +29,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void TypePointer(bool useInterpreter)
+        public void TypePointer(CompilationType useInterpreter)
         {
             Expression exp = Expression.Constant(0);
             Type pointer = typeof(int*);
@@ -85,7 +85,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ExpressionAndTypeCombinations))]
-        public void ExpressionEvaluation(Expression expression, Type type, bool useInterpreter)
+        public void ExpressionEvaluation(Expression expression, Type type, CompilationType useInterpreter)
         {
             bool expected;
             if (type == typeof(void))
@@ -97,7 +97,7 @@ namespace System.Linq.Expressions.Tests
                 Type nonNullable = type.IsConstructedGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>)
                     ? type.GetGenericArguments()[0]
                     : type;
-                object value = Expression.Lambda<Func<object>>(Expression.Convert(expression, typeof(object))).Compile()();
+                object value = Expression.Lambda<Func<object>>(Expression.Convert(expression, typeof(object))).Compile(CompilationType.WithoutPreference)();
                 expected = value != null && value.GetType() == nonNullable;
             }
 
@@ -106,7 +106,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ExpressionAndTypeCombinations))]
-        public void ExpressionEvaluationWithParameter(Expression expression, Type type, bool useInterpreter)
+        public void ExpressionEvaluationWithParameter(Expression expression, Type type, CompilationType useInterpreter)
         {
             if (expression.Type == typeof(void))
                 return; // Can't have void parameter.
@@ -118,7 +118,7 @@ namespace System.Linq.Expressions.Tests
                 Type nonNullable = type.IsConstructedGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>)
                     ? type.GetGenericArguments()[0]
                     : type;
-                object value = Expression.Lambda<Func<object>>(Expression.Convert(expression, typeof(object))).Compile()();
+                object value = Expression.Lambda<Func<object>>(Expression.Convert(expression, typeof(object))).Compile(CompilationType.WithoutPreference)();
                 expected = value != null && value.GetType() == nonNullable;
             }
 
@@ -163,7 +163,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void VariantDelegateArgument(bool useInterpreter)
+        public void VariantDelegateArgument(CompilationType useInterpreter)
         {
             Action<object> ao = x => { };
             Action<string> a = x => { };
@@ -182,7 +182,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(TypeArguments))]
-        public void TypeEqualConstant(Type type, bool useInterpreter)
+        public void TypeEqualConstant(Type type, CompilationType useInterpreter)
         {
             Func<bool> isNullOfType = Expression.Lambda<Func<bool>>(
                 Expression.TypeEqual(Expression.Constant(null), type)

@@ -130,7 +130,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void InnerProperty(bool useInterpreter)
+        public void InnerProperty(CompilationType useInterpreter)
         {
             Expression<Func<Outer>> exp = Expression.Lambda<Func<Outer>>(
                 Expression.MemberInit(
@@ -146,7 +146,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void InnerField(bool useInterpreter)
+        public void InnerField(CompilationType useInterpreter)
         {
             Expression<Func<Outer>> exp = Expression.Lambda<Func<Outer>>(
                 Expression.MemberInit(
@@ -162,7 +162,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void StaticInnerProperty(bool useInterpreter)
+        public void StaticInnerProperty(CompilationType useInterpreter)
         {
             Expression<Func<Outer>> exp = Expression.Lambda<Func<Outer>>(
                 Expression.MemberInit(
@@ -177,7 +177,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void StaticInnerField(bool useInterpreter)
+        public void StaticInnerField(CompilationType useInterpreter)
         {
             Expression<Func<Outer>> exp = Expression.Lambda<Func<Outer>>(
                 Expression.MemberInit(
@@ -192,7 +192,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void ReadonlyInnerProperty(bool useInterpreter)
+        public void ReadonlyInnerProperty(CompilationType useInterpreter)
         {
             Expression<Func<Outer>> exp = Expression.Lambda<Func<Outer>>(
                 Expression.MemberInit(
@@ -208,7 +208,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void ReadonlyInnerField(bool useInterpreter)
+        public void ReadonlyInnerField(CompilationType useInterpreter)
         {
             Expression<Func<Outer>> exp = Expression.Lambda<Func<Outer>>(
                 Expression.MemberInit(
@@ -224,7 +224,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void StaticReadonlyInnerProperty(bool useInterpreter)
+        public void StaticReadonlyInnerProperty(CompilationType useInterpreter)
         {
             Expression<Func<Outer>> exp = Expression.Lambda<Func<Outer>>(
                 Expression.MemberInit(
@@ -239,7 +239,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void StaticReadonlyInnerField(bool useInterpreter)
+        public void StaticReadonlyInnerField(CompilationType useInterpreter)
         {
             Expression<Func<Outer>> exp = Expression.Lambda<Func<Outer>>(
                 Expression.MemberInit(

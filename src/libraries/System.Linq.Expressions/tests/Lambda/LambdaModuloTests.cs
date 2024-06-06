@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaModuloDecimalTest(bool useInterpreter)
+        public static void LambdaModuloDecimalTest(CompilationType useInterpreter)
         {
             decimal[] values = new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -23,7 +23,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaModuloDoubleTest(bool useInterpreter)
+        public static void LambdaModuloDoubleTest(CompilationType useInterpreter)
         {
             double[] values = new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -36,7 +36,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaModuloFloatTest(bool useInterpreter)
+        public static void LambdaModuloFloatTest(CompilationType useInterpreter)
         {
             float[] values = new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -50,7 +50,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void LambdaModuloIntTest(bool useInterpreter)
+        public static void LambdaModuloIntTest(CompilationType useInterpreter)
         {
             int[] values = new int[] { 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -64,7 +64,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void LambdaModuloLongTest(bool useInterpreter)
+        public static void LambdaModuloLongTest(CompilationType useInterpreter)
         {
             long[] values = new long[] { 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -78,7 +78,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void LambdaModuloShortTest(bool useInterpreter)
+        public static void LambdaModuloShortTest(CompilationType useInterpreter)
         {
             short[] values = new short[] { 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -92,7 +92,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void LambdaModuloUIntTest(bool useInterpreter)
+        public static void LambdaModuloUIntTest(CompilationType useInterpreter)
         {
             uint[] values = new uint[] { 0, 1, uint.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -106,7 +106,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void LambdaModuloULongTest(bool useInterpreter)
+        public static void LambdaModuloULongTest(CompilationType useInterpreter)
         {
             ulong[] values = new ulong[] { 0, 1, ulong.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -120,7 +120,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void LambdaModuloUShortTest(bool useInterpreter)
+        public static void LambdaModuloUShortTest(CompilationType useInterpreter)
         {
             ushort[] values = new ushort[] { 0, 1, ushort.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -145,7 +145,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify decimal
 
-        private static void VerifyModuloDecimal(decimal a, decimal b, bool useInterpreter)
+        private static void VerifyModuloDecimal(decimal a, decimal b, CompilationType useInterpreter)
         {
             bool divideByZero;
             decimal expected;
@@ -291,7 +291,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify double
 
-        private static void VerifyModuloDouble(double a, double b, bool useInterpreter)
+        private static void VerifyModuloDouble(double a, double b, CompilationType useInterpreter)
         {
             double expected = a % b;
 
@@ -384,7 +384,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify float
 
-        private static void VerifyModuloFloat(float a, float b, bool useInterpreter)
+        private static void VerifyModuloFloat(float a, float b, CompilationType useInterpreter)
         {
             float expected = a % b;
 
@@ -477,7 +477,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify int
 
-        private static void VerifyModuloInt(int a, int b, bool useInterpreter)
+        private static void VerifyModuloInt(int a, int b, CompilationType useInterpreter)
         {
             ResultType outcome;
             int expected = 0;
@@ -650,7 +650,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify long
 
-        private static void VerifyModuloLong(long a, long b, bool useInterpreter)
+        private static void VerifyModuloLong(long a, long b, CompilationType useInterpreter)
         {
             ResultType outcome;
             long expected = 0;
@@ -823,7 +823,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify short
 
-        private static void VerifyModuloShort(short a, short b, bool useInterpreter)
+        private static void VerifyModuloShort(short a, short b, CompilationType useInterpreter)
         {
             bool divideByZero;
             short expected;
@@ -969,7 +969,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify uint
 
-        private static void VerifyModuloUInt(uint a, uint b, bool useInterpreter)
+        private static void VerifyModuloUInt(uint a, uint b, CompilationType useInterpreter)
         {
             bool divideByZero;
             uint expected;
@@ -1115,7 +1115,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify ulong
 
-        private static void VerifyModuloULong(ulong a, ulong b, bool useInterpreter)
+        private static void VerifyModuloULong(ulong a, ulong b, CompilationType useInterpreter)
         {
             bool divideByZero;
             ulong expected;
@@ -1261,7 +1261,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify ushort
 
-        private static void VerifyModuloUShort(ushort a, ushort b, bool useInterpreter)
+        private static void VerifyModuloUShort(ushort a, ushort b, CompilationType useInterpreter)
         {
             bool divideByZero;
             ushort expected;

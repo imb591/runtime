@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
     {
         [Theory]
         [PerCompilationType(nameof(ConstantValueData))]
-        public void JustGotoValue(object value, bool useInterpreter)
+        public void JustGotoValue(object value, CompilationType useInterpreter)
         {
             Type type = value.GetType();
             LabelTarget target = Expression.Label(type);
@@ -24,7 +24,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void GotoToMiddle(bool useInterpreter)
+        public void GotoToMiddle(CompilationType useInterpreter)
         {
             // The behaviour is that return jumps to a label, but does not necessarily leave a block.
             LabelTarget target = Expression.Label(typeof(int));
@@ -38,7 +38,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ConstantValueData))]
-        public void GotoJumps(object value, bool useInterpreter)
+        public void GotoJumps(object value, CompilationType useInterpreter)
         {
             Type type = value.GetType();
             LabelTarget target = Expression.Label(type);
@@ -68,7 +68,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void GotoVoidNoValue(bool useInterpreter)
+        public void GotoVoidNoValue(CompilationType useInterpreter)
         {
             LabelTarget target = Expression.Label();
             Expression block = Expression.Block(
@@ -81,7 +81,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void GotoExplicitVoidNoValue(bool useInterpreter)
+        public void GotoExplicitVoidNoValue(CompilationType useInterpreter)
         {
             LabelTarget target = Expression.Label();
             Expression block = Expression.Block(
@@ -119,7 +119,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ConstantValueData))]
-        public void CanAssignAnythingToVoid(object value, bool useInterpreter)
+        public void CanAssignAnythingToVoid(object value, CompilationType useInterpreter)
         {
             LabelTarget target = Expression.Label();
             BlockExpression block = Expression.Block(
@@ -139,7 +139,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ObjectAssignableConstantValueData))]
-        public void ExplicitTypeAssigned(object value, bool useInterpreter)
+        public void ExplicitTypeAssigned(object value, CompilationType useInterpreter)
         {
             LabelTarget target = Expression.Label(typeof(object));
             BlockExpression block = Expression.Block(
@@ -213,14 +213,14 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void UndefinedLabel(bool useInterpreter)
+        public void UndefinedLabel(CompilationType useInterpreter)
         {
             Expression<Action> goNowhere = Expression.Lambda<Action>(Expression.Goto(Expression.Label()));
             Assert.Throws<InvalidOperationException>(() => goNowhere.Compile(useInterpreter));
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void AmbiguousJump(bool useInterpreter)
+        public void AmbiguousJump(CompilationType useInterpreter)
         {
             LabelTarget target = Expression.Label();
             Expression<Action> exp = Expression.Lambda<Action>(
@@ -234,7 +234,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void MultipleDefinitionsInSeparateBlocks(bool useInterpreter)
+        public void MultipleDefinitionsInSeparateBlocks(CompilationType useInterpreter)
         {
             LabelTarget target = Expression.Label(typeof(int));
             Func<int> add = Expression.Lambda<Func<int>>(
@@ -262,7 +262,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void JumpIntoExpression(bool useInterpreter)
+        public void JumpIntoExpression(CompilationType useInterpreter)
         {
             LabelTarget target = Expression.Label();
             Expression<Func<bool>> isInt = Expression.Lambda<Func<bool>>(
@@ -275,7 +275,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void JumpInWithValue(bool useInterpreter)
+        public void JumpInWithValue(CompilationType useInterpreter)
         {
             LabelTarget target = Expression.Label(typeof(int));
             Expression<Func<int>> exp = Expression.Lambda<Func<int>>(
@@ -289,7 +289,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void AmbiguousJumpBack(bool useInterpreter)
+        public void AmbiguousJumpBack(CompilationType useInterpreter)
         {
             LabelTarget label = Expression.Label(typeof(void));
             BlockExpression block = Expression.Block(
@@ -300,7 +300,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void AmbiguousJumpSplit(bool useInterpreter)
+        public void AmbiguousJumpSplit(CompilationType useInterpreter)
         {
             LabelTarget label = Expression.Label(typeof(void));
             BlockExpression block = Expression.Block(

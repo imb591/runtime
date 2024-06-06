@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaUnaryNotNullableByteTest(bool useInterpreter)
+        public static void CheckLambdaUnaryNotNullableByteTest(CompilationType useInterpreter)
         {
             foreach (byte? value in new byte?[] { null, 0, 1, byte.MaxValue })
             {
@@ -19,7 +19,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaUnaryNotNullableIntTest(bool useInterpreter)
+        public static void CheckLambdaUnaryNotNullableIntTest(CompilationType useInterpreter)
         {
             foreach (int? value in new int?[] { null, 0, 1, -1, int.MinValue, int.MaxValue })
             {
@@ -28,7 +28,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaUnaryNotNullableLongTest(bool useInterpreter)
+        public static void CheckLambdaUnaryNotNullableLongTest(CompilationType useInterpreter)
         {
             foreach (long? value in new long?[] { null, 0, 1, -1, long.MinValue, long.MaxValue })
             {
@@ -37,7 +37,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaUnaryNotNullableSByteTest(bool useInterpreter)
+        public static void CheckLambdaUnaryNotNullableSByteTest(CompilationType useInterpreter)
         {
             foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
             {
@@ -46,7 +46,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaUnaryNotNullableShortTest(bool useInterpreter)
+        public static void CheckLambdaUnaryNotNullableShortTest(CompilationType useInterpreter)
         {
             foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
             {
@@ -55,7 +55,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaUnaryNotNullableUIntTest(bool useInterpreter)
+        public static void CheckLambdaUnaryNotNullableUIntTest(CompilationType useInterpreter)
         {
             foreach (uint? value in new uint?[] { null, 0, 1, uint.MaxValue })
             {
@@ -64,7 +64,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaUnaryNotNullableULongTest(bool useInterpreter)
+        public static void CheckLambdaUnaryNotNullableULongTest(CompilationType useInterpreter)
         {
             foreach (ulong? value in new ulong?[] { null, 0, 1, ulong.MaxValue })
             {
@@ -73,7 +73,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaUnaryNotNullableUShortTest(bool useInterpreter)
+        public static void CheckLambdaUnaryNotNullableUShortTest(CompilationType useInterpreter)
         {
             foreach (ushort? value in new ushort?[] { null, 0, 1, ushort.MaxValue })
             {
@@ -85,7 +85,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyUnaryNotNullableByte(byte? value, bool useInterpreter)
+        private static void VerifyUnaryNotNullableByte(byte? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(byte?), "p");
 
@@ -139,7 +139,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f4()(value));
         }
 
-        private static void VerifyUnaryNotNullableInt(int? value, bool useInterpreter)
+        private static void VerifyUnaryNotNullableInt(int? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(int?), "p");
 
@@ -193,7 +193,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f4()(value));
         }
 
-        private static void VerifyUnaryNotNullableLong(long? value, bool useInterpreter)
+        private static void VerifyUnaryNotNullableLong(long? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(long?), "p");
 
@@ -247,7 +247,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f4()(value));
         }
 
-        private static void VerifyUnaryNotNullableSByte(sbyte? value, bool useInterpreter)
+        private static void VerifyUnaryNotNullableSByte(sbyte? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(sbyte?), "p");
 
@@ -301,7 +301,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f4()(value));
         }
 
-        private static void VerifyUnaryNotNullableShort(short? value, bool useInterpreter)
+        private static void VerifyUnaryNotNullableShort(short? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(short?), "p");
 
@@ -355,7 +355,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f4()(value));
         }
 
-        private static void VerifyUnaryNotNullableUInt(uint? value, bool useInterpreter)
+        private static void VerifyUnaryNotNullableUInt(uint? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(uint?), "p");
 
@@ -409,7 +409,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f4()(value));
         }
 
-        private static void VerifyUnaryNotNullableULong(ulong? value, bool useInterpreter)
+        private static void VerifyUnaryNotNullableULong(ulong? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(ulong?), "p");
 
@@ -463,7 +463,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f4()(value));
         }
 
-        private static void VerifyUnaryNotNullableUShort(ushort? value, bool useInterpreter)
+        private static void VerifyUnaryNotNullableUShort(ushort? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(ushort?), "p");
 

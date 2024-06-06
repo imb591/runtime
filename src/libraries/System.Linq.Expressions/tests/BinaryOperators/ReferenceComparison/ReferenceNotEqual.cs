@@ -9,7 +9,7 @@ namespace System.Linq.Expressions.Tests
     {
         [Theory]
         [PerCompilationType(nameof(ReferenceObjectsData))]
-        public void FalseOnSame(object item, bool useInterpreter)
+        public void FalseOnSame(object item, CompilationType useInterpreter)
         {
             Expression exp = Expression.ReferenceNotEqual(
                     Expression.Constant(item, item.GetType()),
@@ -20,7 +20,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ReferenceTypesData))]
-        public void FalseOnBothNull(Type type, bool useInterpreter)
+        public void FalseOnBothNull(Type type, CompilationType useInterpreter)
         {
             Expression exp = Expression.ReferenceNotEqual(
                 Expression.Constant(null, type),
@@ -31,7 +31,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ReferenceObjectsData))]
-        public void TrueIfLeftNull(object item, bool useInterpreter)
+        public void TrueIfLeftNull(object item, CompilationType useInterpreter)
         {
             Expression exp = Expression.ReferenceNotEqual(
                     Expression.Constant(null, item.GetType()),
@@ -42,7 +42,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ReferenceObjectsData))]
-        public void TrueIfRightNull(object item, bool useInterpreter)
+        public void TrueIfRightNull(object item, CompilationType useInterpreter)
         {
             Expression exp = Expression.ReferenceNotEqual(
                     Expression.Constant(item, item.GetType()),
@@ -53,7 +53,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(DifferentObjects))]
-        public void TrueIfDifferentObjectsAsObject(object x, object y, bool useInterpreter)
+        public void TrueIfDifferentObjectsAsObject(object x, object y, CompilationType useInterpreter)
         {
             Expression exp = Expression.ReferenceNotEqual(
                     Expression.Constant(x, typeof(object)),
@@ -64,7 +64,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(DifferentObjects))]
-        public void TrueIfDifferentObjectsOwnType(object x, object y, bool useInterpreter)
+        public void TrueIfDifferentObjectsOwnType(object x, object y, CompilationType useInterpreter)
         {
             Expression exp = Expression.ReferenceNotEqual(
                     Expression.Constant(x),
@@ -95,7 +95,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ComparableValuesData))]
-        public void FalseOnSameViaInterface(object item, bool useInterpreter)
+        public void FalseOnSameViaInterface(object item, CompilationType useInterpreter)
         {
             Expression exp = Expression.ReferenceNotEqual(
                 Expression.Constant(item, typeof(IComparable)),
@@ -106,7 +106,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(DifferentComparableValues))]
-        public void TrueOnDifferentViaInterface(object x, object y, bool useInterpreter)
+        public void TrueOnDifferentViaInterface(object x, object y, CompilationType useInterpreter)
         {
             Expression exp = Expression.ReferenceNotEqual(
                 Expression.Constant(x, typeof(IComparable)),
@@ -117,7 +117,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ComparableReferenceTypesData))]
-        public void FalseOnSameLeftViaInterface(object item, bool useInterpreter)
+        public void FalseOnSameLeftViaInterface(object item, CompilationType useInterpreter)
         {
             Expression exp = Expression.ReferenceNotEqual(
                 Expression.Constant(item, typeof(IComparable)),
@@ -128,7 +128,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ComparableReferenceTypesData))]
-        public void FalseOnSameRightViaInterface(object item, bool useInterpreter)
+        public void FalseOnSameRightViaInterface(object item, CompilationType useInterpreter)
         {
             Expression exp = Expression.ReferenceNotEqual(
                 Expression.Constant(item),

@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableBoolConstantTest(bool useInterpreter)
+        public static void CheckNullableBoolConstantTest(CompilationType useInterpreter)
         {
             foreach (bool? value in new bool?[] { null, true, false })
             {
@@ -19,7 +19,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableByteConstantTest(bool useInterpreter)
+        public static void CheckNullableByteConstantTest(CompilationType useInterpreter)
         {
             foreach (byte? value in new byte?[] { null, 0, 1, byte.MaxValue })
             {
@@ -28,7 +28,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableCharConstantTest(bool useInterpreter)
+        public static void CheckNullableCharConstantTest(CompilationType useInterpreter)
         {
             foreach (char? value in new char?[] { null, '\0', '\b', 'A', '\uffff' })
             {
@@ -37,7 +37,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableDecimalConstantTest(bool useInterpreter)
+        public static void CheckNullableDecimalConstantTest(CompilationType useInterpreter)
         {
             foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
             {
@@ -46,7 +46,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableDoubleConstantTest(bool useInterpreter)
+        public static void CheckNullableDoubleConstantTest(CompilationType useInterpreter)
         {
             foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
             {
@@ -55,7 +55,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableEnumConstantTest(bool useInterpreter)
+        public static void CheckNullableEnumConstantTest(CompilationType useInterpreter)
         {
             foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
             {
@@ -64,7 +64,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableEnumLongConstantTest(bool useInterpreter)
+        public static void CheckNullableEnumLongConstantTest(CompilationType useInterpreter)
         {
             foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
             {
@@ -73,7 +73,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableFloatConstantTest(bool useInterpreter)
+        public static void CheckNullableFloatConstantTest(CompilationType useInterpreter)
         {
             foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
             {
@@ -82,7 +82,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableIntConstantTest(bool useInterpreter)
+        public static void CheckNullableIntConstantTest(CompilationType useInterpreter)
         {
             foreach (int? value in new int?[] { null, 0, 1, -1, int.MinValue, int.MaxValue })
             {
@@ -91,7 +91,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableLongConstantTest(bool useInterpreter)
+        public static void CheckNullableLongConstantTest(CompilationType useInterpreter)
         {
             foreach (long? value in new long?[] { null, 0, 1, -1, long.MinValue, long.MaxValue })
             {
@@ -100,7 +100,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableStructConstantTest(bool useInterpreter)
+        public static void CheckNullableStructConstantTest(CompilationType useInterpreter)
         {
             foreach (S? value in new S?[] { null, default(S), new S() })
             {
@@ -109,7 +109,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableSByteConstantTest(bool useInterpreter)
+        public static void CheckNullableSByteConstantTest(CompilationType useInterpreter)
         {
             foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
             {
@@ -118,7 +118,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableStructWithStringConstantTest(bool useInterpreter)
+        public static void CheckNullableStructWithStringConstantTest(CompilationType useInterpreter)
         {
             foreach (Sc? value in new Sc?[] { null, default(Sc), new Sc(), new Sc(null) })
             {
@@ -127,7 +127,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableStructWithStringAndFieldConstantTest(bool useInterpreter)
+        public static void CheckNullableStructWithStringAndFieldConstantTest(CompilationType useInterpreter)
         {
             foreach (Scs? value in new Scs?[] { null, default(Scs), new Scs(), new Scs(null, new S()) })
             {
@@ -136,7 +136,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableShortConstantTest(bool useInterpreter)
+        public static void CheckNullableShortConstantTest(CompilationType useInterpreter)
         {
             foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
             {
@@ -145,7 +145,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableStructWithTwoValuesConstantTest(bool useInterpreter)
+        public static void CheckNullableStructWithTwoValuesConstantTest(CompilationType useInterpreter)
         {
             foreach (Sp? value in new Sp?[] { null, default(Sp), new Sp(), new Sp(5, 5.0) })
             {
@@ -154,7 +154,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableStructWithValueConstantTest(bool useInterpreter)
+        public static void CheckNullableStructWithValueConstantTest(CompilationType useInterpreter)
         {
             foreach (Ss? value in new Ss?[] { null, default(Ss), new Ss(), new Ss(new S()) })
             {
@@ -163,7 +163,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableUIntConstantTest(bool useInterpreter)
+        public static void CheckNullableUIntConstantTest(CompilationType useInterpreter)
         {
             foreach (uint? value in new uint?[] { null, 0, 1, uint.MaxValue })
             {
@@ -172,7 +172,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableULongConstantTest(bool useInterpreter)
+        public static void CheckNullableULongConstantTest(CompilationType useInterpreter)
         {
             foreach (ulong? value in new ulong?[] { null, 0, 1, ulong.MaxValue })
             {
@@ -181,7 +181,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableUShortConstantTest(bool useInterpreter)
+        public static void CheckNullableUShortConstantTest(CompilationType useInterpreter)
         {
             foreach (ushort? value in new ushort?[] { null, 0, 1, ushort.MaxValue })
             {
@@ -190,19 +190,19 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableGenericWithStructRestrictionWithEnumConstantTest(bool useInterpreter)
+        public static void CheckNullableGenericWithStructRestrictionWithEnumConstantTest(CompilationType useInterpreter)
         {
             CheckNullableGenericWithStructRestrictionConstantHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableGenericWithStructRestrictionWithStructConstantTest(bool useInterpreter)
+        public static void CheckNullableGenericWithStructRestrictionWithStructConstantTest(CompilationType useInterpreter)
         {
             CheckNullableGenericWithStructRestrictionConstantHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableGenericWithStructRestrictionWithStructWithStringAndValueConstantTest(bool useInterpreter)
+        public static void CheckNullableGenericWithStructRestrictionWithStructWithStringAndValueConstantTest(CompilationType useInterpreter)
         {
             CheckNullableGenericWithStructRestrictionConstantHelper<Scs>(useInterpreter);
         }
@@ -211,7 +211,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Generic helpers
 
-        private static void CheckNullableGenericWithStructRestrictionConstantHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckNullableGenericWithStructRestrictionConstantHelper<Ts>(CompilationType useInterpreter) where Ts : struct
         {
             foreach (Ts? value in new Ts?[] { null, default(Ts), new Ts() })
             {
@@ -223,7 +223,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyNullableBoolConstant(bool? value, bool useInterpreter)
+        private static void VerifyNullableBoolConstant(bool? value, CompilationType useInterpreter)
         {
             Expression<Func<bool?>> e =
                 Expression.Lambda<Func<bool?>>(
@@ -233,7 +233,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableByteConstant(byte? value, bool useInterpreter)
+        private static void VerifyNullableByteConstant(byte? value, CompilationType useInterpreter)
         {
             Expression<Func<byte?>> e =
                 Expression.Lambda<Func<byte?>>(
@@ -243,7 +243,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableCharConstant(char? value, bool useInterpreter)
+        private static void VerifyNullableCharConstant(char? value, CompilationType useInterpreter)
         {
             Expression<Func<char?>> e =
                 Expression.Lambda<Func<char?>>(
@@ -253,7 +253,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableDecimalConstant(decimal? value, bool useInterpreter)
+        private static void VerifyNullableDecimalConstant(decimal? value, CompilationType useInterpreter)
         {
             Expression<Func<decimal?>> e =
                 Expression.Lambda<Func<decimal?>>(
@@ -263,7 +263,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableDoubleConstant(double? value, bool useInterpreter)
+        private static void VerifyNullableDoubleConstant(double? value, CompilationType useInterpreter)
         {
             Expression<Func<double?>> e =
                 Expression.Lambda<Func<double?>>(
@@ -273,7 +273,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableEnumConstant(E? value, bool useInterpreter)
+        private static void VerifyNullableEnumConstant(E? value, CompilationType useInterpreter)
         {
             Expression<Func<E?>> e =
                 Expression.Lambda<Func<E?>>(
@@ -283,7 +283,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableEnumLongConstant(El? value, bool useInterpreter)
+        private static void VerifyNullableEnumLongConstant(El? value, CompilationType useInterpreter)
         {
             Expression<Func<El?>> e =
                 Expression.Lambda<Func<El?>>(
@@ -293,7 +293,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableFloatConstant(float? value, bool useInterpreter)
+        private static void VerifyNullableFloatConstant(float? value, CompilationType useInterpreter)
         {
             Expression<Func<float?>> e =
                 Expression.Lambda<Func<float?>>(
@@ -303,7 +303,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableIntConstant(int? value, bool useInterpreter)
+        private static void VerifyNullableIntConstant(int? value, CompilationType useInterpreter)
         {
             Expression<Func<int?>> e =
                 Expression.Lambda<Func<int?>>(
@@ -313,7 +313,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableLongConstant(long? value, bool useInterpreter)
+        private static void VerifyNullableLongConstant(long? value, CompilationType useInterpreter)
         {
             Expression<Func<long?>> e =
                 Expression.Lambda<Func<long?>>(
@@ -323,7 +323,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableStructConstant(S? value, bool useInterpreter)
+        private static void VerifyNullableStructConstant(S? value, CompilationType useInterpreter)
         {
             Expression<Func<S?>> e =
                 Expression.Lambda<Func<S?>>(
@@ -333,7 +333,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableSByteConstant(sbyte? value, bool useInterpreter)
+        private static void VerifyNullableSByteConstant(sbyte? value, CompilationType useInterpreter)
         {
             Expression<Func<sbyte?>> e =
                 Expression.Lambda<Func<sbyte?>>(
@@ -343,7 +343,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableStructWithStringConstant(Sc? value, bool useInterpreter)
+        private static void VerifyNullableStructWithStringConstant(Sc? value, CompilationType useInterpreter)
         {
             Expression<Func<Sc?>> e =
                 Expression.Lambda<Func<Sc?>>(
@@ -353,7 +353,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableStructWithStringAndFieldConstant(Scs? value, bool useInterpreter)
+        private static void VerifyNullableStructWithStringAndFieldConstant(Scs? value, CompilationType useInterpreter)
         {
             Expression<Func<Scs?>> e =
                 Expression.Lambda<Func<Scs?>>(
@@ -363,7 +363,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableShortConstant(short? value, bool useInterpreter)
+        private static void VerifyNullableShortConstant(short? value, CompilationType useInterpreter)
         {
             Expression<Func<short?>> e =
                 Expression.Lambda<Func<short?>>(
@@ -373,7 +373,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableStructWithTwoValuesConstant(Sp? value, bool useInterpreter)
+        private static void VerifyNullableStructWithTwoValuesConstant(Sp? value, CompilationType useInterpreter)
         {
             Expression<Func<Sp?>> e =
                 Expression.Lambda<Func<Sp?>>(
@@ -383,7 +383,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableStructWithValueConstant(Ss? value, bool useInterpreter)
+        private static void VerifyNullableStructWithValueConstant(Ss? value, CompilationType useInterpreter)
         {
             Expression<Func<Ss?>> e =
                 Expression.Lambda<Func<Ss?>>(
@@ -393,7 +393,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableUIntConstant(uint? value, bool useInterpreter)
+        private static void VerifyNullableUIntConstant(uint? value, CompilationType useInterpreter)
         {
             Expression<Func<uint?>> e =
                 Expression.Lambda<Func<uint?>>(
@@ -403,7 +403,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableULongConstant(ulong? value, bool useInterpreter)
+        private static void VerifyNullableULongConstant(ulong? value, CompilationType useInterpreter)
         {
             Expression<Func<ulong?>> e =
                 Expression.Lambda<Func<ulong?>>(
@@ -413,7 +413,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableUShortConstant(ushort? value, bool useInterpreter)
+        private static void VerifyNullableUShortConstant(ushort? value, CompilationType useInterpreter)
         {
             Expression<Func<ushort?>> e =
                 Expression.Lambda<Func<ushort?>>(
@@ -423,7 +423,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableGenericWithStructRestriction<Ts>(Ts? value, bool useInterpreter) where Ts : struct
+        private static void VerifyNullableGenericWithStructRestriction<Ts>(Ts? value, CompilationType useInterpreter) where Ts : struct
         {
             Expression<Func<Ts?>> e =
                 Expression.Lambda<Func<Ts?>>(

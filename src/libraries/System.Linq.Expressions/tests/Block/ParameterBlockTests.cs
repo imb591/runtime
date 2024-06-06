@@ -16,7 +16,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ConstantValueData))]
-        public void SingleElementBlock(object value, bool useInterpreter)
+        public void SingleElementBlock(object value, CompilationType useInterpreter)
         {
             Type type = value.GetType();
             ConstantExpression constant = Expression.Constant(value, type);
@@ -33,7 +33,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ConstantValueData))]
-        public void DoubleElementBlock(object value, bool useInterpreter)
+        public void DoubleElementBlock(object value, CompilationType useInterpreter)
         {
             Type type = value.GetType();
             ConstantExpression constant = Expression.Constant(value, type);
@@ -99,7 +99,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ObjectAssignableConstantValuesAndSizes))]
-        public void BlockExplicitType(object value, int blockSize, bool useInterpreter)
+        public void BlockExplicitType(object value, int blockSize, CompilationType useInterpreter)
         {
             ConstantExpression constant = Expression.Constant(value, value.GetType());
             BlockExpression block = Expression.Block(typeof(object), SingleParameter, PadBlock(blockSize - 1, constant));
@@ -122,7 +122,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ConstantValuesAndSizes))]
-        public void BlockFromEmptyParametersSameAsFromParams(object value, int blockSize, bool useInterpreter)
+        public void BlockFromEmptyParametersSameAsFromParams(object value, int blockSize, CompilationType useInterpreter)
         {
             ConstantExpression constant = Expression.Constant(value, value.GetType());
             IEnumerable<Expression> expressions = PadBlock(blockSize - 1, constant);

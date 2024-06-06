@@ -30,7 +30,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryArithmeticNegateDecimalTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticNegateDecimalTest(CompilationType useInterpreter)
         {
             decimal[] values = new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -40,7 +40,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryArithmeticNegateDoubleTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticNegateDoubleTest(CompilationType useInterpreter)
         {
             double[] values = new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -50,7 +50,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryArithmeticNegateFloatTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticNegateFloatTest(CompilationType useInterpreter)
         {
             float[] values = new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -60,7 +60,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryArithmeticNegateIntTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticNegateIntTest(CompilationType useInterpreter)
         {
             int[] values = new int[] { 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -70,7 +70,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryArithmeticNegateLongTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticNegateLongTest(CompilationType useInterpreter)
         {
             long[] values = new long[] { 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -90,7 +90,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryArithmeticNegateShortTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticNegateShortTest(CompilationType useInterpreter)
         {
             short[] values = new short[] { 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -120,7 +120,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidOperationException>(() => Expression.Negate(Expression.Constant(value, typeof(char))));
         }
 
-        private static void VerifyArithmeticNegateDecimal(decimal value, bool useInterpreter)
+        private static void VerifyArithmeticNegateDecimal(decimal value, CompilationType useInterpreter)
         {
             Expression<Func<decimal>> e =
                 Expression.Lambda<Func<decimal>>(
@@ -130,7 +130,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((decimal)(-value), f());
         }
 
-        private static void VerifyArithmeticNegateDouble(double value, bool useInterpreter)
+        private static void VerifyArithmeticNegateDouble(double value, CompilationType useInterpreter)
         {
             Expression<Func<double>> e =
                 Expression.Lambda<Func<double>>(
@@ -140,7 +140,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((double)(-value), f());
         }
 
-        private static void VerifyArithmeticNegateFloat(float value, bool useInterpreter)
+        private static void VerifyArithmeticNegateFloat(float value, CompilationType useInterpreter)
         {
             Expression<Func<float>> e =
                 Expression.Lambda<Func<float>>(
@@ -150,7 +150,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((float)(-value), f());
         }
 
-        private static void VerifyArithmeticNegateInt(int value, bool useInterpreter)
+        private static void VerifyArithmeticNegateInt(int value, CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -160,7 +160,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((int)(-value)), f());
         }
 
-        private static void VerifyArithmeticNegateLong(long value, bool useInterpreter)
+        private static void VerifyArithmeticNegateLong(long value, CompilationType useInterpreter)
         {
             Expression<Func<long>> e =
                 Expression.Lambda<Func<long>>(
@@ -175,7 +175,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidOperationException>(() => Expression.Negate(Expression.Constant(value, typeof(sbyte))));
         }
 
-        private static void VerifyArithmeticNegateShort(short value, bool useInterpreter)
+        private static void VerifyArithmeticNegateShort(short value, CompilationType useInterpreter)
         {
             Expression<Func<short>> e =
                 Expression.Lambda<Func<short>>(

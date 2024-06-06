@@ -12,7 +12,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedDivideNullableByteTest(bool useInterpreter)
+        public static void CheckLiftedDivideNullableByteTest(CompilationType useInterpreter)
         {
             byte?[] values = new byte?[] { null, 0, 1, byte.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -26,7 +26,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedDivideNullableCharTest(bool useInterpreter)
+        public static void CheckLiftedDivideNullableCharTest(CompilationType useInterpreter)
         {
             char?[] values = new char?[] { null, '\0', '\b', 'A', '\uffff' };
             for (int i = 0; i < values.Length; i++)
@@ -39,7 +39,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedDivideNullableDecimalTest(bool useInterpreter)
+        public static void CheckLiftedDivideNullableDecimalTest(CompilationType useInterpreter)
         {
             decimal?[] values = new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -52,7 +52,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedDivideNullableDoubleTest(bool useInterpreter)
+        public static void CheckLiftedDivideNullableDoubleTest(CompilationType useInterpreter)
         {
             double?[] values = new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -65,7 +65,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedDivideNullableFloatTest(bool useInterpreter)
+        public static void CheckLiftedDivideNullableFloatTest(CompilationType useInterpreter)
         {
             float?[] values = new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -79,7 +79,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedDivideNullableIntTest(bool useInterpreter)
+        public static void CheckLiftedDivideNullableIntTest(CompilationType useInterpreter)
         {
             int?[] values = new int?[] { null, 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -93,7 +93,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedDivideNullableLongTest(bool useInterpreter)
+        public static void CheckLiftedDivideNullableLongTest(CompilationType useInterpreter)
         {
             long?[] values = new long?[] { null, 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -107,7 +107,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedDivideNullableSByteTest(bool useInterpreter)
+        public static void CheckLiftedDivideNullableSByteTest(CompilationType useInterpreter)
         {
             sbyte?[] values = new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -121,7 +121,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedDivideNullableShortTest(bool useInterpreter)
+        public static void CheckLiftedDivideNullableShortTest(CompilationType useInterpreter)
         {
             short?[] values = new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -135,7 +135,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedDivideNullableUIntTest(bool useInterpreter)
+        public static void CheckLiftedDivideNullableUIntTest(CompilationType useInterpreter)
         {
             uint?[] values = new uint?[] { null, 0, 1, uint.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -149,7 +149,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedDivideNullableULongTest(bool useInterpreter)
+        public static void CheckLiftedDivideNullableULongTest(CompilationType useInterpreter)
         {
             ulong?[] values = new ulong?[] { null, 0, 1, ulong.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -163,7 +163,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedDivideNullableUShortTest(bool useInterpreter)
+        public static void CheckLiftedDivideNullableUShortTest(CompilationType useInterpreter)
         {
             ushort?[] values = new ushort?[] { null, 0, 1, ushort.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -177,7 +177,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedDivideNullableNumberTest(bool useInterpreter)
+        public static void CheckLiftedDivideNullableNumberTest(CompilationType useInterpreter)
         {
             AssertExtensions.ThrowsOnAot<NotSupportedException>(() =>
             {
@@ -260,7 +260,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyDivideNullableByte(byte? a, byte? b, bool useInterpreter)
+        private static void VerifyDivideNullableByte(byte? a, byte? b, CompilationType useInterpreter)
         {
             Expression<Func<byte?>> e =
                 Expression.Lambda<Func<byte?>>(
@@ -276,7 +276,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal((byte?)(a / b), f());
         }
 
-        private static void VerifyDivideNullableChar(char? a, char? b, bool useInterpreter)
+        private static void VerifyDivideNullableChar(char? a, char? b, CompilationType useInterpreter)
         {
             Expression<Func<char?>> e =
                 Expression.Lambda<Func<char?>>(
@@ -292,7 +292,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal((char?)(a / b), f());
         }
 
-        private static void VerifyDivideNullableDecimal(decimal? a, decimal? b, bool useInterpreter)
+        private static void VerifyDivideNullableDecimal(decimal? a, decimal? b, CompilationType useInterpreter)
         {
             Expression<Func<decimal?>> e =
                 Expression.Lambda<Func<decimal?>>(
@@ -308,7 +308,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(a / b, f());
         }
 
-        private static void VerifyDivideNullableDouble(double? a, double? b, bool useInterpreter)
+        private static void VerifyDivideNullableDouble(double? a, double? b, CompilationType useInterpreter)
         {
             Expression<Func<double?>> e =
                 Expression.Lambda<Func<double?>>(
@@ -321,7 +321,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a / b, f());
         }
 
-        private static void VerifyDivideNullableFloat(float? a, float? b, bool useInterpreter)
+        private static void VerifyDivideNullableFloat(float? a, float? b, CompilationType useInterpreter)
         {
             Expression<Func<float?>> e =
                 Expression.Lambda<Func<float?>>(
@@ -334,7 +334,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a / b, f());
         }
 
-        private static void VerifyDivideNullableInt(int? a, int? b, bool useInterpreter)
+        private static void VerifyDivideNullableInt(int? a, int? b, CompilationType useInterpreter)
         {
             Expression<Func<int?>> e =
                 Expression.Lambda<Func<int?>>(
@@ -352,7 +352,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(a / b, f());
         }
 
-        private static void VerifyDivideNullableLong(long? a, long? b, bool useInterpreter)
+        private static void VerifyDivideNullableLong(long? a, long? b, CompilationType useInterpreter)
         {
             Expression<Func<long?>> e =
                 Expression.Lambda<Func<long?>>(
@@ -370,7 +370,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(a / b, f());
         }
 
-        private static void VerifyDivideNullableSByte(sbyte? a, sbyte? b, bool useInterpreter)
+        private static void VerifyDivideNullableSByte(sbyte? a, sbyte? b, CompilationType useInterpreter)
         {
             Expression<Func<sbyte?>> e =
                 Expression.Lambda<Func<sbyte?>>(
@@ -386,7 +386,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(unchecked((sbyte?)(a / b)), f());
         }
 
-        private static void VerifyDivideNullableShort(short? a, short? b, bool useInterpreter)
+        private static void VerifyDivideNullableShort(short? a, short? b, CompilationType useInterpreter)
         {
             Expression<Func<short?>> e =
                 Expression.Lambda<Func<short?>>(
@@ -402,7 +402,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(unchecked((short?)(a / b)), f());
         }
 
-        private static void VerifyDivideNullableUInt(uint? a, uint? b, bool useInterpreter)
+        private static void VerifyDivideNullableUInt(uint? a, uint? b, CompilationType useInterpreter)
         {
             Expression<Func<uint?>> e =
                 Expression.Lambda<Func<uint?>>(
@@ -418,7 +418,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(a / b, f());
         }
 
-        private static void VerifyDivideNullableULong(ulong? a, ulong? b, bool useInterpreter)
+        private static void VerifyDivideNullableULong(ulong? a, ulong? b, CompilationType useInterpreter)
         {
             Expression<Func<ulong?>> e =
                 Expression.Lambda<Func<ulong?>>(
@@ -434,7 +434,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(a / b, f());
         }
 
-        private static void VerifyDivideNullableUShort(ushort? a, ushort? b, bool useInterpreter)
+        private static void VerifyDivideNullableUShort(ushort? a, ushort? b, CompilationType useInterpreter)
         {
             Expression<Func<ushort?>> e =
                 Expression.Lambda<Func<ushort?>>(
@@ -450,7 +450,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal((ushort?)(a / b), f());
         }
 
-        private static void VerifyDivideNullableNumber(Number? a, Number? b, bool useInterpreter)
+        private static void VerifyDivideNullableNumber(Number? a, Number? b, CompilationType useInterpreter)
         {
             Expression<Func<Number?>> e =
                 Expression.Lambda<Func<Number?>>(

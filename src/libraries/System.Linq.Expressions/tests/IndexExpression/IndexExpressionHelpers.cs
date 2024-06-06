@@ -20,8 +20,10 @@ namespace System.Linq.Expressions.Tests
 
             // Compile and evaluate with interpretation flag and without
             // in case there are bugs in the compiler/interpreter.
-            Assert.Equal(expected, lambda.Compile(false)());
-            Assert.Equal(expected, lambda.Compile(true)());
+            foreach (var type in CompilationTypes.Types)
+            {
+                Assert.Equal(expected, lambda.Compile(type)());
+            }
         }
     }
 }

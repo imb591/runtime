@@ -395,7 +395,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void Spill_RefInstance_IndexAssignment_Eval(bool useInterpreter)
+        public static void Spill_RefInstance_IndexAssignment_Eval(CompilationType useInterpreter)
         {
             Expression<Func<int>> e = Spill_RefInstance_IndexAssignment();
 
@@ -498,7 +498,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void Spill_RefInstance_Index_Eval(bool useInterpreter)
+        public static void Spill_RefInstance_Index_Eval(CompilationType useInterpreter)
         {
             Expression<Func<int>> e = Spill_RefInstance_Index();
 
@@ -593,7 +593,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void Spill_RefInstance_MemberAssignment_Eval(bool useInterpreter)
+        public static void Spill_RefInstance_MemberAssignment_Eval(CompilationType useInterpreter)
         {
             Expression<Func<int>> e = Spill_RefInstance_MemberAssignment();
 
@@ -698,7 +698,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void Spill_RefInstance_Call_Eval(bool useInterpreter)
+        public static void Spill_RefInstance_Call_Eval(CompilationType useInterpreter)
         {
             Expression<Func<int>> e = Spill_RefInstance_Call();
 
@@ -792,7 +792,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void Spill_RefArgs_Call_Eval(bool useInterpreter)
+        public static void Spill_RefArgs_Call_Eval(CompilationType useInterpreter)
         {
             Expression<Func<int>> e = Spill_RefArgs_Call();
 
@@ -884,7 +884,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void Spill_RefArgs_New_Eval(bool useInterpreter)
+        public static void Spill_RefArgs_New_Eval(CompilationType useInterpreter)
         {
             Expression<Func<int>> e = Spill_RefArgs_New();
 
@@ -1053,7 +1053,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void Spill_RefArgs_Invoke_Eval(bool useInterpreter)
+        public static void Spill_RefArgs_Invoke_Eval(CompilationType useInterpreter)
         {
             Expression<Func<int>> e = Spill_RefArgs_Invoke();
 
@@ -1078,7 +1078,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void Spill_RefArgs_Invoke_Inline_Eval(bool useInterpreter)
+        public static void Spill_RefArgs_Invoke_Inline_Eval(CompilationType useInterpreter)
         {
             Expression<Func<int>> e = Spill_RefArgs_Invoke_Inline();
 
@@ -1184,7 +1184,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void Spill_RefInstance_ListInit_Eval(bool useInterpreter)
+        public static void Spill_RefInstance_ListInit_Eval(CompilationType useInterpreter)
         {
             Expression<Func<ValueList>> e = Spill_RefInstance_ListInit();
 
@@ -1291,7 +1291,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void Spill_RefInstance_MemberInit_Assign_Field_Eval(bool useInterpreter)
+        public static void Spill_RefInstance_MemberInit_Assign_Field_Eval(CompilationType useInterpreter)
         {
             Expression<Func<ValueBar>> e = Spill_RefInstance_MemberInit_Assign_Field();
 
@@ -1398,7 +1398,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void Spill_RefInstance_MemberInit_Assign_Property_Eval(bool useInterpreter)
+        public static void Spill_RefInstance_MemberInit_Assign_Property_Eval(CompilationType useInterpreter)
         {
             Expression<Func<ValueBar>> e = Spill_RefInstance_MemberInit_Assign_Property();
 
@@ -2187,23 +2187,29 @@ namespace System.Linq.Expressions.Tests
 
         private static void Test(Func<Expression, Expression> factory, Expression arg1)
         {
-            Test(args => factory(args[0]), new[] { arg1 }, false);
-            Test(args => factory(args[0]), new[] { arg1 }, true);
+            foreach (var useInterpreter in CompilationTypes.Types)
+            {
+                Test(args => factory(args[0]), new[] { arg1 }, useInterpreter);
+            }
         }
 
         private static void Test(Func<Expression, Expression, Expression> factory, Expression arg1, Expression arg2)
         {
-            Test(args => factory(args[0], args[1]), new[] { arg1, arg2 }, false);
-            Test(args => factory(args[0], args[1]), new[] { arg1, arg2 }, true);
+            foreach (var useInterpreter in CompilationTypes.Types)
+            {
+                Test(args => factory(args[0], args[1]), new[] { arg1, arg2 }, useInterpreter);
+            }
         }
 
         private static void Test(Func<Expression, Expression, Expression, Expression> factory, Expression arg1, Expression arg2, Expression arg3)
         {
-            Test(args => factory(args[0], args[1], args[2]), new[] { arg1, arg2, arg3 }, false);
-            Test(args => factory(args[0], args[1], args[2]), new[] { arg1, arg2, arg3 }, true);
+            foreach (var useInterpreter in CompilationTypes.Types)
+            {
+                Test(args => factory(args[0], args[1], args[2]), new[] { arg1, arg2, arg3 }, useInterpreter);
+            }
         }
 
-        private static void Test(Func<Expression[], Expression> factory, Expression[] args, bool useInterpreter)
+        private static void Test(Func<Expression[], Expression> factory, Expression[] args, CompilationType useInterpreter)
         {
             object expected = Eval(factory(args), useInterpreter);
 
@@ -2220,7 +2226,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static object Eval(Expression expression, bool useInterpreter)
+        private static object Eval(Expression expression, CompilationType useInterpreter)
         {
             return Expression.Lambda<Func<object>>(Expression.Convert(expression, typeof(object))).Compile(useInterpreter)();
         }

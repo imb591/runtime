@@ -555,7 +555,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void CallWithLambdaIndex(bool useInterpreter)
+        public void CallWithLambdaIndex(CompilationType useInterpreter)
         {
             // An exception to the rule against unassignable indices, lamdba expressions
             // can be automatically quoted.
@@ -567,7 +567,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void CallWithIntAndLambdaIndex(bool useInterpreter)
+        public void CallWithIntAndLambdaIndex(CompilationType useInterpreter)
         {
             PropertyInfo prop = typeof(IntAndExpressionIndexed).GetProperty("Item");
             ConstantExpression instance = Expression.Constant(new IntAndExpressionIndexed());
@@ -587,7 +587,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void OverloadedIndexer(bool useInterpreter)
+        public void OverloadedIndexer(CompilationType useInterpreter)
         {
             ConstantExpression instance = Expression.Constant(new OverloadedIndexers());
             ConstantExpression index = Expression.Constant("");
@@ -613,7 +613,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void NonIndexedPropertyExplicitlyNoIndices(bool useInterpreter)
+        public void NonIndexedPropertyExplicitlyNoIndices(CompilationType useInterpreter)
         {
             ConstantExpression instance = Expression.Constant("123");
             IndexExpression prop = Expression.Property(instance, "Length", null);
@@ -650,7 +650,7 @@ namespace System.Linq.Expressions.Tests
 
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConstrainedVirtualCall(bool useInterpreter)
+        public static void ConstrainedVirtualCall(CompilationType useInterpreter)
         {
             // Virtual call via base declaration to valuetype.
             ConstantExpression instance = Expression.Constant(new InterfaceIndexableValueType());

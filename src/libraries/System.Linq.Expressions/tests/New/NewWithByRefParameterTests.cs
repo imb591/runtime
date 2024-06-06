@@ -38,7 +38,7 @@ namespace System.Linq.Expressions.Tests
         private delegate OutNewType OutNewTypeFactory(out int x);
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void CreateByRef(bool useInterpreter)
+        public void CreateByRef(CompilationType useInterpreter)
         {
             ParameterExpression pX = Expression.Parameter(typeof(int).MakeByRefType());
             ParameterExpression pY = Expression.Parameter(typeof(int).MakeByRefType());
@@ -52,7 +52,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(16, y);
         }
 
-        private void CreateByRefAliasing(bool useInterpreter)
+        private void CreateByRefAliasing(CompilationType useInterpreter)
         {
             ParameterExpression pX = Expression.Parameter(typeof(int).MakeByRefType());
             ParameterExpression pY = Expression.Parameter(typeof(int).MakeByRefType());
@@ -67,18 +67,18 @@ namespace System.Linq.Expressions.Tests
         [Fact, ActiveIssue("https://github.com/dotnet/runtime/issues/19286")]
         public void CreateByRefAliasingInterpreted()
         {
-            CreateByRefAliasing(useInterpreter: true);
+            CreateByRefAliasing(useInterpreter: CompilationType.Interpret);
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/19286", typeof(PlatformDetection), nameof(PlatformDetection.IsLinqExpressionsBuiltWithIsInterpretingOnly))]
         [Fact]
         public void CreateByRefAliasingCompiled()
         {
-            CreateByRefAliasing(useInterpreter: false);
+            CreateByRefAliasing(useInterpreter: CompilationType.Compile);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void CreateByRefReferencingReadonly(bool useInterpreter)
+        public void CreateByRefReferencingReadonly(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(int).MakeByRefType());
             ByRefNewFactory1 del =
@@ -93,7 +93,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void CreateByRefReferencingOnlyReadonly(bool useInterpreter)
+        public void CreateByRefReferencingOnlyReadonly(CompilationType useInterpreter)
         {
             Func<ByRefNewType> del =
                 Expression.Lambda<Func<ByRefNewType>>(
@@ -106,7 +106,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void CreateByRefThrowing(bool useInterpreter)
+        public void CreateByRefThrowing(CompilationType useInterpreter)
         {
             ParameterExpression pX = Expression.Parameter(typeof(int).MakeByRefType());
             ParameterExpression pY = Expression.Parameter(typeof(int).MakeByRefType());
@@ -119,7 +119,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void CreateOut(bool useInterpreter)
+        public void CreateOut(CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(int).MakeByRefType());
             OutNewTypeFactory del =

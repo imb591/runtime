@@ -12,7 +12,7 @@ namespace System.Linq.Expressions.Tests
     {
         [Theory]
         [PerCompilationType(nameof(ConstantValueData))]
-        public void SingleElementBlock(object value, bool useInterpreter)
+        public void SingleElementBlock(object value, CompilationType useInterpreter)
         {
             Type type = value.GetType();
             ConstantExpression constant = Expression.Constant(value, type);
@@ -28,7 +28,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ConstantValueData))]
-        public void DoubleElementBlock(object value, bool useInterpreter)
+        public void DoubleElementBlock(object value, CompilationType useInterpreter)
         {
             Type type = value.GetType();
             ConstantExpression constant = Expression.Constant(value, type);
@@ -59,7 +59,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ConstantValueData))]
-        public void TripleElementBlock(object value, bool useInterpreter)
+        public void TripleElementBlock(object value, CompilationType useInterpreter)
         {
             Type type = value.GetType();
             ConstantExpression constant = Expression.Constant(value, type);
@@ -93,7 +93,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ConstantValueData))]
-        public void QuadrupleElementBlock(object value, bool useInterpreter)
+        public void QuadrupleElementBlock(object value, CompilationType useInterpreter)
         {
             Type type = value.GetType();
             ConstantExpression constant = Expression.Constant(value, type);
@@ -130,7 +130,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ConstantValueData))]
-        public void QuintupleElementBlock(object value, bool useInterpreter)
+        public void QuintupleElementBlock(object value, CompilationType useInterpreter)
         {
             Type type = value.GetType();
             ConstantExpression constant = Expression.Constant(value, type);
@@ -170,7 +170,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ConstantValueData))]
-        public void SextupleElementBlock(object value, bool useInterpreter)
+        public void SextupleElementBlock(object value, CompilationType useInterpreter)
         {
             Type type = value.GetType();
             ConstantExpression constant = Expression.Constant(value, type);
@@ -241,7 +241,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(ObjectAssignableConstantValuesAndSizes))]
-        public void BlockExplicitType(object value, int blockSize, bool useInterpreter)
+        public void BlockExplicitType(object value, int blockSize, CompilationType useInterpreter)
         {
             ConstantExpression constant = Expression.Constant(value, value.GetType());
             BlockExpression block = Expression.Block(typeof(object), PadBlock(blockSize - 1, constant));

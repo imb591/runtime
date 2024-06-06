@@ -37,7 +37,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableUShortModuloTest(bool useInterpreter)
+        public static void CheckNullableUShortModuloTest(CompilationType useInterpreter)
         {
             ushort?[] array = { 0, 1, ushort.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -51,7 +51,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableShortModuloTest(bool useInterpreter)
+        public static void CheckNullableShortModuloTest(CompilationType useInterpreter)
         {
             short?[] array = { 0, 1, -1, short.MinValue, short.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -65,7 +65,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableUIntModuloTest(bool useInterpreter)
+        public static void CheckNullableUIntModuloTest(CompilationType useInterpreter)
         {
             uint?[] array = { 0, 1, uint.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -79,7 +79,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableIntModuloTest(bool useInterpreter)
+        public static void CheckNullableIntModuloTest(CompilationType useInterpreter)
         {
             int?[] array = { 0, 1, -1, int.MinValue, int.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -93,7 +93,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableULongModuloTest(bool useInterpreter)
+        public static void CheckNullableULongModuloTest(CompilationType useInterpreter)
         {
             ulong?[] array = { 0, 1, ulong.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -107,7 +107,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableLongModuloTest(bool useInterpreter)
+        public static void CheckNullableLongModuloTest(CompilationType useInterpreter)
         {
             long?[] array = { 0, 1, -1, long.MinValue, long.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -120,7 +120,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableFloatModuloTest(bool useInterpreter)
+        public static void CheckNullableFloatModuloTest(CompilationType useInterpreter)
         {
             float?[] array = { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN, null };
             for (int i = 0; i < array.Length; i++)
@@ -133,7 +133,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableDoubleModuloTest(bool useInterpreter)
+        public static void CheckNullableDoubleModuloTest(CompilationType useInterpreter)
         {
             double?[] array = { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN, null };
             for (int i = 0; i < array.Length; i++)
@@ -146,7 +146,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableDecimalModuloTest(bool useInterpreter)
+        public static void CheckNullableDecimalModuloTest(CompilationType useInterpreter)
         {
             decimal?[] array = { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -189,7 +189,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidOperationException>(() => Expression.Modulo(aExp, bExp));
         }
 
-        private static void VerifyNullableUShortModulo(ushort? a, ushort? b, bool useInterpreter)
+        private static void VerifyNullableUShortModulo(ushort? a, ushort? b, CompilationType useInterpreter)
         {
             Expression<Func<ushort?>> e =
                 Expression.Lambda<Func<ushort?>>(
@@ -205,7 +205,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(a % b, f());
         }
 
-        private static void VerifyNullableShortModulo(short? a, short? b, bool useInterpreter)
+        private static void VerifyNullableShortModulo(short? a, short? b, CompilationType useInterpreter)
         {
             Expression<Func<short?>> e =
                 Expression.Lambda<Func<short?>>(
@@ -221,7 +221,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(a % b, f());
         }
 
-        private static void VerifyNullableUIntModulo(uint? a, uint? b, bool useInterpreter)
+        private static void VerifyNullableUIntModulo(uint? a, uint? b, CompilationType useInterpreter)
         {
             Expression<Func<uint?>> e =
                 Expression.Lambda<Func<uint?>>(
@@ -237,7 +237,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(a % b, f());
         }
 
-        private static void VerifyNullableIntModulo(int? a, int? b, bool useInterpreter)
+        private static void VerifyNullableIntModulo(int? a, int? b, CompilationType useInterpreter)
         {
             Expression<Func<int?>> e =
                 Expression.Lambda<Func<int?>>(
@@ -255,7 +255,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(a % b, f());
         }
 
-        private static void VerifyNullableULongModulo(ulong? a, ulong? b, bool useInterpreter)
+        private static void VerifyNullableULongModulo(ulong? a, ulong? b, CompilationType useInterpreter)
         {
             Expression<Func<ulong?>> e =
                 Expression.Lambda<Func<ulong?>>(
@@ -271,7 +271,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(a % b, f());
         }
 
-        private static void VerifyNullableLongModulo(long? a, long? b, bool useInterpreter)
+        private static void VerifyNullableLongModulo(long? a, long? b, CompilationType useInterpreter)
         {
             Expression<Func<long?>> e =
                 Expression.Lambda<Func<long?>>(
@@ -289,7 +289,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(a % b, f());
         }
 
-        private static void VerifyNullableFloatModulo(float? a, float? b, bool useInterpreter)
+        private static void VerifyNullableFloatModulo(float? a, float? b, CompilationType useInterpreter)
         {
             Expression<Func<float?>> e =
                 Expression.Lambda<Func<float?>>(
@@ -302,7 +302,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a % b, f());
         }
 
-        private static void VerifyNullableDoubleModulo(double? a, double? b, bool useInterpreter)
+        private static void VerifyNullableDoubleModulo(double? a, double? b, CompilationType useInterpreter)
         {
             Expression<Func<double?>> e =
                 Expression.Lambda<Func<double?>>(
@@ -315,7 +315,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a % b, f());
         }
 
-        private static void VerifyNullableDecimalModulo(decimal? a, decimal? b, bool useInterpreter)
+        private static void VerifyNullableDecimalModulo(decimal? a, decimal? b, CompilationType useInterpreter)
         {
             Expression<Func<decimal?>> e =
                 Expression.Lambda<Func<decimal?>>(

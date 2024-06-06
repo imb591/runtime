@@ -14,7 +14,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void SelfApplication(bool useInterpreter)
+        public static void SelfApplication(CompilationType useInterpreter)
         {
             // Expression<X> f = x => {};
             Expression<X> f = Expression.Lambda<X>(Expression.Empty(), Expression.Parameter(typeof(X)));
@@ -28,18 +28,17 @@ namespace System.Linq.Expressions.Tests
             b.Compile(useInterpreter).DynamicInvoke();
         }
 
-        [Fact]
-        public static void NoWriteBackToInstance()
+        [Theory, ClassData(typeof(CompilationTypes))]
+        public static void NoWriteBackToInstance(CompilationType useInterpreter)
         {
-            new NoThread(false).DoTest();
-            new NoThread(true).DoTest(); // This case fails
+            new NoThread(useInterpreter).DoTest();
         }
 
         public class NoThread
         {
-            private readonly bool _preferInterpretation;
+            private readonly CompilationType _preferInterpretation;
 
-            public NoThread(bool preferInterpretation)
+            public NoThread(CompilationType preferInterpretation)
             {
                 _preferInterpretation = preferInterpretation;
             }
@@ -82,7 +81,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void InvocationDoesNotChangeFunctionInvoked(bool useInterpreter)
+        public static void InvocationDoesNotChangeFunctionInvoked(CompilationType useInterpreter)
         {
             FuncHolder holder = new FuncHolder();
             MemberExpression fld = Expression.Field(Expression.Constant(holder), "Function");
@@ -246,7 +245,7 @@ namespace System.Linq.Expressions.Tests
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
         [ClassData(typeof(CompilationTypes))]
-        public static void InvokePrivateDelegate(bool useInterpreter)
+        public static void InvokePrivateDelegate(CompilationType useInterpreter)
         {
             AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), AssemblyBuilderAccess.RunAndCollect);
             ModuleBuilder module = assembly.DefineDynamicModule("Name");
@@ -264,7 +263,7 @@ namespace System.Linq.Expressions.Tests
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
         [ClassData(typeof(CompilationTypes))]
-        public static void InvokePrivateDelegateTypeLambda(bool useInterpreter)
+        public static void InvokePrivateDelegateTypeLambda(CompilationType useInterpreter)
         {
             AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), AssemblyBuilderAccess.RunAndCollect);
             ModuleBuilder module = assembly.DefineDynamicModule("Name");
@@ -282,7 +281,7 @@ namespace System.Linq.Expressions.Tests
         private delegate void RefIntAction(ref int x);
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void InvokeByRefLambda(bool useInterpreter)
+        public static void InvokeByRefLambda(CompilationType useInterpreter)
         {
             ParameterExpression refParam = Expression.Parameter(typeof(int).MakeByRefType());
             ParameterExpression param = Expression.Parameter(typeof(List<int>));

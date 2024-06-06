@@ -15,8 +15,8 @@ namespace System.Linq.Expressions.Tests
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
     internal class PerCompilationTypeAttribute : DataAttribute
     {
-        private static readonly object s_boxedFalse = false;
-        private static readonly object s_boxedTrue = true;
+        private static readonly object s_boxedFalse = CompilationType.Compile;
+        private static readonly object s_boxedTrue = CompilationType.Interpret;
 
         private readonly MemberDataAttribute delegatedTo;
 

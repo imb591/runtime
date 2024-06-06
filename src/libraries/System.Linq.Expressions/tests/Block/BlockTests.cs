@@ -11,7 +11,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckBlockClosureVariableInitializationTest(bool useInterpreter)
+        public static void CheckBlockClosureVariableInitializationTest(CompilationType useInterpreter)
         {
             foreach (var kv in BlockClosureVariableInitialization())
             {
@@ -101,7 +101,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyBlockClosureVariableInitialization(Expression e, object o, bool useInterpreter)
+        private static void VerifyBlockClosureVariableInitialization(Expression e, object o, CompilationType useInterpreter)
         {
             Expression<Func<object>> f =
                 Expression.Lambda<Func<object>>(
@@ -155,7 +155,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void EmptyBlock(bool useInterpreter)
+        public static void EmptyBlock(CompilationType useInterpreter)
         {
             BlockExpression block = Expression.Block();
             Assert.Equal(typeof(void), block.Type);
@@ -166,7 +166,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void EmptyBlockExplicitType(bool useInterpreter)
+        public static void EmptyBlockExplicitType(CompilationType useInterpreter)
         {
             BlockExpression block = Expression.Block(typeof(void));
             Assert.Equal(typeof(void), block.Type);
@@ -183,7 +183,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void EmptyScope(bool useInterpreter)
+        public static void EmptyScope(CompilationType useInterpreter)
         {
             BlockExpression scope = Expression.Block(new[] { Expression.Parameter(typeof(int), "x") }, new Expression[0]);
             Assert.Equal(typeof(void), scope.Type);
@@ -194,7 +194,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void EmptyScopeExplicitType(bool useInterpreter)
+        public static void EmptyScopeExplicitType(CompilationType useInterpreter)
         {
             BlockExpression scope = Expression.Block(typeof(void), new[] { Expression.Parameter(typeof(int), "x") }, new Expression[0]);
             Assert.Equal(typeof(void), scope.Type);
@@ -252,7 +252,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void MutableValue(bool useInterpreter)
+        public static void MutableValue(CompilationType useInterpreter)
         {
             // f = () =>
             //     {
@@ -275,7 +275,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void MutableValue_Nullable(bool useInterpreter)
+        public static void MutableValue_Nullable(CompilationType useInterpreter)
         {
             // f = () =>
             //     {
@@ -301,7 +301,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void MutableBox(bool useInterpreter)
+        public static void MutableBox(CompilationType useInterpreter)
         {
             // f = () =>
             //     {
@@ -327,7 +327,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void MutableBox_Nullable(bool useInterpreter)
+        public static void MutableBox_Nullable(CompilationType useInterpreter)
         {
             // f = () =>
             //     {

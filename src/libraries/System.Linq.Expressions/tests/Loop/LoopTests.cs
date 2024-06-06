@@ -70,7 +70,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void BreakWithinLoop(bool useInterpreter)
+        public void BreakWithinLoop(CompilationType useInterpreter)
         {
             string labelName = "Not likely to appear for any other reason {E90FAF9D-1934-4FC9-93EB-BCE70B586146}";
             LabelTarget @break = Expression.Label(labelName);
@@ -79,17 +79,16 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void ContinueWithinLoop(bool useInterpreter)
+        public void ContinueWithinLoop(CompilationType useInterpreter)
         {
             string labelName = "Not likely to appear for any other reason {F9C549FE-6E6C-44A2-A434-0147E0D49F7F}";
             LabelTarget @continue = Expression.Label(labelName);
             Expression<Action> lambda = Expression.Lambda<Action>(Expression.Loop(Expression.Label(@continue), null, @continue));
-            Assert.Throws<InvalidOperationException>(() => lambda.Compile());
             Assert.Contains(labelName, Assert.Throws<InvalidOperationException>(() => lambda.Compile(useInterpreter)).Message);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void BreakOutsideLoop(bool useInterpreter)
+        public void BreakOutsideLoop(CompilationType useInterpreter)
         {
             string labelName = "Not likely to appear for any other reason {D3C6FCD8-EA2F-440B-938F-C81560C3BDBA}";
             LabelTarget @break = Expression.Label(labelName);
@@ -103,7 +102,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void ContinueOutsideLoop(bool useInterpreter)
+        public void ContinueOutsideLoop(CompilationType useInterpreter)
         {
             string labelName = "Not likely to appear for any other reason {1107D64D-9FC4-4533-83E2-0F5F78B48315}";
             LabelTarget @continue = Expression.Label(labelName);
@@ -117,7 +116,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void ContinueTheSameAsBreak(bool useInterpreter)
+        public void ContinueTheSameAsBreak(CompilationType useInterpreter)
         {
             string labelName = "Not likely to appear for any other reason {B9CD9CF5-6C67-41C9-98C0-F445CAAB5082}";
             LabelTarget label = Expression.Label(labelName);
@@ -128,7 +127,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void NoLabelsInfiniteLoop(bool useInterpreter)
+        public void NoLabelsInfiniteLoop(CompilationType useInterpreter)
         {
             // Have an error condition so the otherwise-infinite loop can complete.
             ParameterExpression num = Expression.Variable(typeof(int));
@@ -157,7 +156,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void NoBreakToLabelInfiniteLoop(bool useInterpreter)
+        public void NoBreakToLabelInfiniteLoop(CompilationType useInterpreter)
         {
             // Have an error condition so the otherwise-infinite loop can complete.
             ParameterExpression num = Expression.Variable(typeof(int));
@@ -187,7 +186,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void ExplicitContinue(bool useInterpreter)
+        public void ExplicitContinue(CompilationType useInterpreter)
         {
             var builder = new StringBuilder();
             ParameterExpression value = Expression.Variable(typeof(int));
@@ -225,7 +224,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void LoopWithBreak(bool useInterpreter)
+        public void LoopWithBreak(CompilationType useInterpreter)
         {
             ParameterExpression value = Expression.Parameter(typeof(int));
             ParameterExpression result = Expression.Variable(typeof(int));

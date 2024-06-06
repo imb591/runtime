@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaDivideNullableDecimalTest(bool useInterpreter)
+        public static void LambdaDivideNullableDecimalTest(CompilationType useInterpreter)
         {
             decimal?[] values = new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -23,7 +23,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaDivideNullableDoubleTest(bool useInterpreter)
+        public static void LambdaDivideNullableDoubleTest(CompilationType useInterpreter)
         {
             double?[] values = new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -36,7 +36,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaDivideNullableFloatTest(bool useInterpreter)
+        public static void LambdaDivideNullableFloatTest(CompilationType useInterpreter)
         {
             float?[] values = new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -50,7 +50,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void LambdaDivideNullableIntTest(bool useInterpreter)
+        public static void LambdaDivideNullableIntTest(CompilationType useInterpreter)
         {
             int?[] values = new int?[] { null, 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -64,7 +64,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void LambdaDivideNullableLongTest(bool useInterpreter)
+        public static void LambdaDivideNullableLongTest(CompilationType useInterpreter)
         {
             long?[] values = new long?[] { null, 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -78,7 +78,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void LambdaDivideNullableShortTest(bool useInterpreter)
+        public static void LambdaDivideNullableShortTest(CompilationType useInterpreter)
         {
             short?[] values = new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -92,7 +92,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void LambdaDivideNullableUIntTest(bool useInterpreter)
+        public static void LambdaDivideNullableUIntTest(CompilationType useInterpreter)
         {
             uint?[] values = new uint?[] { null, 0, 1, uint.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -106,7 +106,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void LambdaDivideNullableULongTest(bool useInterpreter)
+        public static void LambdaDivideNullableULongTest(CompilationType useInterpreter)
         {
             ulong?[] values = new ulong?[] { null, 0, 1, ulong.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -120,7 +120,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void LambdaDivideNullableUShortTest(bool useInterpreter)
+        public static void LambdaDivideNullableUShortTest(CompilationType useInterpreter)
         {
             ushort?[] values = new ushort?[] { null, 0, 1, ushort.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -145,7 +145,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify decimal?
 
-        private static void VerifyDivideNullableDecimal(decimal? a, decimal? b, bool useInterpreter)
+        private static void VerifyDivideNullableDecimal(decimal? a, decimal? b, CompilationType useInterpreter)
         {
             bool divideByZero;
             decimal? expected;
@@ -291,7 +291,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify double?
 
-        private static void VerifyDivideNullableDouble(double? a, double? b, bool useInterpreter)
+        private static void VerifyDivideNullableDouble(double? a, double? b, CompilationType useInterpreter)
         {
             double? expected = a / b;
 
@@ -384,7 +384,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify float?
 
-        private static void VerifyDivideNullableFloat(float? a, float? b, bool useInterpreter)
+        private static void VerifyDivideNullableFloat(float? a, float? b, CompilationType useInterpreter)
         {
             float? expected = a / b;
 
@@ -477,7 +477,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify int?
 
-        private static void VerifyDivideNullableInt(int? a, int? b, bool useInterpreter)
+        private static void VerifyDivideNullableInt(int? a, int? b, CompilationType useInterpreter)
         {
             ResultType outcome;
             int? expected = null;
@@ -650,7 +650,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify long?
 
-        private static void VerifyDivideNullableLong(long? a, long? b, bool useInterpreter)
+        private static void VerifyDivideNullableLong(long? a, long? b, CompilationType useInterpreter)
         {
             ResultType outcome;
             long? expected = null;
@@ -823,7 +823,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify short?
 
-        private static void VerifyDivideNullableShort(short? a, short? b, bool useInterpreter)
+        private static void VerifyDivideNullableShort(short? a, short? b, CompilationType useInterpreter)
         {
             bool divideByZero;
             short? expected;
@@ -969,7 +969,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify uint?
 
-        private static void VerifyDivideNullableUInt(uint? a, uint? b, bool useInterpreter)
+        private static void VerifyDivideNullableUInt(uint? a, uint? b, CompilationType useInterpreter)
         {
             bool divideByZero;
             uint? expected;
@@ -1115,7 +1115,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify ulong?
 
-        private static void VerifyDivideNullableULong(ulong? a, ulong? b, bool useInterpreter)
+        private static void VerifyDivideNullableULong(ulong? a, ulong? b, CompilationType useInterpreter)
         {
             bool divideByZero;
             ulong? expected;
@@ -1261,7 +1261,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify ushort?
 
-        private static void VerifyDivideNullableUShort(ushort? a, ushort? b, bool useInterpreter)
+        private static void VerifyDivideNullableUShort(ushort? a, ushort? b, CompilationType useInterpreter)
         {
             bool divideByZero;
             ushort? expected;

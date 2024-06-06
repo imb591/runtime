@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableEnumCastEnumTypeTest(bool useInterpreter)
+        public static void CheckNullableEnumCastEnumTypeTest(CompilationType useInterpreter)
         {
             E?[] array = new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue };
             for (int i = 0; i < array.Length; i++)
@@ -20,7 +20,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableEnumCastObjectTest(bool useInterpreter)
+        public static void CheckNullableEnumCastObjectTest(CompilationType useInterpreter)
         {
             E?[] array = new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue };
             for (int i = 0; i < array.Length; i++)
@@ -30,7 +30,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableIntCastObjectTest(bool useInterpreter)
+        public static void CheckNullableIntCastObjectTest(CompilationType useInterpreter)
         {
             int?[] array = new int?[] { null, 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -40,7 +40,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableIntCastValueTypeTest(bool useInterpreter)
+        public static void CheckNullableIntCastValueTypeTest(CompilationType useInterpreter)
         {
             int?[] array = new int?[] { null, 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -50,7 +50,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableStructCastIEquatableOfStructTest(bool useInterpreter)
+        public static void CheckNullableStructCastIEquatableOfStructTest(CompilationType useInterpreter)
         {
             S?[] array = new S?[] { null, default(S), new S() };
             for (int i = 0; i < array.Length; i++)
@@ -60,7 +60,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableStructCastObjectTest(bool useInterpreter)
+        public static void CheckNullableStructCastObjectTest(CompilationType useInterpreter)
         {
             S?[] array = new S?[] { null, default(S), new S() };
             for (int i = 0; i < array.Length; i++)
@@ -70,7 +70,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableStructCastValueTypeTest(bool useInterpreter)
+        public static void CheckNullableStructCastValueTypeTest(CompilationType useInterpreter)
         {
             S?[] array = new S?[] { null, default(S), new S() };
             for (int i = 0; i < array.Length; i++)
@@ -80,37 +80,37 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertGenericWithStructRestrictionCastObjectAsEnum(bool useInterpreter)
+        public static void ConvertGenericWithStructRestrictionCastObjectAsEnum(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionCastObjectHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertGenericWithStructRestrictionCastObjectAsStruct(bool useInterpreter)
+        public static void ConvertGenericWithStructRestrictionCastObjectAsStruct(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionCastObjectHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertGenericWithStructRestrictionCastObjectAsStructWithStringAndField(bool useInterpreter)
+        public static void ConvertGenericWithStructRestrictionCastObjectAsStructWithStringAndField(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionCastObjectHelper<Scs>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertGenericWithStructRestrictionCastValueTypeAsEnum(bool useInterpreter)
+        public static void ConvertGenericWithStructRestrictionCastValueTypeAsEnum(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionCastValueTypeHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertGenericWithStructRestrictionCastValueTypeAsStruct(bool useInterpreter)
+        public static void ConvertGenericWithStructRestrictionCastValueTypeAsStruct(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionCastValueTypeHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertGenericWithStructRestrictionCastValueTypeAsStructWithStringAndField(bool useInterpreter)
+        public static void ConvertGenericWithStructRestrictionCastValueTypeAsStructWithStringAndField(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionCastValueTypeHelper<Scs>(useInterpreter);
         }
@@ -119,7 +119,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Generic helpers
 
-        private static void CheckGenericWithStructRestrictionCastObjectHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckGenericWithStructRestrictionCastObjectHelper<Ts>(CompilationType useInterpreter) where Ts : struct
         {
             Ts[] array = new Ts[] { default(Ts), new Ts() };
             for (int i = 0; i < array.Length; i++)
@@ -128,7 +128,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithStructRestrictionCastValueTypeHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckGenericWithStructRestrictionCastValueTypeHelper<Ts>(CompilationType useInterpreter) where Ts : struct
         {
             Ts[] array = new Ts[] { default(Ts), new Ts() };
             for (int i = 0; i < array.Length; i++)
@@ -141,7 +141,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyNullableEnumCastEnumType(E? value, bool useInterpreter)
+        private static void VerifyNullableEnumCastEnumType(E? value, CompilationType useInterpreter)
         {
             Expression<Func<Enum>> e =
                 Expression.Lambda<Func<Enum>>(
@@ -152,7 +152,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableEnumCastObject(E? value, bool useInterpreter)
+        private static void VerifyNullableEnumCastObject(E? value, CompilationType useInterpreter)
         {
             Expression<Func<object>> e =
                 Expression.Lambda<Func<object>>(
@@ -163,7 +163,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableIntCastObject(int? value, bool useInterpreter)
+        private static void VerifyNullableIntCastObject(int? value, CompilationType useInterpreter)
         {
             Expression<Func<object>> e =
                 Expression.Lambda<Func<object>>(
@@ -174,7 +174,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableIntCastValueType(int? value, bool useInterpreter)
+        private static void VerifyNullableIntCastValueType(int? value, CompilationType useInterpreter)
         {
             Expression<Func<ValueType>> e =
                 Expression.Lambda<Func<ValueType>>(
@@ -185,7 +185,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableStructCastIEquatableOfStruct(S? value, bool useInterpreter)
+        private static void VerifyNullableStructCastIEquatableOfStruct(S? value, CompilationType useInterpreter)
         {
             Expression<Func<IEquatable<S>>> e =
                 Expression.Lambda<Func<IEquatable<S>>>(
@@ -196,7 +196,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableStructCastObject(S? value, bool useInterpreter)
+        private static void VerifyNullableStructCastObject(S? value, CompilationType useInterpreter)
         {
             Expression<Func<object>> e =
                 Expression.Lambda<Func<object>>(
@@ -207,7 +207,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyNullableStructCastValueType(S? value, bool useInterpreter)
+        private static void VerifyNullableStructCastValueType(S? value, CompilationType useInterpreter)
         {
             Expression<Func<ValueType>> e =
                 Expression.Lambda<Func<ValueType>>(
@@ -218,7 +218,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyGenericWithStructRestrictionCastObject<Ts>(Ts value, bool useInterpreter) where Ts : struct
+        private static void VerifyGenericWithStructRestrictionCastObject<Ts>(Ts value, CompilationType useInterpreter) where Ts : struct
         {
             Expression<Func<object>> e =
                 Expression.Lambda<Func<object>>(
@@ -229,7 +229,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyGenericWithStructRestrictionCastValueType<Ts>(Ts value, bool useInterpreter) where Ts : struct
+        private static void VerifyGenericWithStructRestrictionCastValueType<Ts>(Ts value, CompilationType useInterpreter) where Ts : struct
         {
             Expression<Func<ValueType>> e =
                 Expression.Lambda<Func<ValueType>>(

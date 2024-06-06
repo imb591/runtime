@@ -15,7 +15,7 @@ namespace System.Linq.Expressions.Tests
         [PerCompilationType(nameof(NullableUnboxableFromIComparable))]
         [PerCompilationType(nameof(UnboxableFromIComparableT))]
         [PerCompilationType(nameof(NullableUnboxableFromIComparableT))]
-        public void CanUnbox(object value, Type type, Type boxedType, bool useInterpreter)
+        public void CanUnbox(object value, Type type, Type boxedType, CompilationType useInterpreter)
         {
             Expression expression = Expression.Constant(value, boxedType);
             UnaryExpression unbox = Expression.Unbox(expression, type);
@@ -31,7 +31,7 @@ namespace System.Linq.Expressions.Tests
         [PerCompilationType(nameof(NullableUnboxableFromIComparable))]
         [PerCompilationType(nameof(UnboxableFromIComparableT))]
         [PerCompilationType(nameof(NullableUnboxableFromIComparableT))]
-        public void CanUnboxFromMake(object value, Type type, Type boxedType, bool useInterpreter)
+        public void CanUnboxFromMake(object value, Type type, Type boxedType, CompilationType useInterpreter)
         {
             Expression expression = Expression.Constant(value, boxedType);
             UnaryExpression unbox = Expression.MakeUnary(ExpressionType.Unbox, expression, type);
@@ -116,7 +116,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(NullableTypes))]
-        public void NullNullable(Type type, bool useInterpreter)
+        public void NullNullable(Type type, CompilationType useInterpreter)
         {
             UnaryExpression unbox = Expression.Unbox(Expression.Default(typeof(object)), type);
             Func<bool> isNull = Expression.Lambda<Func<bool>>(Expression.Equal(Expression.Default(type), unbox)).Compile(useInterpreter);
@@ -167,7 +167,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void MistmatchFailsOnRuntime(bool useInterpreter)
+        public void MistmatchFailsOnRuntime(CompilationType useInterpreter)
         {
             Expression unbox = Expression.Unbox(Expression.Constant(0, typeof(object)), typeof(long));
             Func<long> del = Expression.Lambda<Func<long>>(unbox).Compile(useInterpreter);

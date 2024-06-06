@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedNullableBoolAndTest(bool useInterpreter)
+        public static void CheckLiftedNullableBoolAndTest(CompilationType useInterpreter)
         {
             bool?[] values = new bool?[] { null, true, false };
             for (int i = 0; i < values.Length; i++)
@@ -23,7 +23,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedNullableBoolAndAlsoTest(bool useInterpreter)
+        public static void CheckLiftedNullableBoolAndAlsoTest(CompilationType useInterpreter)
         {
             bool?[] values = new bool?[] { null, true, false };
             for (int i = 0; i < values.Length; i++)
@@ -36,7 +36,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedNullableBoolOrTest(bool useInterpreter)
+        public static void CheckLiftedNullableBoolOrTest(CompilationType useInterpreter)
         {
             bool?[] values = new bool?[] { null, true, false };
             for (int i = 0; i < values.Length; i++)
@@ -49,7 +49,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedNullableBoolOrElseTest(bool useInterpreter)
+        public static void CheckLiftedNullableBoolOrElseTest(CompilationType useInterpreter)
         {
             bool?[] values = new bool?[] { null, true, false };
             for (int i = 0; i < values.Length; i++)
@@ -62,7 +62,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedNullableBoolAndWithMethodTest(bool useInterpreter)
+        public static void CheckLiftedNullableBoolAndWithMethodTest(CompilationType useInterpreter)
         {
             bool?[] values = new bool?[] { null, true, false };
             for (int i = 0; i < values.Length; i++)
@@ -75,7 +75,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedNullableBoolAndAlsoWithMethodTest(bool useInterpreter)
+        public static void CheckLiftedNullableBoolAndAlsoWithMethodTest(CompilationType useInterpreter)
         {
             bool?[] values = new bool?[] { null, true, false };
             for (int i = 0; i < values.Length; i++)
@@ -88,7 +88,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedNullableBoolWithMethodOrTest(bool useInterpreter)
+        public static void CheckLiftedNullableBoolWithMethodOrTest(CompilationType useInterpreter)
         {
             bool?[] values = new bool?[] { null, true, false };
             for (int i = 0; i < values.Length; i++)
@@ -101,7 +101,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedNullableBoolWithMethodOrElseTest(bool useInterpreter)
+        public static void CheckLiftedNullableBoolWithMethodOrElseTest(CompilationType useInterpreter)
         {
             bool?[] values = new bool?[] { null, true, false };
             for (int i = 0; i < values.Length; i++)
@@ -117,7 +117,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyNullableBoolAnd(bool? a, bool? b, bool useInterpreter)
+        private static void VerifyNullableBoolAnd(bool? a, bool? b, CompilationType useInterpreter)
         {
             ParameterExpression p0 = Expression.Parameter(typeof(bool), "p0");
             ParameterExpression p1 = Expression.Parameter(typeof(bool), "p1");
@@ -136,7 +136,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyNullableBoolAndAlso(bool? a, bool? b, bool useInterpreter)
+        private static void VerifyNullableBoolAndAlso(bool? a, bool? b, CompilationType useInterpreter)
         {
             ParameterExpression p0 = Expression.Parameter(typeof(bool), "p0");
             ParameterExpression p1 = Expression.Parameter(typeof(bool), "p1");
@@ -155,7 +155,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyNullableBoolOr(bool? a, bool? b, bool useInterpreter)
+        private static void VerifyNullableBoolOr(bool? a, bool? b, CompilationType useInterpreter)
         {
             ParameterExpression p0 = Expression.Parameter(typeof(bool), "p0");
             ParameterExpression p1 = Expression.Parameter(typeof(bool), "p1");
@@ -174,7 +174,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyNullableBoolOrElse(bool? a, bool? b, bool useInterpreter)
+        private static void VerifyNullableBoolOrElse(bool? a, bool? b, CompilationType useInterpreter)
         {
             ParameterExpression p0 = Expression.Parameter(typeof(bool), "p0");
             ParameterExpression p1 = Expression.Parameter(typeof(bool), "p1");
@@ -193,7 +193,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyNullableBoolWithMethodAnd(bool? a, bool? b, bool useInterpreter)
+        private static void VerifyNullableBoolWithMethodAnd(bool? a, bool? b, CompilationType useInterpreter)
         {
             ParameterExpression p0 = Expression.Parameter(typeof(bool), "p0");
             ParameterExpression p1 = Expression.Parameter(typeof(bool), "p1");
@@ -212,7 +212,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyNullableBoolWithMethodAndAlso(bool? a, bool? b, bool useInterpreter)
+        private static void VerifyNullableBoolWithMethodAndAlso(bool? a, bool? b, CompilationType useInterpreter)
         {
             ParameterExpression p0 = Expression.Parameter(typeof(bool), "p0");
             ParameterExpression p1 = Expression.Parameter(typeof(bool), "p1");
@@ -231,7 +231,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyNullableBoolWithMethodOr(bool? a, bool? b, bool useInterpreter)
+        private static void VerifyNullableBoolWithMethodOr(bool? a, bool? b, CompilationType useInterpreter)
         {
             ParameterExpression p0 = Expression.Parameter(typeof(bool), "p0");
             ParameterExpression p1 = Expression.Parameter(typeof(bool), "p1");
@@ -250,7 +250,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyNullableBoolWithMethodOrElse(bool? a, bool? b, bool useInterpreter)
+        private static void VerifyNullableBoolWithMethodOrElse(bool? a, bool? b, CompilationType useInterpreter)
         {
             ParameterExpression p0 = Expression.Parameter(typeof(bool), "p0");
             ParameterExpression p1 = Expression.Parameter(typeof(bool), "p1");

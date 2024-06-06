@@ -47,7 +47,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryIncrementNullableShortTest(bool useInterpreter)
+        public static void CheckUnaryIncrementNullableShortTest(CompilationType useInterpreter)
         {
             short?[] values = new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -57,7 +57,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryIncrementNullableUShortTest(bool useInterpreter)
+        public static void CheckUnaryIncrementNullableUShortTest(CompilationType useInterpreter)
         {
             ushort?[] values = new ushort?[] { null, 0, 1, ushort.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -67,7 +67,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryIncrementNullableIntTest(bool useInterpreter)
+        public static void CheckUnaryIncrementNullableIntTest(CompilationType useInterpreter)
         {
             int?[] values = new int?[] { null, 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -77,7 +77,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryIncrementNullableUIntTest(bool useInterpreter)
+        public static void CheckUnaryIncrementNullableUIntTest(CompilationType useInterpreter)
         {
             uint?[] values = new uint?[] { null, 0, 1, uint.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -87,7 +87,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryIncrementNullableLongTest(bool useInterpreter)
+        public static void CheckUnaryIncrementNullableLongTest(CompilationType useInterpreter)
         {
             long?[] values = new long?[] { null, 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -97,7 +97,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryIncrementNullableULongTest(bool useInterpreter)
+        public static void CheckUnaryIncrementNullableULongTest(CompilationType useInterpreter)
         {
             ulong?[] values = new ulong?[] { null, 0, 1, ulong.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -107,7 +107,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckIncrementFloatTest(bool useInterpreter)
+        public static void CheckIncrementFloatTest(CompilationType useInterpreter)
         {
             float?[] values = new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -117,7 +117,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckIncrementDoubleTest(bool useInterpreter)
+        public static void CheckIncrementDoubleTest(CompilationType useInterpreter)
         {
             double?[] values = new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -136,7 +136,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(IncrementableValues), true)]
-        public static void CustomOpIncrement(Incrementable? operand, Incrementable? expected, bool useInterpreter)
+        public static void CustomOpIncrement(Incrementable? operand, Incrementable? expected, CompilationType useInterpreter)
         {
             AssertExtensions.ThrowsOnAot<NotSupportedException>(() =>
             {
@@ -148,7 +148,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory, PerCompilationType(nameof(IncrementableWhenNullableValues))]
         public static void NonLiftedNullableOpIncrement(
-            IncrementableWhenNullable? operand, IncrementableWhenNullable? expected, bool useInterpreter)
+            IncrementableWhenNullable? operand, IncrementableWhenNullable? expected, CompilationType useInterpreter)
         {
             Func<IncrementableWhenNullable?> func = Expression.Lambda<Func<IncrementableWhenNullable?>>(
                 Expression.Increment(Expression.Constant(operand, typeof(IncrementableWhenNullable?)))).Compile(useInterpreter);
@@ -156,7 +156,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(DoublyIncrementedIncrementableValues), true)]
-        public static void UserDefinedOpIncrement(Incrementable? operand, Incrementable? expected, bool useInterpreter)
+        public static void UserDefinedOpIncrement(Incrementable? operand, Incrementable? expected, CompilationType useInterpreter)
         {
             AssertExtensions.ThrowsOnAot<NotSupportedException>(() =>
             {
@@ -168,7 +168,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(DoublyIncrementedInt32s), true)]
-        public static void UserDefinedOpIncrementArithmeticType(int? operand, int? expected, bool useInterpreter)
+        public static void UserDefinedOpIncrementArithmeticType(int? operand, int? expected, CompilationType useInterpreter)
         {
             MethodInfo method = typeof(IncrementDecrementTests).GetMethod(nameof(DoublyIncrementInt32));
             Func<int?> func = Expression.Lambda<Func<int?>>(
@@ -178,7 +178,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyIncrementNullableShort(short? value, bool useInterpreter)
+        private static void VerifyIncrementNullableShort(short? value, CompilationType useInterpreter)
         {
             Expression<Func<short?>> e =
                 Expression.Lambda<Func<short?>>(
@@ -188,7 +188,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((short?)(++value)), f());
         }
 
-        private static void VerifyIncrementNullableUShort(ushort? value, bool useInterpreter)
+        private static void VerifyIncrementNullableUShort(ushort? value, CompilationType useInterpreter)
         {
             Expression<Func<ushort?>> e =
                 Expression.Lambda<Func<ushort?>>(
@@ -198,7 +198,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((ushort?)(++value)), f());
         }
 
-        private static void VerifyIncrementNullableInt(int? value, bool useInterpreter)
+        private static void VerifyIncrementNullableInt(int? value, CompilationType useInterpreter)
         {
             Expression<Func<int?>> e =
                 Expression.Lambda<Func<int?>>(
@@ -208,7 +208,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((int?)(++value)), f());
         }
 
-        private static void VerifyIncrementNullableUInt(uint? value, bool useInterpreter)
+        private static void VerifyIncrementNullableUInt(uint? value, CompilationType useInterpreter)
         {
             Expression<Func<uint?>> e =
                 Expression.Lambda<Func<uint?>>(
@@ -218,7 +218,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((uint?)(++value)), f());
         }
 
-        private static void VerifyIncrementNullableLong(long? value, bool useInterpreter)
+        private static void VerifyIncrementNullableLong(long? value, CompilationType useInterpreter)
         {
             Expression<Func<long?>> e =
                 Expression.Lambda<Func<long?>>(
@@ -228,7 +228,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((long?)(++value)), f());
         }
 
-        private static void VerifyIncrementNullableULong(ulong? value, bool useInterpreter)
+        private static void VerifyIncrementNullableULong(ulong? value, CompilationType useInterpreter)
         {
             Expression<Func<ulong?>> e =
                 Expression.Lambda<Func<ulong?>>(
@@ -238,7 +238,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((ulong?)(++value)), f());
         }
 
-        private static void VerifyIncrementNullableFloat(float? value, bool useInterpreter)
+        private static void VerifyIncrementNullableFloat(float? value, CompilationType useInterpreter)
         {
             Expression<Func<float?>> e =
                 Expression.Lambda<Func<float?>>(
@@ -248,7 +248,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((float?)(++value), f());
         }
 
-        private static void VerifyIncrementNullableDouble(double? value, bool useInterpreter)
+        private static void VerifyIncrementNullableDouble(double? value, CompilationType useInterpreter)
         {
             Expression<Func<double?>> e =
                 Expression.Lambda<Func<double?>>(

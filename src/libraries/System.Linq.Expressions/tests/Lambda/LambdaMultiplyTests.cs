@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaMultiplyDecimalTest(bool useInterpreter)
+        public static void LambdaMultiplyDecimalTest(CompilationType useInterpreter)
         {
             decimal[] values = new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -23,7 +23,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaMultiplyDoubleTest(bool useInterpreter)
+        public static void LambdaMultiplyDoubleTest(CompilationType useInterpreter)
         {
             double[] values = new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -36,7 +36,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaMultiplyFloatTest(bool useInterpreter)
+        public static void LambdaMultiplyFloatTest(CompilationType useInterpreter)
         {
             float[] values = new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -49,7 +49,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaMultiplyIntTest(bool useInterpreter)
+        public static void LambdaMultiplyIntTest(CompilationType useInterpreter)
         {
             int[] values = new int[] { 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -62,7 +62,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaMultiplyLongTest(bool useInterpreter)
+        public static void LambdaMultiplyLongTest(CompilationType useInterpreter)
         {
             long[] values = new long[] { 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -75,7 +75,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaMultiplyShortTest(bool useInterpreter)
+        public static void LambdaMultiplyShortTest(CompilationType useInterpreter)
         {
             short[] values = new short[] { 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -88,7 +88,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaMultiplyUIntTest(bool useInterpreter)
+        public static void LambdaMultiplyUIntTest(CompilationType useInterpreter)
         {
             uint[] values = new uint[] { 0, 1, uint.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -101,7 +101,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaMultiplyULongTest(bool useInterpreter)
+        public static void LambdaMultiplyULongTest(CompilationType useInterpreter)
         {
             ulong[] values = new ulong[] { 0, 1, ulong.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -114,7 +114,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void LambdaMultiplyUShortTest(bool useInterpreter)
+        public static void LambdaMultiplyUShortTest(CompilationType useInterpreter)
         {
             ushort[] values = new ushort[] { 0, 1, ushort.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -132,7 +132,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify decimal
 
-        private static void VerifyMultiplyDecimal(decimal a, decimal b, bool useInterpreter)
+        private static void VerifyMultiplyDecimal(decimal a, decimal b, CompilationType useInterpreter)
         {
             bool overflows;
             decimal expected;
@@ -278,7 +278,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify double
 
-        private static void VerifyMultiplyDouble(double a, double b, bool useInterpreter)
+        private static void VerifyMultiplyDouble(double a, double b, CompilationType useInterpreter)
         {
             double expected = a * b;
 
@@ -371,7 +371,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify float
 
-        private static void VerifyMultiplyFloat(float a, float b, bool useInterpreter)
+        private static void VerifyMultiplyFloat(float a, float b, CompilationType useInterpreter)
         {
             float expected = a * b;
 
@@ -464,7 +464,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify int
 
-        private static void VerifyMultiplyInt(int a, int b, bool useInterpreter)
+        private static void VerifyMultiplyInt(int a, int b, CompilationType useInterpreter)
         {
             int expected = unchecked(a * b);
 
@@ -557,7 +557,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify long
 
-        private static void VerifyMultiplyLong(long a, long b, bool useInterpreter)
+        private static void VerifyMultiplyLong(long a, long b, CompilationType useInterpreter)
         {
             long expected = unchecked(a * b);
 
@@ -650,7 +650,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify short
 
-        private static void VerifyMultiplyShort(short a, short b, bool useInterpreter)
+        private static void VerifyMultiplyShort(short a, short b, CompilationType useInterpreter)
         {
             short expected = unchecked((short)(a * b));
 
@@ -744,7 +744,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify uint
 
-        private static void VerifyMultiplyUInt(uint a, uint b, bool useInterpreter)
+        private static void VerifyMultiplyUInt(uint a, uint b, CompilationType useInterpreter)
         {
             uint expected = unchecked(a * b);
 
@@ -837,7 +837,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify ulong
 
-        private static void VerifyMultiplyULong(ulong a, ulong b, bool useInterpreter)
+        private static void VerifyMultiplyULong(ulong a, ulong b, CompilationType useInterpreter)
         {
             ulong expected = unchecked(a * b);
 
@@ -930,7 +930,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Verify ushort
 
-        private static void VerifyMultiplyUShort(ushort a, ushort b, bool useInterpreter)
+        private static void VerifyMultiplyUShort(ushort a, ushort b, CompilationType useInterpreter)
         {
             ushort expected = unchecked((ushort)(a * b));
 

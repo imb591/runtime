@@ -130,7 +130,7 @@ namespace System.Linq.Expressions.Tests
         [Theory]
         [ActiveIssue("https://github.com/mono/mono/issues/14912", TestRuntimes.Mono)]
         [PerCompilationType(nameof(TestData))]
-        public static void NewArrayBounds(Type arrayType, object size, Type sizeType, object defaultValue, bool useInterpreter)
+        public static void NewArrayBounds(Type arrayType, object size, Type sizeType, object defaultValue, CompilationType useInterpreter)
         {
             Expression newArrayExpression = Expression.NewArrayBounds(arrayType, Expression.Constant(size, sizeType));
             Expression <Func<Array>> e = Expression.Lambda<Func<Array>>(newArrayExpression);
@@ -286,7 +286,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
         [ActiveIssue("https://github.com/mono/mono/issues/14933", TestRuntimes.Mono)]
-        public static void SingleNegativeBoundErrorMessage(bool useInterpreter)
+        public static void SingleNegativeBoundErrorMessage(CompilationType useInterpreter)
         {
             string localizedMessage = null;
             try
@@ -307,7 +307,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
         [ActiveIssue("https://github.com/mono/mono/issues/14934", TestRuntimes.Mono)]
-        public static void MultipleNegativeBoundErrorMessage(bool useInterpreter)
+        public static void MultipleNegativeBoundErrorMessage(CompilationType useInterpreter)
         {
             string localizedMessage = null;
             try

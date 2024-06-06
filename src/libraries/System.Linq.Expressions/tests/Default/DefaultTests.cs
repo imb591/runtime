@@ -23,7 +23,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void DefaultEnumRef(bool useInterpreter)
+        public void DefaultEnumRef(CompilationType useInterpreter)
         {
             ParameterExpression x = Expression.Variable(typeof(MyEnum), "x");
 
@@ -76,7 +76,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void DbNull(bool useInterpreter)
+        public void DbNull(CompilationType useInterpreter)
         {
             Expression<Func<DBNull>> lambda = Expression.Lambda<Func<DBNull>>(Expression.Default(typeof(DBNull)));
             Func<DBNull> func = lambda.Compile(useInterpreter);
@@ -84,7 +84,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void StructType(bool useInterpreter)
+        public void StructType(CompilationType useInterpreter)
         {
             Expression<Func<Sp>> lambda = Expression.Lambda<Func<Sp>>(Expression.Default(typeof(Sp)));
             Func<Sp> func = lambda.Compile(useInterpreter);
@@ -94,7 +94,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void PrivateStructType(bool useInterpreter)
+        public void PrivateStructType(CompilationType useInterpreter)
         {
             Expression<Func<StPri>> lambda = Expression.Lambda<Func<StPri>>(Expression.Default(typeof(StPri)));
             Func<StPri> func = lambda.Compile(useInterpreter);
@@ -108,7 +108,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void StructTypeWithParameterlessConstructor(bool useInterpreter)
+        public void StructTypeWithParameterlessConstructor(CompilationType useInterpreter)
         {
             Expression<Func<ValueTypeWithParameterlessConstructor>> lambda =
                 Expression.Lambda<Func<ValueTypeWithParameterlessConstructor>>(
@@ -119,7 +119,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void StructTypeWithParameterlessConstructorThatThrows(bool useInterpreter)
+        public void StructTypeWithParameterlessConstructorThatThrows(CompilationType useInterpreter)
         {
             Expression<Func<ValueTypeWithParameterlessConstructorThatThrows>> lambda =
                 Expression.Lambda<Func<ValueTypeWithParameterlessConstructorThatThrows>>(
@@ -130,7 +130,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void NullableStructTypeWithParameterlessConstructor(bool useInterpreter)
+        public void NullableStructTypeWithParameterlessConstructor(CompilationType useInterpreter)
         {
             Expression<Func<ValueTypeWithParameterlessConstructorThatThrows?>> lambda =
                 Expression.Lambda<Func<ValueTypeWithParameterlessConstructorThatThrows?>>(
@@ -142,7 +142,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void GetValueOrDefault(bool useInterpreter)
+        public void GetValueOrDefault(CompilationType useInterpreter)
         {
             Expression<Func<ValueTypeWithParameterlessConstructor?, ValueTypeWithParameterlessConstructor>> e =
                 (ValueTypeWithParameterlessConstructor? x) => x.GetValueOrDefault();

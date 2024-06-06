@@ -12,7 +12,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryDecrementShortTest(bool useInterpreter)
+        public static void CheckUnaryDecrementShortTest(CompilationType useInterpreter)
         {
             short[] values = new short[] { 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -22,7 +22,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryDecrementUShortTest(bool useInterpreter)
+        public static void CheckUnaryDecrementUShortTest(CompilationType useInterpreter)
         {
             ushort[] values = new ushort[] { 0, 1, ushort.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -32,7 +32,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryDecrementIntTest(bool useInterpreter)
+        public static void CheckUnaryDecrementIntTest(CompilationType useInterpreter)
         {
             int[] values = new int[] { 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -43,7 +43,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryDecrementUIntTest(bool useInterpreter)
+        public static void CheckUnaryDecrementUIntTest(CompilationType useInterpreter)
         {
             uint[] values = new uint[] { 0, 1, uint.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -53,7 +53,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryDecrementLongTest(bool useInterpreter)
+        public static void CheckUnaryDecrementLongTest(CompilationType useInterpreter)
         {
             long[] values = new long[] { 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -63,7 +63,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryDecrementULongTest(bool useInterpreter)
+        public static void CheckUnaryDecrementULongTest(CompilationType useInterpreter)
         {
             ulong[] values = new ulong[] { 0, 1, ulong.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -73,7 +73,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckDecrementFloatTest(bool useInterpreter)
+        public static void CheckDecrementFloatTest(CompilationType useInterpreter)
         {
             float[] values = new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -83,7 +83,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckDecrementDoubleTest(bool useInterpreter)
+        public static void CheckDecrementDoubleTest(CompilationType useInterpreter)
         {
             double[] values = new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -107,7 +107,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(DecrementableValues), false)]
-        public static void CustomOpDecrement(Decrementable operand, Decrementable expected, bool useInterpreter)
+        public static void CustomOpDecrement(Decrementable operand, Decrementable expected, CompilationType useInterpreter)
         {
             Func<Decrementable> func = Expression.Lambda<Func<Decrementable>>(
                             Expression.Decrement(Expression.Constant(operand))).Compile(useInterpreter);
@@ -115,7 +115,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(DoublyDecrementedDecrementableValues), false)]
-        public static void UserDefinedOpDecrement(Decrementable operand, Decrementable expected, bool useInterpreter)
+        public static void UserDefinedOpDecrement(Decrementable operand, Decrementable expected, CompilationType useInterpreter)
         {
             MethodInfo method = typeof(IncrementDecrementTests).GetMethod(nameof(DoublyDecrement));
             Func<Decrementable> func = Expression.Lambda<Func<Decrementable>>(
@@ -124,7 +124,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(DoublyDecrementedInt32s), false)]
-        public static void UserDefinedOpDecrementArithmeticType(int operand, int expected, bool useInterpreter)
+        public static void UserDefinedOpDecrementArithmeticType(int operand, int expected, CompilationType useInterpreter)
         {
             MethodInfo method = typeof(IncrementDecrementTests).GetMethod(nameof(DoublyDecrementInt32));
             Func<int> func = Expression.Lambda<Func<int>>(
@@ -149,7 +149,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyDecrementShort(short value, bool useInterpreter)
+        private static void VerifyDecrementShort(short value, CompilationType useInterpreter)
         {
             Expression<Func<short>> e =
                 Expression.Lambda<Func<short>>(
@@ -159,7 +159,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((short)(--value)), f());
         }
 
-        private static void VerifyDecrementUShort(ushort value, bool useInterpreter)
+        private static void VerifyDecrementUShort(ushort value, CompilationType useInterpreter)
         {
             Expression<Func<ushort>> e =
                 Expression.Lambda<Func<ushort>>(
@@ -169,7 +169,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((ushort)(--value)), f());
         }
 
-        private static void VerifyDecrementInt(int value, bool useInterpreter)
+        private static void VerifyDecrementInt(int value, CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -179,7 +179,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((int)(--value)), f());
         }
 
-        private static void VerifyDecrementIntMakeUnary(int value, bool useInterpreter)
+        private static void VerifyDecrementIntMakeUnary(int value, CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -189,7 +189,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked(--value), f());
         }
 
-        private static void VerifyDecrementUInt(uint value, bool useInterpreter)
+        private static void VerifyDecrementUInt(uint value, CompilationType useInterpreter)
         {
             Expression<Func<uint>> e =
                 Expression.Lambda<Func<uint>>(
@@ -199,7 +199,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((uint)(--value)), f());
         }
 
-        private static void VerifyDecrementLong(long value, bool useInterpreter)
+        private static void VerifyDecrementLong(long value, CompilationType useInterpreter)
         {
             Expression<Func<long>> e =
                 Expression.Lambda<Func<long>>(
@@ -209,7 +209,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((long)(--value)), f());
         }
 
-        private static void VerifyDecrementULong(ulong value, bool useInterpreter)
+        private static void VerifyDecrementULong(ulong value, CompilationType useInterpreter)
         {
             Expression<Func<ulong>> e =
                 Expression.Lambda<Func<ulong>>(
@@ -219,7 +219,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((ulong)(--value)), f());
         }
 
-        private static void VerifyDecrementFloat(float value, bool useInterpreter)
+        private static void VerifyDecrementFloat(float value, CompilationType useInterpreter)
         {
             Expression<Func<float>> e =
                 Expression.Lambda<Func<float>>(
@@ -229,7 +229,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((float)(--value), f());
         }
 
-        private static void VerifyDecrementDouble(double value, bool useInterpreter)
+        private static void VerifyDecrementDouble(double value, CompilationType useInterpreter)
         {
             Expression<Func<double>> e =
                 Expression.Lambda<Func<double>>(

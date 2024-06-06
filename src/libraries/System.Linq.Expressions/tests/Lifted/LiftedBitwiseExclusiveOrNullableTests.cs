@@ -11,7 +11,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedBitwiseExclusiveOrNullableByteTest(bool useInterpreter)
+        public static void CheckLiftedBitwiseExclusiveOrNullableByteTest(CompilationType useInterpreter)
         {
             byte?[] values = new byte?[] { null, 0, 1, byte.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -24,7 +24,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedBitwiseExclusiveOrNullableIntTest(bool useInterpreter)
+        public static void CheckLiftedBitwiseExclusiveOrNullableIntTest(CompilationType useInterpreter)
         {
             int?[] values = new int?[] { null, 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -37,7 +37,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedBitwiseExclusiveOrNullableLongTest(bool useInterpreter)
+        public static void CheckLiftedBitwiseExclusiveOrNullableLongTest(CompilationType useInterpreter)
         {
             long?[] values = new long?[] { null, 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -50,7 +50,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedBitwiseExclusiveOrNullableSByteTest(bool useInterpreter)
+        public static void CheckLiftedBitwiseExclusiveOrNullableSByteTest(CompilationType useInterpreter)
         {
             sbyte?[] values = new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -63,7 +63,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedBitwiseExclusiveOrNullableShortTest(bool useInterpreter)
+        public static void CheckLiftedBitwiseExclusiveOrNullableShortTest(CompilationType useInterpreter)
         {
             short?[] values = new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -76,7 +76,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedBitwiseExclusiveOrNullableUIntTest(bool useInterpreter)
+        public static void CheckLiftedBitwiseExclusiveOrNullableUIntTest(CompilationType useInterpreter)
         {
             uint?[] values = new uint?[] { null, 0, 1, uint.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -89,7 +89,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedBitwiseExclusiveOrNullableULongTest(bool useInterpreter)
+        public static void CheckLiftedBitwiseExclusiveOrNullableULongTest(CompilationType useInterpreter)
         {
             ulong?[] values = new ulong?[] { null, 0, 1, ulong.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -102,7 +102,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedBitwiseExclusiveOrNullableUShortTest(bool useInterpreter)
+        public static void CheckLiftedBitwiseExclusiveOrNullableUShortTest(CompilationType useInterpreter)
         {
             ushort?[] values = new ushort?[] { null, 0, 1, ushort.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -115,7 +115,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLiftedBitwiseExclusiveOrNullableNumberTest(bool useInterpreter)
+        public static void CheckLiftedBitwiseExclusiveOrNullableNumberTest(CompilationType useInterpreter)
         {
             AssertExtensions.ThrowsOnAot<NotSupportedException>(() =>
             {
@@ -178,7 +178,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyBitwiseExclusiveOrNullableByte(byte? a, byte? b, bool useInterpreter)
+        private static void VerifyBitwiseExclusiveOrNullableByte(byte? a, byte? b, CompilationType useInterpreter)
         {
             Expression<Func<byte?>> e =
                 Expression.Lambda<Func<byte?>>(
@@ -191,7 +191,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a ^ b, f());
         }
 
-        private static void VerifyBitwiseExclusiveOrNullableInt(int? a, int? b, bool useInterpreter)
+        private static void VerifyBitwiseExclusiveOrNullableInt(int? a, int? b, CompilationType useInterpreter)
         {
             Expression<Func<int?>> e =
                 Expression.Lambda<Func<int?>>(
@@ -204,7 +204,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a ^ b, f());
         }
 
-        private static void VerifyBitwiseExclusiveOrNullableLong(long? a, long? b, bool useInterpreter)
+        private static void VerifyBitwiseExclusiveOrNullableLong(long? a, long? b, CompilationType useInterpreter)
         {
             Expression<Func<long?>> e =
                 Expression.Lambda<Func<long?>>(
@@ -217,7 +217,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a ^ b, f());
         }
 
-        private static void VerifyBitwiseExclusiveOrNullableSByte(sbyte? a, sbyte? b, bool useInterpreter)
+        private static void VerifyBitwiseExclusiveOrNullableSByte(sbyte? a, sbyte? b, CompilationType useInterpreter)
         {
             Expression<Func<sbyte?>> e =
                 Expression.Lambda<Func<sbyte?>>(
@@ -230,7 +230,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a ^ b, f());
         }
 
-        private static void VerifyBitwiseExclusiveOrNullableShort(short? a, short? b, bool useInterpreter)
+        private static void VerifyBitwiseExclusiveOrNullableShort(short? a, short? b, CompilationType useInterpreter)
         {
             Expression<Func<short?>> e =
                 Expression.Lambda<Func<short?>>(
@@ -243,7 +243,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a ^ b, f());
         }
 
-        private static void VerifyBitwiseExclusiveOrNullableUInt(uint? a, uint? b, bool useInterpreter)
+        private static void VerifyBitwiseExclusiveOrNullableUInt(uint? a, uint? b, CompilationType useInterpreter)
         {
             Expression<Func<uint?>> e =
                 Expression.Lambda<Func<uint?>>(
@@ -256,7 +256,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a ^ b, f());
         }
 
-        private static void VerifyBitwiseExclusiveOrNullableULong(ulong? a, ulong? b, bool useInterpreter)
+        private static void VerifyBitwiseExclusiveOrNullableULong(ulong? a, ulong? b, CompilationType useInterpreter)
         {
             Expression<Func<ulong?>> e =
                 Expression.Lambda<Func<ulong?>>(
@@ -269,7 +269,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a ^ b, f());
         }
 
-        private static void VerifyBitwiseExclusiveOrNullableUShort(ushort? a, ushort? b, bool useInterpreter)
+        private static void VerifyBitwiseExclusiveOrNullableUShort(ushort? a, ushort? b, CompilationType useInterpreter)
         {
             Expression<Func<ushort?>> e =
                 Expression.Lambda<Func<ushort?>>(
@@ -282,7 +282,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(a ^ b, f());
         }
 
-        private static void VerifyBitwiseExclusiveOrNullableNumber(Number? a, Number? b, bool useInterpreter)
+        private static void VerifyBitwiseExclusiveOrNullableNumber(Number? a, Number? b, CompilationType useInterpreter)
         {
             Expression<Func<Number?>> e =
                 Expression.Lambda<Func<Number?>>(

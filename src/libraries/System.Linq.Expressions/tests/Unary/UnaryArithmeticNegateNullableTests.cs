@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryArithmeticNegateNullableByteTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticNegateNullableByteTest(CompilationType useInterpreter)
         {
             byte?[] values = new byte?[] { null, 0, 1, byte.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -20,7 +20,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryArithmeticNegateNullableCharTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticNegateNullableCharTest(CompilationType useInterpreter)
         {
             char?[] values = new char?[] { null, '\0', '\b', 'A', '\uffff' };
             for (int i = 0; i < values.Length; i++)
@@ -30,7 +30,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryArithmeticNegateNullableDecimalTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticNegateNullableDecimalTest(CompilationType useInterpreter)
         {
             decimal?[] values = new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -40,7 +40,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryArithmeticNegateNullableDoubleTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticNegateNullableDoubleTest(CompilationType useInterpreter)
         {
             double?[] values = new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -50,7 +50,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryArithmeticNegateNullableFloatTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticNegateNullableFloatTest(CompilationType useInterpreter)
         {
             float?[] values = new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -60,7 +60,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryArithmeticNegateNullableIntTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticNegateNullableIntTest(CompilationType useInterpreter)
         {
             int?[] values = new int?[] { null, 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -70,7 +70,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryArithmeticNegateNullableLongTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticNegateNullableLongTest(CompilationType useInterpreter)
         {
             long?[] values = new long?[] { null, 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -80,7 +80,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryArithmeticNegateNullableSByteTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticNegateNullableSByteTest(CompilationType useInterpreter)
         {
             sbyte?[] values = new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -90,7 +90,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryArithmeticNegateNullableShortTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticNegateNullableShortTest(CompilationType useInterpreter)
         {
             short?[] values = new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -103,17 +103,17 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyArithmeticNegateNullableByte(byte? value, bool useInterpreter)
+        private static void VerifyArithmeticNegateNullableByte(byte? value, CompilationType useInterpreter)
         {
             Assert.Throws<InvalidOperationException>(() => Expression.Negate(Expression.Constant(value, typeof(byte?))));
         }
 
-        private static void VerifyArithmeticNegateNullableChar(char? value, bool useInterpreter)
+        private static void VerifyArithmeticNegateNullableChar(char? value, CompilationType useInterpreter)
         {
             Assert.Throws<InvalidOperationException>(() => Expression.Negate(Expression.Constant(value, typeof(char?))));
         }
 
-        private static void VerifyArithmeticNegateNullableDecimal(decimal? value, bool useInterpreter)
+        private static void VerifyArithmeticNegateNullableDecimal(decimal? value, CompilationType useInterpreter)
         {
             Expression<Func<decimal?>> e =
                 Expression.Lambda<Func<decimal?>>(
@@ -123,7 +123,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((decimal?)(-value), f());
         }
 
-        private static void VerifyArithmeticNegateNullableDouble(double? value, bool useInterpreter)
+        private static void VerifyArithmeticNegateNullableDouble(double? value, CompilationType useInterpreter)
         {
             Expression<Func<double?>> e =
                 Expression.Lambda<Func<double?>>(
@@ -133,7 +133,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((double?)(-value), f());
         }
 
-        private static void VerifyArithmeticNegateNullableFloat(float? value, bool useInterpreter)
+        private static void VerifyArithmeticNegateNullableFloat(float? value, CompilationType useInterpreter)
         {
             Expression<Func<float?>> e =
                 Expression.Lambda<Func<float?>>(
@@ -143,7 +143,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((float?)(-value), f());
         }
 
-        private static void VerifyArithmeticNegateNullableInt(int? value, bool useInterpreter)
+        private static void VerifyArithmeticNegateNullableInt(int? value, CompilationType useInterpreter)
         {
             Expression<Func<int?>> e =
                 Expression.Lambda<Func<int?>>(
@@ -153,7 +153,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((int?)(-value)), f());
         }
 
-        private static void VerifyArithmeticNegateNullableLong(long? value, bool useInterpreter)
+        private static void VerifyArithmeticNegateNullableLong(long? value, CompilationType useInterpreter)
         {
             Expression<Func<long?>> e =
                 Expression.Lambda<Func<long?>>(
@@ -163,12 +163,12 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((long?)(-value)), f());
         }
 
-        private static void VerifyArithmeticNegateNullableSByte(sbyte? value, bool useInterpreter)
+        private static void VerifyArithmeticNegateNullableSByte(sbyte? value, CompilationType useInterpreter)
         {
             Assert.Throws<InvalidOperationException>(() => Expression.Negate(Expression.Constant(value, typeof(sbyte?))));
         }
 
-        private static void VerifyArithmeticNegateNullableShort(short? value, bool useInterpreter)
+        private static void VerifyArithmeticNegateNullableShort(short? value, CompilationType useInterpreter)
         {
             Expression<Func<short?>> e =
                 Expression.Lambda<Func<short?>>(

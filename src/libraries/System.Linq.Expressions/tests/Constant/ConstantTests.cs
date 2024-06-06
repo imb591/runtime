@@ -18,7 +18,7 @@ namespace System.Linq.Expressions.Tests
 #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckBoolConstantTest(bool useInterpreter)
+        public static void CheckBoolConstantTest(CompilationType useInterpreter)
         {
             foreach (bool value in new bool[] { true, false })
             {
@@ -27,7 +27,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckByteConstantTest(bool useInterpreter)
+        public static void CheckByteConstantTest(CompilationType useInterpreter)
         {
             foreach (byte value in new byte[] { 0, 1, byte.MaxValue })
             {
@@ -36,7 +36,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckCustomConstantTest(bool useInterpreter)
+        public static void CheckCustomConstantTest(CompilationType useInterpreter)
         {
             foreach (C value in new C[] { null, new C(), new D(), new D(0), new D(5) })
             {
@@ -45,7 +45,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckCharConstantTest(bool useInterpreter)
+        public static void CheckCharConstantTest(CompilationType useInterpreter)
         {
             foreach (char value in new char[] { '\0', '\b', 'A', '\uffff' })
             {
@@ -54,7 +54,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckCustom2ConstantTest(bool useInterpreter)
+        public static void CheckCustom2ConstantTest(CompilationType useInterpreter)
         {
             foreach (D value in new D[] { null, new D(), new D(0), new D(5) })
             {
@@ -63,7 +63,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckDecimalConstantTest(bool useInterpreter)
+        public static void CheckDecimalConstantTest(CompilationType useInterpreter)
         {
             foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue, int.MinValue, int.MaxValue, int.MinValue - 1L, int.MaxValue + 1L, long.MinValue, long.MaxValue, long.MaxValue + 1m, ulong.MaxValue, ulong.MaxValue + 1m })
             {
@@ -72,7 +72,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckDelegateConstantTest(bool useInterpreter)
+        public static void CheckDelegateConstantTest(CompilationType useInterpreter)
         {
             foreach (Delegate value in new Delegate[] { null, (Func<object>)delegate () { return null; }, (Func<int, int>)delegate (int i) { return i + 1; }, (Action<object>)delegate { } })
             {
@@ -81,7 +81,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckDoubleConstantTest(bool useInterpreter)
+        public static void CheckDoubleConstantTest(CompilationType useInterpreter)
         {
             foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
             {
@@ -90,7 +90,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckEnumConstantTest(bool useInterpreter)
+        public static void CheckEnumConstantTest(CompilationType useInterpreter)
         {
             foreach (E value in new E[] { (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
             {
@@ -99,7 +99,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckEnumLongConstantTest(bool useInterpreter)
+        public static void CheckEnumLongConstantTest(CompilationType useInterpreter)
         {
             foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
             {
@@ -108,7 +108,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckFloatConstantTest(bool useInterpreter)
+        public static void CheckFloatConstantTest(CompilationType useInterpreter)
         {
             foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
             {
@@ -117,7 +117,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckFuncOfObjectConstantTest(bool useInterpreter)
+        public static void CheckFuncOfObjectConstantTest(CompilationType useInterpreter)
         {
             foreach (Func<object> value in new Func<object>[] { null, (Func<object>)delegate () { return null; } })
             {
@@ -126,7 +126,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckInterfaceConstantTest(bool useInterpreter)
+        public static void CheckInterfaceConstantTest(CompilationType useInterpreter)
         {
             foreach (I value in new I[] { null, new C(), new D(), new D(0), new D(5) })
             {
@@ -135,7 +135,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckIEquatableOfCustomConstantTest(bool useInterpreter)
+        public static void CheckIEquatableOfCustomConstantTest(CompilationType useInterpreter)
         {
             foreach (IEquatable<C> value in new IEquatable<C>[] { null, new C(), new D(), new D(0), new D(5) })
             {
@@ -144,7 +144,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckIEquatableOfCustom2ConstantTest(bool useInterpreter)
+        public static void CheckIEquatableOfCustom2ConstantTest(CompilationType useInterpreter)
         {
             foreach (IEquatable<D> value in new IEquatable<D>[] { null, new D(), new D(0), new D(5) })
             {
@@ -153,7 +153,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckIntConstantTest(bool useInterpreter)
+        public static void CheckIntConstantTest(CompilationType useInterpreter)
         {
             foreach (int value in new int[] { 0, 1, -1, int.MinValue, int.MaxValue })
             {
@@ -162,7 +162,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLongConstantTest(bool useInterpreter)
+        public static void CheckLongConstantTest(CompilationType useInterpreter)
         {
             foreach (long value in new long[] { 0, 1, -1, long.MinValue, long.MaxValue })
             {
@@ -171,7 +171,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckObjectConstantTest(bool useInterpreter)
+        public static void CheckObjectConstantTest(CompilationType useInterpreter)
         {
             foreach (object value in new object[] { null, new object(), new C(), new D(3) })
             {
@@ -180,7 +180,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckStructConstantTest(bool useInterpreter)
+        public static void CheckStructConstantTest(CompilationType useInterpreter)
         {
             foreach (S value in new S[] { default(S), new S() })
             {
@@ -189,7 +189,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckSByteConstantTest(bool useInterpreter)
+        public static void CheckSByteConstantTest(CompilationType useInterpreter)
         {
             foreach (sbyte value in new sbyte[] { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
             {
@@ -198,7 +198,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckStructWithStringConstantTest(bool useInterpreter)
+        public static void CheckStructWithStringConstantTest(CompilationType useInterpreter)
         {
             foreach (Sc value in new Sc[] { default(Sc), new Sc(), new Sc(null) })
             {
@@ -207,7 +207,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckStructWithStringAndFieldConstantTest(bool useInterpreter)
+        public static void CheckStructWithStringAndFieldConstantTest(CompilationType useInterpreter)
         {
             foreach (Scs value in new Scs[] { default(Scs), new Scs(), new Scs(null, new S()) })
             {
@@ -216,7 +216,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckShortConstantTest(bool useInterpreter)
+        public static void CheckShortConstantTest(CompilationType useInterpreter)
         {
             foreach (short value in new short[] { 0, 1, -1, short.MinValue, short.MaxValue })
             {
@@ -225,7 +225,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckStructWithTwoValuesConstantTest(bool useInterpreter)
+        public static void CheckStructWithTwoValuesConstantTest(CompilationType useInterpreter)
         {
             foreach (Sp value in new Sp[] { default(Sp), new Sp(), new Sp(5, 5.0) })
             {
@@ -234,7 +234,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckStructWithValueConstantTest(bool useInterpreter)
+        public static void CheckStructWithValueConstantTest(CompilationType useInterpreter)
         {
             foreach (Ss value in new Ss[] { default(Ss), new Ss(), new Ss(new S()) })
             {
@@ -243,7 +243,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckStringConstantTest(bool useInterpreter)
+        public static void CheckStringConstantTest(CompilationType useInterpreter)
         {
             foreach (string value in new string[] { null, "", "a", "foo" })
             {
@@ -252,7 +252,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUIntConstantTest(bool useInterpreter)
+        public static void CheckUIntConstantTest(CompilationType useInterpreter)
         {
             foreach (uint value in new uint[] { 0, 1, uint.MaxValue })
             {
@@ -261,7 +261,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckULongConstantTest(bool useInterpreter)
+        public static void CheckULongConstantTest(CompilationType useInterpreter)
         {
             foreach (ulong value in new ulong[] { 0, 1, ulong.MaxValue })
             {
@@ -270,7 +270,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUShortConstantTest(bool useInterpreter)
+        public static void CheckUShortConstantTest(CompilationType useInterpreter)
         {
             foreach (ushort value in new ushort[] { 0, 1, ushort.MaxValue })
             {
@@ -286,7 +286,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTypeConstantTest(bool useInterpreter)
+        public static void CheckTypeConstantTest(CompilationType useInterpreter)
         {
             foreach (Type value in new[]
             {
@@ -319,7 +319,7 @@ namespace System.Linq.Expressions.Tests
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly))]
         [ClassData(typeof(CompilationTypes))]
-        public static void CheckMethodInfoConstantTest(bool useInterpreter)
+        public static void CheckMethodInfoConstantTest(CompilationType useInterpreter)
         {
             foreach (MethodInfo value in new MethodInfo[]
             {
@@ -349,7 +349,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckConstructorInfoConstantTest(bool useInterpreter)
+        public static void CheckConstructorInfoConstantTest(CompilationType useInterpreter)
         {
             foreach (
                 ConstructorInfo value in
@@ -363,91 +363,91 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithStructRestrictionWithEnumConstantTest(bool useInterpreter)
+        public static void CheckGenericWithStructRestrictionWithEnumConstantTest(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionConstantHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithStructRestrictionWithStructConstantTest(bool useInterpreter)
+        public static void CheckGenericWithStructRestrictionWithStructConstantTest(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionConstantHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithStructRestrictionWithStructWithStringAndValueConstantTest(bool useInterpreter)
+        public static void CheckGenericWithStructRestrictionWithStructWithStringAndValueConstantTest(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionConstantHelper<Scs>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithCustomTest(bool useInterpreter)
+        public static void CheckGenericWithCustomTest(CompilationType useInterpreter)
         {
             CheckGenericHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithEnumTest(bool useInterpreter)
+        public static void CheckGenericWithEnumTest(CompilationType useInterpreter)
         {
             CheckGenericHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithObjectTest(bool useInterpreter)
+        public static void CheckGenericWithObjectTest(CompilationType useInterpreter)
         {
             CheckGenericHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithStructTest(bool useInterpreter)
+        public static void CheckGenericWithStructTest(CompilationType useInterpreter)
         {
             CheckGenericHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithStructWithStringAndValueTest(bool useInterpreter)
+        public static void CheckGenericWithStructWithStringAndValueTest(CompilationType useInterpreter)
         {
             CheckGenericHelper<Scs>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithClassRestrictionWithCustomTest(bool useInterpreter)
+        public static void CheckGenericWithClassRestrictionWithCustomTest(CompilationType useInterpreter)
         {
             CheckGenericWithClassRestrictionHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithClassRestrictionWithObjectTest(bool useInterpreter)
+        public static void CheckGenericWithClassRestrictionWithObjectTest(CompilationType useInterpreter)
         {
             CheckGenericWithClassRestrictionHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithClassAndNewRestrictionWithCustomTest(bool useInterpreter)
+        public static void CheckGenericWithClassAndNewRestrictionWithCustomTest(CompilationType useInterpreter)
         {
             CheckGenericWithClassAndNewRestrictionHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithClassAndNewRestrictionWithObjectTest(bool useInterpreter)
+        public static void CheckGenericWithClassAndNewRestrictionWithObjectTest(CompilationType useInterpreter)
         {
             CheckGenericWithClassAndNewRestrictionHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithSubClassRestrictionTest(bool useInterpreter)
+        public static void CheckGenericWithSubClassRestrictionTest(CompilationType useInterpreter)
         {
             CheckGenericWithSubClassRestrictionHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericWithSubClassAndNewRestrictionTest(bool useInterpreter)
+        public static void CheckGenericWithSubClassAndNewRestrictionTest(CompilationType useInterpreter)
         {
             CheckGenericWithSubClassAndNewRestrictionHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void BoundConstantCaching1(bool useInterpreter)
+        public static void BoundConstantCaching1(CompilationType useInterpreter)
         {
             ConstantExpression c = Expression.Constant(new Bar());
 
@@ -464,7 +464,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void BoundConstantCaching2(bool useInterpreter)
+        public static void BoundConstantCaching2(CompilationType useInterpreter)
         {
             var b = new Bar();
             ConstantExpression c1 = Expression.Constant(b);
@@ -484,7 +484,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void BoundConstantCaching3(bool useInterpreter)
+        public static void BoundConstantCaching3(CompilationType useInterpreter)
         {
             var b = new Bar() { Foo = 1 };
 
@@ -502,7 +502,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void BoundConstantCaching4(bool useInterpreter)
+        public static void BoundConstantCaching4(CompilationType useInterpreter)
         {
             Bar[] bs = new[]
             {
@@ -527,7 +527,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Generic helpers
 
-        private static void CheckGenericWithStructRestrictionConstantHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckGenericWithStructRestrictionConstantHelper<Ts>(CompilationType useInterpreter) where Ts : struct
         {
             foreach (Ts value in new Ts[] { default(Ts), new Ts() })
             {
@@ -535,7 +535,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericHelper<T>(bool useInterpreter)
+        private static void CheckGenericHelper<T>(CompilationType useInterpreter)
         {
             foreach (T value in new T[] { default(T) })
             {
@@ -543,7 +543,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithClassRestrictionHelper<Tc>(bool useInterpreter) where Tc : class
+        private static void CheckGenericWithClassRestrictionHelper<Tc>(CompilationType useInterpreter) where Tc : class
         {
             foreach (Tc value in new Tc[] { null, default(Tc) })
             {
@@ -551,7 +551,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithClassAndNewRestrictionHelper<Tcn>(bool useInterpreter) where Tcn : class, new()
+        private static void CheckGenericWithClassAndNewRestrictionHelper<Tcn>(CompilationType useInterpreter) where Tcn : class, new()
         {
             foreach (Tcn value in new Tcn[] { null, default(Tcn), new Tcn() })
             {
@@ -559,7 +559,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithSubClassRestrictionHelper<TC>(bool useInterpreter) where TC : C
+        private static void CheckGenericWithSubClassRestrictionHelper<TC>(CompilationType useInterpreter) where TC : C
         {
             foreach (TC value in new TC[] { null, default(TC), (TC)new C() })
             {
@@ -567,7 +567,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithSubClassAndNewRestrictionHelper<TCn>(bool useInterpreter) where TCn : C, new()
+        private static void CheckGenericWithSubClassAndNewRestrictionHelper<TCn>(CompilationType useInterpreter) where TCn : C, new()
         {
             foreach (TCn value in new TCn[] { null, default(TCn), new TCn(), (TCn)new C() })
             {
@@ -579,7 +579,7 @@ namespace System.Linq.Expressions.Tests
 
 #region Test verifiers
 
-        private static void VerifyBoolConstant(bool value, bool useInterpreter)
+        private static void VerifyBoolConstant(bool value, CompilationType useInterpreter)
         {
             Expression<Func<bool>> e =
                 Expression.Lambda<Func<bool>>(
@@ -589,7 +589,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyByteConstant(byte value, bool useInterpreter)
+        private static void VerifyByteConstant(byte value, CompilationType useInterpreter)
         {
             Expression<Func<byte>> e =
                 Expression.Lambda<Func<byte>>(
@@ -599,7 +599,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyCustomConstant(C value, bool useInterpreter)
+        private static void VerifyCustomConstant(C value, CompilationType useInterpreter)
         {
             Expression<Func<C>> e =
                 Expression.Lambda<Func<C>>(
@@ -609,7 +609,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyCharConstant(char value, bool useInterpreter)
+        private static void VerifyCharConstant(char value, CompilationType useInterpreter)
         {
             Expression<Func<char>> e =
                 Expression.Lambda<Func<char>>(
@@ -619,7 +619,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyCustom2Constant(D value, bool useInterpreter)
+        private static void VerifyCustom2Constant(D value, CompilationType useInterpreter)
         {
             Expression<Func<D>> e =
                 Expression.Lambda<Func<D>>(
@@ -629,7 +629,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyDecimalConstant(decimal value, bool useInterpreter)
+        private static void VerifyDecimalConstant(decimal value, CompilationType useInterpreter)
         {
             Expression<Func<decimal>> e =
                 Expression.Lambda<Func<decimal>>(
@@ -639,7 +639,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyDelegateConstant(Delegate value, bool useInterpreter)
+        private static void VerifyDelegateConstant(Delegate value, CompilationType useInterpreter)
         {
             Expression<Func<Delegate>> e =
                 Expression.Lambda<Func<Delegate>>(
@@ -649,7 +649,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyDoubleConstant(double value, bool useInterpreter)
+        private static void VerifyDoubleConstant(double value, CompilationType useInterpreter)
         {
             Expression<Func<double>> e =
                 Expression.Lambda<Func<double>>(
@@ -659,7 +659,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyEnumConstant(E value, bool useInterpreter)
+        private static void VerifyEnumConstant(E value, CompilationType useInterpreter)
         {
             Expression<Func<E>> e =
                 Expression.Lambda<Func<E>>(
@@ -669,7 +669,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyEnumLongConstant(El value, bool useInterpreter)
+        private static void VerifyEnumLongConstant(El value, CompilationType useInterpreter)
         {
             Expression<Func<El>> e =
                 Expression.Lambda<Func<El>>(
@@ -679,7 +679,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyFloatConstant(float value, bool useInterpreter)
+        private static void VerifyFloatConstant(float value, CompilationType useInterpreter)
         {
             Expression<Func<float>> e =
                 Expression.Lambda<Func<float>>(
@@ -689,7 +689,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyFuncOfObjectConstant(Func<object> value, bool useInterpreter)
+        private static void VerifyFuncOfObjectConstant(Func<object> value, CompilationType useInterpreter)
         {
             Expression<Func<Func<object>>> e =
                 Expression.Lambda<Func<Func<object>>>(
@@ -699,7 +699,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyInterfaceConstant(I value, bool useInterpreter)
+        private static void VerifyInterfaceConstant(I value, CompilationType useInterpreter)
         {
             Expression<Func<I>> e =
                 Expression.Lambda<Func<I>>(
@@ -709,7 +709,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyIEquatableOfCustomConstant(IEquatable<C> value, bool useInterpreter)
+        private static void VerifyIEquatableOfCustomConstant(IEquatable<C> value, CompilationType useInterpreter)
         {
             Expression<Func<IEquatable<C>>> e =
                 Expression.Lambda<Func<IEquatable<C>>>(
@@ -719,7 +719,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyIEquatableOfCustom2Constant(IEquatable<D> value, bool useInterpreter)
+        private static void VerifyIEquatableOfCustom2Constant(IEquatable<D> value, CompilationType useInterpreter)
         {
             Expression<Func<IEquatable<D>>> e =
                 Expression.Lambda<Func<IEquatable<D>>>(
@@ -729,7 +729,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyIntConstant(int value, bool useInterpreter)
+        private static void VerifyIntConstant(int value, CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -739,7 +739,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyLongConstant(long value, bool useInterpreter)
+        private static void VerifyLongConstant(long value, CompilationType useInterpreter)
         {
             Expression<Func<long>> e =
                 Expression.Lambda<Func<long>>(
@@ -749,7 +749,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyObjectConstant(object value, bool useInterpreter)
+        private static void VerifyObjectConstant(object value, CompilationType useInterpreter)
         {
             Expression<Func<object>> e =
                 Expression.Lambda<Func<object>>(
@@ -759,7 +759,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyStructConstant(S value, bool useInterpreter)
+        private static void VerifyStructConstant(S value, CompilationType useInterpreter)
         {
             Expression<Func<S>> e =
                 Expression.Lambda<Func<S>>(
@@ -769,7 +769,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifySByteConstant(sbyte value, bool useInterpreter)
+        private static void VerifySByteConstant(sbyte value, CompilationType useInterpreter)
         {
             Expression<Func<sbyte>> e =
                 Expression.Lambda<Func<sbyte>>(
@@ -779,7 +779,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyStructWithStringConstant(Sc value, bool useInterpreter)
+        private static void VerifyStructWithStringConstant(Sc value, CompilationType useInterpreter)
         {
             Expression<Func<Sc>> e =
                 Expression.Lambda<Func<Sc>>(
@@ -789,7 +789,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyStructWithStringAndFieldConstant(Scs value, bool useInterpreter)
+        private static void VerifyStructWithStringAndFieldConstant(Scs value, CompilationType useInterpreter)
         {
             Expression<Func<Scs>> e =
                 Expression.Lambda<Func<Scs>>(
@@ -799,7 +799,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyShortConstant(short value, bool useInterpreter)
+        private static void VerifyShortConstant(short value, CompilationType useInterpreter)
         {
             Expression<Func<short>> e =
                 Expression.Lambda<Func<short>>(
@@ -809,7 +809,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyStructWithTwoValuesConstant(Sp value, bool useInterpreter)
+        private static void VerifyStructWithTwoValuesConstant(Sp value, CompilationType useInterpreter)
         {
             Expression<Func<Sp>> e =
                 Expression.Lambda<Func<Sp>>(
@@ -819,7 +819,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyStructWithValueConstant(Ss value, bool useInterpreter)
+        private static void VerifyStructWithValueConstant(Ss value, CompilationType useInterpreter)
         {
             Expression<Func<Ss>> e =
                 Expression.Lambda<Func<Ss>>(
@@ -829,7 +829,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyStringConstant(string value, bool useInterpreter)
+        private static void VerifyStringConstant(string value, CompilationType useInterpreter)
         {
             Expression<Func<string>> e =
                 Expression.Lambda<Func<string>>(
@@ -839,7 +839,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyUIntConstant(uint value, bool useInterpreter)
+        private static void VerifyUIntConstant(uint value, CompilationType useInterpreter)
         {
             Expression<Func<uint>> e =
                 Expression.Lambda<Func<uint>>(
@@ -849,7 +849,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyULongConstant(ulong value, bool useInterpreter)
+        private static void VerifyULongConstant(ulong value, CompilationType useInterpreter)
         {
             Expression<Func<ulong>> e =
                 Expression.Lambda<Func<ulong>>(
@@ -859,7 +859,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyUShortConstant(ushort value, bool useInterpreter)
+        private static void VerifyUShortConstant(ushort value, CompilationType useInterpreter)
         {
             Expression<Func<ushort>> e =
                 Expression.Lambda<Func<ushort>>(
@@ -869,7 +869,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyTypeConstant(Type value, bool useInterpreter)
+        private static void VerifyTypeConstant(Type value, CompilationType useInterpreter)
         {
             Expression<Func<Type>> e =
                 Expression.Lambda<Func<Type>>(
@@ -879,7 +879,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyMethodInfoConstant(MethodInfo value, bool useInterpreter)
+        private static void VerifyMethodInfoConstant(MethodInfo value, CompilationType useInterpreter)
         {
             Expression<Func<MethodInfo>> e =
                 Expression.Lambda<Func<MethodInfo>>(
@@ -889,7 +889,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyConstructorInfoConstant(ConstructorInfo value, bool useInterpreter)
+        private static void VerifyConstructorInfoConstant(ConstructorInfo value, CompilationType useInterpreter)
         {
             Expression<Func<ConstructorInfo>> e =
                 Expression.Lambda<Func<ConstructorInfo>>(Expression.Constant(value, typeof(ConstructorInfo)));
@@ -897,7 +897,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyGenericWithStructRestriction<Ts>(Ts value, bool useInterpreter) where Ts : struct
+        private static void VerifyGenericWithStructRestriction<Ts>(Ts value, CompilationType useInterpreter) where Ts : struct
         {
             Expression<Func<Ts>> e =
                 Expression.Lambda<Func<Ts>>(
@@ -907,7 +907,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyGeneric<T>(T value, bool useInterpreter)
+        private static void VerifyGeneric<T>(T value, CompilationType useInterpreter)
         {
             Expression<Func<T>> e =
                 Expression.Lambda<Func<T>>(
@@ -917,7 +917,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyGenericWithClassRestriction<Tc>(Tc value, bool useInterpreter) where Tc : class
+        private static void VerifyGenericWithClassRestriction<Tc>(Tc value, CompilationType useInterpreter) where Tc : class
         {
             Expression<Func<Tc>> e =
                 Expression.Lambda<Func<Tc>>(
@@ -927,7 +927,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyGenericWithClassAndNewRestriction<Tcn>(Tcn value, bool useInterpreter) where Tcn : class, new()
+        private static void VerifyGenericWithClassAndNewRestriction<Tcn>(Tcn value, CompilationType useInterpreter) where Tcn : class, new()
         {
             Expression<Func<Tcn>> e =
                 Expression.Lambda<Func<Tcn>>(
@@ -937,7 +937,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyGenericWithSubClassRestriction<TC>(TC value, bool useInterpreter) where TC : C
+        private static void VerifyGenericWithSubClassRestriction<TC>(TC value, CompilationType useInterpreter) where TC : C
         {
             Expression<Func<TC>> e =
                 Expression.Lambda<Func<TC>>(
@@ -947,7 +947,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f());
         }
 
-        private static void VerifyGenericWithSubClassAndNewRestriction<TCn>(TCn value, bool useInterpreter) where TCn : C, new()
+        private static void VerifyGenericWithSubClassAndNewRestriction<TCn>(TCn value, CompilationType useInterpreter) where TCn : C, new()
         {
             Expression<Func<TCn>> e =
                 Expression.Lambda<Func<TCn>>(
@@ -1025,7 +1025,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void DecimalConstantRetainsScaleAnd(bool useInterpreter)
+        public static void DecimalConstantRetainsScaleAnd(CompilationType useInterpreter)
         {
             var lambda = Expression.Lambda<Func<decimal>>(Expression.Constant(-0.000m));
             var func = lambda.Compile(useInterpreter);

@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableBoolTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableBoolTest(CompilationType useInterpreter)
         {
             foreach (bool? value in new bool?[] { null, true, false })
             {
@@ -19,7 +19,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableByteTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableByteTest(CompilationType useInterpreter)
         {
             foreach (byte? value in new byte?[] { null, 0, 1, byte.MaxValue })
             {
@@ -28,7 +28,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableCharTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableCharTest(CompilationType useInterpreter)
         {
             foreach (char? value in new char?[] { null, '\0', '\b', 'A', '\uffff' })
             {
@@ -37,7 +37,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableDecimalTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableDecimalTest(CompilationType useInterpreter)
         {
             foreach (decimal? value in new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
             {
@@ -46,7 +46,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableDoubleTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableDoubleTest(CompilationType useInterpreter)
         {
             foreach (double? value in new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
             {
@@ -55,7 +55,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableEnumTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableEnumTest(CompilationType useInterpreter)
         {
             foreach (E? value in new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
             {
@@ -64,7 +64,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableEnumLongTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableEnumLongTest(CompilationType useInterpreter)
         {
             foreach (El? value in new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
             {
@@ -73,7 +73,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableFloatTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableFloatTest(CompilationType useInterpreter)
         {
             foreach (float? value in new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
             {
@@ -82,7 +82,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableIntTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableIntTest(CompilationType useInterpreter)
         {
             foreach (int? value in new int?[] { null, 0, 1, -1, int.MinValue, int.MaxValue })
             {
@@ -91,7 +91,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableLongTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableLongTest(CompilationType useInterpreter)
         {
             foreach (long? value in new long?[] { null, 0, 1, -1, long.MinValue, long.MaxValue })
             {
@@ -100,7 +100,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableStructTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableStructTest(CompilationType useInterpreter)
         {
             foreach (S? value in new S?[] { null, default(S), new S() })
             {
@@ -109,7 +109,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableSByteTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableSByteTest(CompilationType useInterpreter)
         {
             foreach (sbyte? value in new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
             {
@@ -118,7 +118,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableStructWithStringTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableStructWithStringTest(CompilationType useInterpreter)
         {
             foreach (Sc? value in new Sc?[] { null, default(Sc), new Sc(), new Sc(null) })
             {
@@ -127,7 +127,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableStructWithStringAndFieldTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableStructWithStringAndFieldTest(CompilationType useInterpreter)
         {
             foreach (Scs? value in new Scs?[] { null, default(Scs), new Scs(), new Scs(null, new S()) })
             {
@@ -136,7 +136,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableShortTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableShortTest(CompilationType useInterpreter)
         {
             foreach (short? value in new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue })
             {
@@ -145,7 +145,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableStructWithTwoValuesTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableStructWithTwoValuesTest(CompilationType useInterpreter)
         {
             foreach (Sp? value in new Sp?[] { null, default(Sp), new Sp(), new Sp(5, 5.0) })
             {
@@ -154,7 +154,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableStructWithValueTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableStructWithValueTest(CompilationType useInterpreter)
         {
             foreach (Ss? value in new Ss?[] { null, default(Ss), new Ss(), new Ss(new S()) })
             {
@@ -163,7 +163,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableUIntTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableUIntTest(CompilationType useInterpreter)
         {
             foreach (uint? value in new uint?[] { null, 0, 1, uint.MaxValue })
             {
@@ -172,7 +172,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableULongTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableULongTest(CompilationType useInterpreter)
         {
             foreach (ulong? value in new ulong?[] { null, 0, 1, ulong.MaxValue })
             {
@@ -181,7 +181,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableUShortTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableUShortTest(CompilationType useInterpreter)
         {
             foreach (ushort? value in new ushort?[] { null, 0, 1, ushort.MaxValue })
             {
@@ -190,19 +190,19 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableGenericWithStructRestrictionWithEnumTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableGenericWithStructRestrictionWithEnumTest(CompilationType useInterpreter)
         {
             CheckLambdaIdentityNullableGenericWithStructRestrictionHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableGenericWithStructRestrictionWithStructTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableGenericWithStructRestrictionWithStructTest(CompilationType useInterpreter)
         {
             CheckLambdaIdentityNullableGenericWithStructRestrictionHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityNullableGenericWithStructRestrictionWithStructWithStringAndFieldTest(bool useInterpreter)
+        public static void CheckLambdaIdentityNullableGenericWithStructRestrictionWithStructWithStringAndFieldTest(CompilationType useInterpreter)
         {
             CheckLambdaIdentityNullableGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
@@ -211,7 +211,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Generic helpers
 
-        private static void CheckLambdaIdentityNullableGenericWithStructRestrictionHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckLambdaIdentityNullableGenericWithStructRestrictionHelper<Ts>(CompilationType useInterpreter) where Ts : struct
         {
             foreach (Ts? value in new Ts?[] { default(Ts), new Ts() })
             {
@@ -223,7 +223,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyIdentityNullableBool(bool? value, bool useInterpreter)
+        private static void VerifyIdentityNullableBool(bool? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(bool?), "p");
 
@@ -267,7 +267,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f4()(value));
         }
 
-        private static void VerifyIdentityNullableByte(byte? value, bool useInterpreter)
+        private static void VerifyIdentityNullableByte(byte? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(byte?), "p");
 
@@ -311,7 +311,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f4()(value));
         }
 
-        private static void VerifyIdentityNullableChar(char? value, bool useInterpreter)
+        private static void VerifyIdentityNullableChar(char? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(char?), "p");
 
@@ -355,7 +355,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f4()(value));
         }
 
-        private static void VerifyIdentityNullableDecimal(decimal? value, bool useInterpreter)
+        private static void VerifyIdentityNullableDecimal(decimal? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(decimal?), "p");
 
@@ -399,7 +399,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f4()(value));
         }
 
-        private static void VerifyIdentityNullableDouble(double? value, bool useInterpreter)
+        private static void VerifyIdentityNullableDouble(double? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(double?), "p");
 
@@ -443,7 +443,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f4()(value));
         }
 
-        private static void VerifyIdentityNullableEnum(E? value, bool useInterpreter)
+        private static void VerifyIdentityNullableEnum(E? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(E?), "p");
 
@@ -487,7 +487,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f4()(value));
         }
 
-        private static void VerifyIdentityNullableEnumLong(El? value, bool useInterpreter)
+        private static void VerifyIdentityNullableEnumLong(El? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(El?), "p");
 
@@ -531,7 +531,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f4()(value));
         }
 
-        private static void VerifyIdentityNullableFloat(float? value, bool useInterpreter)
+        private static void VerifyIdentityNullableFloat(float? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(float?), "p");
 
@@ -575,7 +575,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f4()(value));
         }
 
-        private static void VerifyIdentityNullableInt(int? value, bool useInterpreter)
+        private static void VerifyIdentityNullableInt(int? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(int?), "p");
 
@@ -619,7 +619,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f4()(value));
         }
 
-        private static void VerifyIdentityNullableLong(long? value, bool useInterpreter)
+        private static void VerifyIdentityNullableLong(long? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(long?), "p");
 
@@ -663,7 +663,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f4()(value));
         }
 
-        private static void VerifyIdentityNullableStruct(S? value, bool useInterpreter)
+        private static void VerifyIdentityNullableStruct(S? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(S?), "p");
 
@@ -707,7 +707,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f4()(value));
         }
 
-        private static void VerifyIdentityNullableSByte(sbyte? value, bool useInterpreter)
+        private static void VerifyIdentityNullableSByte(sbyte? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(sbyte?), "p");
 
@@ -751,7 +751,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f4()(value));
         }
 
-        private static void VerifyIdentityNullableStructWithString(Sc? value, bool useInterpreter)
+        private static void VerifyIdentityNullableStructWithString(Sc? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(Sc?), "p");
 
@@ -795,7 +795,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f4()(value));
         }
 
-        private static void VerifyIdentityNullableStructWithStringAndField(Scs? value, bool useInterpreter)
+        private static void VerifyIdentityNullableStructWithStringAndField(Scs? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(Scs?), "p");
 
@@ -839,7 +839,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f4()(value));
         }
 
-        private static void VerifyIdentityNullableShort(short? value, bool useInterpreter)
+        private static void VerifyIdentityNullableShort(short? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(short?), "p");
 
@@ -883,7 +883,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f4()(value));
         }
 
-        private static void VerifyIdentityNullableStructWithTwoValues(Sp? value, bool useInterpreter)
+        private static void VerifyIdentityNullableStructWithTwoValues(Sp? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(Sp?), "p");
 
@@ -927,7 +927,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f4()(value));
         }
 
-        private static void VerifyIdentityNullableStructWithValue(Ss? value, bool useInterpreter)
+        private static void VerifyIdentityNullableStructWithValue(Ss? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(Ss?), "p");
 
@@ -971,7 +971,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f4()(value));
         }
 
-        private static void VerifyIdentityNullableUInt(uint? value, bool useInterpreter)
+        private static void VerifyIdentityNullableUInt(uint? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(uint?), "p");
 
@@ -1015,7 +1015,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f4()(value));
         }
 
-        private static void VerifyIdentityNullableULong(ulong? value, bool useInterpreter)
+        private static void VerifyIdentityNullableULong(ulong? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(ulong?), "p");
 
@@ -1059,7 +1059,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f4()(value));
         }
 
-        private static void VerifyIdentityNullableUShort(ushort? value, bool useInterpreter)
+        private static void VerifyIdentityNullableUShort(ushort? value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(ushort?), "p");
 
@@ -1103,7 +1103,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, f4()(value));
         }
 
-        private static void VerifyIdentityNullableGenericWithStructRestriction<Ts>(Ts? value, bool useInterpreter) where Ts : struct
+        private static void VerifyIdentityNullableGenericWithStructRestriction<Ts>(Ts? value, CompilationType useInterpreter) where Ts : struct
         {
             ParameterExpression p = Expression.Parameter(typeof(Ts?), "p");
 

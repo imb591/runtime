@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region NullableBool tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableBoolArrayIndexTest(bool useInterpreter)
+        public static void CheckNullableBoolArrayIndexTest(CompilationType useInterpreter)
         {
             CheckNullableBoolArrayIndex(GenerateNullableBoolArray(0), useInterpreter);
             CheckNullableBoolArrayIndex(GenerateNullableBoolArray(1), useInterpreter);
@@ -18,7 +18,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableBoolArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionNullableBoolArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionNullableBoolArrayIndex(null, -1, useInterpreter);
@@ -39,7 +39,7 @@ namespace System.Linq.Expressions.Tests
         #region NullableByte tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableByteArrayIndexTest(bool useInterpreter)
+        public static void CheckNullableByteArrayIndexTest(CompilationType useInterpreter)
         {
             CheckNullableByteArrayIndex(GenerateNullableByteArray(0), useInterpreter);
             CheckNullableByteArrayIndex(GenerateNullableByteArray(1), useInterpreter);
@@ -47,7 +47,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableByteArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionNullableByteArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionNullableByteArrayIndex(null, -1, useInterpreter);
@@ -68,7 +68,7 @@ namespace System.Linq.Expressions.Tests
         #region NullableChar tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableCharArrayIndexTest(bool useInterpreter)
+        public static void CheckNullableCharArrayIndexTest(CompilationType useInterpreter)
         {
             CheckNullableCharArrayIndex(GenerateNullableCharArray(0), useInterpreter);
             CheckNullableCharArrayIndex(GenerateNullableCharArray(1), useInterpreter);
@@ -76,7 +76,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableCharArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionNullableCharArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionNullableCharArrayIndex(null, -1, useInterpreter);
@@ -97,7 +97,7 @@ namespace System.Linq.Expressions.Tests
         #region NullableDecimal tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableDecimalArrayIndexTest(bool useInterpreter)
+        public static void CheckNullableDecimalArrayIndexTest(CompilationType useInterpreter)
         {
             CheckNullableDecimalArrayIndex(GenerateNullableDecimalArray(0), useInterpreter);
             CheckNullableDecimalArrayIndex(GenerateNullableDecimalArray(1), useInterpreter);
@@ -105,7 +105,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableDecimalArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionNullableDecimalArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionNullableDecimalArrayIndex(null, -1, useInterpreter);
@@ -126,7 +126,7 @@ namespace System.Linq.Expressions.Tests
         #region NullableDouble tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableDoubleArrayIndexTest(bool useInterpreter)
+        public static void CheckNullableDoubleArrayIndexTest(CompilationType useInterpreter)
         {
             CheckNullableDoubleArrayIndex(GenerateNullableDoubleArray(0), useInterpreter);
             CheckNullableDoubleArrayIndex(GenerateNullableDoubleArray(1), useInterpreter);
@@ -134,7 +134,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableDoubleArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionNullableDoubleArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionNullableDoubleArrayIndex(null, -1, useInterpreter);
@@ -155,7 +155,7 @@ namespace System.Linq.Expressions.Tests
         #region NullableEnum tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableEnumArrayIndexTest(bool useInterpreter)
+        public static void CheckNullableEnumArrayIndexTest(CompilationType useInterpreter)
         {
             CheckNullableEnumArrayIndex(GenerateNullableEnumArray(0), useInterpreter);
             CheckNullableEnumArrayIndex(GenerateNullableEnumArray(1), useInterpreter);
@@ -163,7 +163,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableEnumArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionNullableEnumArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionNullableEnumArrayIndex(null, -1, useInterpreter);
@@ -184,7 +184,7 @@ namespace System.Linq.Expressions.Tests
         #region NullableLongEnum tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableLongEnumArrayIndexTest(bool useInterpreter)
+        public static void CheckNullableLongEnumArrayIndexTest(CompilationType useInterpreter)
         {
             CheckNullableLongEnumArrayIndex(GenerateNullableLongEnumArray(0), useInterpreter);
             CheckNullableLongEnumArrayIndex(GenerateNullableLongEnumArray(1), useInterpreter);
@@ -192,7 +192,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableLongEnumArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionNullableLongEnumArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionNullableLongEnumArrayIndex(null, -1, useInterpreter);
@@ -213,7 +213,7 @@ namespace System.Linq.Expressions.Tests
         #region NullableFloat tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableFloatArrayIndexTest(bool useInterpreter)
+        public static void CheckNullableFloatArrayIndexTest(CompilationType useInterpreter)
         {
             CheckNullableFloatArrayIndex(GenerateNullableFloatArray(0), useInterpreter);
             CheckNullableFloatArrayIndex(GenerateNullableFloatArray(1), useInterpreter);
@@ -221,7 +221,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableFloatArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionNullableFloatArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionNullableFloatArrayIndex(null, -1, useInterpreter);
@@ -242,7 +242,7 @@ namespace System.Linq.Expressions.Tests
         #region NullableInt tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableIntArrayIndexTest(bool useInterpreter)
+        public static void CheckNullableIntArrayIndexTest(CompilationType useInterpreter)
         {
             CheckNullableIntArrayIndex(GenerateNullableIntArray(0), useInterpreter);
             CheckNullableIntArrayIndex(GenerateNullableIntArray(1), useInterpreter);
@@ -250,7 +250,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableIntArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionNullableIntArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionNullableIntArrayIndex(null, -1, useInterpreter);
@@ -271,7 +271,7 @@ namespace System.Linq.Expressions.Tests
         #region NullableLong tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableLongArrayIndexTest(bool useInterpreter)
+        public static void CheckNullableLongArrayIndexTest(CompilationType useInterpreter)
         {
             CheckNullableLongArrayIndex(GenerateNullableLongArray(0), useInterpreter);
             CheckNullableLongArrayIndex(GenerateNullableLongArray(1), useInterpreter);
@@ -279,7 +279,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableLongArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionNullableLongArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionNullableLongArrayIndex(null, -1, useInterpreter);
@@ -300,7 +300,7 @@ namespace System.Linq.Expressions.Tests
         #region NullableSByte tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableSByteArrayIndexTest(bool useInterpreter)
+        public static void CheckNullableSByteArrayIndexTest(CompilationType useInterpreter)
         {
             CheckNullableSByteArrayIndex(GenerateNullableSByteArray(0), useInterpreter);
             CheckNullableSByteArrayIndex(GenerateNullableSByteArray(1), useInterpreter);
@@ -308,7 +308,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableSByteArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionNullableSByteArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionNullableSByteArrayIndex(null, -1, useInterpreter);
@@ -329,7 +329,7 @@ namespace System.Linq.Expressions.Tests
         #region NullableShort tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableShortArrayIndexTest(bool useInterpreter)
+        public static void CheckNullableShortArrayIndexTest(CompilationType useInterpreter)
         {
             CheckNullableShortArrayIndex(GenerateNullableShortArray(0), useInterpreter);
             CheckNullableShortArrayIndex(GenerateNullableShortArray(1), useInterpreter);
@@ -337,7 +337,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableShortArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionNullableShortArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionNullableShortArrayIndex(null, -1, useInterpreter);
@@ -358,7 +358,7 @@ namespace System.Linq.Expressions.Tests
         #region NullableStruct tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableStructArrayIndexTest(bool useInterpreter)
+        public static void CheckNullableStructArrayIndexTest(CompilationType useInterpreter)
         {
             CheckNullableStructArrayIndex(GenerateNullableStructArray(0), useInterpreter);
             CheckNullableStructArrayIndex(GenerateNullableStructArray(1), useInterpreter);
@@ -366,7 +366,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableStructArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionNullableStructArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionNullableStructArrayIndex(null, -1, useInterpreter);
@@ -387,7 +387,7 @@ namespace System.Linq.Expressions.Tests
         #region NullableStructWithString tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableStructWithStringArrayIndexTest(bool useInterpreter)
+        public static void CheckNullableStructWithStringArrayIndexTest(CompilationType useInterpreter)
         {
             CheckNullableStructWithStringArrayIndex(GenerateNullableStructWithStringArray(0), useInterpreter);
             CheckNullableStructWithStringArrayIndex(GenerateNullableStructWithStringArray(1), useInterpreter);
@@ -395,7 +395,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableStructWithStringArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionNullableStructWithStringArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionNullableStructWithStringArrayIndex(null, -1, useInterpreter);
@@ -416,7 +416,7 @@ namespace System.Linq.Expressions.Tests
         #region NullableStructWithStringAndValue tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableStructWithStringAndValueArrayIndexTest(bool useInterpreter)
+        public static void CheckNullableStructWithStringAndValueArrayIndexTest(CompilationType useInterpreter)
         {
             CheckNullableStructWithStringAndValueArrayIndex(GenerateNullableStructWithStringAndValueArray(0), useInterpreter);
             CheckNullableStructWithStringAndValueArrayIndex(GenerateNullableStructWithStringAndValueArray(1), useInterpreter);
@@ -424,7 +424,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableStructWithStringAndValueArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionNullableStructWithStringAndValueArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionNullableStructWithStringAndValueArrayIndex(null, -1, useInterpreter);
@@ -445,7 +445,7 @@ namespace System.Linq.Expressions.Tests
         #region NullableStructWithTwoValues tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableStructWithTwoValuesArrayIndexTest(bool useInterpreter)
+        public static void CheckNullableStructWithTwoValuesArrayIndexTest(CompilationType useInterpreter)
         {
             CheckNullableStructWithTwoValuesArrayIndex(GenerateNullableStructWithTwoValuesArray(0), useInterpreter);
             CheckNullableStructWithTwoValuesArrayIndex(GenerateNullableStructWithTwoValuesArray(1), useInterpreter);
@@ -453,7 +453,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableStructWithTwoValuesArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionNullableStructWithTwoValuesArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionNullableStructWithTwoValuesArrayIndex(null, -1, useInterpreter);
@@ -474,7 +474,7 @@ namespace System.Linq.Expressions.Tests
         #region NullableStructWithStruct tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableStructWithStructArrayIndexTest(bool useInterpreter)
+        public static void CheckNullableStructWithStructArrayIndexTest(CompilationType useInterpreter)
         {
             CheckNullableStructWithStructArrayIndex(GenerateNullableStructWithStructArray(0), useInterpreter);
             CheckNullableStructWithStructArrayIndex(GenerateNullableStructWithStructArray(1), useInterpreter);
@@ -482,7 +482,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableStructWithStructArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionNullableStructWithStructArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionNullableStructWithStructArrayIndex(null, -1, useInterpreter);
@@ -503,7 +503,7 @@ namespace System.Linq.Expressions.Tests
         #region NullableUInt tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableUIntArrayIndexTest(bool useInterpreter)
+        public static void CheckNullableUIntArrayIndexTest(CompilationType useInterpreter)
         {
             CheckNullableUIntArrayIndex(GenerateNullableUIntArray(0), useInterpreter);
             CheckNullableUIntArrayIndex(GenerateNullableUIntArray(1), useInterpreter);
@@ -511,7 +511,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableUIntArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionNullableUIntArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionNullableUIntArrayIndex(null, -1, useInterpreter);
@@ -532,7 +532,7 @@ namespace System.Linq.Expressions.Tests
         #region NullableULong tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableULongArrayIndexTest(bool useInterpreter)
+        public static void CheckNullableULongArrayIndexTest(CompilationType useInterpreter)
         {
             CheckNullableULongArrayIndex(GenerateNullableULongArray(0), useInterpreter);
             CheckNullableULongArrayIndex(GenerateNullableULongArray(1), useInterpreter);
@@ -540,7 +540,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableULongArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionNullableULongArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionNullableULongArrayIndex(null, -1, useInterpreter);
@@ -561,7 +561,7 @@ namespace System.Linq.Expressions.Tests
         #region NullableUShort tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableUShortArrayIndexTest(bool useInterpreter)
+        public static void CheckNullableUShortArrayIndexTest(CompilationType useInterpreter)
         {
             CheckNullableUShortArrayIndex(GenerateNullableUShortArray(0), useInterpreter);
             CheckNullableUShortArrayIndex(GenerateNullableUShortArray(1), useInterpreter);
@@ -569,7 +569,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableUShortArrayIndexTest(bool useInterpreter)
+        public static void CheckExceptionNullableUShortArrayIndexTest(CompilationType useInterpreter)
         {
             // null arrays
             CheckExceptionNullableUShortArrayIndex(null, -1, useInterpreter);
@@ -590,37 +590,37 @@ namespace System.Linq.Expressions.Tests
         #region Generic tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableGenericWithStructRestriction(bool useInterpreter)
+        public static void CheckNullableGenericWithStructRestriction(CompilationType useInterpreter)
         {
             CheckNullableGenericWithStructRestrictionHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableGenericWithStructRestriction(bool useInterpreter)
+        public static void CheckExceptionNullableGenericWithStructRestriction(CompilationType useInterpreter)
         {
             CheckExceptionNullableGenericWithStructRestrictionHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableGenericWithStructRestriction2(bool useInterpreter)
+        public static void CheckNullableGenericWithStructRestriction2(CompilationType useInterpreter)
         {
             CheckNullableGenericWithStructRestrictionHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableGenericWithStructRestriction2(bool useInterpreter)
+        public static void CheckExceptionNullableGenericWithStructRestriction2(CompilationType useInterpreter)
         {
             CheckExceptionNullableGenericWithStructRestrictionHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableGenericWithStructRestriction3(bool useInterpreter)
+        public static void CheckNullableGenericWithStructRestriction3(CompilationType useInterpreter)
         {
             CheckNullableGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionNullableGenericWithStructRestriction3(bool useInterpreter)
+        public static void CheckExceptionNullableGenericWithStructRestriction3(CompilationType useInterpreter)
         {
             CheckExceptionNullableGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
@@ -629,14 +629,14 @@ namespace System.Linq.Expressions.Tests
 
         #region Generic helpers
 
-        private static void CheckNullableGenericWithStructRestrictionHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckNullableGenericWithStructRestrictionHelper<Ts>(CompilationType useInterpreter) where Ts : struct
         {
             CheckNullableGenericWithStructRestrictionArrayIndex<Ts>(GenerateNullableGenericWithStructRestrictionArray<Ts>(0), useInterpreter);
             CheckNullableGenericWithStructRestrictionArrayIndex<Ts>(GenerateNullableGenericWithStructRestrictionArray<Ts>(1), useInterpreter);
             CheckNullableGenericWithStructRestrictionArrayIndex<Ts>(GenerateNullableGenericWithStructRestrictionArray<Ts>(5), useInterpreter);
         }
 
-        private static void CheckExceptionNullableGenericWithStructRestrictionHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckExceptionNullableGenericWithStructRestrictionHelper<Ts>(CompilationType useInterpreter) where Ts : struct
         {
             // null arrays
             CheckExceptionNullableGenericWithStructRestrictionArrayIndex<Ts>(null, -1, useInterpreter);
@@ -911,7 +911,7 @@ namespace System.Linq.Expressions.Tests
         #endregion
 
         #region Check array index
-        private static void CheckNullableBoolArrayIndex(bool?[] array, bool useInterpreter)
+        private static void CheckNullableBoolArrayIndex(bool?[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -922,7 +922,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckNullableByteArrayIndex(byte?[] array, bool useInterpreter)
+        private static void CheckNullableByteArrayIndex(byte?[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -933,7 +933,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckNullableCharArrayIndex(char?[] array, bool useInterpreter)
+        private static void CheckNullableCharArrayIndex(char?[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -944,7 +944,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckNullableDecimalArrayIndex(decimal?[] array, bool useInterpreter)
+        private static void CheckNullableDecimalArrayIndex(decimal?[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -955,7 +955,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckNullableDoubleArrayIndex(double?[] array, bool useInterpreter)
+        private static void CheckNullableDoubleArrayIndex(double?[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -966,7 +966,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckNullableEnumArrayIndex(E?[] array, bool useInterpreter)
+        private static void CheckNullableEnumArrayIndex(E?[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -977,7 +977,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckNullableLongEnumArrayIndex(El?[] array, bool useInterpreter)
+        private static void CheckNullableLongEnumArrayIndex(El?[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -988,7 +988,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckNullableFloatArrayIndex(float?[] array, bool useInterpreter)
+        private static void CheckNullableFloatArrayIndex(float?[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -999,7 +999,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckNullableIntArrayIndex(int?[] array, bool useInterpreter)
+        private static void CheckNullableIntArrayIndex(int?[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1010,7 +1010,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckNullableLongArrayIndex(long?[] array, bool useInterpreter)
+        private static void CheckNullableLongArrayIndex(long?[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1021,7 +1021,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckNullableSByteArrayIndex(sbyte?[] array, bool useInterpreter)
+        private static void CheckNullableSByteArrayIndex(sbyte?[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1032,7 +1032,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckNullableShortArrayIndex(short?[] array, bool useInterpreter)
+        private static void CheckNullableShortArrayIndex(short?[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1043,7 +1043,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckNullableStructArrayIndex(S?[] array, bool useInterpreter)
+        private static void CheckNullableStructArrayIndex(S?[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1054,7 +1054,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckNullableStructWithStringArrayIndex(Sc?[] array, bool useInterpreter)
+        private static void CheckNullableStructWithStringArrayIndex(Sc?[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1065,7 +1065,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckNullableStructWithStringAndValueArrayIndex(Scs?[] array, bool useInterpreter)
+        private static void CheckNullableStructWithStringAndValueArrayIndex(Scs?[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1076,7 +1076,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckNullableStructWithTwoValuesArrayIndex(Sp?[] array, bool useInterpreter)
+        private static void CheckNullableStructWithTwoValuesArrayIndex(Sp?[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1087,7 +1087,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckNullableStructWithStructArrayIndex(Ss?[] array, bool useInterpreter)
+        private static void CheckNullableStructWithStructArrayIndex(Ss?[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1098,7 +1098,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckNullableUIntArrayIndex(uint?[] array, bool useInterpreter)
+        private static void CheckNullableUIntArrayIndex(uint?[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1109,7 +1109,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckNullableULongArrayIndex(ulong?[] array, bool useInterpreter)
+        private static void CheckNullableULongArrayIndex(ulong?[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1120,7 +1120,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckNullableUShortArrayIndex(ushort?[] array, bool useInterpreter)
+        private static void CheckNullableUShortArrayIndex(ushort?[] array, CompilationType useInterpreter)
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1131,7 +1131,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(success);
         }
 
-        private static void CheckNullableGenericWithStructRestrictionArrayIndex<Ts>(Ts?[] array, bool useInterpreter) where Ts : struct
+        private static void CheckNullableGenericWithStructRestrictionArrayIndex<Ts>(Ts?[] array, CompilationType useInterpreter) where Ts : struct
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1145,7 +1145,7 @@ namespace System.Linq.Expressions.Tests
         #endregion
 
         #region Check index expression
-        private static bool CheckNullableBoolArrayIndexExpression(bool?[] array, int index, bool useInterpreter)
+        private static bool CheckNullableBoolArrayIndexExpression(bool?[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<bool?>> e =
                 Expression.Lambda<Func<bool?>>(
@@ -1156,7 +1156,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckNullableByteArrayIndexExpression(byte?[] array, int index, bool useInterpreter)
+        private static bool CheckNullableByteArrayIndexExpression(byte?[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<byte?>> e =
                 Expression.Lambda<Func<byte?>>(
@@ -1167,7 +1167,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckNullableCharArrayIndexExpression(char?[] array, int index, bool useInterpreter)
+        private static bool CheckNullableCharArrayIndexExpression(char?[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<char?>> e =
                 Expression.Lambda<Func<char?>>(
@@ -1178,7 +1178,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckNullableDecimalArrayIndexExpression(decimal?[] array, int index, bool useInterpreter)
+        private static bool CheckNullableDecimalArrayIndexExpression(decimal?[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<decimal?>> e =
                 Expression.Lambda<Func<decimal?>>(
@@ -1189,7 +1189,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckNullableDoubleArrayIndexExpression(double?[] array, int index, bool useInterpreter)
+        private static bool CheckNullableDoubleArrayIndexExpression(double?[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<double?>> e =
                 Expression.Lambda<Func<double?>>(
@@ -1200,7 +1200,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckNullableEnumArrayIndexExpression(E?[] array, int index, bool useInterpreter)
+        private static bool CheckNullableEnumArrayIndexExpression(E?[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<E?>> e =
                 Expression.Lambda<Func<E?>>(
@@ -1211,7 +1211,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckNullableLongEnumArrayIndexExpression(El?[] array, int index, bool useInterpreter)
+        private static bool CheckNullableLongEnumArrayIndexExpression(El?[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<El?>> e =
                 Expression.Lambda<Func<El?>>(
@@ -1222,7 +1222,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckNullableFloatArrayIndexExpression(float?[] array, int index, bool useInterpreter)
+        private static bool CheckNullableFloatArrayIndexExpression(float?[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<float?>> e =
                 Expression.Lambda<Func<float?>>(
@@ -1233,7 +1233,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckNullableIntArrayIndexExpression(int?[] array, int index, bool useInterpreter)
+        private static bool CheckNullableIntArrayIndexExpression(int?[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<int?>> e =
                 Expression.Lambda<Func<int?>>(
@@ -1244,7 +1244,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckNullableLongArrayIndexExpression(long?[] array, int index, bool useInterpreter)
+        private static bool CheckNullableLongArrayIndexExpression(long?[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<long?>> e =
                 Expression.Lambda<Func<long?>>(
@@ -1255,7 +1255,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckNullableSByteArrayIndexExpression(sbyte?[] array, int index, bool useInterpreter)
+        private static bool CheckNullableSByteArrayIndexExpression(sbyte?[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<sbyte?>> e =
                 Expression.Lambda<Func<sbyte?>>(
@@ -1266,7 +1266,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckNullableShortArrayIndexExpression(short?[] array, int index, bool useInterpreter)
+        private static bool CheckNullableShortArrayIndexExpression(short?[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<short?>> e =
                 Expression.Lambda<Func<short?>>(
@@ -1277,7 +1277,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckNullableStructArrayIndexExpression(S?[] array, int index, bool useInterpreter)
+        private static bool CheckNullableStructArrayIndexExpression(S?[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<S?>> e =
                 Expression.Lambda<Func<S?>>(
@@ -1288,7 +1288,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckNullableStructWithStringArrayIndexExpression(Sc?[] array, int index, bool useInterpreter)
+        private static bool CheckNullableStructWithStringArrayIndexExpression(Sc?[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<Sc?>> e =
                 Expression.Lambda<Func<Sc?>>(
@@ -1299,7 +1299,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckNullableStructWithStringAndValueArrayIndexExpression(Scs?[] array, int index, bool useInterpreter)
+        private static bool CheckNullableStructWithStringAndValueArrayIndexExpression(Scs?[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<Scs?>> e =
                 Expression.Lambda<Func<Scs?>>(
@@ -1310,7 +1310,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckNullableStructWithTwoValuesArrayIndexExpression(Sp?[] array, int index, bool useInterpreter)
+        private static bool CheckNullableStructWithTwoValuesArrayIndexExpression(Sp?[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<Sp?>> e =
                 Expression.Lambda<Func<Sp?>>(
@@ -1321,7 +1321,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckNullableStructWithStructArrayIndexExpression(Ss?[] array, int index, bool useInterpreter)
+        private static bool CheckNullableStructWithStructArrayIndexExpression(Ss?[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<Ss?>> e =
                 Expression.Lambda<Func<Ss?>>(
@@ -1332,7 +1332,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckNullableUIntArrayIndexExpression(uint?[] array, int index, bool useInterpreter)
+        private static bool CheckNullableUIntArrayIndexExpression(uint?[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<uint?>> e =
                 Expression.Lambda<Func<uint?>>(
@@ -1343,7 +1343,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckNullableULongArrayIndexExpression(ulong?[] array, int index, bool useInterpreter)
+        private static bool CheckNullableULongArrayIndexExpression(ulong?[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<ulong?>> e =
                 Expression.Lambda<Func<ulong?>>(
@@ -1354,7 +1354,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckNullableUShortArrayIndexExpression(ushort?[] array, int index, bool useInterpreter)
+        private static bool CheckNullableUShortArrayIndexExpression(ushort?[] array, int index, CompilationType useInterpreter)
         {
             Expression<Func<ushort?>> e =
                 Expression.Lambda<Func<ushort?>>(
@@ -1365,7 +1365,7 @@ namespace System.Linq.Expressions.Tests
             return object.Equals(f(), array[index]);
         }
 
-        private static bool CheckNullableGenericWithStructRestrictionArrayIndexExpression<Ts>(Ts?[] array, int index, bool useInterpreter) where Ts : struct
+        private static bool CheckNullableGenericWithStructRestrictionArrayIndexExpression<Ts>(Ts?[] array, int index, CompilationType useInterpreter) where Ts : struct
         {
             Expression<Func<Ts?>> e =
                 Expression.Lambda<Func<Ts?>>(
@@ -1380,7 +1380,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Check exception array index
 
-        private static void CheckExceptionNullableBoolArrayIndex(bool?[] array, int index, bool useInterpreter)
+        private static void CheckExceptionNullableBoolArrayIndex(bool?[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableBoolArrayIndexExpression(array, index, useInterpreter));
@@ -1388,7 +1388,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckNullableBoolArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionNullableByteArrayIndex(byte?[] array, int index, bool useInterpreter)
+        private static void CheckExceptionNullableByteArrayIndex(byte?[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableByteArrayIndexExpression(array, index, useInterpreter));
@@ -1396,7 +1396,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckNullableByteArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionNullableCharArrayIndex(char?[] array, int index, bool useInterpreter)
+        private static void CheckExceptionNullableCharArrayIndex(char?[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableCharArrayIndexExpression(array, index, useInterpreter));
@@ -1404,7 +1404,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckNullableCharArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionNullableDecimalArrayIndex(decimal?[] array, int index, bool useInterpreter)
+        private static void CheckExceptionNullableDecimalArrayIndex(decimal?[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableDecimalArrayIndexExpression(array, index, useInterpreter));
@@ -1412,7 +1412,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckNullableDecimalArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionNullableDoubleArrayIndex(double?[] array, int index, bool useInterpreter)
+        private static void CheckExceptionNullableDoubleArrayIndex(double?[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableDoubleArrayIndexExpression(array, index, useInterpreter));
@@ -1420,7 +1420,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckNullableDoubleArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionNullableEnumArrayIndex(E?[] array, int index, bool useInterpreter)
+        private static void CheckExceptionNullableEnumArrayIndex(E?[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableEnumArrayIndexExpression(array, index, useInterpreter));
@@ -1428,7 +1428,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckNullableEnumArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionNullableLongEnumArrayIndex(El?[] array, int index, bool useInterpreter)
+        private static void CheckExceptionNullableLongEnumArrayIndex(El?[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableLongEnumArrayIndexExpression(array, index, useInterpreter));
@@ -1436,7 +1436,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckNullableLongEnumArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionNullableFloatArrayIndex(float?[] array, int index, bool useInterpreter)
+        private static void CheckExceptionNullableFloatArrayIndex(float?[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableFloatArrayIndexExpression(array, index, useInterpreter));
@@ -1444,7 +1444,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckNullableFloatArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionNullableIntArrayIndex(int?[] array, int index, bool useInterpreter)
+        private static void CheckExceptionNullableIntArrayIndex(int?[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableIntArrayIndexExpression(array, index, useInterpreter));
@@ -1452,7 +1452,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckNullableIntArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionNullableLongArrayIndex(long?[] array, int index, bool useInterpreter)
+        private static void CheckExceptionNullableLongArrayIndex(long?[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableLongArrayIndexExpression(array, index, useInterpreter));
@@ -1460,7 +1460,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckNullableLongArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionNullableSByteArrayIndex(sbyte?[] array, int index, bool useInterpreter)
+        private static void CheckExceptionNullableSByteArrayIndex(sbyte?[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableSByteArrayIndexExpression(array, index, useInterpreter));
@@ -1468,7 +1468,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckNullableSByteArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionNullableShortArrayIndex(short?[] array, int index, bool useInterpreter)
+        private static void CheckExceptionNullableShortArrayIndex(short?[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableShortArrayIndexExpression(array, index, useInterpreter));
@@ -1476,7 +1476,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckNullableShortArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionNullableStructArrayIndex(S?[] array, int index, bool useInterpreter)
+        private static void CheckExceptionNullableStructArrayIndex(S?[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableStructArrayIndexExpression(array, index, useInterpreter));
@@ -1484,7 +1484,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckNullableStructArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionNullableStructWithStringArrayIndex(Sc?[] array, int index, bool useInterpreter)
+        private static void CheckExceptionNullableStructWithStringArrayIndex(Sc?[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableStructWithStringArrayIndexExpression(array, index, useInterpreter));
@@ -1492,7 +1492,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckNullableStructWithStringArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionNullableStructWithStringAndValueArrayIndex(Scs?[] array, int index, bool useInterpreter)
+        private static void CheckExceptionNullableStructWithStringAndValueArrayIndex(Scs?[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableStructWithStringAndValueArrayIndexExpression(array, index, useInterpreter));
@@ -1500,7 +1500,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckNullableStructWithStringAndValueArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionNullableStructWithTwoValuesArrayIndex(Sp?[] array, int index, bool useInterpreter)
+        private static void CheckExceptionNullableStructWithTwoValuesArrayIndex(Sp?[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableStructWithTwoValuesArrayIndexExpression(array, index, useInterpreter));
@@ -1508,7 +1508,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckNullableStructWithTwoValuesArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionNullableStructWithStructArrayIndex(Ss?[] array, int index, bool useInterpreter)
+        private static void CheckExceptionNullableStructWithStructArrayIndex(Ss?[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableStructWithStructArrayIndexExpression(array, index, useInterpreter));
@@ -1516,7 +1516,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckNullableStructWithStructArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionNullableUIntArrayIndex(uint?[] array, int index, bool useInterpreter)
+        private static void CheckExceptionNullableUIntArrayIndex(uint?[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableUIntArrayIndexExpression(array, index, useInterpreter));
@@ -1524,7 +1524,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckNullableUIntArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionNullableULongArrayIndex(ulong?[] array, int index, bool useInterpreter)
+        private static void CheckExceptionNullableULongArrayIndex(ulong?[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableULongArrayIndexExpression(array, index, useInterpreter));
@@ -1532,7 +1532,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckNullableULongArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionNullableUShortArrayIndex(ushort?[] array, int index, bool useInterpreter)
+        private static void CheckExceptionNullableUShortArrayIndex(ushort?[] array, int index, CompilationType useInterpreter)
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableUShortArrayIndexExpression(array, index, useInterpreter));
@@ -1540,7 +1540,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<IndexOutOfRangeException>(() => CheckNullableUShortArrayIndexExpression(array, index, useInterpreter));
         }
 
-        private static void CheckExceptionNullableGenericWithStructRestrictionArrayIndex<Ts>(Ts?[] array, int index, bool useInterpreter) where Ts : struct
+        private static void CheckExceptionNullableGenericWithStructRestrictionArrayIndex<Ts>(Ts?[] array, int index, CompilationType useInterpreter) where Ts : struct
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(() => CheckNullableGenericWithStructRestrictionArrayIndexExpression(array, index, useInterpreter));

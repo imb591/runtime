@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryBitwiseNotBoolTest(bool useInterpreter)
+        public static void CheckUnaryBitwiseNotBoolTest(CompilationType useInterpreter)
         {
             bool[] values = new bool[] { false, true };
             for (int i = 0; i < values.Length; i++)
@@ -20,7 +20,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryBitwiseNotByteTest(bool useInterpreter)
+        public static void CheckUnaryBitwiseNotByteTest(CompilationType useInterpreter)
         {
             byte[] values = new byte[] { 0, 1, byte.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -30,7 +30,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryBitwiseNotIntTest(bool useInterpreter)
+        public static void CheckUnaryBitwiseNotIntTest(CompilationType useInterpreter)
         {
             int[] values = new int[] { 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -40,7 +40,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryBitwiseNotLongTest(bool useInterpreter)
+        public static void CheckUnaryBitwiseNotLongTest(CompilationType useInterpreter)
         {
             long[] values = new long[] { 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -50,7 +50,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryBitwiseNotSByteTest(bool useInterpreter)
+        public static void CheckUnaryBitwiseNotSByteTest(CompilationType useInterpreter)
         {
             sbyte[] values = new sbyte[] { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -60,7 +60,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryBitwiseNotShortTest(bool useInterpreter)
+        public static void CheckUnaryBitwiseNotShortTest(CompilationType useInterpreter)
         {
             short[] values = new short[] { 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -70,7 +70,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryBitwiseNotUIntTest(bool useInterpreter)
+        public static void CheckUnaryBitwiseNotUIntTest(CompilationType useInterpreter)
         {
             uint[] values = new uint[] { 0, 1, uint.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -80,7 +80,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryBitwiseNotULongTest(bool useInterpreter)
+        public static void CheckUnaryBitwiseNotULongTest(CompilationType useInterpreter)
         {
             ulong[] values = new ulong[] { 0, 1, ulong.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -90,7 +90,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUnaryBitwiseNotUShortTest(bool useInterpreter)
+        public static void CheckUnaryBitwiseNotUShortTest(CompilationType useInterpreter)
         {
             ushort[] values = new ushort[] { 0, 1, ushort.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -110,7 +110,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyBitwiseNotBool(bool value, bool useInterpreter)
+        private static void VerifyBitwiseNotBool(bool value, CompilationType useInterpreter)
         {
             Expression<Func<bool>> e =
                 Expression.Lambda<Func<bool>>(
@@ -120,7 +120,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((bool)(!value), f());
         }
 
-        private static void VerifyBitwiseNotByte(byte value, bool useInterpreter)
+        private static void VerifyBitwiseNotByte(byte value, CompilationType useInterpreter)
         {
             Expression<Func<byte>> e =
                 Expression.Lambda<Func<byte>>(
@@ -130,7 +130,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((byte)(~value)), f());
         }
 
-        private static void VerifyBitwiseNotInt(int value, bool useInterpreter)
+        private static void VerifyBitwiseNotInt(int value, CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -140,7 +140,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((int)(~value), f());
         }
 
-        private static void VerifyBitwiseNotLong(long value, bool useInterpreter)
+        private static void VerifyBitwiseNotLong(long value, CompilationType useInterpreter)
         {
             Expression<Func<long>> e =
                 Expression.Lambda<Func<long>>(
@@ -150,7 +150,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((long)(~value), f());
         }
 
-        private static void VerifyBitwiseNotSByte(sbyte value, bool useInterpreter)
+        private static void VerifyBitwiseNotSByte(sbyte value, CompilationType useInterpreter)
         {
             Expression<Func<sbyte>> e =
                 Expression.Lambda<Func<sbyte>>(
@@ -160,7 +160,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((sbyte)(~value), f());
         }
 
-        private static void VerifyBitwiseNotShort(short value, bool useInterpreter)
+        private static void VerifyBitwiseNotShort(short value, CompilationType useInterpreter)
         {
             Expression<Func<short>> e =
                 Expression.Lambda<Func<short>>(
@@ -170,7 +170,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((short)(~value), f());
         }
 
-        private static void VerifyBitwiseNotUInt(uint value, bool useInterpreter)
+        private static void VerifyBitwiseNotUInt(uint value, CompilationType useInterpreter)
         {
             Expression<Func<uint>> e =
                 Expression.Lambda<Func<uint>>(
@@ -180,7 +180,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((uint)(~value), f());
         }
 
-        private static void VerifyBitwiseNotULong(ulong value, bool useInterpreter)
+        private static void VerifyBitwiseNotULong(ulong value, CompilationType useInterpreter)
         {
             Expression<Func<ulong>> e =
                 Expression.Lambda<Func<ulong>>(
@@ -190,7 +190,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((ulong)(~value), f());
         }
 
-        private static void VerifyBitwiseNotUShort(ushort value, bool useInterpreter)
+        private static void VerifyBitwiseNotUShort(ushort value, CompilationType useInterpreter)
         {
             Expression<Func<ushort>> e =
                 Expression.Lambda<Func<ushort>>(

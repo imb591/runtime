@@ -12,7 +12,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3737, "https://github.com/dotnet/runtime/issues/15397")]
-        public static void CheckUnaryArithmeticOnesComplementShortTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticOnesComplementShortTest(CompilationType useInterpreter)
         {
             short[] values = new short[] { 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -22,7 +22,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3737, "https://github.com/dotnet/runtime/issues/15397")]
-        public static void CheckUnaryArithmeticOnesComplementUShortTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticOnesComplementUShortTest(CompilationType useInterpreter)
         {
             ushort[] values = new ushort[] { 0, 1, ushort.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -32,7 +32,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3737, "https://github.com/dotnet/runtime/issues/15397")]
-        public static void CheckUnaryArithmeticOnesComplementIntTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticOnesComplementIntTest(CompilationType useInterpreter)
         {
             int[] values = new int[] { 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -42,7 +42,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3737, "https://github.com/dotnet/runtime/issues/15397")]
-        public static void CheckUnaryArithmeticOnesComplementUIntTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticOnesComplementUIntTest(CompilationType useInterpreter)
         {
             uint[] values = new uint[] { 0, 1, uint.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -52,7 +52,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3737, "https://github.com/dotnet/runtime/issues/15397")]
-        public static void CheckUnaryArithmeticOnesComplementLongTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticOnesComplementLongTest(CompilationType useInterpreter)
         {
             long[] values = new long[] { 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -62,7 +62,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3737, "https://github.com/dotnet/runtime/issues/15397")]
-        public static void CheckUnaryArithmeticOnesComplementULongTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticOnesComplementULongTest(CompilationType useInterpreter)
         {
             ulong[] values = new ulong[] { 0, 1, ulong.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -72,7 +72,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3737, "https://github.com/dotnet/runtime/issues/15397")]
-        public static void CheckUnaryArithmeticOnesComplementByteTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticOnesComplementByteTest(CompilationType useInterpreter)
         {
             byte[] values = new byte[] { 0, 1, byte.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -82,7 +82,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3737, "https://github.com/dotnet/runtime/issues/15397")]
-        public static void CheckUnaryArithmeticOnesComplementSByteTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticOnesComplementSByteTest(CompilationType useInterpreter)
         {
             sbyte[] values = new sbyte[] { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -109,7 +109,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyArithmeticOnesComplementShort(short value, bool useInterpreter)
+        private static void VerifyArithmeticOnesComplementShort(short value, CompilationType useInterpreter)
         {
             Expression<Func<short>> e =
                 Expression.Lambda<Func<short>>(
@@ -119,7 +119,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((short)(~value), f());
         }
 
-        private static void VerifyArithmeticOnesComplementUShort(ushort value, bool useInterpreter)
+        private static void VerifyArithmeticOnesComplementUShort(ushort value, CompilationType useInterpreter)
         {
             Expression<Func<ushort>> e =
                 Expression.Lambda<Func<ushort>>(
@@ -129,7 +129,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((ushort)(~value)), f());
         }
 
-        private static void VerifyArithmeticOnesComplementInt(int value, bool useInterpreter)
+        private static void VerifyArithmeticOnesComplementInt(int value, CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -139,7 +139,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((int)(~value), f());
         }
 
-        private static void VerifyArithmeticOnesComplementUInt(uint value, bool useInterpreter)
+        private static void VerifyArithmeticOnesComplementUInt(uint value, CompilationType useInterpreter)
         {
             Expression<Func<uint>> e =
                 Expression.Lambda<Func<uint>>(
@@ -149,7 +149,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((uint)(~value), f());
         }
 
-        private static void VerifyArithmeticOnesComplementLong(long value, bool useInterpreter)
+        private static void VerifyArithmeticOnesComplementLong(long value, CompilationType useInterpreter)
         {
             Expression<Func<long>> e =
                 Expression.Lambda<Func<long>>(
@@ -159,7 +159,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((long)(~value), f());
         }
 
-        private static void VerifyArithmeticOnesComplementULong(ulong value, bool useInterpreter)
+        private static void VerifyArithmeticOnesComplementULong(ulong value, CompilationType useInterpreter)
         {
             Expression<Func<ulong>> e =
                 Expression.Lambda<Func<ulong>>(
@@ -169,7 +169,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((ulong)(~value), f());
         }
 
-        private static void VerifyArithmeticOnesComplementByte(byte value, bool useInterpreter)
+        private static void VerifyArithmeticOnesComplementByte(byte value, CompilationType useInterpreter)
         {
             Expression<Func<byte>> e =
                 Expression.Lambda<Func<byte>>(
@@ -179,7 +179,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((byte)(~value)), f());
         }
 
-        private static void VerifyArithmeticOnesComplementSByte(sbyte value, bool useInterpreter)
+        private static void VerifyArithmeticOnesComplementSByte(sbyte value, CompilationType useInterpreter)
         {
             Expression<Func<sbyte>> e =
                 Expression.Lambda<Func<sbyte>>(
@@ -201,7 +201,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(Int32OnesComplements))]
-        public static void MakeUnaryOnesComplement(int value, int expected, bool useInterpreter)
+        public static void MakeUnaryOnesComplement(int value, int expected, CompilationType useInterpreter)
         {
             Expression<Func<int>> lambda = Expression.Lambda<Func<int>>(
                 Expression.MakeUnary(ExpressionType.OnesComplement, Expression.Constant(value), null));
@@ -226,7 +226,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CustomOperatorOnesComplement(bool useInterpreter)
+        public static void CustomOperatorOnesComplement(CompilationType useInterpreter)
         {
             Complementary value = new Complementary {Value = 43};
             Expression<Func<Complementary>> lambda = Expression.Lambda<Func<Complementary>>(
@@ -236,7 +236,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ExplicitOperatorOnesComplement(bool useInterpreter)
+        public static void ExplicitOperatorOnesComplement(CompilationType useInterpreter)
         {
             Complementary value = new Complementary {Value = 43};
             MethodInfo method = typeof(Complementary).GetMethod(nameof(Complementary.OnesComplement));

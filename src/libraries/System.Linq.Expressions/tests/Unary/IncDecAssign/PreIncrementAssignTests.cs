@@ -27,7 +27,7 @@ namespace System.Linq.Expressions.Tests
         [PerCompilationType(nameof(NullableSinglesAndIncrements))]
         [PerCompilationType(nameof(DoublesAndIncrements))]
         [PerCompilationType(nameof(NullableDoublesAndIncrements))]
-        public void ReturnsCorrectValues(Type type, object value, object result, bool useInterpreter)
+        public void ReturnsCorrectValues(Type type, object value, object result, CompilationType useInterpreter)
         {
             ParameterExpression variable = Expression.Variable(type);
             BlockExpression block = Expression.Block(
@@ -57,7 +57,7 @@ namespace System.Linq.Expressions.Tests
         [PerCompilationType(nameof(NullableSinglesAndIncrements))]
         [PerCompilationType(nameof(DoublesAndIncrements))]
         [PerCompilationType(nameof(NullableDoublesAndIncrements))]
-        public void AssignsCorrectValues(Type type, object value, object result, bool useInterpreter)
+        public void AssignsCorrectValues(Type type, object value, object result, CompilationType useInterpreter)
         {
             ParameterExpression variable = Expression.Variable(type);
             LabelTarget target = Expression.Label(type);
@@ -73,7 +73,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void SingleNanToNan(bool useInterpreter)
+        public void SingleNanToNan(CompilationType useInterpreter)
         {
             TestPropertyClass<float> instance = new TestPropertyClass<float>();
             instance.TestInstance = float.NaN;
@@ -93,7 +93,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void DoubleNanToNan(bool useInterpreter)
+        public void DoubleNanToNan(CompilationType useInterpreter)
         {
             TestPropertyClass<double> instance = new TestPropertyClass<double>();
             instance.TestInstance = double.NaN;
@@ -113,7 +113,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [PerCompilationType(nameof(IncrementOverflowingValues))]
-        public void OverflowingValuesThrow(object value, bool useInterpreter)
+        public void OverflowingValuesThrow(object value, CompilationType useInterpreter)
         {
             ParameterExpression variable = Expression.Variable(value.GetType());
             Action overflow = Expression.Lambda<Action>(
@@ -137,7 +137,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void MethodCorrectResult(bool useInterpreter)
+        public void MethodCorrectResult(CompilationType useInterpreter)
         {
             ParameterExpression variable = Expression.Variable(typeof(string));
             BlockExpression block = Expression.Block(
@@ -150,7 +150,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void MethodCorrectAssign(bool useInterpreter)
+        public void MethodCorrectAssign(CompilationType useInterpreter)
         {
             ParameterExpression variable = Expression.Variable(typeof(string));
             LabelTarget target = Expression.Label(typeof(string));
@@ -190,7 +190,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void StaticMemberAccessCorrect(bool useInterpreter)
+        public void StaticMemberAccessCorrect(CompilationType useInterpreter)
         {
             TestPropertyClass<uint>.TestStatic = 2U;
             Assert.Equal(
@@ -206,7 +206,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void InstanceMemberAccessCorrect(bool useInterpreter)
+        public void InstanceMemberAccessCorrect(CompilationType useInterpreter)
         {
             TestPropertyClass<int> instance = new TestPropertyClass<int>();
             instance.TestInstance = 2;
@@ -227,7 +227,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public void ArrayAccessCorrect(bool useInterpreter)
+        public void ArrayAccessCorrect(CompilationType useInterpreter)
         {
             int[] array = new int[1];
             array[0] = 2;

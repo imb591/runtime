@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityBoolTest(bool useInterpreter)
+        public static void CheckLambdaIdentityBoolTest(CompilationType useInterpreter)
         {
             foreach (bool value in new bool[] { true, false })
             {
@@ -19,7 +19,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityByteTest(bool useInterpreter)
+        public static void CheckLambdaIdentityByteTest(CompilationType useInterpreter)
         {
             foreach (byte value in new byte[] { 0, 1, byte.MaxValue })
             {
@@ -28,7 +28,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityCustomTest(bool useInterpreter)
+        public static void CheckLambdaIdentityCustomTest(CompilationType useInterpreter)
         {
             foreach (C value in new C[] { null, new C(), new D(), new D(0), new D(5) })
             {
@@ -37,7 +37,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityCharTest(bool useInterpreter)
+        public static void CheckLambdaIdentityCharTest(CompilationType useInterpreter)
         {
             foreach (char value in new char[] { '\0', '\b', 'A', '\uffff' })
             {
@@ -46,7 +46,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityCustom2Test(bool useInterpreter)
+        public static void CheckLambdaIdentityCustom2Test(CompilationType useInterpreter)
         {
             foreach (D value in new D[] { null, new D(), new D(0), new D(5) })
             {
@@ -55,7 +55,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityDecimalTest(bool useInterpreter)
+        public static void CheckLambdaIdentityDecimalTest(CompilationType useInterpreter)
         {
             foreach (decimal value in new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue })
             {
@@ -64,7 +64,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityDelegateTest(bool useInterpreter)
+        public static void CheckLambdaIdentityDelegateTest(CompilationType useInterpreter)
         {
             foreach (Delegate value in new Delegate[] { null, (Func<object>)delegate () { return null; }, (Func<int, int>)delegate (int i) { return i + 1; }, (Action<object>)delegate { } })
             {
@@ -73,7 +73,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityDoubleTest(bool useInterpreter)
+        public static void CheckLambdaIdentityDoubleTest(CompilationType useInterpreter)
         {
             foreach (double value in new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN })
             {
@@ -82,7 +82,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityEnumTest(bool useInterpreter)
+        public static void CheckLambdaIdentityEnumTest(CompilationType useInterpreter)
         {
             foreach (E value in new E[] { (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
             {
@@ -91,7 +91,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityEnumLongTest(bool useInterpreter)
+        public static void CheckLambdaIdentityEnumLongTest(CompilationType useInterpreter)
         {
             foreach (El value in new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue })
             {
@@ -100,7 +100,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityFloatTest(bool useInterpreter)
+        public static void CheckLambdaIdentityFloatTest(CompilationType useInterpreter)
         {
             foreach (float value in new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN })
             {
@@ -109,7 +109,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityFuncOfObjectTest(bool useInterpreter)
+        public static void CheckLambdaIdentityFuncOfObjectTest(CompilationType useInterpreter)
         {
             foreach (Func<object> value in new Func<object>[] { null, (Func<object>)delegate () { return null; } })
             {
@@ -118,7 +118,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityInterfaceTest(bool useInterpreter)
+        public static void CheckLambdaIdentityInterfaceTest(CompilationType useInterpreter)
         {
             foreach (I value in new I[] { null, new C(), new D(), new D(0), new D(5) })
             {
@@ -127,7 +127,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityIEquatableOfCustomTest(bool useInterpreter)
+        public static void CheckLambdaIdentityIEquatableOfCustomTest(CompilationType useInterpreter)
         {
             foreach (IEquatable<C> value in new IEquatable<C>[] { null, new C(), new D(), new D(0), new D(5) })
             {
@@ -136,7 +136,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityIEquatableOfCustom2Test(bool useInterpreter)
+        public static void CheckLambdaIdentityIEquatableOfCustom2Test(CompilationType useInterpreter)
         {
             foreach (IEquatable<D> value in new IEquatable<D>[] { null, new D(), new D(0), new D(5) })
             {
@@ -145,7 +145,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityIntTest(bool useInterpreter)
+        public static void CheckLambdaIdentityIntTest(CompilationType useInterpreter)
         {
             foreach (int value in new int[] { 0, 1, -1, int.MinValue, int.MaxValue })
             {
@@ -154,7 +154,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityLongTest(bool useInterpreter)
+        public static void CheckLambdaIdentityLongTest(CompilationType useInterpreter)
         {
             foreach (long value in new long[] { 0, 1, -1, long.MinValue, long.MaxValue })
             {
@@ -163,7 +163,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityObjectTest(bool useInterpreter)
+        public static void CheckLambdaIdentityObjectTest(CompilationType useInterpreter)
         {
             foreach (object value in new object[] { null, new object(), new C(), new D(3) })
             {
@@ -172,7 +172,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityStructTest(bool useInterpreter)
+        public static void CheckLambdaIdentityStructTest(CompilationType useInterpreter)
         {
             foreach (S value in new S[] { default(S), new S() })
             {
@@ -181,7 +181,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentitySByteTest(bool useInterpreter)
+        public static void CheckLambdaIdentitySByteTest(CompilationType useInterpreter)
         {
             foreach (sbyte value in new sbyte[] { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue })
             {
@@ -190,7 +190,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityStructWithStringTest(bool useInterpreter)
+        public static void CheckLambdaIdentityStructWithStringTest(CompilationType useInterpreter)
         {
             foreach (Sc value in new Sc[] { default(Sc), new Sc(), new Sc(null) })
             {
@@ -199,7 +199,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityStructWithStringAndFieldTest(bool useInterpreter)
+        public static void CheckLambdaIdentityStructWithStringAndFieldTest(CompilationType useInterpreter)
         {
             foreach (Scs value in new Scs[] { default(Scs), new Scs(), new Scs(null, new S()) })
             {
@@ -208,7 +208,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityShortTest(bool useInterpreter)
+        public static void CheckLambdaIdentityShortTest(CompilationType useInterpreter)
         {
             foreach (short value in new short[] { 0, 1, -1, short.MinValue, short.MaxValue })
             {
@@ -217,7 +217,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityStructWithTwoValuesTest(bool useInterpreter)
+        public static void CheckLambdaIdentityStructWithTwoValuesTest(CompilationType useInterpreter)
         {
             foreach (Sp value in new Sp[] { default(Sp), new Sp(), new Sp(5, 5.0) })
             {
@@ -226,7 +226,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityStructWithValueTest(bool useInterpreter)
+        public static void CheckLambdaIdentityStructWithValueTest(CompilationType useInterpreter)
         {
             foreach (Ss value in new Ss[] { default(Ss), new Ss(), new Ss(new S()) })
             {
@@ -235,7 +235,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityStringTest(bool useInterpreter)
+        public static void CheckLambdaIdentityStringTest(CompilationType useInterpreter)
         {
             foreach (string value in new string[] { null, "", "a", "foo" })
             {
@@ -244,7 +244,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityUIntTest(bool useInterpreter)
+        public static void CheckLambdaIdentityUIntTest(CompilationType useInterpreter)
         {
             foreach (uint value in new uint[] { 0, 1, uint.MaxValue })
             {
@@ -253,7 +253,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityULongTest(bool useInterpreter)
+        public static void CheckLambdaIdentityULongTest(CompilationType useInterpreter)
         {
             foreach (ulong value in new ulong[] { 0, 1, ulong.MaxValue })
             {
@@ -262,7 +262,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityUShortTest(bool useInterpreter)
+        public static void CheckLambdaIdentityUShortTest(CompilationType useInterpreter)
         {
             foreach (ushort value in new ushort[] { 0, 1, ushort.MaxValue })
             {
@@ -271,85 +271,85 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityGenericWithCustomTest(bool useInterpreter)
+        public static void CheckLambdaIdentityGenericWithCustomTest(CompilationType useInterpreter)
         {
             CheckLambdaIdentityGenericHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityGenericWithEnumTest(bool useInterpreter)
+        public static void CheckLambdaIdentityGenericWithEnumTest(CompilationType useInterpreter)
         {
             CheckLambdaIdentityGenericHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityGenericWithObjectTest(bool useInterpreter)
+        public static void CheckLambdaIdentityGenericWithObjectTest(CompilationType useInterpreter)
         {
             CheckLambdaIdentityGenericHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityGenericWithStructTest(bool useInterpreter)
+        public static void CheckLambdaIdentityGenericWithStructTest(CompilationType useInterpreter)
         {
             CheckLambdaIdentityGenericHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityGenericWithStructWithStringAndFieldTest(bool useInterpreter)
+        public static void CheckLambdaIdentityGenericWithStructWithStringAndFieldTest(CompilationType useInterpreter)
         {
             CheckLambdaIdentityGenericHelper<Scs>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityGenericWithClassRestrictionWithCustomTest(bool useInterpreter)
+        public static void CheckLambdaIdentityGenericWithClassRestrictionWithCustomTest(CompilationType useInterpreter)
         {
             CheckLambdaIdentityGenericWithClassRestrictionHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityGenericWithClassRestrictionWithObjectTest(bool useInterpreter)
+        public static void CheckLambdaIdentityGenericWithClassRestrictionWithObjectTest(CompilationType useInterpreter)
         {
             CheckLambdaIdentityGenericWithClassRestrictionHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityGenericWithSubClassRestrictionWithCustomTest(bool useInterpreter)
+        public static void CheckLambdaIdentityGenericWithSubClassRestrictionWithCustomTest(CompilationType useInterpreter)
         {
             CheckLambdaIdentityGenericWithSubClassRestrictionHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityGenericWithClassAndNewRestrictionWithCustomTest(bool useInterpreter)
+        public static void CheckLambdaIdentityGenericWithClassAndNewRestrictionWithCustomTest(CompilationType useInterpreter)
         {
             CheckLambdaIdentityGenericWithClassAndNewRestrictionHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityGenericWithClassAndNewRestrictionWithObjectTest(bool useInterpreter)
+        public static void CheckLambdaIdentityGenericWithClassAndNewRestrictionWithObjectTest(CompilationType useInterpreter)
         {
             CheckLambdaIdentityGenericWithClassAndNewRestrictionHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityGenericWithSubClassAndNewRestrictionWithCustomTest(bool useInterpreter)
+        public static void CheckLambdaIdentityGenericWithSubClassAndNewRestrictionWithCustomTest(CompilationType useInterpreter)
         {
             CheckLambdaIdentityGenericWithSubClassAndNewRestrictionHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityGenericWithStructRestrictionWithEnumTest(bool useInterpreter)
+        public static void CheckLambdaIdentityGenericWithStructRestrictionWithEnumTest(CompilationType useInterpreter)
         {
             CheckLambdaIdentityGenericWithStructRestrictionHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityGenericWithStructRestrictionWithStructTest(bool useInterpreter)
+        public static void CheckLambdaIdentityGenericWithStructRestrictionWithStructTest(CompilationType useInterpreter)
         {
             CheckLambdaIdentityGenericWithStructRestrictionHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLambdaIdentityGenericWithStructRestrictionWithStructWithStringAndFieldTest(bool useInterpreter)
+        public static void CheckLambdaIdentityGenericWithStructRestrictionWithStructWithStringAndFieldTest(CompilationType useInterpreter)
         {
             CheckLambdaIdentityGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
@@ -358,7 +358,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Generic helpers
 
-        private static void CheckLambdaIdentityGenericHelper<T>(bool useInterpreter)
+        private static void CheckLambdaIdentityGenericHelper<T>(CompilationType useInterpreter)
         {
             foreach (T value in new T[] { default(T) })
             {
@@ -366,7 +366,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckLambdaIdentityGenericWithClassRestrictionHelper<Tc>(bool useInterpreter) where Tc : class
+        private static void CheckLambdaIdentityGenericWithClassRestrictionHelper<Tc>(CompilationType useInterpreter) where Tc : class
         {
             foreach (Tc value in new Tc[] { null, default(Tc) })
             {
@@ -374,7 +374,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckLambdaIdentityGenericWithSubClassRestrictionHelper<TC>(bool useInterpreter) where TC : C
+        private static void CheckLambdaIdentityGenericWithSubClassRestrictionHelper<TC>(CompilationType useInterpreter) where TC : C
         {
             foreach (TC value in new TC[] { null, default(TC), (TC)new C() })
             {
@@ -382,7 +382,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckLambdaIdentityGenericWithClassAndNewRestrictionHelper<Tcn>(bool useInterpreter) where Tcn : class, new()
+        private static void CheckLambdaIdentityGenericWithClassAndNewRestrictionHelper<Tcn>(CompilationType useInterpreter) where Tcn : class, new()
         {
             foreach (Tcn value in new Tcn[] { null, default(Tcn), new Tcn() })
             {
@@ -390,7 +390,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckLambdaIdentityGenericWithSubClassAndNewRestrictionHelper<TCn>(bool useInterpreter) where TCn : C, new()
+        private static void CheckLambdaIdentityGenericWithSubClassAndNewRestrictionHelper<TCn>(CompilationType useInterpreter) where TCn : C, new()
         {
             foreach (TCn value in new TCn[] { null, default(TCn), new TCn(), (TCn)new C() })
             {
@@ -398,7 +398,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckLambdaIdentityGenericWithStructRestrictionHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckLambdaIdentityGenericWithStructRestrictionHelper<Ts>(CompilationType useInterpreter) where Ts : struct
         {
             foreach (Ts value in new Ts[] { default(Ts), new Ts() })
             {
@@ -409,7 +409,7 @@ namespace System.Linq.Expressions.Tests
         #endregion
 
         #region Test verifiers
-        private static void VerifyIdentityBool(bool value, bool useInterpreter)
+        private static void VerifyIdentityBool(bool value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(bool), "p");
 
@@ -454,7 +454,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityByte(byte value, bool useInterpreter)
+        private static void VerifyIdentityByte(byte value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(byte), "p");
 
@@ -499,7 +499,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityCustom(C value, bool useInterpreter)
+        private static void VerifyIdentityCustom(C value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(C), "p");
 
@@ -544,7 +544,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityChar(char value, bool useInterpreter)
+        private static void VerifyIdentityChar(char value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(char), "p");
 
@@ -589,7 +589,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityCustom2(D value, bool useInterpreter)
+        private static void VerifyIdentityCustom2(D value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(D), "p");
 
@@ -634,7 +634,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityDecimal(decimal value, bool useInterpreter)
+        private static void VerifyIdentityDecimal(decimal value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(decimal), "p");
 
@@ -679,7 +679,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityDelegate(Delegate value, bool useInterpreter)
+        private static void VerifyIdentityDelegate(Delegate value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(Delegate), "p");
 
@@ -724,7 +724,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityDouble(double value, bool useInterpreter)
+        private static void VerifyIdentityDouble(double value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(double), "p");
 
@@ -769,7 +769,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityEnum(E value, bool useInterpreter)
+        private static void VerifyIdentityEnum(E value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(E), "p");
 
@@ -814,7 +814,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityEnumLong(El value, bool useInterpreter)
+        private static void VerifyIdentityEnumLong(El value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(El), "p");
 
@@ -859,7 +859,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityFloat(float value, bool useInterpreter)
+        private static void VerifyIdentityFloat(float value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(float), "p");
 
@@ -904,7 +904,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityFuncOfObject(Func<object> value, bool useInterpreter)
+        private static void VerifyIdentityFuncOfObject(Func<object> value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(Func<object>), "p");
 
@@ -949,7 +949,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityInterface(I value, bool useInterpreter)
+        private static void VerifyIdentityInterface(I value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(I), "p");
 
@@ -994,7 +994,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityIEquatableOfCustom(IEquatable<C> value, bool useInterpreter)
+        private static void VerifyIdentityIEquatableOfCustom(IEquatable<C> value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(IEquatable<C>), "p");
 
@@ -1039,7 +1039,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityIEquatableOfCustom2(IEquatable<D> value, bool useInterpreter)
+        private static void VerifyIdentityIEquatableOfCustom2(IEquatable<D> value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(IEquatable<D>), "p");
 
@@ -1084,7 +1084,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityInt(int value, bool useInterpreter)
+        private static void VerifyIdentityInt(int value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(int), "p");
 
@@ -1129,7 +1129,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityLong(long value, bool useInterpreter)
+        private static void VerifyIdentityLong(long value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(long), "p");
 
@@ -1174,7 +1174,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityObject(object value, bool useInterpreter)
+        private static void VerifyIdentityObject(object value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(object), "p");
 
@@ -1219,7 +1219,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityStruct(S value, bool useInterpreter)
+        private static void VerifyIdentityStruct(S value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(S), "p");
 
@@ -1264,7 +1264,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentitySByte(sbyte value, bool useInterpreter)
+        private static void VerifyIdentitySByte(sbyte value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(sbyte), "p");
 
@@ -1309,7 +1309,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityStructWithString(Sc value, bool useInterpreter)
+        private static void VerifyIdentityStructWithString(Sc value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(Sc), "p");
 
@@ -1354,7 +1354,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityStructWithStringAndField(Scs value, bool useInterpreter)
+        private static void VerifyIdentityStructWithStringAndField(Scs value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(Scs), "p");
 
@@ -1399,7 +1399,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityShort(short value, bool useInterpreter)
+        private static void VerifyIdentityShort(short value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(short), "p");
 
@@ -1444,7 +1444,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityStructWithTwoValues(Sp value, bool useInterpreter)
+        private static void VerifyIdentityStructWithTwoValues(Sp value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(Sp), "p");
 
@@ -1489,7 +1489,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityStructWithValue(Ss value, bool useInterpreter)
+        private static void VerifyIdentityStructWithValue(Ss value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(Ss), "p");
 
@@ -1534,7 +1534,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityString(string value, bool useInterpreter)
+        private static void VerifyIdentityString(string value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(string), "p");
 
@@ -1579,7 +1579,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityUInt(uint value, bool useInterpreter)
+        private static void VerifyIdentityUInt(uint value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(uint), "p");
 
@@ -1624,7 +1624,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityULong(ulong value, bool useInterpreter)
+        private static void VerifyIdentityULong(ulong value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(ulong), "p");
 
@@ -1669,7 +1669,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityUShort(ushort value, bool useInterpreter)
+        private static void VerifyIdentityUShort(ushort value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(ushort), "p");
 
@@ -1714,7 +1714,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityGeneric<T>(T value, bool useInterpreter)
+        private static void VerifyIdentityGeneric<T>(T value, CompilationType useInterpreter)
         {
             ParameterExpression p = Expression.Parameter(typeof(T), "p");
 
@@ -1759,7 +1759,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityGenericWithClassRestriction<Tc>(Tc value, bool useInterpreter) where Tc : class
+        private static void VerifyIdentityGenericWithClassRestriction<Tc>(Tc value, CompilationType useInterpreter) where Tc : class
         {
             ParameterExpression p = Expression.Parameter(typeof(Tc), "p");
 
@@ -1804,7 +1804,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityGenericWithSubClassRestriction<TC>(TC value, bool useInterpreter) where TC : C
+        private static void VerifyIdentityGenericWithSubClassRestriction<TC>(TC value, CompilationType useInterpreter) where TC : C
         {
             ParameterExpression p = Expression.Parameter(typeof(TC), "p");
 
@@ -1849,7 +1849,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityGenericWithClassAndNewRestriction<Tcn>(Tcn value, bool useInterpreter) where Tcn : class, new()
+        private static void VerifyIdentityGenericWithClassAndNewRestriction<Tcn>(Tcn value, CompilationType useInterpreter) where Tcn : class, new()
         {
             ParameterExpression p = Expression.Parameter(typeof(Tcn), "p");
 
@@ -1894,7 +1894,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityGenericWithSubClassAndNewRestriction<TCn>(TCn value, bool useInterpreter) where TCn : C, new()
+        private static void VerifyIdentityGenericWithSubClassAndNewRestriction<TCn>(TCn value, CompilationType useInterpreter) where TCn : C, new()
         {
             ParameterExpression p = Expression.Parameter(typeof(TCn), "p");
 
@@ -1939,7 +1939,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        private static void VerifyIdentityGenericWithStructRestriction<Ts>(Ts value, bool useInterpreter) where Ts : struct
+        private static void VerifyIdentityGenericWithStructRestriction<Ts>(Ts value, CompilationType useInterpreter) where Ts : struct
         {
             ParameterExpression p = Expression.Parameter(typeof(Ts), "p");
 

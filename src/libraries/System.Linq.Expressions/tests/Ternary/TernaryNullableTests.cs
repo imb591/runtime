@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableBoolTest(bool useInterpreter)
+        public static void CheckTernaryNullableBoolTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             bool?[] array2 = new bool?[] { null, true, false };
@@ -27,7 +27,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableByteTest(bool useInterpreter)
+        public static void CheckTernaryNullableByteTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             byte?[] array2 = new byte?[] { null, 0, 1, byte.MaxValue };
@@ -44,7 +44,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableCharTest(bool useInterpreter)
+        public static void CheckTernaryNullableCharTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             char?[] array2 = new char?[] { null, '\0', '\b', 'A', '\uffff' };
@@ -61,7 +61,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableDecimalTest(bool useInterpreter)
+        public static void CheckTernaryNullableDecimalTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             decimal?[] array2 = new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
@@ -78,7 +78,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableDoubleTest(bool useInterpreter)
+        public static void CheckTernaryNullableDoubleTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             double?[] array2 = new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
@@ -95,7 +95,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableEnumTest(bool useInterpreter)
+        public static void CheckTernaryNullableEnumTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             E?[] array2 = new E?[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue };
@@ -112,7 +112,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableEnumLongTest(bool useInterpreter)
+        public static void CheckTernaryNullableEnumLongTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             El?[] array2 = new El?[] { null, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue };
@@ -129,7 +129,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableFloatTest(bool useInterpreter)
+        public static void CheckTernaryNullableFloatTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             float?[] array2 = new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
@@ -146,7 +146,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableIntTest(bool useInterpreter)
+        public static void CheckTernaryNullableIntTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             int?[] array2 = new int?[] { null, 0, 1, -1, int.MinValue, int.MaxValue };
@@ -163,7 +163,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableLongTest(bool useInterpreter)
+        public static void CheckTernaryNullableLongTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             long?[] array2 = new long?[] { null, 0, 1, -1, long.MinValue, long.MaxValue };
@@ -180,7 +180,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableStructTest(bool useInterpreter)
+        public static void CheckTernaryNullableStructTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             S?[] array2 = new S?[] { null, default(S), new S() };
@@ -197,7 +197,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableSByteTest(bool useInterpreter)
+        public static void CheckTernaryNullableSByteTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             sbyte?[] array2 = new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue };
@@ -214,7 +214,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableStructWithStringTest(bool useInterpreter)
+        public static void CheckTernaryNullableStructWithStringTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             Sc?[] array2 = new Sc?[] { null, default(Sc), new Sc(), new Sc(null) };
@@ -231,7 +231,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableStructWithStringAndFieldTest(bool useInterpreter)
+        public static void CheckTernaryNullableStructWithStringAndFieldTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             Scs?[] array2 = new Scs?[] { null, default(Scs), new Scs(), new Scs(null, new S()) };
@@ -248,7 +248,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableShortTest(bool useInterpreter)
+        public static void CheckTernaryNullableShortTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             short?[] array2 = new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue };
@@ -265,7 +265,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableStructWithTwoValuesTest(bool useInterpreter)
+        public static void CheckTernaryNullableStructWithTwoValuesTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             Sp?[] array2 = new Sp?[] { null, default(Sp), new Sp(), new Sp(5, 5.0) };
@@ -282,7 +282,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableStructWithValueTest(bool useInterpreter)
+        public static void CheckTernaryNullableStructWithValueTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             Ss?[] array2 = new Ss?[] { null, default(Ss), new Ss(), new Ss(new S()) };
@@ -299,7 +299,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableUIntTest(bool useInterpreter)
+        public static void CheckTernaryNullableUIntTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             uint?[] array2 = new uint?[] { null, 0, 1, uint.MaxValue };
@@ -316,7 +316,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableULongTest(bool useInterpreter)
+        public static void CheckTernaryNullableULongTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             ulong?[] array2 = new ulong?[] { null, 0, 1, ulong.MaxValue };
@@ -333,7 +333,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableUShortTest(bool useInterpreter)
+        public static void CheckTernaryNullableUShortTest(CompilationType useInterpreter)
         {
             bool[] array1 = new bool[] { false, true };
             ushort?[] array2 = new ushort?[] { null, 0, 1, ushort.MaxValue };
@@ -350,19 +350,19 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableGenericWithStructRestrictionWithEnumTest(bool useInterpreter)
+        public static void CheckTernaryNullableGenericWithStructRestrictionWithEnumTest(CompilationType useInterpreter)
         {
             CheckTernaryNullableGenericWithStructRestrictionHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableGenericWithStructRestrictionWithStructTest(bool useInterpreter)
+        public static void CheckTernaryNullableGenericWithStructRestrictionWithStructTest(CompilationType useInterpreter)
         {
             CheckTernaryNullableGenericWithStructRestrictionHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckTernaryNullableGenericWithStructRestrictionWithStructWithStringAndFieldTest(bool useInterpreter)
+        public static void CheckTernaryNullableGenericWithStructRestrictionWithStructWithStringAndFieldTest(CompilationType useInterpreter)
         {
             CheckTernaryNullableGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
@@ -371,7 +371,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Generic helpers
 
-        private static void CheckTernaryNullableGenericWithStructRestrictionHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckTernaryNullableGenericWithStructRestrictionHelper<Ts>(CompilationType useInterpreter) where Ts : struct
         {
             bool[] array1 = new bool[] { false, true };
             Ts?[] array2 = new Ts?[] { default(Ts), new Ts() };
@@ -391,7 +391,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyNullableBool(bool condition, bool? a, bool? b, bool useInterpreter)
+        private static void VerifyNullableBool(bool condition, bool? a, bool? b, CompilationType useInterpreter)
         {
             Expression<Func<bool?>> e =
                 Expression.Lambda<Func<bool?>>(
@@ -405,7 +405,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyNullableByte(bool condition, byte? a, byte? b, bool useInterpreter)
+        private static void VerifyNullableByte(bool condition, byte? a, byte? b, CompilationType useInterpreter)
         {
             Expression<Func<byte?>> e =
                 Expression.Lambda<Func<byte?>>(
@@ -419,7 +419,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyNullableChar(bool condition, char? a, char? b, bool useInterpreter)
+        private static void VerifyNullableChar(bool condition, char? a, char? b, CompilationType useInterpreter)
         {
             Expression<Func<char?>> e =
                 Expression.Lambda<Func<char?>>(
@@ -433,7 +433,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyNullableDecimal(bool condition, decimal? a, decimal? b, bool useInterpreter)
+        private static void VerifyNullableDecimal(bool condition, decimal? a, decimal? b, CompilationType useInterpreter)
         {
             Expression<Func<decimal?>> e =
                 Expression.Lambda<Func<decimal?>>(
@@ -447,7 +447,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyNullableDouble(bool condition, double? a, double? b, bool useInterpreter)
+        private static void VerifyNullableDouble(bool condition, double? a, double? b, CompilationType useInterpreter)
         {
             Expression<Func<double?>> e =
                 Expression.Lambda<Func<double?>>(
@@ -461,7 +461,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyNullableEnum(bool condition, E? a, E? b, bool useInterpreter)
+        private static void VerifyNullableEnum(bool condition, E? a, E? b, CompilationType useInterpreter)
         {
             Expression<Func<E?>> e =
                 Expression.Lambda<Func<E?>>(
@@ -475,7 +475,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyNullableEnumLong(bool condition, El? a, El? b, bool useInterpreter)
+        private static void VerifyNullableEnumLong(bool condition, El? a, El? b, CompilationType useInterpreter)
         {
             Expression<Func<El?>> e =
                 Expression.Lambda<Func<El?>>(
@@ -489,7 +489,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyNullableFloat(bool condition, float? a, float? b, bool useInterpreter)
+        private static void VerifyNullableFloat(bool condition, float? a, float? b, CompilationType useInterpreter)
         {
             Expression<Func<float?>> e =
                 Expression.Lambda<Func<float?>>(
@@ -503,7 +503,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyNullableInt(bool condition, int? a, int? b, bool useInterpreter)
+        private static void VerifyNullableInt(bool condition, int? a, int? b, CompilationType useInterpreter)
         {
             Expression<Func<int?>> e =
                 Expression.Lambda<Func<int?>>(
@@ -517,7 +517,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyNullableLong(bool condition, long? a, long? b, bool useInterpreter)
+        private static void VerifyNullableLong(bool condition, long? a, long? b, CompilationType useInterpreter)
         {
             Expression<Func<long?>> e =
                 Expression.Lambda<Func<long?>>(
@@ -531,7 +531,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyNullableStruct(bool condition, S? a, S? b, bool useInterpreter)
+        private static void VerifyNullableStruct(bool condition, S? a, S? b, CompilationType useInterpreter)
         {
             Expression<Func<S?>> e =
                 Expression.Lambda<Func<S?>>(
@@ -545,7 +545,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyNullableSByte(bool condition, sbyte? a, sbyte? b, bool useInterpreter)
+        private static void VerifyNullableSByte(bool condition, sbyte? a, sbyte? b, CompilationType useInterpreter)
         {
             Expression<Func<sbyte?>> e =
                 Expression.Lambda<Func<sbyte?>>(
@@ -559,7 +559,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyNullableStructWithString(bool condition, Sc? a, Sc? b, bool useInterpreter)
+        private static void VerifyNullableStructWithString(bool condition, Sc? a, Sc? b, CompilationType useInterpreter)
         {
             Expression<Func<Sc?>> e =
                 Expression.Lambda<Func<Sc?>>(
@@ -573,7 +573,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyNullableStructWithStringAndField(bool condition, Scs? a, Scs? b, bool useInterpreter)
+        private static void VerifyNullableStructWithStringAndField(bool condition, Scs? a, Scs? b, CompilationType useInterpreter)
         {
             Expression<Func<Scs?>> e =
                 Expression.Lambda<Func<Scs?>>(
@@ -587,7 +587,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyNullableShort(bool condition, short? a, short? b, bool useInterpreter)
+        private static void VerifyNullableShort(bool condition, short? a, short? b, CompilationType useInterpreter)
         {
             Expression<Func<short?>> e =
                 Expression.Lambda<Func<short?>>(
@@ -601,7 +601,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyNullableStructWithTwoValues(bool condition, Sp? a, Sp? b, bool useInterpreter)
+        private static void VerifyNullableStructWithTwoValues(bool condition, Sp? a, Sp? b, CompilationType useInterpreter)
         {
             Expression<Func<Sp?>> e =
                 Expression.Lambda<Func<Sp?>>(
@@ -615,7 +615,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyNullableStructWithValue(bool condition, Ss? a, Ss? b, bool useInterpreter)
+        private static void VerifyNullableStructWithValue(bool condition, Ss? a, Ss? b, CompilationType useInterpreter)
         {
             Expression<Func<Ss?>> e =
                 Expression.Lambda<Func<Ss?>>(
@@ -629,7 +629,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyNullableUInt(bool condition, uint? a, uint? b, bool useInterpreter)
+        private static void VerifyNullableUInt(bool condition, uint? a, uint? b, CompilationType useInterpreter)
         {
             Expression<Func<uint?>> e =
                 Expression.Lambda<Func<uint?>>(
@@ -643,7 +643,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyNullableULong(bool condition, ulong? a, ulong? b, bool useInterpreter)
+        private static void VerifyNullableULong(bool condition, ulong? a, ulong? b, CompilationType useInterpreter)
         {
             Expression<Func<ulong?>> e =
                 Expression.Lambda<Func<ulong?>>(
@@ -657,7 +657,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyNullableUShort(bool condition, ushort? a, ushort? b, bool useInterpreter)
+        private static void VerifyNullableUShort(bool condition, ushort? a, ushort? b, CompilationType useInterpreter)
         {
             Expression<Func<ushort?>> e =
                 Expression.Lambda<Func<ushort?>>(
@@ -671,7 +671,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(condition ? a : b, f());
         }
 
-        private static void VerifyNullableGenericWithStructRestriction<Ts>(bool condition, Ts? a, Ts? b, bool useInterpreter) where Ts : struct
+        private static void VerifyNullableGenericWithStructRestriction<Ts>(bool condition, Ts? a, Ts? b, CompilationType useInterpreter) where Ts : struct
         {
             Expression<Func<Ts?>> e =
                 Expression.Lambda<Func<Ts?>>(

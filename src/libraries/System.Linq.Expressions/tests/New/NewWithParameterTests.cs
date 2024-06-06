@@ -11,7 +11,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNewWithParameterEnumTest(bool useInterpreter)
+        public static void CheckNewWithParameterEnumTest(CompilationType useInterpreter)
         {
             foreach (E value in new E[] { (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue })
             {
@@ -20,7 +20,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNewWithParameterIntTest(bool useInterpreter)
+        public static void CheckNewWithParameterIntTest(CompilationType useInterpreter)
         {
             foreach (int value in new int[] { 0, 1, -1, int.MinValue, int.MaxValue })
             {
@@ -29,7 +29,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNewWithParameterStructTest(bool useInterpreter)
+        public static void CheckNewWithParameterStructTest(CompilationType useInterpreter)
         {
             foreach (S value in new S[] { default(S), new S() })
             {
@@ -38,7 +38,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNewWithParameterStructWithStringTest(bool useInterpreter)
+        public static void CheckNewWithParameterStructWithStringTest(CompilationType useInterpreter)
         {
             foreach (Sc value in new Sc[] { default(Sc), new Sc(), new Sc(null) })
             {
@@ -47,7 +47,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNewWithParameterStructWithStringAndFieldTest(bool useInterpreter)
+        public static void CheckNewWithParameterStructWithStringAndFieldTest(CompilationType useInterpreter)
         {
             foreach (Scs value in new Scs[] { default(Scs), new Scs(), new Scs(null, new S()) })
             {
@@ -56,7 +56,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNewWithParameterStructWithTwoValuesTest(bool useInterpreter)
+        public static void CheckNewWithParameterStructWithTwoValuesTest(CompilationType useInterpreter)
         {
             foreach (Sp value in new Sp[] { default(Sp), new Sp(), new Sp(5, 5.0) })
             {
@@ -65,7 +65,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNewWithParameterStringTest(bool useInterpreter)
+        public static void CheckNewWithParameterStringTest(CompilationType useInterpreter)
         {
             foreach (Sc value in new Sc[] { default(Sc), new Sc(), new Sc(null) })
             {
@@ -74,19 +74,19 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNewWithParameterGenericWithStructRestrictionWithEnumTest(bool useInterpreter)
+        public static void CheckNewWithParameterGenericWithStructRestrictionWithEnumTest(CompilationType useInterpreter)
         {
             CheckNewWithParameterGenericWithStructRestrictionHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNewWithParameterGenericWithStructRestrictionWithStructTest(bool useInterpreter)
+        public static void CheckNewWithParameterGenericWithStructRestrictionWithStructTest(CompilationType useInterpreter)
         {
             CheckNewWithParameterGenericWithStructRestrictionHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNewWithParameterGenericWithStructRestrictionWithStructWithStringAndFieldTest(bool useInterpreter)
+        public static void CheckNewWithParameterGenericWithStructRestrictionWithStructWithStringAndFieldTest(CompilationType useInterpreter)
         {
             CheckNewWithParameterGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
@@ -95,7 +95,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Generic helpers
 
-        private static void CheckNewWithParameterGenericWithStructRestrictionHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckNewWithParameterGenericWithStructRestrictionHelper<Ts>(CompilationType useInterpreter) where Ts : struct
         {
             foreach (Ts value in new Ts[] { default(Ts), new Ts() })
             {
@@ -107,7 +107,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyWithParameterEnum(E value, bool useInterpreter)
+        private static void VerifyWithParameterEnum(E value, CompilationType useInterpreter)
         {
             ConstructorInfo constructor = typeof(E?).GetConstructor(new Type[] { typeof(E) });
             Expression[] exprArgs = new Expression[] { Expression.Constant(value, typeof(E)) };
@@ -119,7 +119,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(new E?(value), f());
         }
 
-        private static void VerifyWithParameterInt(int value, bool useInterpreter)
+        private static void VerifyWithParameterInt(int value, CompilationType useInterpreter)
         {
             ConstructorInfo constructor = typeof(int?).GetConstructor(new Type[] { typeof(int) });
             Expression[] exprArgs = new Expression[] { Expression.Constant(value, typeof(int)) };
@@ -131,7 +131,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(new int?(value), f());
         }
 
-        private static void VerifyWithParameterStruct(S value, bool useInterpreter)
+        private static void VerifyWithParameterStruct(S value, CompilationType useInterpreter)
         {
             ConstructorInfo constructor = typeof(S?).GetConstructor(new Type[] { typeof(S) });
             Expression[] exprArgs = new Expression[] { Expression.Constant(value, typeof(S)) };
@@ -143,7 +143,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(new S?(value), f());
         }
 
-        private static void VerifyWithParameterStructWithString(Sc value, bool useInterpreter)
+        private static void VerifyWithParameterStructWithString(Sc value, CompilationType useInterpreter)
         {
             ConstructorInfo constructor = typeof(Sc?).GetConstructor(new Type[] { typeof(Sc) });
             Expression[] exprArgs = new Expression[] { Expression.Constant(value, typeof(Sc)) };
@@ -155,7 +155,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(new Sc?(value), f());
         }
 
-        private static void VerifyWithParameterStructWithStringAndField(Scs value, bool useInterpreter)
+        private static void VerifyWithParameterStructWithStringAndField(Scs value, CompilationType useInterpreter)
         {
             ConstructorInfo constructor = typeof(Scs?).GetConstructor(new Type[] { typeof(Scs) });
             Expression[] exprArgs = new Expression[] { Expression.Constant(value, typeof(Scs)) };
@@ -167,7 +167,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(new Scs?(value), f());
         }
 
-        private static void VerifyWithParameterString(Sc value, bool useInterpreter)
+        private static void VerifyWithParameterString(Sc value, CompilationType useInterpreter)
         {
             ConstructorInfo constructor = typeof(Sc?).GetConstructor(new Type[] { typeof(Sc) });
             Expression[] exprArgs = new Expression[] { Expression.Constant(value, typeof(Sc)) };
@@ -179,7 +179,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(new Sc?(value), f());
         }
 
-        private static void VerifyWithParameterStructWithTwoValues(Sp value, bool useInterpreter)
+        private static void VerifyWithParameterStructWithTwoValues(Sp value, CompilationType useInterpreter)
         {
             ConstructorInfo constructor = typeof(Sp?).GetConstructor(new Type[] { typeof(Sp) });
             Expression[] exprArgs = new Expression[] { Expression.Constant(value, typeof(Sp)) };
@@ -191,7 +191,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(new Sp?(value), f());
         }
 
-        private static void VerifyWithParameterGenericWithStructRestriction<Ts>(Ts value, bool useInterpreter) where Ts : struct
+        private static void VerifyWithParameterGenericWithStructRestriction<Ts>(Ts value, CompilationType useInterpreter) where Ts : struct
         {
             ConstructorInfo constructor = typeof(Ts?).GetConstructor(new Type[] { typeof(Ts) });
             Expression[] exprArgs = new Expression[] { Expression.Constant(value, typeof(Ts)) };

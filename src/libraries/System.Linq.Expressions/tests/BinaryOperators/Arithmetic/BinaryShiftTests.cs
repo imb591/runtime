@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckByteShiftTest(bool useInterpreter)
+        public static void CheckByteShiftTest(CompilationType useInterpreter)
         {
             byte[] array = new byte[] { 0, 1, byte.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -20,7 +20,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableByteShiftTest(bool useInterpreter)
+        public static void CheckNullableByteShiftTest(CompilationType useInterpreter)
         {
             byte?[] array = { 0, 1, byte.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -30,7 +30,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckSByteShiftTest(bool useInterpreter)
+        public static void CheckSByteShiftTest(CompilationType useInterpreter)
         {
             sbyte[] array = new sbyte[] { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -40,7 +40,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableSByteShiftTest(bool useInterpreter)
+        public static void CheckNullableSByteShiftTest(CompilationType useInterpreter)
         {
             sbyte?[] array = { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -50,7 +50,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUShortShiftTest(bool useInterpreter)
+        public static void CheckUShortShiftTest(CompilationType useInterpreter)
         {
             ushort[] array = new ushort[] { 0, 1, ushort.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -60,7 +60,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableUShortShiftTest(bool useInterpreter)
+        public static void CheckNullableUShortShiftTest(CompilationType useInterpreter)
         {
             ushort?[] array = { 0, 1, ushort.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -70,7 +70,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckShortShiftTest(bool useInterpreter)
+        public static void CheckShortShiftTest(CompilationType useInterpreter)
         {
             short[] array = new short[] { 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -80,7 +80,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableShortShiftTest(bool useInterpreter)
+        public static void CheckNullableShortShiftTest(CompilationType useInterpreter)
         {
             short?[] array = { 0, 1, -1, short.MinValue, short.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -90,7 +90,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUIntShiftTest(bool useInterpreter)
+        public static void CheckUIntShiftTest(CompilationType useInterpreter)
         {
             uint[] array = new uint[] { 0, 1, uint.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -100,7 +100,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableUIntShiftTest(bool useInterpreter)
+        public static void CheckNullableUIntShiftTest(CompilationType useInterpreter)
         {
             uint?[] array = { 0, 1, uint.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -110,7 +110,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckIntShiftTest(bool useInterpreter)
+        public static void CheckIntShiftTest(CompilationType useInterpreter)
         {
             int[] array = new int[] { 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -120,7 +120,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableIntShiftTest(bool useInterpreter)
+        public static void CheckNullableIntShiftTest(CompilationType useInterpreter)
         {
             int?[] array = { 0, 1, -1, int.MinValue, int.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -130,7 +130,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckULongShiftTest(bool useInterpreter)
+        public static void CheckULongShiftTest(CompilationType useInterpreter)
         {
             ulong[] array = new ulong[] { 0, 1, ulong.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -140,7 +140,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableULongShiftTest(bool useInterpreter)
+        public static void CheckNullableULongShiftTest(CompilationType useInterpreter)
         {
             ulong?[] array = { 0, 1, ulong.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -150,7 +150,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLongShiftTest(bool useInterpreter)
+        public static void CheckLongShiftTest(CompilationType useInterpreter)
         {
             long[] array = new long[] { 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -160,7 +160,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNullableLongShiftTest(bool useInterpreter)
+        public static void CheckNullableLongShiftTest(CompilationType useInterpreter)
         {
             long?[] array = { 0, 1, -1, long.MinValue, long.MaxValue, null };
             for (int i = 0; i < array.Length; i++)
@@ -175,7 +175,7 @@ namespace System.Linq.Expressions.Tests
 
         private static int[] s_shifts = new[] { int.MinValue, -1, 0, 1, 2, 31, 32, 63, 64, int.MaxValue };
 
-        private static void VerifyByteShift(byte a, bool useInterpreter)
+        private static void VerifyByteShift(byte a, CompilationType useInterpreter)
         {
             foreach (var b in s_shifts)
             {
@@ -187,7 +187,7 @@ namespace System.Linq.Expressions.Tests
             VerifyNullShift(a, false, useInterpreter);
         }
 
-        private static void VerifyByteShift(byte a, int b, bool left, bool useInterpreter)
+        private static void VerifyByteShift(byte a, int b, bool left, CompilationType useInterpreter)
         {
             Expression<Func<byte>> e =
                 Expression.Lambda<Func<byte>>(
@@ -224,7 +224,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((byte)(left ? a << b : a >> b)), fn());
         }
 
-        private static void VerifyNullableByteShift(byte? a, bool useInterpreter)
+        private static void VerifyNullableByteShift(byte? a, CompilationType useInterpreter)
         {
             foreach (var b in s_shifts)
             {
@@ -236,7 +236,7 @@ namespace System.Linq.Expressions.Tests
             VerifyNullableNullShift(a, false, useInterpreter);
         }
 
-        private static void VerifyNullableByteShift(byte? a, int b, bool left, bool useInterpreter)
+        private static void VerifyNullableByteShift(byte? a, int b, bool left, CompilationType useInterpreter)
         {
             Expression<Func<byte?>> e =
                 Expression.Lambda<Func<byte?>>(
@@ -273,7 +273,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((byte?)(left ? a << b : a >> b)), f());
         }
 
-        private static void VerifySByteShift(sbyte a, bool useInterpreter)
+        private static void VerifySByteShift(sbyte a, CompilationType useInterpreter)
         {
             foreach (var b in s_shifts)
             {
@@ -285,7 +285,7 @@ namespace System.Linq.Expressions.Tests
             VerifyNullShift(a, false, useInterpreter);
         }
 
-        private static void VerifySByteShift(sbyte a, int b, bool left, bool useInterpreter)
+        private static void VerifySByteShift(sbyte a, int b, bool left, CompilationType useInterpreter)
         {
             Expression<Func<sbyte>> e =
                 Expression.Lambda<Func<sbyte>>(
@@ -322,7 +322,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((sbyte)(left ? a << b : a >> b)), fn());
         }
 
-        private static void VerifyNullableSByteShift(sbyte? a, bool useInterpreter)
+        private static void VerifyNullableSByteShift(sbyte? a, CompilationType useInterpreter)
         {
             foreach (var b in s_shifts)
             {
@@ -334,7 +334,7 @@ namespace System.Linq.Expressions.Tests
             VerifyNullableNullShift(a, false, useInterpreter);
         }
 
-        private static void VerifyNullableSByteShift(sbyte? a, int b, bool left, bool useInterpreter)
+        private static void VerifyNullableSByteShift(sbyte? a, int b, bool left, CompilationType useInterpreter)
         {
             Expression<Func<sbyte?>> e =
                 Expression.Lambda<Func<sbyte?>>(
@@ -371,7 +371,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((sbyte?)(left ? a << b : a >> b)), f());
         }
 
-        private static void VerifyUShortShift(ushort a, bool useInterpreter)
+        private static void VerifyUShortShift(ushort a, CompilationType useInterpreter)
         {
             foreach (var b in s_shifts)
             {
@@ -383,7 +383,7 @@ namespace System.Linq.Expressions.Tests
             VerifyNullShift(a, false, useInterpreter);
         }
 
-        private static void VerifyUShortShift(ushort a, int b, bool left, bool useInterpreter)
+        private static void VerifyUShortShift(ushort a, int b, bool left, CompilationType useInterpreter)
         {
             Expression<Func<ushort>> e =
                 Expression.Lambda<Func<ushort>>(
@@ -420,7 +420,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((ushort)(left ? a << b : a >> b)), fn());
         }
 
-        private static void VerifyNullableUShortShift(ushort? a, bool useInterpreter)
+        private static void VerifyNullableUShortShift(ushort? a, CompilationType useInterpreter)
         {
             foreach (var b in s_shifts)
             {
@@ -432,7 +432,7 @@ namespace System.Linq.Expressions.Tests
             VerifyNullableNullShift(a, false, useInterpreter);
         }
 
-        private static void VerifyNullableUShortShift(ushort? a, int b, bool left, bool useInterpreter)
+        private static void VerifyNullableUShortShift(ushort? a, int b, bool left, CompilationType useInterpreter)
         {
             Expression<Func<ushort?>> e =
                 Expression.Lambda<Func<ushort?>>(
@@ -469,7 +469,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((ushort?)(left ? a << b : a >> b)), f());
         }
 
-        private static void VerifyShortShift(short a, bool useInterpreter)
+        private static void VerifyShortShift(short a, CompilationType useInterpreter)
         {
             foreach (var b in s_shifts)
             {
@@ -481,7 +481,7 @@ namespace System.Linq.Expressions.Tests
             VerifyNullShift(a, false, useInterpreter);
         }
 
-        private static void VerifyShortShift(short a, int b, bool left, bool useInterpreter)
+        private static void VerifyShortShift(short a, int b, bool left, CompilationType useInterpreter)
         {
             Expression<Func<short>> e =
                 Expression.Lambda<Func<short>>(
@@ -518,7 +518,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((short)(left ? a << b : a >> b)), fn());
         }
 
-        private static void VerifyNullableShortShift(short? a, bool useInterpreter)
+        private static void VerifyNullableShortShift(short? a, CompilationType useInterpreter)
         {
             foreach (var b in s_shifts)
             {
@@ -530,7 +530,7 @@ namespace System.Linq.Expressions.Tests
             VerifyNullableNullShift(a, false, useInterpreter);
         }
 
-        private static void VerifyNullableShortShift(short? a, int b, bool left, bool useInterpreter)
+        private static void VerifyNullableShortShift(short? a, int b, bool left, CompilationType useInterpreter)
         {
             Expression<Func<short?>> e =
                 Expression.Lambda<Func<short?>>(
@@ -567,7 +567,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(unchecked((short?)(left ? a << b : a >> b)), f());
         }
 
-        private static void VerifyUIntShift(uint a, bool useInterpreter)
+        private static void VerifyUIntShift(uint a, CompilationType useInterpreter)
         {
             foreach (var b in s_shifts)
             {
@@ -579,7 +579,7 @@ namespace System.Linq.Expressions.Tests
             VerifyNullShift(a, false, useInterpreter);
         }
 
-        private static void VerifyUIntShift(uint a, int b, bool left, bool useInterpreter)
+        private static void VerifyUIntShift(uint a, int b, bool left, CompilationType useInterpreter)
         {
             Expression<Func<uint>> e =
                 Expression.Lambda<Func<uint>>(
@@ -616,7 +616,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(left ? a << b : a >> b, fn());
         }
 
-        private static void VerifyNullableUIntShift(uint? a, bool useInterpreter)
+        private static void VerifyNullableUIntShift(uint? a, CompilationType useInterpreter)
         {
             foreach (var b in s_shifts)
             {
@@ -628,7 +628,7 @@ namespace System.Linq.Expressions.Tests
             VerifyNullableNullShift(a, false, useInterpreter);
         }
 
-        private static void VerifyNullableUIntShift(uint? a, int b, bool left, bool useInterpreter)
+        private static void VerifyNullableUIntShift(uint? a, int b, bool left, CompilationType useInterpreter)
         {
             Expression<Func<uint?>> e =
                 Expression.Lambda<Func<uint?>>(
@@ -665,7 +665,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(left ? a << b : a >> b, f());
         }
 
-        private static void VerifyIntShift(int a, bool useInterpreter)
+        private static void VerifyIntShift(int a, CompilationType useInterpreter)
         {
             foreach (var b in s_shifts)
             {
@@ -677,7 +677,7 @@ namespace System.Linq.Expressions.Tests
             VerifyNullShift(a, false, useInterpreter);
         }
 
-        private static void VerifyIntShift(int a, int b, bool left, bool useInterpreter)
+        private static void VerifyIntShift(int a, int b, bool left, CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -714,7 +714,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(left ? a << b : a >> b, fn());
         }
 
-        private static void VerifyNullableIntShift(int? a, bool useInterpreter)
+        private static void VerifyNullableIntShift(int? a, CompilationType useInterpreter)
         {
             foreach (var b in s_shifts)
             {
@@ -726,7 +726,7 @@ namespace System.Linq.Expressions.Tests
             VerifyNullableNullShift(a, false, useInterpreter);
         }
 
-        private static void VerifyNullableIntShift(int? a, int b, bool left, bool useInterpreter)
+        private static void VerifyNullableIntShift(int? a, int b, bool left, CompilationType useInterpreter)
         {
             Expression<Func<int?>> e =
                 Expression.Lambda<Func<int?>>(
@@ -763,7 +763,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(left ? a << b : a >> b, f());
         }
 
-        private static void VerifyULongShift(ulong a, bool useInterpreter)
+        private static void VerifyULongShift(ulong a, CompilationType useInterpreter)
         {
             foreach (var b in s_shifts)
             {
@@ -775,7 +775,7 @@ namespace System.Linq.Expressions.Tests
             VerifyNullShift(a, false, useInterpreter);
         }
 
-        private static void VerifyULongShift(ulong a, int b, bool left, bool useInterpreter)
+        private static void VerifyULongShift(ulong a, int b, bool left, CompilationType useInterpreter)
         {
             Expression<Func<ulong>> e =
                 Expression.Lambda<Func<ulong>>(
@@ -812,7 +812,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(left ? a << b : a >> b, fn());
         }
 
-        private static void VerifyNullableULongShift(ulong? a, bool useInterpreter)
+        private static void VerifyNullableULongShift(ulong? a, CompilationType useInterpreter)
         {
             foreach (var b in s_shifts)
             {
@@ -824,7 +824,7 @@ namespace System.Linq.Expressions.Tests
             VerifyNullableNullShift(a, false, useInterpreter);
         }
 
-        private static void VerifyNullableULongShift(ulong? a, int b, bool left, bool useInterpreter)
+        private static void VerifyNullableULongShift(ulong? a, int b, bool left, CompilationType useInterpreter)
         {
             Expression<Func<ulong?>> e =
                 Expression.Lambda<Func<ulong?>>(
@@ -861,7 +861,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(left ? a << b : a >> b, f());
         }
 
-        private static void VerifyLongShift(long a, bool useInterpreter)
+        private static void VerifyLongShift(long a, CompilationType useInterpreter)
         {
             foreach (var b in s_shifts)
             {
@@ -873,7 +873,7 @@ namespace System.Linq.Expressions.Tests
             VerifyNullShift(a, false, useInterpreter);
         }
 
-        private static void VerifyLongShift(long a, int b, bool left, bool useInterpreter)
+        private static void VerifyLongShift(long a, int b, bool left, CompilationType useInterpreter)
         {
             Expression<Func<long>> e =
                 Expression.Lambda<Func<long>>(
@@ -910,7 +910,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(left ? a << b : a >> b, fn());
         }
 
-        private static void VerifyNullableLongShift(long? a, bool useInterpreter)
+        private static void VerifyNullableLongShift(long? a, CompilationType useInterpreter)
         {
             foreach (var b in s_shifts)
             {
@@ -922,7 +922,7 @@ namespace System.Linq.Expressions.Tests
             VerifyNullableNullShift(a, false, useInterpreter);
         }
 
-        private static void VerifyNullableLongShift(long? a, int b, bool left, bool useInterpreter)
+        private static void VerifyNullableLongShift(long? a, int b, bool left, CompilationType useInterpreter)
         {
             Expression<Func<long?>> e =
                 Expression.Lambda<Func<long?>>(
@@ -959,7 +959,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(left ? a << b : a >> b, f());
         }
 
-        private static void VerifyNullShift<T>(T a, bool left, bool useInterpreter) where T : struct
+        private static void VerifyNullShift<T>(T a, bool left, CompilationType useInterpreter) where T : struct
         {
             Expression<Func<T?>> e =
                 Expression.Lambda<Func<T?>>(
@@ -979,7 +979,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Null(f());
         }
 
-        private static void VerifyNullableNullShift<T>(T a, bool left, bool useInterpreter)
+        private static void VerifyNullableNullShift<T>(T a, bool left, CompilationType useInterpreter)
         {
             Expression<Func<T>> e =
                 Expression.Lambda<Func<T>>(

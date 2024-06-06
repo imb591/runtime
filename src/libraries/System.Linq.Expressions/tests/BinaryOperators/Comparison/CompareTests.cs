@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
     {
         public static IEnumerable<object[]> TestData()
         {
-            foreach (bool useInterpreter in new bool[] { true, false })
+            foreach (CompilationType useInterpreter in CompilationTypes.Types)
             {
                 yield return new object[] { new byte[] { 0, 1, byte.MaxValue }, useInterpreter };
                 yield return new object[] { new char[] { '\0', '\b', 'A', '\uffff' }, useInterpreter };
@@ -42,7 +42,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [MemberData(nameof(TestData))]
-        public static void GreaterThanOrEqual(Array array, bool useInterpreter)
+        public static void GreaterThanOrEqual(Array array, CompilationType useInterpreter)
         {
             Type type = array.GetType().GetElementType();
             for (int i = 0; i < array.Length; i++)
@@ -59,7 +59,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [MemberData(nameof(TestData))]
-        public static void GreaterThan(Array array, bool useInterpreter)
+        public static void GreaterThan(Array array, CompilationType useInterpreter)
         {
             Type type = array.GetType().GetElementType();
             for (int i = 0; i < array.Length; i++)
@@ -76,7 +76,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [MemberData(nameof(TestData))]
-        public static void LessThanOrEqual(Array array, bool useInterpreter)
+        public static void LessThanOrEqual(Array array, CompilationType useInterpreter)
         {
             Type type = array.GetType().GetElementType();
             for (int i = 0; i < array.Length; i++)
@@ -93,7 +93,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [MemberData(nameof(TestData))]
-        public static void LessThan(Array array, bool useInterpreter)
+        public static void LessThan(Array array, CompilationType useInterpreter)
         {
             Type type = array.GetType().GetElementType();
             for (int i = 0; i < array.Length; i++)

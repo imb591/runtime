@@ -11,7 +11,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckBytePowerTest(bool useInterpreter)
+        public static void CheckBytePowerTest(CompilationType useInterpreter)
         {
             byte[] array = new byte[] { 0, 1, byte.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -24,7 +24,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckSBytePowerTest(bool useInterpreter)
+        public static void CheckSBytePowerTest(CompilationType useInterpreter)
         {
             sbyte[] array = new sbyte[] { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -37,7 +37,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUShortPowerTest(bool useInterpreter)
+        public static void CheckUShortPowerTest(CompilationType useInterpreter)
         {
             ushort[] array = new ushort[] { 0, 1, ushort.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -50,7 +50,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckShortPowerTest(bool useInterpreter)
+        public static void CheckShortPowerTest(CompilationType useInterpreter)
         {
             short[] array = new short[] { 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -63,7 +63,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUIntPowerTest(bool useInterpreter)
+        public static void CheckUIntPowerTest(CompilationType useInterpreter)
         {
             uint[] array = new uint[] { 0, 1, uint.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -76,7 +76,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckIntPowerTest(bool useInterpreter)
+        public static void CheckIntPowerTest(CompilationType useInterpreter)
         {
             int[] array = new int[] { 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -89,7 +89,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckULongPowerTest(bool useInterpreter)
+        public static void CheckULongPowerTest(CompilationType useInterpreter)
         {
             ulong[] array = new ulong[] { 0, 1, ulong.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -102,7 +102,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLongPowerTest(bool useInterpreter)
+        public static void CheckLongPowerTest(CompilationType useInterpreter)
         {
             long[] array = new long[] { 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -115,7 +115,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckFloatPowerTest(bool useInterpreter)
+        public static void CheckFloatPowerTest(CompilationType useInterpreter)
         {
             float[] array = new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
             for (int i = 0; i < array.Length; i++)
@@ -128,7 +128,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckDoublePowerTest(bool useInterpreter)
+        public static void CheckDoublePowerTest(CompilationType useInterpreter)
         {
             double[] array = new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
             for (int i = 0; i < array.Length; i++)
@@ -141,7 +141,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckDecimalPowerTest(bool useInterpreter)
+        public static void CheckDecimalPowerTest(CompilationType useInterpreter)
         {
             decimal[] array = new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
             for (int i = 0; i < array.Length; i++)
@@ -154,7 +154,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckCharPowerTest(bool useInterpreter)
+        public static void CheckCharPowerTest(CompilationType useInterpreter)
         {
             char[] array = new char[] { '\0', '\b', 'A', '\uffff' };
             for (int i = 0; i < array.Length; i++)
@@ -170,7 +170,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyBytePower(byte a, byte b, bool useInterpreter)
+        private static void VerifyBytePower(byte a, byte b, CompilationType useInterpreter)
         {
             Expression<Func<byte>> e =
                 Expression.Lambda<Func<byte>>(
@@ -184,7 +184,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(PowerByte(a, b), f());
         }
 
-        private static void VerifySBytePower(sbyte a, sbyte b, bool useInterpreter)
+        private static void VerifySBytePower(sbyte a, sbyte b, CompilationType useInterpreter)
         {
             Expression<Func<sbyte>> e =
                 Expression.Lambda<Func<sbyte>>(
@@ -198,7 +198,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(PowerSByte(a, b), f());
         }
 
-        private static void VerifyUShortPower(ushort a, ushort b, bool useInterpreter)
+        private static void VerifyUShortPower(ushort a, ushort b, CompilationType useInterpreter)
         {
             Expression<Func<ushort>> e =
                 Expression.Lambda<Func<ushort>>(
@@ -212,7 +212,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(PowerUShort(a, b), f());
         }
 
-        private static void VerifyShortPower(short a, short b, bool useInterpreter)
+        private static void VerifyShortPower(short a, short b, CompilationType useInterpreter)
         {
             Expression<Func<short>> e =
                 Expression.Lambda<Func<short>>(
@@ -226,7 +226,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(PowerShort(a, b), f());
         }
 
-        private static void VerifyUIntPower(uint a, uint b, bool useInterpreter)
+        private static void VerifyUIntPower(uint a, uint b, CompilationType useInterpreter)
         {
             Expression<Func<uint>> e =
                 Expression.Lambda<Func<uint>>(
@@ -240,7 +240,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(PowerUInt(a, b), f());
         }
 
-        private static void VerifyIntPower(int a, int b, bool useInterpreter)
+        private static void VerifyIntPower(int a, int b, CompilationType useInterpreter)
         {
             Expression<Func<int>> e =
                 Expression.Lambda<Func<int>>(
@@ -254,7 +254,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(PowerInt(a, b), f());
         }
 
-        private static void VerifyULongPower(ulong a, ulong b, bool useInterpreter)
+        private static void VerifyULongPower(ulong a, ulong b, CompilationType useInterpreter)
         {
             Expression<Func<ulong>> e =
                 Expression.Lambda<Func<ulong>>(
@@ -268,7 +268,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(PowerULong(a, b), f());
         }
 
-        private static void VerifyLongPower(long a, long b, bool useInterpreter)
+        private static void VerifyLongPower(long a, long b, CompilationType useInterpreter)
         {
             Expression<Func<long>> e =
                 Expression.Lambda<Func<long>>(
@@ -282,7 +282,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(PowerLong(a, b), f());
         }
 
-        private static void VerifyFloatPower(float a, float b, bool useInterpreter)
+        private static void VerifyFloatPower(float a, float b, CompilationType useInterpreter)
         {
             Expression<Func<float>> e =
                 Expression.Lambda<Func<float>>(
@@ -296,7 +296,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(PowerFloat(a, b), f());
         }
 
-        private static void VerifyDoublePower(double a, double b, bool useInterpreter)
+        private static void VerifyDoublePower(double a, double b, CompilationType useInterpreter)
         {
             Expression<Func<double>> e =
                 Expression.Lambda<Func<double>>(
@@ -310,7 +310,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(PowerDouble(a, b), f());
         }
 
-        private static void VerifyDecimalPower(decimal a, decimal b, bool useInterpreter)
+        private static void VerifyDecimalPower(decimal a, decimal b, CompilationType useInterpreter)
         {
             Expression<Func<decimal>> e =
                 Expression.Lambda<Func<decimal>>(
@@ -335,7 +335,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyCharPower(char a, char b, bool useInterpreter)
+        private static void VerifyCharPower(char a, char b, CompilationType useInterpreter)
         {
             Expression<Func<char>> e =
                 Expression.Lambda<Func<char>>(

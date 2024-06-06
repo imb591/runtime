@@ -11,7 +11,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3196, "https://github.com/dotnet/runtime/issues/15182")]
-        public static void CheckUnaryIsFalseBoolTest(bool useInterpreter)
+        public static void CheckUnaryIsFalseBoolTest(CompilationType useInterpreter)
         {
             bool[] values = new bool[] { false, true };
             for (int i = 0; i < values.Length; i++)
@@ -31,7 +31,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyIsFalseBool(bool value, bool useInterpreter)
+        private static void VerifyIsFalseBool(bool value, CompilationType useInterpreter)
         {
             Expression<Func<bool>> e =
                 Expression.Lambda<Func<bool>>(
@@ -50,7 +50,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(Truthinesses))]
-        public static void VerifyMakeUnaryExplicitMethodIsFalseBool(Truthiness argument, bool expected, bool useInterpreter)
+        public static void VerifyMakeUnaryExplicitMethodIsFalseBool(Truthiness argument, bool expected, CompilationType useInterpreter)
         {
             Expression<Func<bool>> e =
                 Expression.Lambda<Func<bool>>(
@@ -61,7 +61,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(Truthinesses))]
-        public static void VerifyMakeUnaryDeduceMethodIsFalseBool(Truthiness argument, bool expected, bool useInterpreter)
+        public static void VerifyMakeUnaryDeduceMethodIsFalseBool(Truthiness argument, bool expected, CompilationType useInterpreter)
         {
             Expression<Func<bool>> e =
                 Expression.Lambda<Func<bool>>(

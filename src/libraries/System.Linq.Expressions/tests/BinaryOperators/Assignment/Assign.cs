@@ -167,7 +167,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void SimpleAssignment(bool useInterpreter)
+        public void SimpleAssignment(CompilationType useInterpreter)
         {
             ParameterExpression variable = Expression.Variable(typeof(int));
             LabelTarget target = Expression.Label(typeof(int));
@@ -181,7 +181,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void AssignmentHasValueItself(bool useInterpreter)
+        public void AssignmentHasValueItself(CompilationType useInterpreter)
         {
             ParameterExpression variable = Expression.Variable(typeof(int));
             Expression exp = Expression.Block(
@@ -192,7 +192,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, PerCompilationType(nameof(MemberAssignments))]
-        public void AssignToMember(Expression memberExp, object value, bool useInterpreter)
+        public void AssignToMember(Expression memberExp, object value, CompilationType useInterpreter)
         {
             Func<bool> func = Expression.Lambda<Func<bool>>(
                 Expression.Block(
@@ -237,7 +237,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public void ReferenceAssignable(bool useInterpreter)
+        public void ReferenceAssignable(CompilationType useInterpreter)
         {
             ParameterExpression variable = Expression.Variable(typeof(object));
             LabelTarget target = Expression.Label(typeof(object));
@@ -284,7 +284,7 @@ namespace System.Linq.Expressions.Tests
         [Theory]
         [ClassData(typeof(CompilationTypes))]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/19094")]
-        public static void Left_ValueTypeContainsChildTryExpression(bool useInterpreter)
+        public static void Left_ValueTypeContainsChildTryExpression(CompilationType useInterpreter)
         {
             Expression tryExpression = Expression.TryFinally(
                 Expression.Constant(1),
@@ -305,7 +305,7 @@ namespace System.Linq.Expressions.Tests
         [Theory]
         [ClassData(typeof(CompilationTypes))]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/19094")]
-        public static void ValueTypeIndexAssign(bool useInterpreter)
+        public static void ValueTypeIndexAssign(CompilationType useInterpreter)
         {
             Expression index = Expression.Property(Expression.Constant(new StructWithPropertiesAndFields()), typeof(StructWithPropertiesAndFields).GetProperty("Item"), new Expression[] { Expression.Constant(1) });
 
@@ -321,7 +321,7 @@ namespace System.Linq.Expressions.Tests
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
-        public static void Left_ReferenceTypeContainsChildTryExpression_Compiles(bool useInterpreter)
+        public static void Left_ReferenceTypeContainsChildTryExpression_Compiles(CompilationType useInterpreter)
         {
             Expression tryExpression = Expression.TryFinally(
                 Expression.Constant(1),

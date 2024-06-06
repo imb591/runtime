@@ -10,7 +10,7 @@ namespace System.Linq.Expressions.Tests
         #region Test methods
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3196, "https://github.com/dotnet/runtime/issues/15182")]
-        public static void CheckUnaryArithmeticUnaryPlusNullableShortTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticUnaryPlusNullableShortTest(CompilationType useInterpreter)
         {
             short?[] values = new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -20,7 +20,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3196, "https://github.com/dotnet/runtime/issues/15182")]
-        public static void CheckUnaryArithmeticUnaryPlusNullableUShortTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticUnaryPlusNullableUShortTest(CompilationType useInterpreter)
         {
             ushort?[] values = new ushort?[] { null, 0, 1, ushort.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -30,7 +30,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3196, "https://github.com/dotnet/runtime/issues/15182")]
-        public static void CheckUnaryArithmeticUnaryPlusNullableIntTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticUnaryPlusNullableIntTest(CompilationType useInterpreter)
         {
             int?[] values = new int?[] { null, 0, 1, -1, int.MinValue, int.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -40,7 +40,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3196, "https://github.com/dotnet/runtime/issues/15182")]
-        public static void CheckUnaryArithmeticUnaryPlusNullableUIntTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticUnaryPlusNullableUIntTest(CompilationType useInterpreter)
         {
             uint?[] values = new uint?[] { null, 0, 1, uint.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -50,7 +50,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3196, "https://github.com/dotnet/runtime/issues/15182")]
-        public static void CheckUnaryArithmeticUnaryPlusNullableLongTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticUnaryPlusNullableLongTest(CompilationType useInterpreter)
         {
             long?[] values = new long?[] { null, 0, 1, -1, long.MinValue, long.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -60,7 +60,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3196, "https://github.com/dotnet/runtime/issues/15182")]
-        public static void CheckUnaryArithmeticUnaryPlusNullableULongTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticUnaryPlusNullableULongTest(CompilationType useInterpreter)
         {
             ulong?[] values = new ulong?[] { null, 0, 1, ulong.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -70,7 +70,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3196, "https://github.com/dotnet/runtime/issues/15182")]
-        public static void CheckUnaryArithmeticUnaryPlusNullableFloatTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticUnaryPlusNullableFloatTest(CompilationType useInterpreter)
         {
             float?[] values = new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -80,7 +80,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3196, "https://github.com/dotnet/runtime/issues/15182")]
-        public static void CheckUnaryArithmeticUnaryPlusNullableDoubleTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticUnaryPlusNullableDoubleTest(CompilationType useInterpreter)
         {
             double?[] values = new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
             for (int i = 0; i < values.Length; i++)
@@ -90,7 +90,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))] //[WorkItem(3196, "https://github.com/dotnet/runtime/issues/15182")]
-        public static void CheckUnaryArithmeticUnaryPlusNullableDecimalTest(bool useInterpreter)
+        public static void CheckUnaryArithmeticUnaryPlusNullableDecimalTest(CompilationType useInterpreter)
         {
             decimal?[] values = new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
             for (int i = 0; i < values.Length; i++)
@@ -103,7 +103,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyArithmeticUnaryPlusNullableShort(short? value, bool useInterpreter)
+        private static void VerifyArithmeticUnaryPlusNullableShort(short? value, CompilationType useInterpreter)
         {
             Expression<Func<short?>> e =
                 Expression.Lambda<Func<short?>>(
@@ -113,7 +113,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((short?)(+value), f());
         }
 
-        private static void VerifyArithmeticUnaryPlusNullableUShort(ushort? value, bool useInterpreter)
+        private static void VerifyArithmeticUnaryPlusNullableUShort(ushort? value, CompilationType useInterpreter)
         {
             Expression<Func<ushort?>> e =
                 Expression.Lambda<Func<ushort?>>(
@@ -123,7 +123,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((ushort?)(+value), f());
         }
 
-        private static void VerifyArithmeticUnaryPlusNullableInt(int? value, bool useInterpreter)
+        private static void VerifyArithmeticUnaryPlusNullableInt(int? value, CompilationType useInterpreter)
         {
             Expression<Func<int?>> e =
                 Expression.Lambda<Func<int?>>(
@@ -133,7 +133,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((int?)(+value), f());
         }
 
-        private static void VerifyArithmeticUnaryPlusNullableUInt(uint? value, bool useInterpreter)
+        private static void VerifyArithmeticUnaryPlusNullableUInt(uint? value, CompilationType useInterpreter)
         {
             Expression<Func<uint?>> e =
                 Expression.Lambda<Func<uint?>>(
@@ -143,7 +143,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((uint?)(+value), f());
         }
 
-        private static void VerifyArithmeticUnaryPlusNullableLong(long? value, bool useInterpreter)
+        private static void VerifyArithmeticUnaryPlusNullableLong(long? value, CompilationType useInterpreter)
         {
             Expression<Func<long?>> e =
                 Expression.Lambda<Func<long?>>(
@@ -153,7 +153,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((long?)(+value), f());
         }
 
-        private static void VerifyArithmeticUnaryPlusNullableULong(ulong? value, bool useInterpreter)
+        private static void VerifyArithmeticUnaryPlusNullableULong(ulong? value, CompilationType useInterpreter)
         {
             Expression<Func<ulong?>> e =
                 Expression.Lambda<Func<ulong?>>(
@@ -163,7 +163,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((ulong?)(+value), f());
         }
 
-        private static void VerifyArithmeticUnaryPlusNullableFloat(float? value, bool useInterpreter)
+        private static void VerifyArithmeticUnaryPlusNullableFloat(float? value, CompilationType useInterpreter)
         {
             Expression<Func<float?>> e =
                 Expression.Lambda<Func<float?>>(
@@ -173,7 +173,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((float?)(+value), f());
         }
 
-        private static void VerifyArithmeticUnaryPlusNullableDouble(double? value, bool useInterpreter)
+        private static void VerifyArithmeticUnaryPlusNullableDouble(double? value, CompilationType useInterpreter)
         {
             Expression<Func<double?>> e =
                 Expression.Lambda<Func<double?>>(
@@ -183,7 +183,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal((double?)(+value), f());
         }
 
-        private static void VerifyArithmeticUnaryPlusNullableDecimal(decimal? value, bool useInterpreter)
+        private static void VerifyArithmeticUnaryPlusNullableDecimal(decimal? value, CompilationType useInterpreter)
         {
             Expression<Func<decimal?>> e =
                 Expression.Lambda<Func<decimal?>>(

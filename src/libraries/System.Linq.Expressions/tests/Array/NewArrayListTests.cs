@@ -13,7 +13,7 @@ namespace System.Linq.Expressions.Tests
         #region Tests
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckBoolArrayListTest(bool useInterpreter)
+        public static void CheckBoolArrayListTest(CompilationType useInterpreter)
         {
             bool[][] array = new bool[][]
                 {
@@ -39,7 +39,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckByteArrayListTest(bool useInterpreter)
+        public static void CheckByteArrayListTest(CompilationType useInterpreter)
         {
             byte[][] array = new byte[][]
                 {
@@ -65,7 +65,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckCustomArrayListTest(bool useInterpreter)
+        public static void CheckCustomArrayListTest(CompilationType useInterpreter)
         {
             C[][] array = new C[][]
                 {
@@ -91,7 +91,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckCharArrayListTest(bool useInterpreter)
+        public static void CheckCharArrayListTest(CompilationType useInterpreter)
         {
             char[][] array = new char[][]
                 {
@@ -117,7 +117,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckCustom2ArrayListTest(bool useInterpreter)
+        public static void CheckCustom2ArrayListTest(CompilationType useInterpreter)
         {
             D[][] array = new D[][]
                 {
@@ -143,7 +143,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckDecimalArrayListTest(bool useInterpreter)
+        public static void CheckDecimalArrayListTest(CompilationType useInterpreter)
         {
             decimal[][] array = new decimal[][]
                 {
@@ -169,7 +169,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckDelegateArrayListTest(bool useInterpreter)
+        public static void CheckDelegateArrayListTest(CompilationType useInterpreter)
         {
             Delegate[][] array = new Delegate[][]
                 {
@@ -195,7 +195,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckDoubleArrayListTest(bool useInterpreter)
+        public static void CheckDoubleArrayListTest(CompilationType useInterpreter)
         {
             double[][] array = new double[][]
                 {
@@ -221,7 +221,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckEnumArrayListTest(bool useInterpreter)
+        public static void CheckEnumArrayListTest(CompilationType useInterpreter)
         {
             E[][] array = new E[][]
                 {
@@ -247,7 +247,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckEnumLongArrayListTest(bool useInterpreter)
+        public static void CheckEnumLongArrayListTest(CompilationType useInterpreter)
         {
             El[][] array = new El[][]
                 {
@@ -273,7 +273,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckFloatArrayListTest(bool useInterpreter)
+        public static void CheckFloatArrayListTest(CompilationType useInterpreter)
         {
             float[][] array = new float[][]
                 {
@@ -299,7 +299,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckFuncArrayListTest(bool useInterpreter)
+        public static void CheckFuncArrayListTest(CompilationType useInterpreter)
         {
             Func<object>[][] array = new Func<object>[][]
                 {
@@ -325,7 +325,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckInterfaceArrayListTest(bool useInterpreter)
+        public static void CheckInterfaceArrayListTest(CompilationType useInterpreter)
         {
             I[][] array = new I[][]
                 {
@@ -351,7 +351,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckIEquatableCustomArrayListTest(bool useInterpreter)
+        public static void CheckIEquatableCustomArrayListTest(CompilationType useInterpreter)
         {
             IEquatable<C>[][] array = new IEquatable<C>[][]
                 {
@@ -377,7 +377,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckIEquatableCustom2ArrayListTest(bool useInterpreter)
+        public static void CheckIEquatableCustom2ArrayListTest(CompilationType useInterpreter)
         {
             IEquatable<D>[][] array = new IEquatable<D>[][]
                 {
@@ -403,7 +403,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckIntArrayListTest(bool useInterpreter)
+        public static void CheckIntArrayListTest(CompilationType useInterpreter)
         {
             int[][] array = new int[][]
                 {
@@ -429,7 +429,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckLongArrayListTest(bool useInterpreter)
+        public static void CheckLongArrayListTest(CompilationType useInterpreter)
         {
             long[][] array = new long[][]
                 {
@@ -455,7 +455,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckObjectArrayListTest(bool useInterpreter)
+        public static void CheckObjectArrayListTest(CompilationType useInterpreter)
         {
             object[][] array = new object[][]
                 {
@@ -481,7 +481,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckStructArrayListTest(bool useInterpreter)
+        public static void CheckStructArrayListTest(CompilationType useInterpreter)
         {
             S[][] array = new S[][]
                 {
@@ -507,7 +507,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckSByteArrayListTest(bool useInterpreter)
+        public static void CheckSByteArrayListTest(CompilationType useInterpreter)
         {
             sbyte[][] array = new sbyte[][]
                 {
@@ -533,7 +533,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckStructWithStringArrayListTest(bool useInterpreter)
+        public static void CheckStructWithStringArrayListTest(CompilationType useInterpreter)
         {
             Sc[][] array = new Sc[][]
                 {
@@ -559,7 +559,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckStructWithStringAndFieldArrayListTest(bool useInterpreter)
+        public static void CheckStructWithStringAndFieldArrayListTest(CompilationType useInterpreter)
         {
             Scs[][] array = new Scs[][]
                 {
@@ -585,7 +585,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckShortArrayListTest(bool useInterpreter)
+        public static void CheckShortArrayListTest(CompilationType useInterpreter)
         {
             short[][] array = new short[][]
                 {
@@ -611,7 +611,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckStructWithTwoValuesArrayListTest(bool useInterpreter)
+        public static void CheckStructWithTwoValuesArrayListTest(CompilationType useInterpreter)
         {
             Sp[][] array = new Sp[][]
                 {
@@ -637,7 +637,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckStructWithValueArrayListTest(bool useInterpreter)
+        public static void CheckStructWithValueArrayListTest(CompilationType useInterpreter)
         {
             Ss[][] array = new Ss[][]
                 {
@@ -663,7 +663,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckStringArrayListTest(bool useInterpreter)
+        public static void CheckStringArrayListTest(CompilationType useInterpreter)
         {
             string[][] array = new string[][]
                 {
@@ -689,7 +689,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUIntArrayListTest(bool useInterpreter)
+        public static void CheckUIntArrayListTest(CompilationType useInterpreter)
         {
             uint[][] array = new uint[][]
                 {
@@ -715,7 +715,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckULongArrayListTest(bool useInterpreter)
+        public static void CheckULongArrayListTest(CompilationType useInterpreter)
         {
             ulong[][] array = new ulong[][]
                 {
@@ -741,7 +741,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckUShortArrayListTest(bool useInterpreter)
+        public static void CheckUShortArrayListTest(CompilationType useInterpreter)
         {
             ushort[][] array = new ushort[][]
                 {
@@ -767,85 +767,85 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericCustomArrayListTest(bool useInterpreter)
+        public static void CheckGenericCustomArrayListTest(CompilationType useInterpreter)
         {
             CheckGenericArrayListHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericEnumArrayListTest(bool useInterpreter)
+        public static void CheckGenericEnumArrayListTest(CompilationType useInterpreter)
         {
             CheckGenericArrayListHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericObjectArrayListTest(bool useInterpreter)
+        public static void CheckGenericObjectArrayListTest(CompilationType useInterpreter)
         {
             CheckGenericArrayListHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericStructArrayListTest(bool useInterpreter)
+        public static void CheckGenericStructArrayListTest(CompilationType useInterpreter)
         {
             CheckGenericArrayListHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericStructWithStringAndFieldArrayListTest(bool useInterpreter)
+        public static void CheckGenericStructWithStringAndFieldArrayListTest(CompilationType useInterpreter)
         {
             CheckGenericArrayListHelper<Scs>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericCustomWithClassRestrictionArrayListTest(bool useInterpreter)
+        public static void CheckGenericCustomWithClassRestrictionArrayListTest(CompilationType useInterpreter)
         {
             CheckGenericWithClassRestrictionArrayListHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericObjectWithClassRestrictionArrayListTest(bool useInterpreter)
+        public static void CheckGenericObjectWithClassRestrictionArrayListTest(CompilationType useInterpreter)
         {
             CheckGenericWithClassRestrictionArrayListHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericCustomWithSubClassRestrictionArrayListTest(bool useInterpreter)
+        public static void CheckGenericCustomWithSubClassRestrictionArrayListTest(CompilationType useInterpreter)
         {
             CheckGenericWithSubClassRestrictionArrayListHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericCustomWithClassAndNewRestrictionArrayListTest(bool useInterpreter)
+        public static void CheckGenericCustomWithClassAndNewRestrictionArrayListTest(CompilationType useInterpreter)
         {
             CheckGenericWithClassAndNewRestrictionArrayListHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericObjectWithClassAndNewRestrictionArrayListTest(bool useInterpreter)
+        public static void CheckGenericObjectWithClassAndNewRestrictionArrayListTest(CompilationType useInterpreter)
         {
             CheckGenericWithClassAndNewRestrictionArrayListHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericCustomWithSubClassAndNewRestrictionArrayListTest(bool useInterpreter)
+        public static void CheckGenericCustomWithSubClassAndNewRestrictionArrayListTest(CompilationType useInterpreter)
         {
             CheckGenericWithSubClassAndNewRestrictionArrayListHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericEnumWithStructRestrictionArrayListTest(bool useInterpreter)
+        public static void CheckGenericEnumWithStructRestrictionArrayListTest(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionArrayListHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericStructWithStructRestrictionArrayListTest(bool useInterpreter)
+        public static void CheckGenericStructWithStructRestrictionArrayListTest(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionArrayListHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericStructWithStringAndFieldWithStructRestrictionArrayListTest(bool useInterpreter)
+        public static void CheckGenericStructWithStringAndFieldWithStructRestrictionArrayListTest(CompilationType useInterpreter)
         {
             CheckGenericWithStructRestrictionArrayListHelper<Scs>(useInterpreter);
         }
@@ -954,7 +954,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericArrayListHelper<T>(bool useInterpreter)
+        private static void CheckGenericArrayListHelper<T>(CompilationType useInterpreter)
         {
             T[][] array = new T[][]
                 {
@@ -979,7 +979,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithClassRestrictionArrayListHelper<Tc>(bool useInterpreter) where Tc : class
+        private static void CheckGenericWithClassRestrictionArrayListHelper<Tc>(CompilationType useInterpreter) where Tc : class
         {
             Tc[][] array = new Tc[][]
                 {
@@ -1004,7 +1004,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithSubClassRestrictionArrayListHelper<TC>(bool useInterpreter) where TC : C
+        private static void CheckGenericWithSubClassRestrictionArrayListHelper<TC>(CompilationType useInterpreter) where TC : C
         {
             TC[][] array = new TC[][]
                 {
@@ -1029,7 +1029,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithClassAndNewRestrictionArrayListHelper<Tcn>(bool useInterpreter) where Tcn : class, new()
+        private static void CheckGenericWithClassAndNewRestrictionArrayListHelper<Tcn>(CompilationType useInterpreter) where Tcn : class, new()
         {
             Tcn[][] array = new Tcn[][]
                 {
@@ -1054,7 +1054,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithSubClassAndNewRestrictionArrayListHelper<TCn>(bool useInterpreter) where TCn : C, new()
+        private static void CheckGenericWithSubClassAndNewRestrictionArrayListHelper<TCn>(CompilationType useInterpreter) where TCn : C, new()
         {
             TCn[][] array = new TCn[][]
                 {
@@ -1079,7 +1079,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithStructRestrictionArrayListHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckGenericWithStructRestrictionArrayListHelper<Ts>(CompilationType useInterpreter) where Ts : struct
         {
             Ts[][] array = new Ts[][]
                 {
@@ -1108,7 +1108,7 @@ namespace System.Linq.Expressions.Tests
 
         #region  verifiers
 
-        private static void VerifyBoolArrayList(bool[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyBoolArrayList(bool[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<bool[]>> e =
                 Expression.Lambda<Func<bool[]>>(
@@ -1123,7 +1123,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyByteArrayList(byte[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyByteArrayList(byte[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<byte[]>> e =
                 Expression.Lambda<Func<byte[]>>(
@@ -1138,7 +1138,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyCustomArrayList(C[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyCustomArrayList(C[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<C[]>> e =
                 Expression.Lambda<Func<C[]>>(
@@ -1153,7 +1153,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyCharArrayList(char[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyCharArrayList(char[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<char[]>> e =
                 Expression.Lambda<Func<char[]>>(
@@ -1168,7 +1168,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyCustom2ArrayList(D[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyCustom2ArrayList(D[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<D[]>> e =
                 Expression.Lambda<Func<D[]>>(
@@ -1183,7 +1183,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyDecimalArrayList(decimal[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyDecimalArrayList(decimal[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<decimal[]>> e =
                 Expression.Lambda<Func<decimal[]>>(
@@ -1198,7 +1198,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyDelegateArrayList(Delegate[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyDelegateArrayList(Delegate[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<Delegate[]>> e =
                 Expression.Lambda<Func<Delegate[]>>(
@@ -1213,7 +1213,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyDoubleArrayList(double[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyDoubleArrayList(double[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<double[]>> e =
                 Expression.Lambda<Func<double[]>>(
@@ -1228,7 +1228,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyEnumArrayList(E[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyEnumArrayList(E[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<E[]>> e =
                 Expression.Lambda<Func<E[]>>(
@@ -1243,7 +1243,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyEnumLongArrayList(El[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyEnumLongArrayList(El[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<El[]>> e =
                 Expression.Lambda<Func<El[]>>(
@@ -1258,7 +1258,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyFloatArrayList(float[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyFloatArrayList(float[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<float[]>> e =
                 Expression.Lambda<Func<float[]>>(
@@ -1273,7 +1273,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyFuncArrayList(Func<object>[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyFuncArrayList(Func<object>[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<Func<object>[]>> e =
                 Expression.Lambda<Func<Func<object>[]>>(
@@ -1288,7 +1288,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyInterfaceArrayList(I[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyInterfaceArrayList(I[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<I[]>> e =
                 Expression.Lambda<Func<I[]>>(
@@ -1303,7 +1303,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyIEquatableCustomArrayList(IEquatable<C>[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyIEquatableCustomArrayList(IEquatable<C>[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<IEquatable<C>[]>> e =
                 Expression.Lambda<Func<IEquatable<C>[]>>(
@@ -1318,7 +1318,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyIEquatableCustom2ArrayList(IEquatable<D>[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyIEquatableCustom2ArrayList(IEquatable<D>[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<IEquatable<D>[]>> e =
                 Expression.Lambda<Func<IEquatable<D>[]>>(
@@ -1333,7 +1333,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyIntArrayList(int[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyIntArrayList(int[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<int[]>> e =
                 Expression.Lambda<Func<int[]>>(
@@ -1348,7 +1348,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyLongArrayList(long[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyLongArrayList(long[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<long[]>> e =
                 Expression.Lambda<Func<long[]>>(
@@ -1363,7 +1363,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyObjectArrayList(object[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyObjectArrayList(object[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<object[]>> e =
                 Expression.Lambda<Func<object[]>>(
@@ -1378,7 +1378,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyStructArrayList(S[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyStructArrayList(S[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<S[]>> e =
                 Expression.Lambda<Func<S[]>>(
@@ -1393,7 +1393,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifySByteArrayList(sbyte[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifySByteArrayList(sbyte[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<sbyte[]>> e =
                 Expression.Lambda<Func<sbyte[]>>(
@@ -1408,7 +1408,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyStructWithStringArrayList(Sc[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyStructWithStringArrayList(Sc[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<Sc[]>> e =
                 Expression.Lambda<Func<Sc[]>>(
@@ -1423,7 +1423,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyStructWithStringAndFieldArrayList(Scs[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyStructWithStringAndFieldArrayList(Scs[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<Scs[]>> e =
                 Expression.Lambda<Func<Scs[]>>(
@@ -1438,7 +1438,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyShortArrayList(short[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyShortArrayList(short[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<short[]>> e =
                 Expression.Lambda<Func<short[]>>(
@@ -1453,7 +1453,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyStructWithTwoValuesArrayList(Sp[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyStructWithTwoValuesArrayList(Sp[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<Sp[]>> e =
                 Expression.Lambda<Func<Sp[]>>(
@@ -1468,7 +1468,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyStructWithValueArrayList(Ss[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyStructWithValueArrayList(Ss[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<Ss[]>> e =
                 Expression.Lambda<Func<Ss[]>>(
@@ -1483,7 +1483,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyStringArrayList(string[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyStringArrayList(string[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<string[]>> e =
                 Expression.Lambda<Func<string[]>>(
@@ -1498,7 +1498,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyUIntArrayList(uint[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyUIntArrayList(uint[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<uint[]>> e =
                 Expression.Lambda<Func<uint[]>>(
@@ -1513,7 +1513,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyULongArrayList(ulong[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyULongArrayList(ulong[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<ulong[]>> e =
                 Expression.Lambda<Func<ulong[]>>(
@@ -1528,7 +1528,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyUShortArrayList(ushort[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyUShortArrayList(ushort[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<ushort[]>> e =
                 Expression.Lambda<Func<ushort[]>>(
@@ -1543,7 +1543,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyGenericArrayList<T>(T[] val, Expression[] exprs, bool useInterpreter)
+        private static void VerifyGenericArrayList<T>(T[] val, Expression[] exprs, CompilationType useInterpreter)
         {
             Expression<Func<T[]>> e =
                 Expression.Lambda<Func<T[]>>(
@@ -1558,7 +1558,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyGenericWithClassRestrictionArrayList<Tc>(Tc[] val, Expression[] exprs, bool useInterpreter) where Tc : class
+        private static void VerifyGenericWithClassRestrictionArrayList<Tc>(Tc[] val, Expression[] exprs, CompilationType useInterpreter) where Tc : class
         {
             Expression<Func<Tc[]>> e =
                 Expression.Lambda<Func<Tc[]>>(
@@ -1573,7 +1573,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyGenericWithSubClassRestrictionArrayList<TC>(TC[] val, Expression[] exprs, bool useInterpreter) where TC : C
+        private static void VerifyGenericWithSubClassRestrictionArrayList<TC>(TC[] val, Expression[] exprs, CompilationType useInterpreter) where TC : C
         {
             Expression<Func<TC[]>> e =
                 Expression.Lambda<Func<TC[]>>(
@@ -1588,7 +1588,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyGenericWithClassAndNewRestrictionArrayList<Tcn>(Tcn[] val, Expression[] exprs, bool useInterpreter) where Tcn : class, new()
+        private static void VerifyGenericWithClassAndNewRestrictionArrayList<Tcn>(Tcn[] val, Expression[] exprs, CompilationType useInterpreter) where Tcn : class, new()
         {
             Expression<Func<Tcn[]>> e =
                 Expression.Lambda<Func<Tcn[]>>(
@@ -1603,7 +1603,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyGenericWithSubClassAndNewRestrictionArrayList<TCn>(TCn[] val, Expression[] exprs, bool useInterpreter) where TCn : C, new()
+        private static void VerifyGenericWithSubClassAndNewRestrictionArrayList<TCn>(TCn[] val, Expression[] exprs, CompilationType useInterpreter) where TCn : C, new()
         {
             Expression<Func<TCn[]>> e =
                 Expression.Lambda<Func<TCn[]>>(
@@ -1618,7 +1618,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void VerifyGenericWithStructRestrictionArrayList<Ts>(Ts[] val, Expression[] exprs, bool useInterpreter) where Ts : struct
+        private static void VerifyGenericWithStructRestrictionArrayList<Ts>(Ts[] val, Expression[] exprs, CompilationType useInterpreter) where Ts : struct
         {
             Expression<Func<Ts[]>> e =
                 Expression.Lambda<Func<Ts[]>>(
@@ -1693,7 +1693,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void AutoQuote(bool useInterpreter)
+        public static void AutoQuote(CompilationType useInterpreter)
         {
             Expression<Func<int, int>> doubleIt = x => x * 2;
             Expression<Func<Expression<Func<int, int>>[]>> quoted = Expression.Lambda<Func<Expression<Func<int, int>>[]>>(
@@ -1718,7 +1718,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void NestedCompile(bool useInterpreter)
+        public static void NestedCompile(CompilationType useInterpreter)
         {
             Expression<Func<int, int>> doubleIt = x => x * 2;
             Expression<Func<Func<int, int>[]>> unquoted = Expression.Lambda<Func<Func<int, int>[]>>(
