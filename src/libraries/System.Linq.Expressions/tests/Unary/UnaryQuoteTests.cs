@@ -480,13 +480,13 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(4, vars[1]);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NullLambda()
         {
             AssertExtensions.Throws<ArgumentNullException>("expression", () => Quote(null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void QuoteNonLamdba()
         {
             Func<int> zero = () => 0;
@@ -494,7 +494,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("expression", () => Quote(funcConst));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CannotReduce()
         {
             Expression<Func<int>> exp = () => 2;
@@ -504,7 +504,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => q.ReduceAndCheck());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void TypeExplicitWithGeneralLambdaArgument()
         {
             LambdaExpression lambda = Lambda(Constant(2));

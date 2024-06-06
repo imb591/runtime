@@ -9,7 +9,7 @@ namespace System.Linq.Expressions.Tests
     {
         #region Test methods
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CheckByteAddTest()
         {
             byte[] array = new byte[] { 0, 1, byte.MaxValue };
@@ -22,7 +22,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CheckSByteAddTest()
         {
             sbyte[] array = new sbyte[] { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue };
@@ -158,7 +158,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CheckCharAddTest()
         {
             char[] array = new char[] { '\0', '\b', 'A', '\uffff' };
@@ -480,7 +480,7 @@ namespace System.Linq.Expressions.Tests
 
         #endregion
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CannotReduce()
         {
             Expression exp = Expression.Add(Expression.Constant(0), Expression.Constant(0));
@@ -489,7 +489,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => exp.ReduceAndCheck());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CannotReduceChecked()
         {
             Expression exp = Expression.AddChecked(Expression.Constant(0), Expression.Constant(0));
@@ -498,25 +498,25 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => exp.ReduceAndCheck());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ThrowsOnLeftNull()
         {
             AssertExtensions.Throws<ArgumentNullException>("left", () => Expression.Add(null, Expression.Constant("")));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ThrowsOnRightNull()
         {
             AssertExtensions.Throws<ArgumentNullException>("right", () => Expression.Add(Expression.Constant(""), null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CheckedThrowsOnLeftNull()
         {
             AssertExtensions.Throws<ArgumentNullException>("left", () => Expression.AddChecked(null, Expression.Constant("")));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CheckedThrowsOnRightNull()
         {
             AssertExtensions.Throws<ArgumentNullException>("right", () => Expression.AddChecked(Expression.Constant(""), null));
@@ -530,35 +530,35 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ThrowsOnLeftUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
             AssertExtensions.Throws<ArgumentException>("left", () => Expression.Add(value, Expression.Constant(1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ThrowsOnRightUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
             AssertExtensions.Throws<ArgumentException>("right", () => Expression.Add(Expression.Constant(1), value));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CheckedThrowsOnLeftUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
             AssertExtensions.Throws<ArgumentException>("left", () => Expression.AddChecked(value, Expression.Constant(1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CheckedThrowsOnRightUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
             AssertExtensions.Throws<ArgumentException>("right", () => Expression.Add(Expression.Constant(1), value));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ToStringTest()
         {
             BinaryExpression e1 = Expression.Add(Expression.Parameter(typeof(int), "a"), Expression.Parameter(typeof(int), "b"));

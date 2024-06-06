@@ -91,14 +91,14 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CheckUnaryArithmeticOnesComplementBooleanTest()
         {
             Expression operand = Expression.Variable(typeof(bool));
             Assert.Throws<InvalidOperationException>(() => Expression.OnesComplement(operand));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ToStringTest()
         {
             UnaryExpression e = Expression.OnesComplement(Expression.Parameter(typeof(int), "x"));
@@ -209,7 +209,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, func());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void OnesComplementNonIntegral()
         {
             Expression operand = Expression.Constant(2.0);

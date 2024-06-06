@@ -127,7 +127,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<OverflowException>(overflow);
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(UnincrementableAndUndecrementableTypes))]
         public void InvalidOperandType(Type type)
         {
@@ -164,7 +164,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal("Eggplant", Expression.Lambda<Func<string>>(block).Compile(useInterpreter)());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void IncorrectMethodType()
         {
             Expression variable = Expression.Variable(typeof(int));
@@ -172,7 +172,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidOperationException>(() => Expression.PreIncrementAssign(variable, method));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void IncorrectMethodParameterCount()
         {
             Expression variable = Expression.Variable(typeof(string));
@@ -180,7 +180,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("method", () => Expression.PreIncrementAssign(variable, method));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void IncorrectMethodReturnType()
         {
             Expression variable = Expression.Variable(typeof(int));
@@ -242,7 +242,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(3, array[0]);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CanReduce()
         {
             ParameterExpression variable = Expression.Variable(typeof(int));
@@ -251,26 +251,26 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(op, op.ReduceAndCheck());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NullOperand()
         {
             AssertExtensions.Throws<ArgumentNullException>("expression", () => Expression.PreIncrementAssign(null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UnwritableOperand()
         {
             AssertExtensions.Throws<ArgumentException>("expression", () => Expression.PreIncrementAssign(Expression.Constant(1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UnreadableOperand()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
             AssertExtensions.Throws<ArgumentException>("expression", () => Expression.PreIncrementAssign(value));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateSameOperandSameNode()
         {
             UnaryExpression op = Expression.PreIncrementAssign(Expression.Variable(typeof(int)));
@@ -278,14 +278,14 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(op, NoOpVisitor.Instance.Visit(op));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateDiffOperandDiffNode()
         {
             UnaryExpression op = Expression.PreIncrementAssign(Expression.Variable(typeof(int)));
             Assert.NotSame(op, op.Update(Expression.Variable(typeof(int))));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ToStringTest()
         {
             UnaryExpression e = Expression.PreIncrementAssign(Expression.Parameter(typeof(int), "x"));

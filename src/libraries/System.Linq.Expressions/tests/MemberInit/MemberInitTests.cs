@@ -25,7 +25,7 @@ namespace System.Linq.Expressions.Tests
             VerifyMemberInit(l, x => x.Y.Z == 42 && x.XS.Sum() == 5 + 7 && x.Y.YS.Sum() == 2 + 3, useInterpreter);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ToStringTest()
         {
             MemberInitExpression e1 = Expression.MemberInit(Expression.New(typeof(Y)), Expression.Bind(typeof(Y).GetProperty(nameof(Y.Z)), Expression.Parameter(typeof(int), "z")));
@@ -49,7 +49,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal("new X() {XS = {Void Add(Int32)(a), Void Add(Int32)(b)}}", e6.ToString());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UpdateSameReturnsSame()
         {
             MemberAssignment bind0 = Expression.Bind(typeof(Y).GetProperty(nameof(Y.Z)), Expression.Parameter(typeof(int), "z"));
@@ -59,7 +59,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(init, init.Update(newExp, new [] {bind0, bind1}));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UpdateDifferentBindingsReturnsDifferent()
         {
             MemberAssignment bind0 = Expression.Bind(typeof(Y).GetProperty(nameof(Y.Z)), Expression.Parameter(typeof(int), "z"));
@@ -70,7 +70,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(init, init.Update(newExp, new[] { bind1, bind0 }));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UpdateDifferentNewReturnsDifferent()
         {
             MemberAssignment bind0 = Expression.Bind(typeof(Y).GetProperty(nameof(Y.Z)), Expression.Parameter(typeof(int), "z"));

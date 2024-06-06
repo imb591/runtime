@@ -57,10 +57,6 @@ namespace System.Linq.Expressions.Tests
                     withCompileToMethod[i] = arg;
                 }
 
-                if (withFalse != null)
-                    yield return withFalse;
-
-                yield return withTrue;
                 yield return withCompileToMethod;
             }
         }

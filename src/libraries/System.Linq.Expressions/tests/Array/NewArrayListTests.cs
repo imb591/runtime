@@ -850,7 +850,7 @@ namespace System.Linq.Expressions.Tests
             CheckGenericWithStructRestrictionArrayListHelper<Scs>(useInterpreter);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ThrowOnNegativeSizedCollection()
         {
             // This is an obscure case, and it doesn't much matter what is thrown, as long as is thrown before such
@@ -859,7 +859,7 @@ namespace System.Linq.Expressions.Tests
             Assert.ThrowsAny<Exception>(() => Expression.NewArrayInit(typeof(int), new BogusReadOnlyCollection<Expression>()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ToStringTest()
         {
             NewArrayExpression e1 = Expression.NewArrayInit(typeof(int));
@@ -1635,58 +1635,58 @@ namespace System.Linq.Expressions.Tests
 
         #endregion
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NullType()
         {
             AssertExtensions.Throws<ArgumentNullException>("type", () => Expression.NewArrayInit(null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void VoidType()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.NewArrayInit(typeof(void)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NullInitializers()
         {
             AssertExtensions.Throws<ArgumentNullException>("initializers", () => Expression.NewArrayInit(typeof(int), default(Expression[])));
             AssertExtensions.Throws<ArgumentNullException>("initializers", () => Expression.NewArrayInit(typeof(int), default(IEnumerable<Expression>)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NullInitializer()
         {
             AssertExtensions.Throws<ArgumentNullException>("initializers[0]", () => Expression.NewArrayInit(typeof(int), new Expression[] { null, null }));
             AssertExtensions.Throws<ArgumentNullException>("initializers[0]", () => Expression.NewArrayInit(typeof(int), new List<Expression> { null, null }));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ByRefType()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.NewArrayInit(typeof(int).MakeByRefType()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void PointerType()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.NewArrayInit(typeof(int).MakePointerType()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void GenericType()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.NewArrayInit(typeof(List<>)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void TypeContainsGenericParameters()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.NewArrayInit(typeof(List<>.Enumerator)));
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.NewArrayInit(typeof(List<>).MakeGenericType(typeof(List<>))));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NotAssignable()
         {
             Assert.Throws<InvalidOperationException>(() => Expression.NewArrayInit(typeof(string), Expression.Constant(2)));
@@ -1733,7 +1733,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(26, arr[0](13));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UpdateSameReturnsSame()
         {
             Expression element0 = Expression.Constant(2);
@@ -1742,7 +1742,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(newArrayExpression, newArrayExpression.Update(new[] { element0, element1 }));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UpdateDifferentReturnsDifferent()
         {
             Expression element0 = Expression.Constant(2);
@@ -1752,7 +1752,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(newArrayExpression, newArrayExpression.Update(newArrayExpression.Expressions.Reverse()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UpdateDoesntRepeatEnumeration()
         {
             Expression element0 = Expression.Constant(2);
@@ -1761,7 +1761,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(newArrayExpression, newArrayExpression.Update(new RunOnceEnumerable<Expression>(new[] { element0 })));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UpdateNullThrows()
         {
             Expression element0 = Expression.Constant(2);

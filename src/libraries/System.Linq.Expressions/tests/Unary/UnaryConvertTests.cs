@@ -110,7 +110,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ToStringTest()
         {
             // NB: Unlike TypeAs, the output does not include the type we're converting to

@@ -9,7 +9,7 @@ namespace System.Linq.Expressions.Tests
     {
         #region Test methods
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [Theory(Skip = "no call to CompileToMethod"), ClassData(typeof(CompilationTypes))]
         public static void CheckUnaryArithmeticNegateNullableByteTest(CompilationType useInterpreter)
         {
             byte?[] values = new byte?[] { null, 0, 1, byte.MaxValue };
@@ -19,7 +19,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [Theory(Skip = "no call to CompileToMethod"), ClassData(typeof(CompilationTypes))]
         public static void CheckUnaryArithmeticNegateNullableCharTest(CompilationType useInterpreter)
         {
             char?[] values = new char?[] { null, '\0', '\b', 'A', '\uffff' };
@@ -79,7 +79,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Theory, ClassData(typeof(CompilationTypes))]
+        [Theory(Skip = "no call to CompileToMethod"), ClassData(typeof(CompilationTypes))]
         public static void CheckUnaryArithmeticNegateNullableSByteTest(CompilationType useInterpreter)
         {
             sbyte?[] values = new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue };

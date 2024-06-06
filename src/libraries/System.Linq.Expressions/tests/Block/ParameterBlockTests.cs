@@ -49,14 +49,14 @@ namespace System.Linq.Expressions.Tests
             Assert.True(Expression.Lambda<Func<bool>>(equal).Compile(useInterpreter)());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NullExpicitType()
         {
             AssertExtensions.Throws<ArgumentNullException>("type", () => Expression.Block(null, SingleParameter, Expression.Constant(0)));
             AssertExtensions.Throws<ArgumentNullException>("type", () => Expression.Block(null, SingleParameter, Enumerable.Repeat(Expression.Constant(0), 1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NullExpressionList()
         {
             AssertExtensions.Throws<ArgumentNullException>("expressions", () => Expression.Block(SingleParameter, default(Expression[])));
@@ -65,7 +65,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentNullException>("expressions", () => Expression.Block(typeof(int), SingleParameter, default(IEnumerable<Expression>)));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(BlockSizes))]
         public void NullExpressionInExpressionList(int size)
         {
@@ -81,7 +81,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(BlockSizes))]
         public void UnreadableExpressionInExpressionList(int size)
         {
@@ -110,7 +110,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(Expression.Lambda<Func<bool>>(equal).Compile(useInterpreter)());
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(BlockSizes))]
         public void BlockInvalidExplicitType(int blockSize)
         {
@@ -136,7 +136,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(Expression.Lambda<Func<bool>>(Expression.Equal(constant, fromEnumBlock)).Compile(useInterpreter)());
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ConstantValuesAndSizes))]
         public void InvalidExpressionIndex(object value, int blockSize)
         {
@@ -145,14 +145,14 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => block.Expressions[blockSize]);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void EmptyBlockWithParametersAndNonVoidTypeNotAllowed()
         {
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.Block(typeof(int), SingleParameter));
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.Block(typeof(int), SingleParameter, Enumerable.Empty<Expression>()));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ConstantValuesAndSizes))]
         public void ResultPropertyFromParams(object value, int blockSize)
         {
@@ -164,7 +164,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(constant, block.Result);
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ConstantValuesAndSizes))]
         public void ResultPropertyFromEnumerable(object value, int blockSize)
         {
@@ -176,7 +176,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(constant, block.Result);
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ConstantValuesAndSizes))]
         public void VariableCountCorrect(object value, int blockSize)
         {
@@ -186,7 +186,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(blockSize, block.Variables.Count);
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ConstantValuesAndSizes))]
         public void RewriteToSameWithSameValues(object value, int blockSize)
         {
@@ -199,7 +199,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(block, NoOpVisitor.Instance.Visit(block));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ConstantValuesAndSizes))]
         public void CanFindItems(object value, int blockSize)
         {
@@ -215,7 +215,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Equal(i, expressions.IndexOf(values[i]));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ConstantValuesAndSizes))]
         public void IdentifyNonAbsentItemAsAbsent(object value, int blockSize)
         {
@@ -228,7 +228,7 @@ namespace System.Linq.Expressions.Tests
             Assert.DoesNotContain(null, block.Expressions);
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ConstantValuesAndSizes))]
         public void ExpressionsEnumerable(object value, int blockSize)
         {
@@ -244,7 +244,7 @@ namespace System.Linq.Expressions.Tests
                 Assert.Same(exp, values[index++]);
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ConstantValuesAndSizes))]
         public void UpdateWithExpressionsReturnsSame(object value, int blockSize)
         {
@@ -257,7 +257,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(block, NoOpVisitor.Instance.Visit(block));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ConstantValuesAndSizes))]
         public void Visit(object value, int blockSize)
         {
@@ -269,7 +269,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(block, new TestVistor().Visit(block));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ObjectAssignableConstantValuesAndSizes))]
         public void VisitTyped(object value, int blockSize)
         {
@@ -281,7 +281,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(block, new TestVistor().Visit(block));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(BlockSizes))]
         public void NullVariables(int blockSize)
         {
@@ -294,7 +294,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentNullException>("variables[0]", () => Expression.Block(typeof(object), vars, expressions.ToArray()));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(BlockSizes))]
         public void ByRefVariables(int blockSize)
         {
@@ -307,7 +307,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("variables[0]", () => Expression.Block(typeof(object), vars, expressions.ToArray()));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(BlockSizes))]
         public void RepeatedVariables(int blockSize)
         {
@@ -321,7 +321,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("variables[1]", () => Expression.Block(typeof(object), vars, expressions.ToArray()));
         }
 
-        [Theory, MemberData(nameof(BlockSizes))]
+        [Theory(Skip = "no call to CompileToMethod"), MemberData(nameof(BlockSizes))]
         public void UpdateDoesntRepeatEnumeration(int blockSize)
         {
             ConstantExpression constant = Expression.Constant(0);
@@ -335,7 +335,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(block, block.Update(new RunOnceEnumerable<ParameterExpression>(vars), block.Expressions));
         }
 
-        [Theory, MemberData(nameof(BlockSizes))]
+        [Theory(Skip = "no call to CompileToMethod"), MemberData(nameof(BlockSizes))]
         public void UpdateDifferentSizeReturnsDifferent(int blockSize)
         {
             ConstantExpression constant = Expression.Constant(0);

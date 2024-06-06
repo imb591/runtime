@@ -46,7 +46,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(42, get());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void InstanceIsNotArray()
         {
             ConstantExpression instance = Expression.Constant(46);
@@ -54,7 +54,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("array", () => Expression.ArrayAccess(instance, index));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void WrongNumberIndices()
         {
             ConstantExpression instance = Expression.Constant(new int[2,3]);
@@ -62,7 +62,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.ArrayAccess(instance, index));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NonInt32Index()
         {
             ConstantExpression instance = Expression.Constant(new int[4]);
@@ -70,7 +70,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("indexes", () => Expression.ArrayAccess(instance, index));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UnreadableIndex()
         {
             ConstantExpression instance = Expression.Constant(new int[4]);

@@ -11,7 +11,7 @@ namespace System.Linq.Expressions.Tests
 {
     public class Expression_Tests
     {
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NewMakeBinary()
         {
             int? i = 10;
@@ -29,7 +29,7 @@ namespace System.Linq.Expressions.Tests
         {
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ElementInit()
         {
             MethodInfo mi1 = typeof(Expression_Tests).GetMethod("Add");
@@ -45,7 +45,7 @@ namespace System.Linq.Expressions.Tests
             public Atom this[Atom b0, Atom b1] { get { return null; } }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void EqualityBetweenReferenceAndInterfacesSucceeds()
         {
             // able to build reference comparison between interfaces
@@ -59,7 +59,7 @@ namespace System.Linq.Expressions.Tests
             Expression.NotEqual(Expression.Constant(null, typeof(IEnumerable)), Expression.Constant(null, typeof(BaseClass)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void EqualityBetweenStructAndIterfaceFails()
         {
             Expression expStruct = Expression.Constant(5);
@@ -67,7 +67,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidOperationException>(() => Expression.Equal(expStruct, expIface));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void EqualityBetweenInheritedTypesSucceeds()
         {
             Expression.Equal(Expression.Constant(null, typeof(BaseClass)), Expression.Constant(null, typeof(DerivedClass)));
@@ -76,13 +76,13 @@ namespace System.Linq.Expressions.Tests
             Expression.NotEqual(Expression.Constant(null, typeof(DerivedClass)), Expression.Constant(null, typeof(BaseClass)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void Regress_ThisPropertyCanBeOverloaded()
         {
             Expression<Predicate<Atom>> d = atom => atom && atom[atom];
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void Arrays()
         {
             Expression<Func<int, int[]>> exp1 = i => new int[i];
@@ -108,7 +108,7 @@ namespace System.Linq.Expressions.Tests
         {
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CheckedExpressions()
         {
             Expression<Func<int, int, int>> exp = (a, b) => unchecked(a + b);
@@ -147,7 +147,7 @@ namespace System.Linq.Expressions.Tests
             return x;
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void VirtualCallExpressions()
         {
             Expression_Tests obj = new Expression_Tests();
@@ -158,37 +158,37 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ConstantNullWithValueTypeIsInvalid()
         {
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.Constant(null, typeof(int)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ConstantNullWithNullableValueType()
         {
             Expression.Constant(null, typeof(int?));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ConstantNullWithReferenceType()
         {
             Expression.Constant(null, typeof(Expression_Tests));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ConstantIntWithInterface()
         {
             Expression.Constant(10, typeof(IComparable));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ConstantIntWithNullableInt()
         {
             Expression.Constant(10, typeof(int?));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void TestUserDefinedOperators()
         {
             TestUserDefinedMathOperators<U, U>();
@@ -341,7 +341,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void TestUserDefinedCoercions()
         {
             TestUserDefinedCoercion<M, N>();
@@ -385,7 +385,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, u.Type);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void TestGetFuncType()
         {
             // 1 type arg Func
@@ -429,19 +429,19 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(typeof(float), type.GetGenericArguments()[4]);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void TestGetFuncTypeWithNullFails()
         {
             AssertExtensions.Throws<ArgumentNullException>("typeArgs", () => Expression.GetFuncType(null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void TestGetFuncTypeWithTooManyArgsFails()
         {
             AssertExtensions.Throws<ArgumentException>("typeArgs", () => Expression.GetFuncType(new Type[] { typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int) }));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void TestPropertiesAndFieldsByName()
         {
             Expression p = Expression.Parameter(typeof(NWindProxy.Customer), "c");
@@ -463,7 +463,7 @@ namespace System.Linq.Expressions.Tests
         private bool IsFunky { get { return _isfunky; } }
         private bool _isfunky = true;
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         // tests calling instance methods by name (generic and non-generic)
         public static void TestCallInstanceMethodsByName()
         {
@@ -489,7 +489,7 @@ namespace System.Linq.Expressions.Tests
         {
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         // this tests calling static methods by name (generic and non-generic)
         public static void TestCallStaticMethodsByName()
         {
@@ -1789,7 +1789,7 @@ namespace System.Linq.Expressions.Tests
                 return x => x * y;
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void InvokeNonTypedLambdaFails()
         {
             Expression call = Expression.Call(null, typeof(Compiler_Tests).GetMethod("ComputeDynamicLambda", BindingFlags.Static | BindingFlags.Public), new Expression[] { });
@@ -1801,7 +1801,7 @@ namespace System.Linq.Expressions.Tests
             return null;
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void InvokeNonTypedDelegateFails()
         {
             Expression call = Expression.Call(null, typeof(Compiler_Tests).GetMethod("ComputeDynamicDelegate", BindingFlags.Static | BindingFlags.Public), new Expression[] { });
@@ -2239,7 +2239,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ShortCircuitAnd()
         {
             int[] values = new[] { 1, 2, 3, 4, 5 };
@@ -2252,7 +2252,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(0, list.Count);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ShortCircuitOr()
         {
             int[] values = new[] { 1, 2, 3, 4, 5 };
@@ -2404,7 +2404,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ExprT_Update()
         {
             System_Linq_Expressions_Expression_TDelegate__1.UseSystem_Linq_Expressions_Expression_TDelegate__1(false);

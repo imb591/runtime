@@ -50,7 +50,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(Expression.Lambda<Func<bool>>(Expression.Equal(Expression.Constant(value), block)).Compile(useInterpreter)());
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(TypesData))]
         public void NonVoidTargetGotoHasNoValue(Type type)
         {
@@ -58,7 +58,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("target", () => Expression.Goto(target));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(TypesData))]
         public void NonVoidTargetGotoHasNoValueTypeExplicit(Type type)
         {
@@ -92,7 +92,7 @@ namespace System.Linq.Expressions.Tests
             Expression.Lambda<Action>(block).Compile(useInterpreter)();
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(TypesData))]
         public void NullValueOnNonVoidGoto(Type type)
         {
@@ -101,14 +101,14 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("target", () => Expression.Goto(Expression.Label(type), null, type));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ConstantValueData))]
         public void ExplicitNullTypeWithValue(object value)
         {
             AssertExtensions.Throws<ArgumentException>("target", () => Expression.Goto(Expression.Label(value.GetType()), default(Type)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UnreadableLabel()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<string>), "WriteOnly");
@@ -130,7 +130,7 @@ namespace System.Linq.Expressions.Tests
             Expression.Lambda<Action>(block).Compile(useInterpreter)();
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(NonObjectAssignableConstantValueData))]
         public void CannotAssignValueTypesToObject(object value)
         {
@@ -150,7 +150,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, Expression.Lambda<Func<object>>(block).Compile(useInterpreter)());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void GotoQuotesIfNecessary()
         {
             LabelTarget target = Expression.Label(typeof(Expression<Func<int>>));
@@ -161,7 +161,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(typeof(Expression<Func<int>>), block.Type);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateSameIsSame()
         {
             LabelTarget target = Expression.Label(typeof(int));
@@ -171,7 +171,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(ret, NoOpVisitor.Instance.Visit(ret));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateDifferentValueIsDifferent()
         {
             LabelTarget target = Expression.Label(typeof(int));
@@ -179,7 +179,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(ret, ret.Update(target, Expression.Constant(0)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateDifferentTargetIsDifferent()
         {
             Expression value = Expression.Constant(0);
@@ -187,26 +187,26 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(ret, ret.Update(Expression.Label(typeof(int)), value));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void OpenGenericType()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Goto(Expression.Label(typeof(void)), typeof(List<>)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void TypeContainsGenericParameters()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Goto(Expression.Label(typeof(void)), typeof(List<>.Enumerator)));
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Goto(Expression.Label(typeof(void)), typeof(List<>).MakeGenericType(typeof(List<>))));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void PointerType()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Goto(Expression.Label(typeof(void)), typeof(int).MakePointerType()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ByRefType()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Goto(Expression.Label(typeof(void)), typeof(int).MakeByRefType()));

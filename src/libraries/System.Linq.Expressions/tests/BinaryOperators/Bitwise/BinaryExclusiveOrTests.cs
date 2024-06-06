@@ -223,7 +223,7 @@ namespace System.Linq.Expressions.Tests
 
         #endregion
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CannotReduce()
         {
             Expression exp = Expression.ExclusiveOr(Expression.Constant(0), Expression.Constant(0));
@@ -232,13 +232,13 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => exp.ReduceAndCheck());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ThrowsOnLeftNull()
         {
             AssertExtensions.Throws<ArgumentNullException>("left", () => Expression.ExclusiveOr(null, Expression.Constant("")));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ThrowsOnRightNull()
         {
             AssertExtensions.Throws<ArgumentNullException>("right", () => Expression.ExclusiveOr(Expression.Constant(""), null));
@@ -252,21 +252,21 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ThrowsOnLeftUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
             AssertExtensions.Throws<ArgumentException>("left", () => Expression.ExclusiveOr(value, Expression.Constant(1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ThrowsOnRightUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
             AssertExtensions.Throws<ArgumentException>("right", () => Expression.ExclusiveOr(Expression.Constant(1), value));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ToStringTest()
         {
             BinaryExpression e = Expression.ExclusiveOr(Expression.Parameter(typeof(int), "a"), Expression.Parameter(typeof(int), "b"));

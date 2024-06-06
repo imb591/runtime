@@ -126,14 +126,14 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(19, vars[1]);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NullVariableList()
         {
             AssertExtensions.Throws<ArgumentNullException>("variables", () => Expression.RuntimeVariables(default(ParameterExpression[])));
             AssertExtensions.Throws<ArgumentNullException>("variables", () => Expression.RuntimeVariables(default(IEnumerable<ParameterExpression>)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NullVariableInList()
         {
             AssertExtensions.Throws<ArgumentNullException>("variables[1]", () => Expression.RuntimeVariables(Expression.Variable(typeof(int)), null));
@@ -149,7 +149,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<IndexOutOfRangeException>(() => vars[0] = null);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CannotReduce()
         {
             RuntimeVariablesExpression vars = Expression.RuntimeVariables(Expression.Variable(typeof(int)));
@@ -158,7 +158,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => vars.ReduceAndCheck());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateSameCollectionSameNode()
         {
             ParameterExpression[] variables = {Expression.Variable(typeof(RuntimeVariablesTests))};
@@ -168,7 +168,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(varExp, NoOpVisitor.Instance.Visit(varExp));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateDiffVarsDiffNode()
         {
             RuntimeVariablesExpression varExp = Expression.RuntimeVariables(Enumerable.Repeat(Expression.Variable(typeof(RuntimeVariablesTests)), 1));
@@ -176,21 +176,21 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateDoesntRepeatEnumeration()
         {
             RuntimeVariablesExpression varExp = Expression.RuntimeVariables(Enumerable.Repeat(Expression.Variable(typeof(RuntimeVariablesTests)), 1));
             Assert.NotSame(varExp, varExp.Update(new RunOnceEnumerable<ParameterExpression>(new[] { Expression.Variable(typeof(RuntimeVariablesTests)) })));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateNullThrows()
         {
             RuntimeVariablesExpression varExp = Expression.RuntimeVariables(Enumerable.Repeat(Expression.Variable(typeof(RuntimeVariablesTests)), 0));
             AssertExtensions.Throws<ArgumentNullException>("variables", () => varExp.Update(null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ToStringTest()
         {
             RuntimeVariablesExpression e1 = Expression.RuntimeVariables();

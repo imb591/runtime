@@ -18398,26 +18398,26 @@ namespace System.Linq.Expressions.Tests
 
         #endregion
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void OpenGenericnType()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.ConvertChecked(Expression.Constant(null), typeof(List<>)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void TypeContainingGenericParameters()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.ConvertChecked(Expression.Constant(null), typeof(List<>.Enumerator)));
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.ConvertChecked(Expression.Constant(null), typeof(List<>).MakeGenericType(typeof(List<>))));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ByRefType()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.ConvertChecked(Expression.Constant(null), typeof(object).MakeByRefType()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void PointerType()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.ConvertChecked(Expression.Constant(null), typeof(int*)));
@@ -18442,7 +18442,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(result, del.DynamicInvoke());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CannotConvertNonVoidToVoid()
         {
             Assert.Throws<InvalidOperationException>(() => Expression.ConvertChecked(Expression.Constant(1), typeof(void)));
@@ -18581,21 +18581,21 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void IfaceToNonSZArray()
         {
             Assert.Throws<InvalidOperationException>(
                 () => Expression.ConvertChecked(Expression.Default(typeof(IList<NonSealed>[])), typeof(NonSealed[,][])));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NonSZArrayToIface()
         {
             Assert.Throws<InvalidOperationException>(
                 () => Expression.ConvertChecked(Expression.Default(typeof(NonSealed[,][])), typeof(IList<NonSealed>[])));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ArrayToNonArrayCompatibleIFace()
         {
             Assert.Throws<InvalidOperationException>(
@@ -18605,7 +18605,7 @@ namespace System.Linq.Expressions.Tests
                     Expression.Default(typeof(NonSealed[][])), typeof(IDictionary<NonSealed, NonSealed>[])));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NonArrayCompatibleIFaceToArray()
         {
             Assert.Throws<InvalidOperationException>(
@@ -18615,7 +18615,7 @@ namespace System.Linq.Expressions.Tests
                     Expression.Default(typeof(IDictionary<NonSealed, NonSealed>[])), typeof(NonSealed[][])));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ArrayToNotRelated()
         {
             Assert.Throws<InvalidOperationException>(

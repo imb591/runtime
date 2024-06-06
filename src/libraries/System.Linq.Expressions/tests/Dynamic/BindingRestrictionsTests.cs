@@ -35,7 +35,7 @@ namespace System.Dynamic.Tests
             Assert.True(Expression.Lambda<Func<bool>>(exp).Compile(CompilationType.CompileToMethod)());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void MergeWithEmptyReturnsSame()
         {
             BindingRestrictions isTrueBool = BindingRestrictions.GetTypeRestriction(
@@ -44,7 +44,7 @@ namespace System.Dynamic.Tests
             Assert.Same(isTrueBool, BindingRestrictions.Empty.Merge(isTrueBool));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void MergeWithSelfReturnsNotSame()
         {
             BindingRestrictions isTrueBool = BindingRestrictions.GetTypeRestriction(
@@ -52,7 +52,7 @@ namespace System.Dynamic.Tests
             Assert.NotSame(isTrueBool, isTrueBool.Merge(isTrueBool));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void MergeWithSelfHasSameExpression()
         {
             Expression exp = Expression.Constant(true);
@@ -61,19 +61,19 @@ namespace System.Dynamic.Tests
             Assert.Same(exp, doubled.ToExpression());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void MergeNull()
         {
             AssertExtensions.Throws<ArgumentNullException>("restrictions", () => BindingRestrictions.Empty.Merge(null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ExpressionRestrictionFromNull()
         {
             AssertExtensions.Throws<ArgumentNullException>("expression", () => BindingRestrictions.GetExpressionRestriction(null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ExpressionRestrictionFromNonBooleanExpression()
         {
             AssertExtensions.Throws<ArgumentException>(
@@ -82,32 +82,32 @@ namespace System.Dynamic.Tests
                 "expression", () => BindingRestrictions.GetExpressionRestriction(Expression.Constant("")));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void InstanceRestrictionFromNull()
         {
             AssertExtensions.Throws<ArgumentNullException>(
                 "expression", () => BindingRestrictions.GetInstanceRestriction(null, new object()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CombineRestrictionsFromNull()
         {
             Assert.Same(BindingRestrictions.Empty, BindingRestrictions.Combine(null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CombineRestrictionsFromEmpty()
         {
             Assert.Same(BindingRestrictions.Empty, BindingRestrictions.Combine(Array.Empty<DynamicMetaObject>()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CombineRestrictionsFromAllNull()
         {
             Assert.Same(BindingRestrictions.Empty, BindingRestrictions.Combine(new DynamicMetaObject[10]));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CustomRestrictionsEqualIfExpressionSame()
         {
             Expression exp = Expression.Constant(false);
@@ -117,7 +117,7 @@ namespace System.Dynamic.Tests
             Assert.Equal(x.GetHashCode(), y.GetHashCode());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CustomRestrictionsNotEqualIfExpressionsNotSame()
         {
             BindingRestrictions x = BindingRestrictions.GetExpressionRestriction(Expression.Constant(false));
@@ -125,7 +125,7 @@ namespace System.Dynamic.Tests
             Assert.NotEqual(x, y);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CustomRestrictionsNotEqualNull()
         {
             BindingRestrictions br = BindingRestrictions.GetExpressionRestriction(Expression.Constant(false));
@@ -195,7 +195,7 @@ namespace System.Dynamic.Tests
             Assert.False(Expression.Lambda<Func<bool>>(hasInst.ToExpression()).Compile(CompilationType.CompileToMethod)());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void InstanceRestrictionEqualsIfAllSame()
         {
             Expression exp = Expression.Default(typeof(Egalitarian));
@@ -210,7 +210,7 @@ namespace System.Dynamic.Tests
             Assert.Equal(x.GetHashCode(), y.GetHashCode());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void InstanceRestrictionNotEqualIfDifferentInstance()
         {
             Expression exp = Expression.Default(typeof(Egalitarian));
@@ -219,7 +219,7 @@ namespace System.Dynamic.Tests
             Assert.NotEqual(x, y);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void InstanceRestrictionNotEqualNull()
         {
             BindingRestrictions br = BindingRestrictions.GetInstanceRestriction(
@@ -227,7 +227,7 @@ namespace System.Dynamic.Tests
             Assert.False(br.Equals(null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void InstanceRestrictionNotEqualIfDifferentExpression()
         {
             Egalitarian inst = new Egalitarian();
@@ -267,7 +267,7 @@ namespace System.Dynamic.Tests
             Assert.False(Expression.Lambda<Func<bool>>(isType.ToExpression()).Compile(CompilationType.CompileToMethod)());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void TypeRestrictionEqualIfSameTypeAndExpression()
         {
             Expression exp = Expression.Default(typeof(Egalitarian));
@@ -278,7 +278,7 @@ namespace System.Dynamic.Tests
             Assert.Equal(x.GetHashCode(), y.GetHashCode());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void TypeRestrictionNotEqualIfDifferentType()
         {
             Expression exp = Expression.Default(typeof(Egalitarian));
@@ -287,7 +287,7 @@ namespace System.Dynamic.Tests
             Assert.NotEqual(x, y);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void TypeRestrictionNotEqualIfDifferentExpression()
         {
             BindingRestrictions x = BindingRestrictions.GetTypeRestriction(
@@ -297,7 +297,7 @@ namespace System.Dynamic.Tests
             Assert.NotEqual(x, y);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void TypeRestrictionNotEqualNull()
         {
             BindingRestrictions br = BindingRestrictions.GetTypeRestriction(

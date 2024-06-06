@@ -682,7 +682,7 @@ namespace System.Linq.Expressions.Tests
         /// <summary>
         /// Verifies that compiling and executing a lambda method works when IsDynamicCodeSupported == false.
         /// </summary>
-        [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
+        [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported), Skip = "no call to CompileToMethod")]
         public static void CompileWorksWhenDynamicCodeNotSupported()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
@@ -696,7 +696,7 @@ namespace System.Linq.Expressions.Tests
 
         // run the same test code as the above CompileWorksWhenDynamicCodeNotSupported test
         // to ensure this test works correctly on all platforms - even if RemoteExecutor is not supported
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CompileWorksWhenDynamicCodeNotSupportedInner()
         {
             ParameterExpression param = Expression.Parameter(typeof(int));

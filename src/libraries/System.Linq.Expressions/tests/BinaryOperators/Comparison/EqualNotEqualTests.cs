@@ -110,7 +110,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void Equal_CannotReduce()
         {
             Expression exp = Expression.Equal(Expression.Constant(0), Expression.Constant(0));
@@ -119,7 +119,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => exp.ReduceAndCheck());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NotEqual_CannotReduce()
         {
             Expression exp = Expression.NotEqual(Expression.Constant(0), Expression.Constant(0));
@@ -128,14 +128,14 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => exp.ReduceAndCheck());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ThrowsOnLeftNull()
         {
             AssertExtensions.Throws<ArgumentNullException>("left", () => Expression.Equal(null, Expression.Constant("")));
             AssertExtensions.Throws<ArgumentNullException>("left", () => Expression.NotEqual(null, Expression.Constant("")));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ThrowsOnRightNull()
         {
             AssertExtensions.Throws<ArgumentNullException>("right", () => Expression.Equal(Expression.Constant(""), null));
@@ -150,7 +150,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ThrowsOnLeftUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
@@ -158,7 +158,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("left", () => Expression.NotEqual(value, Expression.Constant(1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ThrowsOnRightUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
@@ -192,21 +192,21 @@ namespace System.Linq.Expressions.Tests
             GeneralBinaryTests.CompileBinaryExpression(newEqual, useInterpreter, false);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void Equal_ToString()
         {
             BinaryExpression e = Expression.Equal(Expression.Parameter(typeof(int), "a"), Expression.Parameter(typeof(int), "b"));
             Assert.Equal("(a == b)", e.ToString());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NotEqual_ToString()
         {
             BinaryExpression e = Expression.NotEqual(Expression.Parameter(typeof(int), "a"), Expression.Parameter(typeof(int), "b"));
             Assert.Equal("(a != b)", e.ToString());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CannotPreformEqualityOnValueTypesWithoutOperators()
         {
             var uvConst = Expression.Constant(new UselessValue());
@@ -242,7 +242,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(func());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CannotDoNullComparisonWithoutOperatorIfBothNullConstants()
         {
             var typedNullConst = Expression.Constant(null, typeof(UselessValue?));

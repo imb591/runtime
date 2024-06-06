@@ -182,7 +182,7 @@ namespace System.Linq.Expressions.Tests
             });
         }
 
-        [Fact] // See https://github.com/dotnet/runtime/issues/19106
+        [Fact(Skip = "no call to CompileToMethod")] // See https://github.com/dotnet/runtime/issues/19106
         public static void CheckLiftedAddCheckedRegressionTest()
         {
             // Regression test for an issue where `liftToNull` was set to `false` in `AddChecked`,

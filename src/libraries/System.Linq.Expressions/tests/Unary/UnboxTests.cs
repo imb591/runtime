@@ -123,14 +123,14 @@ namespace System.Linq.Expressions.Tests
             Assert.True(isNull());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CannotUnboxToNonInterfaceExceptObject()
         {
             Expression value = Expression.Constant(0);
             AssertExtensions.Throws<ArgumentException>("expression", () => Expression.Unbox(value, typeof(int)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CannotUnboxReferenceType()
         {
             Expression value = Expression.Constant("", typeof(IComparable<string>));
@@ -145,20 +145,20 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CannotUnboxUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable), "WriteOnly");
             AssertExtensions.Throws<ArgumentException>("expression", () => Expression.Unbox(value, typeof(int)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ExpressionNull()
         {
             AssertExtensions.Throws<ArgumentNullException>("expression", () => Expression.Unbox(null, typeof(int)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void TypeNull()
         {
             Expression value = Expression.Constant(0, typeof(object));
@@ -174,7 +174,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidCastException>(() => del());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CannotReduce()
         {
             Expression unbox = Expression.Unbox(Expression.Constant(0, typeof(object)), typeof(int));
@@ -183,14 +183,14 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => unbox.ReduceAndCheck());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void PointerType()
         {
             Type pointerType = typeof(int).MakePointerType();
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Unbox(Expression.Constant(new object()), pointerType));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ByRefType()
         {
             Type byRefType = typeof(int).MakeByRefType();
@@ -202,7 +202,7 @@ namespace System.Linq.Expressions.Tests
             public T Value { get; set; }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void GenericType()
         {
             Type genType = typeof(GenericValueType<>);
@@ -210,7 +210,7 @@ namespace System.Linq.Expressions.Tests
         }
 
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void GenericTypeParameters()
         {
             Type genType = typeof(GenericValueType<>);

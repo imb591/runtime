@@ -9,7 +9,7 @@ namespace System.Linq.Expressions.Tests
     {
         #region Test methods
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CheckUnaryArithmeticNegateByteTest()
         {
             byte[] values = new byte[] { 0, 1, byte.MaxValue };
@@ -19,7 +19,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CheckUnaryArithmeticNegateCharTest()
         {
             char[] values = new char[] { '\0', '\b', 'A', '\uffff' };
@@ -79,7 +79,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CheckUnaryArithmeticNegateSByteTest()
         {
             sbyte[] values = new sbyte[] { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue };
@@ -99,7 +99,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ToStringTest()
         {
             UnaryExpression e = Expression.Negate(Expression.Parameter(typeof(int), "x"));

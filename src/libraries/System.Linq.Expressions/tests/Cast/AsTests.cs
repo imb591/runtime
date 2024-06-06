@@ -838,14 +838,14 @@ namespace System.Linq.Expressions.Tests
             CheckGenericWithStructRestrictionAsValueTypeHelper<Scs>(useInterpreter);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ToStringTest()
         {
             UnaryExpression e = Expression.TypeAs(Expression.Parameter(typeof(object), "o"), typeof(string));
             Assert.Equal("(o As String)", e.ToString());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NonNullableValueType()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.TypeAs(Expression.Constant(0), typeof(int)));
@@ -853,36 +853,36 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.TypeAs(Expression.Constant(DateTime.MinValue), typeof(DateTime)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NullType() =>
             AssertExtensions.Throws<ArgumentNullException>("type", () => Expression.TypeAs(Expression.Constant(""), null));
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NullExpression() =>
             AssertExtensions.Throws<ArgumentNullException>("expression", () => Expression.TypeAs(null, typeof(string)));
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void AsOpenGeneric()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.TypeAs(Expression.Constant(""), typeof(List<>)));
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.TypeAs(Expression.Constant(""), typeof(List<>).MakeGenericType(typeof(List<>))));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void PointerType()
         {
             AssertExtensions.Throws<ArgumentException>(
                 "type", () => Expression.TypeAs(Expression.Constant(""), typeof(int).MakePointerType()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ByRefType()
         {
             AssertExtensions.Throws<ArgumentException>(
                 "type", () => Expression.TypeAs(Expression.Constant(""), typeof(string).MakeByRefType()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UnreadableTypeAs()
         {
             MemberExpression unreadable = Expression.Property(

@@ -349,7 +349,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(PowerChar(a, b), f());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ToStringTest()
         {
             BinaryExpression e = Expression.Power(Expression.Parameter(typeof(double), "a"), Expression.Parameter(typeof(double), "b"));

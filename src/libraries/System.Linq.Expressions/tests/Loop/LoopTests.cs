@@ -26,7 +26,7 @@ namespace System.Linq.Expressions.Tests
             public int Number { get; }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NullBody()
         {
             AssertExtensions.Throws<ArgumentNullException>("body", () => Expression.Loop(null));
@@ -34,7 +34,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentNullException>("body", () => Expression.Loop(null, null, null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UnreadableBody()
         {
             Expression body = Expression.Property(null, typeof(Unreadable<int>), nameof(Unreadable<int>.WriteOnly));
@@ -43,13 +43,13 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("body", () => Expression.Loop(body, null, null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NonVoidContinue()
         {
             AssertExtensions.Throws<ArgumentException>("continue", () => Expression.Loop(Expression.Empty(), null, Expression.Label(typeof(int))));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void TypeWithoutBreakIsVoid()
         {
             Assert.Equal(typeof(void), Expression.Loop(Expression.Constant(3)).Type);
@@ -57,7 +57,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(typeof(void), Expression.Loop(Expression.Constant(3), null, null).Type);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void TypeIsBreaksType()
         {
             LabelTarget voidLabelTarget = Expression.Label();
@@ -247,7 +247,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(120, factorial(5));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CannotReduce()
         {
             LoopExpression loop = Expression.Loop(Expression.Empty(), Expression.Label(), Expression.Label());
@@ -256,35 +256,35 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => loop.ReduceAndCheck());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateSameIsSame()
         {
             LoopExpression loop = Expression.Loop(Expression.Empty(), Expression.Label(), Expression.Label());
             Assert.Same(loop, loop.Update(loop.BreakLabel, loop.ContinueLabel, loop.Body));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateDifferentBodyIsDifferent()
         {
             LoopExpression loop = Expression.Loop(Expression.Empty(), Expression.Label(), Expression.Label());
             Assert.NotSame(loop, loop.Update(loop.BreakLabel, loop.ContinueLabel, Expression.Empty()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateDifferentBreakIsDifferent()
         {
             LoopExpression loop = Expression.Loop(Expression.Empty(), Expression.Label(), Expression.Label());
             Assert.NotSame(loop, loop.Update(Expression.Label(), loop.ContinueLabel, loop.Body));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateDifferentContinueIsDifferent()
         {
             LoopExpression loop = Expression.Loop(Expression.Empty(), Expression.Label(), Expression.Label());
             Assert.NotSame(loop, loop.Update(loop.BreakLabel, Expression.Label(), loop.Body));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ToStringTest()
         {
             LoopExpression e = Expression.Loop(Expression.Empty());

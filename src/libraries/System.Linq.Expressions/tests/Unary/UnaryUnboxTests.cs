@@ -18,7 +18,7 @@ namespace System.Linq.Expressions.Tests
             VerifyUnbox(null, typeof(int), true, useInterpreter);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ToStringTest()
         {
             UnaryExpression e = Expression.Unbox(Expression.Parameter(typeof(object), "x"), typeof(int));

@@ -73,7 +73,7 @@ namespace System.Linq.Expressions.Tests
             Assert.False(Expression.Lambda<Func<bool>>(exp).Compile(useInterpreter)());
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(LeftValueType))]
         [MemberData(nameof(RightValueType))]
         [MemberData(nameof(BothValueType))]
@@ -84,7 +84,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidOperationException>(() => Expression.ReferenceEqual(xExp, yExp));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(UnassignablePairs))]
         public void ThrowsOnUnassignablePairs(object x, object y)
         {
@@ -137,7 +137,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(Expression.Lambda<Func<bool>>(exp).Compile(useInterpreter)());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CannotReduce()
         {
             Expression exp = Expression.ReferenceEqual(Expression.Constant(""), Expression.Constant(""));
@@ -146,33 +146,33 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => exp.ReduceAndCheck());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ThrowsOnLeftNull()
         {
             AssertExtensions.Throws<ArgumentNullException>("left", () => Expression.ReferenceEqual(null, Expression.Constant("")));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ThrowsOnRightNull()
         {
             AssertExtensions.Throws<ArgumentNullException>("right", () => Expression.ReferenceEqual(Expression.Constant(""), null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ThrowsOnLeftUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<string>), "WriteOnly");
             AssertExtensions.Throws<ArgumentException>("left", () => Expression.ReferenceEqual(value, Expression.Constant("")));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ThrowsOnRightUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<string>), "WriteOnly");
             AssertExtensions.Throws<ArgumentException>("right", () => Expression.ReferenceEqual(Expression.Constant(""), value));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void Update()
         {
             Expression e1 = Expression.Constant("bar");

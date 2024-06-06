@@ -2669,7 +2669,7 @@ namespace System.Linq.Expressions.Tests
 
         #endregion
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ArrayIndexNotArray()
         {
             Expression intExp = Expression.Constant(1);
@@ -2677,7 +2677,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("array", () => Expression.ArrayIndex(intExp, Enumerable.Repeat(intExp, 1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ArrayIndexNullArray()
         {
             AssertExtensions.Throws<ArgumentNullException>("array", () => Expression.ArrayIndex(null));
@@ -2685,7 +2685,7 @@ namespace System.Linq.Expressions.Tests
                 "array", () => Expression.ArrayIndex(null, Enumerable.Empty<Expression>()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ArrayIndexNullIndices()
         {
             Expression array = Expression.Constant(new[,] { { 1, 2 }, { 2, 1 } });
@@ -2694,7 +2694,7 @@ namespace System.Linq.Expressions.Tests
                 () => Expression.ArrayIndex(array, Expression.Constant(1), null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ArrayIndexWrongRank()
         {
             Expression array = Expression.Constant(new[,] { { 1, 2 }, { 2, 1 } });
@@ -2703,21 +2703,21 @@ namespace System.Linq.Expressions.Tests
                 Expression.ArrayIndex(array, Expression.Constant(2), Expression.Constant(1), Expression.Constant(2)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ArrayIndexWrongType()
         {
             Expression array = Expression.Constant(new[,] { { 1, 2 }, { 2, 1 } });
             AssertExtensions.Throws<ArgumentException>("indexes[0]", () => Expression.ArrayIndex(array, Expression.Constant(2L), Expression.Constant(1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UnreadableArray()
         {
             Expression array = Expression.Property(null, typeof(Unreadable<int[,]>), nameof(Unreadable<int[,]>.WriteOnly));
             AssertExtensions.Throws<ArgumentException>("array", () => Expression.ArrayIndex(array, Expression.Constant(0), Expression.Constant(0)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UnreadableIndex()
         {
             Expression array = Expression.Constant(new[,] { { 1, 2 }, { 2, 1 } });

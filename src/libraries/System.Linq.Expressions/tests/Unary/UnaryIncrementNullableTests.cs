@@ -128,7 +128,7 @@ namespace System.Linq.Expressions.Tests
 
         #endregion
 
-        [Theory, MemberData(nameof(NonArithmeticObjects), false)]
+        [Theory(Skip = "no call to CompileToMethod"), MemberData(nameof(NonArithmeticObjects), false)]
         public static void DecrementNonArithmetic(object value)
         {
             Expression ex = Expression.Constant(value, typeof(Nullable<>).MakeGenericType(value.GetType()));

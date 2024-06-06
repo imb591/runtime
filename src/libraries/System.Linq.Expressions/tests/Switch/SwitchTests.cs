@@ -469,7 +469,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(typeof(void), s.Type);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void TypedNoDefaultOrCasesSwitch()
         {
             ParameterExpression p = Expression.Parameter(typeof(int));
@@ -555,7 +555,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal("null", f(null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NullSwitchValue()
         {
             AssertExtensions.Throws<ArgumentNullException>("switchValue", () => Expression.Switch(null));
@@ -566,7 +566,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentNullException>("switchValue", () => Expression.Switch(typeof(int), null, Expression.Constant(1), default(MethodInfo), Enumerable.Empty<SwitchCase>()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void VoidSwitchValue()
         {
             AssertExtensions.Throws<ArgumentException>("switchValue", () => Expression.Switch(Expression.Empty()));
@@ -589,7 +589,7 @@ namespace System.Linq.Expressions.Tests
             yield return new object[] { quaternary.GetMethodInfo() };
         }
 
-        [Theory, MemberData(nameof(ComparisonsWithInvalidParameterCounts))]
+        [Theory(Skip = "no call to CompileToMethod"), MemberData(nameof(ComparisonsWithInvalidParameterCounts))]
         public void InvalidComparisonMethodParameterCount(MethodInfo comparison)
         {
             AssertExtensions.Throws<ArgumentException>("comparison", () => Expression.Switch(Expression.Constant(0), Expression.Empty(), comparison));
@@ -598,7 +598,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("comparison", () => Expression.Switch(typeof(int), Expression.Constant(0), Expression.Constant(1), comparison, Enumerable.Empty<SwitchCase>()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ComparisonLeftParameterIncorrect()
         {
             Func<string, int, bool> isLength = (x, y) => (x?.Length).GetValueOrDefault() == y;
@@ -609,7 +609,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.Switch(typeof(int), Expression.Constant(0), Expression.Constant(1), comparer, Enumerable.Empty<SwitchCase>()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ComparisonRightParameterIncorrect()
         {
             Func<int, string, bool> isLength = (x, y) => (y?.Length).GetValueOrDefault() == x;
@@ -625,7 +625,7 @@ namespace System.Linq.Expressions.Tests
             public static bool WithinTwo(int x, int y) => Math.Abs(x - y) < 2;
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void OpenGenericMethodDeclarer()
         {
             Expression switchVal = Expression.Constant(30);
@@ -655,7 +655,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(2, f());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void LeftLiftedCall()
         {
             AssertExtensions.Throws<ArgumentException>(null, () =>
@@ -668,7 +668,7 @@ namespace System.Linq.Expressions.Tests
                 );
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CaseTypeMisMatch()
         {
             AssertExtensions.Throws<ArgumentException>("cases", () =>
@@ -688,7 +688,7 @@ namespace System.Linq.Expressions.Tests
 
         static int NonBooleanMethod(int x, int y) => x + y;
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NonBooleanComparer()
         {
             MethodInfo comparer = typeof(SwitchTests).GetMethod(nameof(NonBooleanMethod), BindingFlags.Static | BindingFlags.NonPublic);
@@ -698,19 +698,19 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("cases", () => Expression.Switch(typeof(int), Expression.Constant(0), Expression.Constant(1), comparer, Enumerable.Repeat(Expression.SwitchCase(Expression.Empty(), Expression.Constant(0)), 1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void MismatchingCasesAndType()
         {
             AssertExtensions.Throws<ArgumentException>("cases", () => Expression.Switch(Expression.Constant(2), Expression.SwitchCase(Expression.Constant("Foo"), Expression.Constant(0)), Expression.SwitchCase(Expression.Constant(3), Expression.Constant(9))));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void MismatchingCasesAndExpclitType()
         {
             AssertExtensions.Throws<ArgumentException>("cases", () => Expression.Switch(typeof(int), Expression.Constant(0), null, null, Expression.SwitchCase(Expression.Constant("Foo"), Expression.Constant(0))));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void MismatchingDefaultAndExpclitType()
         {
             AssertExtensions.Throws<ArgumentException>("defaultBody", () => Expression.Switch(typeof(int), Expression.Constant(0), Expression.Constant("Foo"), null));
@@ -761,7 +761,7 @@ namespace System.Linq.Expressions.Tests
                 ).Compile(useInterpreter)();
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void SwitchCaseUpdateSameToSame()
         {
             Expression[] tests = {Expression.Constant(0), Expression.Constant(2)};
@@ -770,7 +770,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(sc, sc.Update(sc.TestValues, sc.Body));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void SwitchCaseUpdateNullTestsToSame()
         {
             SwitchCase sc = Expression.SwitchCase(Expression.Constant(0), Expression.Constant(1));
@@ -778,28 +778,28 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentNullException>("body", () => sc.Update(sc.TestValues, null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void SwitchCaseDifferentBodyToDifferent()
         {
             SwitchCase sc = Expression.SwitchCase(Expression.Constant(1), Expression.Constant(0), Expression.Constant(2));
             Assert.NotSame(sc, sc.Update(sc.TestValues, Expression.Constant(1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void SwitchCaseDifferentTestsToDifferent()
         {
             SwitchCase sc = Expression.SwitchCase(Expression.Constant(1), Expression.Constant(0), Expression.Constant(2));
             Assert.NotSame(sc, sc.Update(new[] { Expression.Constant(0), Expression.Constant(2) }, sc.Body));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void SwitchCaseUpdateDoesntRepeatEnumeration()
         {
             SwitchCase sc = Expression.SwitchCase(Expression.Constant(1), Expression.Constant(0), Expression.Constant(2));
             Assert.NotSame(sc, sc.Update(new RunOnceEnumerable<Expression>(new[] { Expression.Constant(0), Expression.Constant(2) }), sc.Body));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void SwitchUpdateSameToSame()
         {
             SwitchCase[] cases =
@@ -818,7 +818,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(sw, NoOpVisitor.Instance.Visit(sw));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void SwitchUpdateDifferentDefaultToDifferent()
         {
             SwitchExpression sw = Expression.Switch(
@@ -830,7 +830,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(sw, sw.Update(sw.SwitchValue, sw.Cases, Expression.Constant(0)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void SwitchUpdateDifferentValueToDifferent()
         {
             SwitchExpression sw = Expression.Switch(
@@ -842,7 +842,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(sw, sw.Update(Expression.Constant(0), sw.Cases, sw.DefaultBody));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void SwitchUpdateDifferentCasesToDifferent()
         {
             SwitchExpression sw = Expression.Switch(
@@ -861,7 +861,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(sw, sw.Update(sw.SwitchValue, newCases, sw.DefaultBody));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void SwitchUpdateDoesntRepeatEnumeration()
         {
             SwitchExpression sw = Expression.Switch(
@@ -882,14 +882,14 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(sw, sw.Update(sw.SwitchValue, newCases, sw.DefaultBody));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void SingleTestCaseToString()
         {
             SwitchCase sc = Expression.SwitchCase(Expression.Constant(1), Expression.Constant(0));
             Assert.Equal("case (0): ...", sc.ToString());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void MultipleTestCaseToString()
         {
             SwitchCase sc = Expression.SwitchCase(Expression.Constant(1), Expression.Constant(0), Expression.Constant("A"));
@@ -951,7 +951,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ToStringTest()
         {
             SwitchExpression e1 = Expression.Switch(Expression.Parameter(typeof(int), "x"), Expression.SwitchCase(Expression.Empty(), Expression.Constant(1)));

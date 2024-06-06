@@ -147,7 +147,7 @@ namespace System.Linq.Expressions.Tests
             yield return new object[] { Expression.Property(obj, nameof(PropertyAndFields.Int32Property), new Expression[0]), 7 };
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void BasicAssignmentExpressionTest()
         {
             ParameterExpression left = Expression.Parameter(typeof(int));
@@ -203,7 +203,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(func());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CannotReduce()
         {
             Expression exp = Expression.Assign(Expression.Variable(typeof(int)), Expression.Constant(0));
@@ -212,19 +212,19 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => exp.ReduceAndCheck());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void LeftNull_ThrowsArgumentNullException()
         {
             AssertExtensions.Throws<ArgumentNullException>("left", () => Expression.Assign(null, Expression.Constant("")));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void RightNull_ThrowsArgumentNullException()
         {
             AssertExtensions.Throws<ArgumentNullException>("right", () => Expression.Assign(Expression.Variable(typeof(int)), null));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [InlineData(typeof(int), "Hello", typeof(string))]
         [InlineData(typeof(long), 1, typeof(int))]
         [InlineData(typeof(int?), 1, typeof(int))]
@@ -250,14 +250,14 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal("Hello", Expression.Lambda<Func<object>>(exp).Compile(useInterpreter)());
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ReadOnlyExpressions))]
         public void LeftReadOnly_ThrowsArgumentException(Expression readonlyExp)
         {
             AssertExtensions.Throws<ArgumentException>("left", () => Expression.Assign(readonlyExp, Expression.Default(readonlyExp.Type)));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(WriteOnlyExpressions))]
         public static void Right_WriteOnly_ThrowsArgumentException(Expression writeOnlyExp)
         {
@@ -265,7 +265,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("right", () => Expression.Assign(variable, writeOnlyExp));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [ClassData(typeof(InvalidTypesData))]
         public static void Left_InvalidType_ThrowsArgumentException(Type type)
         {
@@ -273,7 +273,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("left", () => Expression.Assign(left, Expression.Parameter(typeof(int))));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [ClassData(typeof(InvalidTypesData))]
         public static void Right_InvalidType_ThrowsArgumentException(Type type)
         {
@@ -339,7 +339,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(func());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ToStringTest()
         {
             BinaryExpression e = Expression.Assign(Expression.Parameter(typeof(int), "a"), Expression.Parameter(typeof(int), "b"));

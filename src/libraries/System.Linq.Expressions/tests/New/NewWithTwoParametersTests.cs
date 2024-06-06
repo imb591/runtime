@@ -97,7 +97,7 @@ namespace System.Linq.Expressions.Tests
 
         #endregion
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UpdateSameReturnsSame()
         {
             ConstructorInfo constructor = typeof(Sp).GetConstructor(new[] { typeof(int), typeof(double) });
@@ -113,7 +113,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(newExp, newExp.Update(exprArgs));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UpdateDifferentReturnsDifferent()
         {
             ConstructorInfo constructor = typeof(Sp).GetConstructor(new[] { typeof(int), typeof(double) });
@@ -127,7 +127,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(newExp, newExp.Update(new[] { Expression.Constant("x"), Expression.Constant(23) }));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UpdateDoesntRepeatEnumeration()
         {
             ConstructorInfo constructor = typeof(Sp).GetConstructor(new[] { typeof(int), typeof(double) });

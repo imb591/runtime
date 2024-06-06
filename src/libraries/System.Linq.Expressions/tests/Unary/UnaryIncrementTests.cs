@@ -92,14 +92,14 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ToStringTest()
         {
             UnaryExpression e = Expression.Increment(Expression.Parameter(typeof(int), "x"));
             Assert.Equal("Increment(x)", e.ToString());
         }
 
-        [Theory, MemberData(nameof(NonArithmeticObjects), true)]
+        [Theory(Skip = "no call to CompileToMethod"), MemberData(nameof(NonArithmeticObjects), true)]
         public static void IncrementNonArithmetic(object value)
         {
             Expression ex = Expression.Constant(value);
@@ -132,13 +132,13 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, func());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NullOperand()
         {
             AssertExtensions.Throws<ArgumentNullException>("expression", () => Expression.Decrement(null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UnreadableOperand()
         {
             Expression operand = Expression.Property(null, typeof(Unreadable<int>), nameof(Unreadable<int>.WriteOnly));

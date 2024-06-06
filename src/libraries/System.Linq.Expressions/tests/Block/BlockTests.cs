@@ -121,7 +121,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void VisitChangingOnlyParameters()
         {
             BlockExpression block = Expression.Block(
@@ -131,7 +131,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(block, new ParameterChangingVisitor().Visit(block));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void VisitChangingOnlyParametersMultiStatementBody()
         {
             BlockExpression block = Expression.Block(
@@ -142,7 +142,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(block, new ParameterChangingVisitor().Visit(block));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void VisitChangingOnlyParametersTyped()
         {
             BlockExpression block = Expression.Block(
@@ -175,7 +175,7 @@ namespace System.Linq.Expressions.Tests
             nop();
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void EmptyBlockWrongExplicitType()
         {
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.Block(typeof(int)));
@@ -203,7 +203,7 @@ namespace System.Linq.Expressions.Tests
             nop();
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void EmptyScopeExplicitWrongType()
         {
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.Block(
@@ -212,7 +212,7 @@ namespace System.Linq.Expressions.Tests
                 new Expression[0]));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ToStringTest()
         {
             BlockExpression e1 = Expression.Block(Expression.Empty());

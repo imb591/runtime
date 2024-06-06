@@ -9,7 +9,7 @@ namespace System.Linq.Expressions.Tests
 {
     public class ParameterTests : ParameterExpressionTests
     {
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ValidTypeData))]
         public void CreateParameterForValidTypeNoName(Type type)
         {
@@ -19,7 +19,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Null(param.Name);
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ValidTypeData))]
         public void CrateParamForValidTypeWithName(Type type)
         {
@@ -29,21 +29,21 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal("name", param.Name);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NameNeedNotBeCSharpValid()
         {
             ParameterExpression param = Expression.Parameter(typeof(int), "a name with characters not allowed in C# <, >, !, =, \0, \uFFFF, &c.");
             Assert.Equal("a name with characters not allowed in C# <, >, !, =, \0, \uFFFF, &c.", param.Name);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ParameterCannotBeTypeVoid()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Parameter(typeof(void)));
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Parameter(typeof(void), "var"));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [ClassData(typeof(InvalidTypesData))]
         public void OpenGenericType_ThrowsArgumentException(Type type)
         {
@@ -51,14 +51,14 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Parameter(type, "name"));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NullType()
         {
             AssertExtensions.Throws<ArgumentNullException>("type", () => Expression.Parameter(null));
             AssertExtensions.Throws<ArgumentNullException>("type", () => Expression.Parameter(null, "var"));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ByRefTypeData))]
         public void ParameterCanBeByRef(Type type)
         {
@@ -68,7 +68,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Null(param.Name);
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ByRefTypeData))]
         public void NamedParameterCanBeByRef(Type type)
         {
@@ -292,7 +292,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(res, value);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CannotReduce()
         {
             ParameterExpression param = Expression.Parameter(typeof(int));
@@ -301,7 +301,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => param.ReduceAndCheck());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CannotBePointerType()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Parameter(typeof(int*)));

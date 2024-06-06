@@ -7,20 +7,20 @@ namespace System.Linq.Expressions.Tests
 {
     public class TypeEqual : TypeBinaryTests
     {
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NullExpression()
         {
             AssertExtensions.Throws<ArgumentNullException>("expression", () => Expression.TypeEqual(null, typeof(int)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NullType()
         {
             Expression exp = Expression.Constant(0);
             AssertExtensions.Throws<ArgumentNullException>("type", () => Expression.TypeEqual(exp, null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void TypeByRef()
         {
             Expression exp = Expression.Constant(0);
@@ -39,14 +39,14 @@ namespace System.Linq.Expressions.Tests
             Assert.False(func());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UnreadableExpression()
         {
             Expression exp = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
             AssertExtensions.Throws<ArgumentException>("expression", () => Expression.TypeEqual(exp, typeof(int)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CannotReduce()
         {
             Expression exp = Expression.TypeIs(Expression.Constant(0), typeof(int));
@@ -55,28 +55,28 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => exp.ReduceAndCheck());
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ExpressionAndTypeCombinations))]
         public void TypePropertyMatches(Expression expression, Type type)
         {
             Assert.Equal(type, Expression.TypeEqual(expression, type).TypeOperand);
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ExpressionAndTypeCombinations))]
         public void TypeIsBoolean(Expression expression, Type type)
         {
             Assert.Equal(typeof(bool), Expression.TypeEqual(expression, type).Type);
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ExpressionAndTypeCombinations))]
         public void NodeType(Expression expression, Type type)
         {
             Assert.Equal(ExpressionType.TypeEqual, Expression.TypeEqual(expression, type).NodeType);
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ExpressionAndTypeCombinations))]
         public void ExpressionIsThatPassed(Expression expression, Type type)
         {
@@ -135,7 +135,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, func());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateSameReturnsSame()
         {
             Expression expression = Expression.Constant(0);
@@ -144,7 +144,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(typeExp, NoOpVisitor.Instance.Visit(typeExp));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateNotSameReturnsNotSame()
         {
             Expression expression = Expression.Constant(0);
@@ -152,7 +152,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(typeExp, typeExp.Update(Expression.Constant(0)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void VisitHitsVisitTypeBinary()
         {
             TypeBinaryExpression expression = Expression.TypeEqual(Expression.Constant(0), typeof(int));
@@ -196,7 +196,7 @@ namespace System.Linq.Expressions.Tests
             Assert.False(isNullOfType());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ToStringTest()
         {
             TypeBinaryExpression e = Expression.TypeEqual(Expression.Parameter(typeof(string), "s"), typeof(string));

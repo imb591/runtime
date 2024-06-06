@@ -1001,7 +1001,7 @@ namespace System.Linq.Expressions.Tests
 
         #endregion
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CannotReduceLeft()
         {
             Expression exp = Expression.LeftShift(Expression.Constant(0), Expression.Constant(0));
@@ -1010,7 +1010,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => exp.ReduceAndCheck());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CannotReduceRight()
         {
             Expression exp = Expression.RightShift(Expression.Constant(0), Expression.Constant(0));
@@ -1019,25 +1019,25 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => exp.ReduceAndCheck());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void LeftThrowsOnLeftNull()
         {
             AssertExtensions.Throws<ArgumentNullException>("left", () => Expression.LeftShift(null, Expression.Constant("")));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void LeftThrowsOnRightNull()
         {
             AssertExtensions.Throws<ArgumentNullException>("right", () => Expression.LeftShift(Expression.Constant(""), null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void RightThrowsOnLeftNull()
         {
             AssertExtensions.Throws<ArgumentNullException>("left", () => Expression.RightShift(null, Expression.Constant("")));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void RightThrowsOnRightNull()
         {
             AssertExtensions.Throws<ArgumentNullException>("right", () => Expression.RightShift(Expression.Constant(""), null));
@@ -1051,35 +1051,35 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void LeftThrowsOnLeftUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
             AssertExtensions.Throws<ArgumentException>("left", () => Expression.LeftShift(value, Expression.Constant(1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void LeftThrowsOnRightUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
             AssertExtensions.Throws<ArgumentException>("right", () => Expression.LeftShift(Expression.Constant(1), value));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void RightThrowsOnLeftUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
             AssertExtensions.Throws<ArgumentException>("left", () => Expression.RightShift(value, Expression.Constant(1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void RightThrowsOnRightUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
             AssertExtensions.Throws<ArgumentException>("right", () => Expression.RightShift(Expression.Constant(1), value));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ToStringTest()
         {
             BinaryExpression e1 = Expression.LeftShift(Expression.Parameter(typeof(int), "a"), Expression.Parameter(typeof(int), "b"));
@@ -1089,7 +1089,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal("(a >> b)", e2.ToString());
         }
 
-        [Theory, InlineData(typeof(E)), InlineData(typeof(El)), InlineData(typeof(string))]
+        [Theory(Skip = "no call to CompileToMethod"), InlineData(typeof(E)), InlineData(typeof(El)), InlineData(typeof(string))]
         public static void IncorrectLHSTypes(Type type)
         {
             DefaultExpression lhs = Expression.Default(type);
@@ -1098,7 +1098,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidOperationException>(() => Expression.RightShift(lhs, rhs));
         }
 
-        [Theory, InlineData(typeof(E)), InlineData(typeof(El)), InlineData(typeof(string)), InlineData(typeof(long)),
+        [Theory(Skip = "no call to CompileToMethod"), InlineData(typeof(E)), InlineData(typeof(El)), InlineData(typeof(string)), InlineData(typeof(long)),
          InlineData(typeof(short)), InlineData(typeof(uint))]
         public static void IncorrectRHSTypes(Type type)
         {

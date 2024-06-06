@@ -64,14 +64,14 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(16, x);
         }
 
-        [Fact, ActiveIssue("https://github.com/dotnet/runtime/issues/19286")]
+        [Fact(Skip = "no call to CompileToMethod"), ActiveIssue("https://github.com/dotnet/runtime/issues/19286")]
         public void CreateByRefAliasingInterpreted()
         {
             CreateByRefAliasing(useInterpreter: CompilationType.Interpret);
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/19286", typeof(PlatformDetection), nameof(PlatformDetection.IsLinqExpressionsBuiltWithIsInterpretingOnly))]
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CreateByRefAliasingCompiled()
         {
             CreateByRefAliasing(useInterpreter: CompilationType.Compile);

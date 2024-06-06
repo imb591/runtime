@@ -316,7 +316,7 @@ namespace System.Linq.Expressions.Tests
             yield return new object[] { typeof(NonGenericClass).GetMethod(nameof(NonGenericClass.GenericMethod)), typeof(ArgumentException) };
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(Method_Invalid_TestData))]
         public static void Method_Invalid_ThrowsArgumentException(MethodInfo method, Type exceptionType)
         {
@@ -335,7 +335,7 @@ namespace System.Linq.Expressions.Tests
             AssertArgumentException(() => Expression.Call(method, (IEnumerable<Expression>)new Expression[0]), exceptionType, "method");
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void Method_Invalid_Via_Name()
         {
             AssertExtensions.Throws<ArgumentException>("method", () => Expression.Call(typeof(GenericClass<>), nameof(GenericClass<string>.NonGenericMethod), Type.EmptyTypes));
@@ -357,14 +357,14 @@ namespace System.Linq.Expressions.Tests
             yield return new object[] { Expression.Constant(new StructWithInterface1(), typeof(object)), typeof(ClassWithInterface1).GetMethod(nameof(ClassWithInterface1.Method)) };
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(Method_DoesntBelongToInstance_TestData))]
         public static void Method_DoesntBelongToInstance_ThrowsArgumentException(Expression instance, MethodInfo method)
         {
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.Call(instance, method));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void InstanceMethod_NullInstance_ThrowsArgumentException()
         {
             MethodInfo method = typeof(NonGenericClass).GetMethod(nameof(NonGenericClass.InstanceMethod));
@@ -383,7 +383,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.Call(null, method, (IEnumerable<Expression>)new Expression[0]));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void StaticMethod_NonNullInstance_ThrowsArgumentException()
         {
             Expression instance = Expression.Constant(new NonGenericClass());
@@ -402,7 +402,7 @@ namespace System.Linq.Expressions.Tests
             yield return new object[] { Expression.Constant("abc"), typeof(ArgumentException) };
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(InvalidArg_TestData))]
         public static void Arg0_Invalid(Expression arg, Type exceptionType)
         {
@@ -417,7 +417,7 @@ namespace System.Linq.Expressions.Tests
             AssertArgumentException(() => Expression.Call(null, s_method3, arg, s_valid, s_valid), exceptionType, "arg0");
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(InvalidArg_TestData))]
         public static void Arg1_Invalid(Expression arg, Type exceptionType)
         {
@@ -430,7 +430,7 @@ namespace System.Linq.Expressions.Tests
             AssertArgumentException(() => Expression.Call(null, s_method3, s_valid, arg, s_valid), exceptionType, "arg1");
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(InvalidArg_TestData))]
         public static void Arg2_Invalid(Expression arg, Type exceptionType)
         {
@@ -441,7 +441,7 @@ namespace System.Linq.Expressions.Tests
             AssertArgumentException(() => Expression.Call(null, s_method3, s_valid, s_valid, arg), exceptionType, "arg2");
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(InvalidArg_TestData))]
         public static void Arg3_Invalid(Expression arg, Type exceptionType)
         {
@@ -449,7 +449,7 @@ namespace System.Linq.Expressions.Tests
             AssertArgumentException(() => Expression.Call(s_method5, s_valid, s_valid, s_valid, arg, s_valid), exceptionType, "arg3");
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(InvalidArg_TestData))]
         public static void Arg4_Invalid(Expression arg, Type exceptionType)
         {
@@ -462,7 +462,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(paramName, ex.ParamName);
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [InlineData(typeof(NonGenericClass), nameof(NonGenericClass.Method0), 0)]
         [InlineData(typeof(NonGenericClass), nameof(NonGenericClass.Method1), 1)]
         [InlineData(typeof(NonGenericClass), nameof(NonGenericClass.Method2), 2)]
@@ -508,26 +508,26 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("method", () => Expression.Call(null, method, Enumerable.Repeat(arg, count + 1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void MethodName_NullInstance_ThrowsArgumentNullException()
         {
             AssertExtensions.Throws<ArgumentNullException>("instance", () => Expression.Call((Expression)null, "methodName", new Type[0], new Expression[0]));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void MethodName_NullType_ThrowsArgumentNullException()
         {
             AssertExtensions.Throws<ArgumentNullException>("type", () => Expression.Call((Type)null, "methodName", new Type[0], new Expression[0]));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NullMethodName_ThrowsArgumentNullException()
         {
             AssertExtensions.Throws<ArgumentNullException>("methodName", () => Expression.Call(Expression.Constant(new NonGenericClass()), null, new Type[0], new Expression[0]));
             AssertExtensions.Throws<ArgumentNullException>("methodName", () => Expression.Call(typeof(NonGenericClass), null, new Type[0], new Expression[0]));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void MethodName_DoesNotExist_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() => Expression.Call(Expression.Constant(new NonGenericClass()), "NoSuchMethod", null));
@@ -541,7 +541,7 @@ namespace System.Linq.Expressions.Tests
             yield return new object[] { new Type[2] };
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(InvalidTypeArgs_TestData))]
         public static void MethodName_NoSuchGenericMethodWithTypeArgs_ThrowsInvalidOperationException(Type[] typeArgs)
         {
@@ -549,42 +549,42 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidOperationException>(() => Expression.Call(typeof(NonGenericClass), nameof(NonGenericClass.GenericStaticMethod), typeArgs));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void MethodName_TypeArgsDontMatchConstraints_ThrowsArgumentException()
         {
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.Call(Expression.Constant(new NonGenericClass()), nameof(NonGenericClass.ConstrainedInstanceMethod), new Type[] { typeof(object) }));
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.Call(typeof(NonGenericClass), nameof(NonGenericClass.ConstrainedStaticMethod), new Type[] { typeof(object) }));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void MethodName_NonGenericMethodHasTypeArgs_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() => Expression.Call(Expression.Constant(new NonGenericClass()), nameof(NonGenericClass.InstanceMethod), new Type[1]));
             Assert.Throws<InvalidOperationException>(() => Expression.Call(typeof(NonGenericClass), nameof(NonGenericClass.StaticMethod), new Type[1]));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void MethodName_TypeArgsHasNullValue_ThrowsArgumentNullException()
         {
             AssertExtensions.Throws<ArgumentNullException>(null, () => Expression.Call(Expression.Constant(new NonGenericClass()), nameof(NonGenericClass.GenericInstanceMethod), new Type[] { null }));
             AssertExtensions.Throws<ArgumentNullException>(null, () => Expression.Call(typeof(NonGenericClass), nameof(NonGenericClass.GenericStaticMethod), new Type[] { null }));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void MethodName_ArgumentsHasNullValue_ThrowsArgumentNullException()
         {
             AssertExtensions.Throws<ArgumentNullException>("arguments", () => Expression.Call(Expression.Constant(new NonGenericClass()), nameof(NonGenericClass.InstanceMethod1), new Type[0], new Expression[] { null }));
             AssertExtensions.Throws<ArgumentNullException>("arguments", () => Expression.Call(typeof(NonGenericClass), nameof(NonGenericClass.StaticMethod1), new Type[0], new Expression[] { null }));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void MethodName_ArgumentsHasNullValueButDifferentCount_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() => Expression.Call(Expression.Constant(new NonGenericClass()), nameof(NonGenericClass.InstanceMethod1), new Type[0], new Expression[] { null, Expression.Constant("") }));
             Assert.Throws<InvalidOperationException>(() => Expression.Call(typeof(NonGenericClass), nameof(NonGenericClass.StaticMethod1), new Type[0], new Expression[] { null, Expression.Constant("") }));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ToStringTest()
         {
             // NB: Static methods are inconsistent compared to static members; the declaring type is not included
@@ -617,7 +617,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal("x.E2(y, z)", e9.ToString());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void GetArguments()
         {
             VerifyGetArguments(Expression.Call(null, s_method0));

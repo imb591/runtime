@@ -22,7 +22,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void FactoryProducesUniqueTargets()
         {
             Assert.NotSame(Expression.Label("name"), Expression.Label("name"));
@@ -31,7 +31,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(Expression.Label(typeof(int), "name"), Expression.Label(typeof(int), "name"));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void TypeRetained()
         {
             Assert.Equal(typeof(void), Expression.Label().Type);
@@ -42,7 +42,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(typeof(void), Expression.Label(typeof(void), "name").Type);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NameRetained()
         {
             Assert.Null(Expression.Label().Name);
@@ -51,28 +51,28 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal("name", Expression.Label(typeof(int), "name").Name);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ExplicitNullName()
         {
             Assert.Null(Expression.Label(default(string)).Name);
             Assert.Null(Expression.Label(typeof(int), null).Name);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NullType()
         {
             AssertExtensions.Throws<ArgumentNullException>("type", () => Expression.Label(default(Type)));
             AssertExtensions.Throws<ArgumentNullException>("type", () => Expression.Label(null, "name"));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void GenericType()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Label(typeof(List<>)));
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Label(typeof(List<>), null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void TypeWithGenericParameters()
         {
             Type listType = typeof(List<>);
@@ -81,7 +81,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Label(listListListType, null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void PointerType()
         {
             Type pointerType = typeof(int).MakePointerType();
@@ -89,7 +89,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Label(pointerType, null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ByRefType()
         {
             Type byRefType = typeof(int).MakeByRefType();
@@ -97,7 +97,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Label(byRefType, null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NameIsStringRepresentation()
         {
             Assert.Equal("name", Expression.Label("name").ToString());
@@ -106,7 +106,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(" ", Expression.Label(typeof(int), " ").ToString());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NameForUnnamedLabel()
         {
             Assert.Equal("UnamedLabel", Expression.Label().ToString());

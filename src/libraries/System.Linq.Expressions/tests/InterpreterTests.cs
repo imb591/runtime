@@ -13,7 +13,7 @@ namespace System.Linq.Expressions.Tests
 
         // IsNotLinqExpressionsBuiltWithIsInterpretingOnly is not directly required,
         // but this functionality relies on private reflection and that would not work with AOT
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly))]
+        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly), Skip = "no call to CompileToMethod")]
         public static void VerifyInstructions_Simple()
         {
             // Using an unchecked multiplication to ensure that a mul instruction is emitted (and not mul.ovf)
@@ -46,7 +46,7 @@ namespace System.Linq.Expressions.Tests
 
         // IsNotLinqExpressionsBuiltWithIsInterpretingOnly is not directly required,
         // but this functionality relies on private reflection and that would not work with AOT
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly))]
+        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly), Skip = "no call to CompileToMethod")]
         public static void VerifyInstructions_Exceptions()
         {
             ParameterExpression x = Expression.Parameter(typeof(int), "x");
@@ -101,7 +101,7 @@ namespace System.Linq.Expressions.Tests
                   }");
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         [ActiveIssue ("https://github.com/dotnet/runtime/issues/53599", platforms: TestPlatforms.MacCatalyst, runtimes: TestRuntimes.Mono)]
         public static void ConstructorThrows_StackTrace()
         {
@@ -110,7 +110,7 @@ namespace System.Linq.Expressions.Tests
             AssertStackTrace(() => f(), "Thrower..ctor");
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void PropertyGetterThrows_StackTrace()
         {
             Expression<Func<Thrower, int>> e = t => t.Bar;
@@ -118,7 +118,7 @@ namespace System.Linq.Expressions.Tests
             AssertStackTrace(() => f(new Thrower(error: false)), "Thrower.get_Bar");
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void PropertySetterThrows_StackTrace()
         {
             ParameterExpression t = Expression.Parameter(typeof(Thrower), "t");
@@ -127,7 +127,7 @@ namespace System.Linq.Expressions.Tests
             AssertStackTrace(() => f(new Thrower(error: false)), "Thrower.set_Bar");
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void IndexerGetterThrows_StackTrace()
         {
             ParameterExpression t = Expression.Parameter(typeof(Thrower), "t");
@@ -136,7 +136,7 @@ namespace System.Linq.Expressions.Tests
             AssertStackTrace(() => f(new Thrower(error: false)), "Thrower.get_Item");
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void IndexerSetterThrows_StackTrace()
         {
             ParameterExpression t = Expression.Parameter(typeof(Thrower), "t");
@@ -145,7 +145,7 @@ namespace System.Linq.Expressions.Tests
             AssertStackTrace(() => f(new Thrower(error: false)), "Thrower.set_Item");
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void MethodThrows_StackTrace()
         {
             Expression<Action<Thrower>> e = t => t.Foo();

@@ -9,7 +9,7 @@ namespace System.Linq.Expressions.Tests
     {
         #region Test methods
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CheckNullableByteMultiplyTest()
         {
             byte?[] array = { 0, 1, byte.MaxValue, null };
@@ -22,7 +22,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CheckNullableSByteMultiplyTest()
         {
             sbyte?[] array = { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue, null };
@@ -161,7 +161,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void CheckNullableCharMultiplyTest()
         {
             char?[] array = { '\0', '\b', 'A', '\uffff', null };

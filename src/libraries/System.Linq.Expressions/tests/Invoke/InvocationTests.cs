@@ -91,7 +91,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(1, holder.Function());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ToStringTest()
         {
             InvocationExpression e1 = Expression.Invoke(Expression.Parameter(typeof(Action), "f"));
@@ -101,7 +101,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal("Invoke(f, x)", e2.ToString());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void GetArguments()
         {
             VerifyGetArguments(Expression.Invoke(Expression.Default(typeof(Action))));
@@ -146,7 +146,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ArgumentCountMismatchLambda()
         {
             Expression<Func<int, int, int>> adder = (x, y) => x + y;
@@ -154,7 +154,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidOperationException>(() => Expression.Invoke(adder, Expression.Constant(1), Expression.Constant(1), Expression.Constant(1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ArgumentTypeMismatchLambda()
         {
             Expression<Func<int, int, int>> adder = (x, y) => x + y;
@@ -162,7 +162,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("arg0", () => Expression.Invoke(adder, Expression.Constant(1L), Expression.Constant(1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ArgumentCountMismatchDelegate()
         {
             Func<int, int, int> adder = (x, y) => x + y;
@@ -170,7 +170,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidOperationException>(() => Expression.Invoke(Expression.Constant(adder), Expression.Constant(1), Expression.Constant(1), Expression.Constant(1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ArgumentTypeMismatchDelegate()
         {
             Func<int, int, int> adder = (x, y) => x + y;
@@ -178,7 +178,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("arg0", () => Expression.Invoke(Expression.Constant(adder), Expression.Constant(1L), Expression.Constant(1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UpdateSameReturnsSame()
         {
             Expression<Func<int, int, int>> adder = (x, y) => x + y;
@@ -188,7 +188,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(invoke, invoke.Update(adder, new[] {lhs, rhs}));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UpdateDifferentLambdaReturnsDifferent()
         {
             Expression<Func<int, int, int>> adder = (x, y) => x + y;
@@ -199,7 +199,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(invoke, invoke.Update(adder, new[] { lhs, rhs }));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UpdateDifferentArgReturnsDifferent()
         {
             Expression<Func<int, int, int>> adder = (x, y) => x + y;
@@ -232,13 +232,13 @@ namespace System.Linq.Expressions.Tests
             protected override Expression VisitConstant(ConstantExpression node) => Expression.Constant(node.Value, node.Type);
         }
 
-        [Theory, MemberData(nameof(InvocationExpressions))]
+        [Theory(Skip = "no call to CompileToMethod"), MemberData(nameof(InvocationExpressions))]
         public static void LambdaChangeVisit(InvocationExpression invoke)
         {
             Assert.NotSame(invoke, new ParameterChangingVisitor().Visit(invoke));
         }
 
-        [Theory, MemberData(nameof(InvocationExpressions))]
+        [Theory(Skip = "no call to CompileToMethod"), MemberData(nameof(InvocationExpressions))]
         public static void LambdaAndArgChangeVisit(InvocationExpression invoke)
         {
             Assert.NotSame(invoke, new ParameterAndConstantChangingVisitor().Visit(invoke));

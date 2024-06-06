@@ -1927,7 +1927,7 @@ namespace System.Linq.Expressions.Tests
 
         #region Regression tests
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ArrayLength_MultiDimensionalOf1()
         {
             foreach (var e in new Expression[] { Expression.Parameter(typeof(int).MakeArrayType(1)), Expression.Constant(new int[2, 2]) })

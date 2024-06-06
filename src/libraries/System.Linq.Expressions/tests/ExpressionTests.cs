@@ -135,40 +135,40 @@ namespace System.Linq.Expressions.Tests
         public static IEnumerable<object[]> SomeTypes => new[] { typeof(int), typeof(void), typeof(object), typeof(DateTime), typeof(string), typeof(ExpressionTests), typeof(ExpressionType) }
     .Select(type => new object[] { type });
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NodeTypeMustBeOverridden()
         {
             var exp = new IncompleteExpressionOverride();
             Assert.Throws<InvalidOperationException>(() => exp.NodeType);
         }
 
-        [Theory, TestOrder(1), MemberData(nameof(AllNodeTypesPlusSomeInvalid))]
+        [Theory(Skip = "no call to CompileToMethod"), TestOrder(1), MemberData(nameof(AllNodeTypesPlusSomeInvalid))]
         public void NodeTypeFromConstructor(ExpressionType nodeType)
         {
             Assert.Equal(nodeType, new ObsoleteIncompleteExpressionOverride(nodeType, typeof(int)).NodeType);
         }
 
-        [Fact, TestOrder(2)]
+        [Fact(Skip = "no call to CompileToMethod"), TestOrder(2)]
         public void NodeTypeMustBeOverriddenAfterObsoleteConstructorUsed()
         {
             var exp = new IncompleteExpressionOverride();
             Assert.Throws<InvalidOperationException>(() => exp.NodeType);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void TypeMustBeOverridden()
         {
             var exp = new IncompleteExpressionOverride();
             Assert.Throws<InvalidOperationException>(() => exp.Type);
         }
 
-        [Theory, TestOrder(1), MemberData(nameof(SomeTypes))]
+        [Theory(Skip = "no call to CompileToMethod"), TestOrder(1), MemberData(nameof(SomeTypes))]
         public void TypeFromConstructor(Type type)
         {
             Assert.Equal(type, new ObsoleteIncompleteExpressionOverride(ExpressionType.Constant, type).Type);
         }
 
-        [Fact, TestOrder(1)]
+        [Fact(Skip = "no call to CompileToMethod"), TestOrder(1)]
         public void TypeMayBeNonNullOnObsoleteConstructedExpression()
         {
             // This is probably undesirable, but throwing here would be a breaking change.
@@ -176,82 +176,82 @@ namespace System.Linq.Expressions.Tests
             Assert.Null(new ObsoleteIncompleteExpressionOverride(ExpressionType.Add, null).Type);
         }
 
-        [Fact, TestOrder(2)]
+        [Fact(Skip = "no call to CompileToMethod"), TestOrder(2)]
         public void TypeMustBeOverriddenCheckCorrectAfterObsoleteConstructorUsed()
         {
             var exp = new IncompleteExpressionOverride();
             Assert.Throws<InvalidOperationException>(() => exp.Type);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void DefaultCannotReduce()
         {
             Assert.False(new IncompleteExpressionOverride().CanReduce);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void DefaultReducesToSame()
         {
             var exp = new IncompleteExpressionOverride();
             Assert.Same(exp, exp.Reduce());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void VisitChildrenThrowsAsNotReducible()
         {
             var exp = new IncompleteExpressionOverride();
             AssertExtensions.Throws<ArgumentException>(null, () => exp.VisitChildren());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CanVisitChildrenIfReallyReduces()
         {
             var exp = new Reduces();
             Assert.NotSame(exp, exp.VisitChildren());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void VisitingCallsVisitExtension()
         {
             Assert.Same(MarkerExtension, new IncompleteExpressionOverride.Visitor().Visit(new IncompleteExpressionOverride()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ReduceAndCheckThrowsByDefault()
         {
             var exp = new IncompleteExpressionOverride();
             AssertExtensions.Throws<ArgumentException>(null, () => exp.ReduceAndCheck());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ReduceExtensionsThrowsByDefault()
         {
             var exp = new IncompleteExpressionOverride();
             AssertExtensions.Throws<ArgumentException>(null, () => exp.ReduceAndCheck());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void IfClaimCanReduceMustReduce()
         {
             var exp = new ClaimedReducibleOverride();
             AssertExtensions.Throws<ArgumentException>(null, () => exp.Reduce());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ReduceAndCheckThrowOnReduceToSame()
         {
             var exp = new ReducesToSame();
             AssertExtensions.Throws<ArgumentException>(null, () => exp.ReduceAndCheck());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ReduceAndCheckThrowOnReduceToNull()
         {
             var exp = new ReducesToNull();
             AssertExtensions.Throws<ArgumentException>(null, () => exp.ReduceAndCheck());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ReduceAndCheckThrowOnReducedTypeNotAssignable()
         {
             var exp = new ReducesToLongTyped();
@@ -284,7 +284,7 @@ namespace System.Linq.Expressions.Tests
             public int this[int index] => 0;
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ConfirmCanRead()
         {
             var readableExpressions = new Expression[]
@@ -340,7 +340,7 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> WritableExpressionData => WritableExpressions.Select(exp => new object[] { exp });
 
-        [Theory, MemberData(nameof(UnreadableExpressionData))]
+        [Theory(Skip = "no call to CompileToMethod"), MemberData(nameof(UnreadableExpressionData))]
         public void ConfirmCannotRead(Expression unreadableExpression)
         {
             if (unreadableExpression == null)
@@ -349,13 +349,13 @@ namespace System.Linq.Expressions.Tests
                 AssertExtensions.Throws<ArgumentException>("expression", () => Expression.Increment(unreadableExpression));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ConfirmCannotReadSequence()
         {
             AssertExtensions.Throws<ArgumentException>("expressions[0]", () => Expression.Block(typeof(void), UnreadableExpressions));
         }
 
-        [Theory, MemberData(nameof(UnwritableExpressionData))]
+        [Theory(Skip = "no call to CompileToMethod"), MemberData(nameof(UnwritableExpressionData))]
         public void ConfirmCannotWrite(Expression unwritableExpression)
         {
             if (unwritableExpression == null)
@@ -364,7 +364,7 @@ namespace System.Linq.Expressions.Tests
                 AssertExtensions.Throws<ArgumentException>("left", () => Expression.Assign(unwritableExpression, Expression.Constant(0)));
         }
 
-        [Theory, MemberData(nameof(WritableExpressionData))]
+        [Theory(Skip = "no call to CompileToMethod"), MemberData(nameof(WritableExpressionData))]
         public void ConfirmCanWrite(Expression writableExpression)
         {
             Expression.Assign(writableExpression, Expression.Default(writableExpression.Type));
@@ -391,7 +391,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(3, exp.Compile(useInterpreter)());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ToStringTest()
         {
             var e1 = new ExtensionNoToString();

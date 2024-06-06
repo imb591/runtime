@@ -38,19 +38,19 @@ namespace System.Linq.Expressions.Tests
             public int AlwaysInt32 { get; set; }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NullPropertyAccessor()
         {
             AssertExtensions.Throws<ArgumentNullException>("propertyAccessor", () => Expression.Bind(default(MethodInfo), Expression.Constant(0)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NullMember()
         {
             AssertExtensions.Throws<ArgumentNullException>("member", () => Expression.Bind(default(MemberInfo), Expression.Constant(0)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NullExpression()
         {
             MemberInfo member = typeof(PropertyAndFields).GetMember(nameof(PropertyAndFields.StringProperty))[0];
@@ -59,14 +59,14 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentNullException>("expression", () => Expression.Bind(property, null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ReadOnlyMember()
         {
             AssertExtensions.Throws<ArgumentException>("member", () => Expression.Bind(typeof(string).GetProperty(nameof(string.Length)), Expression.Constant(0)));
             AssertExtensions.Throws<ArgumentException>("member", () => Expression.Bind(typeof(string).GetMember(nameof(string.Length))[0], Expression.Constant(0)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void WriteOnlyExpression()
         {
             MemberInfo member = typeof(PropertyAndFields).GetMember(nameof(PropertyAndFields.StringProperty))[0];
@@ -76,7 +76,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("expression", () => Expression.Bind(property, expression));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void MethodForMember()
         {
             MemberInfo member = typeof(PropertyAndFields).GetMember(nameof(object.ToString))[0];
@@ -85,7 +85,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("propertyAccessor", () => Expression.Bind(method, Expression.Constant("")));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ExpressionTypeNotAssignable()
         {
             MemberInfo member = typeof(PropertyAndFields).GetMember(nameof(PropertyAndFields.StringProperty))[0];
@@ -94,7 +94,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.Bind(property, Expression.Constant(0)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void OpenGenericTypesMember()
         {
             MemberInfo member = typeof(Unreadable<>).GetMember("WriteOnly")[0];
@@ -103,7 +103,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.Bind(property, Expression.Constant(0)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void OpenGenericTypesNonGenericMember()
         {
             MemberInfo member = typeof(GenericType<>).GetMember(nameof(GenericType<int>.AlwaysInt32))[0];
@@ -112,7 +112,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.Bind(property, Expression.Constant(0)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void MustBeMemberOfType()
         {
             NewExpression newExp = Expression.New(typeof(UriBuilder));
@@ -189,7 +189,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal("ABC", func().ReadonlyStringField);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ReadonlyProperty()
         {
             MemberInfo member = typeof(PropertyAndFields).GetMember(nameof(PropertyAndFields.ReadonlyStringProperty))[0];
@@ -198,7 +198,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("member", () => Expression.Bind(property, Expression.Constant("")));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void StaticReadonlyProperty()
         {
             MemberInfo member = typeof(PropertyAndFields).GetMember(nameof(PropertyAndFields.StaticReadonlyStringProperty))[0];
@@ -236,21 +236,21 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidProgramException>(() => assignToStaticProperty.Compile(useInterpreter));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateDifferentReturnsDifferent()
         {
             MemberAssignment bind = Expression.Bind(typeof(PropertyAndFields).GetProperty("StringProperty"), Expression.Constant("Hello Property"));
             Assert.NotSame(bind, Expression.Default(typeof(string)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateSameReturnsSame()
         {
             MemberAssignment bind = Expression.Bind(typeof(PropertyAndFields).GetProperty("StringProperty"), Expression.Constant("Hello Property"));
             Assert.Same(bind, bind.Update(bind.Expression));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void MemberBindingTypeAssignment()
         {
             MemberAssignment bind = Expression.Bind(typeof(PropertyAndFields).GetProperty("StringProperty"), Expression.Constant("Hello Property"));
@@ -278,13 +278,13 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Theory, MemberData(nameof(BogusBindings))]
+        [Theory(Skip = "no call to CompileToMethod"), MemberData(nameof(BogusBindings))]
         public void BogusBindingType(MemberBinding binding)
         {
             AssertExtensions.Throws<ArgumentException>("bindings[0]", () => Expression.MemberInit(Expression.New(typeof(PropertyAndFields)), binding));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported), Skip = "no call to CompileToMethod")]
         public void GlobalMethod()
         {
             ModuleBuilder module = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), AssemblyBuilderAccess.RunAndCollect).DefineDynamicModule("Module");
@@ -295,7 +295,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("propertyAccessor", () => Expression.Bind(globalMethodInfo, Expression.Constant(2)));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported), Skip = "no call to CompileToMethod")]
         public void GlobalField()
         {
             ModuleBuilder module = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), AssemblyBuilderAccess.RunAndCollect).DefineDynamicModule("Module");

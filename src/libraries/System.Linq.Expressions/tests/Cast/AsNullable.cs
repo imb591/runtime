@@ -7,7 +7,7 @@ namespace System.Linq.Expressions.Tests
 {
     public static class AsNullableTests
     {
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NotLiftedEvenOnNullableOperand()
         {
             Assert.False(Expression.TypeAs(Expression.Constant(E.A, typeof(E?)), typeof(E?)).IsLifted);

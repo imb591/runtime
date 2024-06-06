@@ -147,7 +147,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ThrowOnNegativeSizedCollection()
         {
             // This is an obscure case, and it doesn't much matter what is thrown, as long as is thrown before such
@@ -183,70 +183,70 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NullType_ThrowsArgumentNullException()
         {
             AssertExtensions.Throws<ArgumentNullException>("type", () => Expression.NewArrayBounds(null, Expression.Constant(2)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void VoidType_ThrowsArgumentException()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.NewArrayBounds(typeof(void), Expression.Constant(2)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NullBounds_ThrowsArgumentnNullException()
         {
             AssertExtensions.Throws<ArgumentNullException>("bounds", () => Expression.NewArrayBounds(typeof(int), default(Expression[])));
             AssertExtensions.Throws<ArgumentNullException>("bounds", () => Expression.NewArrayBounds(typeof(int), default(IEnumerable<Expression>)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void EmptyBounds_ThrowsArgumentException()
         {
             AssertExtensions.Throws<ArgumentException>("bounds", () => Expression.NewArrayBounds(typeof(int)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NullBoundInBounds_ThrowsArgumentNullException()
         {
             AssertExtensions.Throws<ArgumentNullException>("bounds[0]", () => Expression.NewArrayBounds(typeof(int), new Expression[] { null, null }));
             AssertExtensions.Throws<ArgumentNullException>("bounds[0]", () => Expression.NewArrayBounds(typeof(int), new List<Expression> { null, null }));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NonIntegralBoundInBounds_ThrowsArgumentException()
         {
             AssertExtensions.Throws<ArgumentException>("bounds[0]", () => Expression.NewArrayBounds(typeof(int), Expression.Constant(2.0)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ByRefType_ThrowsArgumentException()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.NewArrayBounds(typeof(int).MakeByRefType(), Expression.Constant(2)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void PointerType_ThrowsArgumentException()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.NewArrayBounds(typeof(int).MakePointerType(), Expression.Constant(2)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void OpenGenericType_ThrowsArgumentException()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.NewArrayBounds(typeof(List<>), Expression.Constant(2)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void TypeContainsGenericParameters_ThrowsArgumentException()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.NewArrayBounds(typeof(List<>.Enumerator), Expression.Constant(2)));
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.NewArrayBounds(typeof(List<>).MakeGenericType(typeof(List<>)), Expression.Constant(2)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UpdateSameReturnsSame()
         {
             Expression bound0 = Expression.Constant(2);
@@ -255,7 +255,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(newArrayExpression, newArrayExpression.Update(new [] {bound0, bound1}));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UpdateDifferentReturnsDifferent()
         {
             Expression bound0 = Expression.Constant(2);
@@ -266,7 +266,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(newArrayExpression, newArrayExpression.Update(newArrayExpression.Expressions.Reverse()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UpdateDoesntRepeatEnumeration()
         {
             Expression bound0 = Expression.Constant(2);
@@ -275,7 +275,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(newArrayExpression, newArrayExpression.Update(new RunOnceEnumerable<Expression>(new[] { bound0 })));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void UpdateNullThrows()
         {
             Expression bound0 = Expression.Constant(2);

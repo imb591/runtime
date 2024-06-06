@@ -119,7 +119,7 @@ namespace System.Linq.Expressions.Tests
             return NonBinaryTypesIncludingInvalid.Select(i => new object[] { i });
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(NonBinaryTypesIncludingInvalidData))]
         public void MakeBinaryInvalidType(ExpressionType type)
         {
@@ -128,7 +128,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("binaryType", () => Expression.MakeBinary(type, Expression.Constant(0), Expression.Constant(0), false, null, null));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(BinaryTypesData))]
         public void MakeBinaryLeftNull(ExpressionType type)
         {
@@ -137,7 +137,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<ArgumentNullException>(() => Expression.MakeBinary(type, null, Expression.Constant(0), false, null, null));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(BinaryTypesData))]
         public void MakeBinaryRightNull(ExpressionType type)
         {

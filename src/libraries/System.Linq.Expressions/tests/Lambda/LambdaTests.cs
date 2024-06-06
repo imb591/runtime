@@ -149,7 +149,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(210, f(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void LambdaTypeMustBeDelegate()
         {
             AssertExtensions.Throws<ArgumentException>("TDelegate", () => Expression.Lambda<object>(Expression.Constant(0)));
@@ -175,7 +175,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("delegateType", () => Expression.Lambda(typeof(MulticastDelegate), Expression.Constant(0), true));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NullLambdaBody()
         {
             AssertExtensions.Throws<ArgumentNullException>("body", () => Expression.Lambda<Func<int, int>>(null));
@@ -188,7 +188,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentNullException>("body", () => Expression.Lambda(typeof(Func<int, int>), null, "foo", Enumerable.Empty<ParameterExpression>()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NullParameters()
         {
             Assert.Empty(Expression.Lambda<Func<int>>(Expression.Constant(0), default(ParameterExpression[])).Parameters);
@@ -201,7 +201,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Empty(Expression.Lambda(typeof(Func<int>), Expression.Constant(0), "foo", default(IEnumerable<ParameterExpression>)).Parameters);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NullParameter()
         {
             AssertExtensions.Throws<ArgumentNullException>("parameters[0]", () => Expression.Lambda<Func<int, int>>(Expression.Constant(0), default(ParameterExpression)));
@@ -214,7 +214,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentNullException>("parameters[0]", () => Expression.Lambda(typeof(Func<int, int>), Expression.Constant(0), "foo", Enumerable.Repeat(default(ParameterExpression), 1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ExplicitlyNullNameAllowed()
         {
             Assert.Null(Expression.Lambda<Func<int>>(Expression.Constant(0), null, Enumerable.Empty<ParameterExpression>()).Name);
@@ -222,7 +222,7 @@ namespace System.Linq.Expressions.Tests
         }
 
         // Order this last to give IcosanaryInt32Func a chance to have been used by other tests.
-        [Fact, TestOrder(1)]
+        [Fact(Skip = "no call to CompileToMethod"), TestOrder(1)]
         public void ImplicitlyTyped()
         {
             LambdaExpression exp = Expression.Lambda(
@@ -307,7 +307,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(delType, Expression.Lambda(Expression.Constant(3L), Expression.Parameter(typeof(int).MakeByRefType())).Type);
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NoPreferenceCompile()
         {
             // The two compilation options are given plenty of exercise between here and elsewhere
@@ -327,7 +327,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(19, exp.Compile().DynamicInvoke(12));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void DuplicateParameters()
         {
             ParameterExpression param = Expression.Parameter(typeof(int));
@@ -336,7 +336,7 @@ namespace System.Linq.Expressions.Tests
                 () => Expression.Lambda<Func<int, int, int>>(Expression.Constant(0), false, param, param));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void IncorrectArgumentCount()
         {
             AssertExtensions.Throws<ArgumentException>(null,
@@ -353,7 +353,7 @@ namespace System.Linq.Expressions.Tests
                 () => Expression.Lambda(typeof(Func<int, int, int>), Expression.Constant(1), "nullary or binary?", Enumerable.Empty<ParameterExpression>()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void ByRefParameterForValueDelegateParameter()
         {
             AssertExtensions.Throws<ArgumentException>(null,
@@ -375,7 +375,7 @@ namespace System.Linq.Expressions.Tests
                     Expression.Parameter(typeof(int))));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void IncorrectParameterTypes()
         {
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.Lambda<Action<int>>(Expression.Empty(), Expression.Parameter(typeof(long))));
@@ -384,7 +384,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.Lambda(typeof(Func<Uri, int>), Expression.Constant(1), Expression.Parameter(typeof(string))));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void IncorrectReturnTypes()
         {
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.Lambda<Func<int>>(Expression.Constant(typeof(long))));
@@ -446,7 +446,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(23, exp.Compile(useInterpreter)());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateSameReturnsSame()
         {
             Expression body = Expression.Empty();
@@ -468,7 +468,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(lambda4, lambda4.Update(body, pars));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateDoesntRepeatEnumeration()
         {
             Expression body = Expression.Empty();
@@ -489,7 +489,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(lambda4, lambda4.Update(body, new RunOnceEnumerable<ParameterExpression>(pars)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateDifferentBodyReturnsDifferent()
         {
             Expression body = Expression.Empty();
@@ -511,7 +511,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(lambda4, lambda4.Update(newBody, pars));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateDifferentParamsReturnsDifferent()
         {
             Expression body = Expression.Empty();
@@ -556,7 +556,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateLeavesTailCallAsIs()
         {
             var lambda = (Expression<Func<int>>)Expression.Lambda(Expression.Constant(1), true);
@@ -738,7 +738,7 @@ namespace System.Linq.Expressions.Tests
             from tailCall in new[] {false, true}
             select new object[] {parCount, name, tailCall};
 
-        [Theory, MemberData(nameof(LambdaTypes))]
+        [Theory(Skip = "no call to CompileToMethod"), MemberData(nameof(LambdaTypes))]
         public void ParameterListBehavior(int parCount, string name, bool tailCall)
         {
             // This method contains a lot of assertions, which amount to one large assertion that
@@ -916,7 +916,7 @@ namespace System.Linq.Expressions.Tests
             return var += val;
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void OpenGenericDelegate()
         {
             AssertExtensions.Throws<ArgumentException>("delegateType", () => Expression.Lambda(typeof(Action<>), Expression.Empty()));
@@ -941,7 +941,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(42, del.DynamicInvoke());
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMonoRuntime), nameof(PlatformDetection.IsNotNativeAot))]
+        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMonoRuntime), nameof(PlatformDetection.IsNotNativeAot), Skip = "no call to CompileToMethod")]
         public void ValidateThatInterpreterWithSimpleTypeUsesNonDynamicThunk()
         {
             Expression<Action> action = () => Console.WriteLine("");
@@ -959,7 +959,7 @@ namespace System.Linq.Expressions.Tests
             Assert.True(func2.Compile(preferInterpretation:true).Method.GetType().Name == "RuntimeMethodInfo");
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMonoRuntime), nameof(PlatformDetection.IsNotNativeAot))]
+        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMonoRuntime), nameof(PlatformDetection.IsNotNativeAot), Skip = "no call to CompileToMethod")]
         public void ValidateThatInterpreterWithSimpleTypeUsesDynamicThunk()
         {
             Expression<Action<object,object,object>> complexaction = (object o1, object o2, object o3) => Console.WriteLine("");

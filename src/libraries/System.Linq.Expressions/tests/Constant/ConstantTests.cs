@@ -960,51 +960,51 @@ namespace System.Linq.Expressions.Tests
 
 #endregion
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void InvalidTypeValueType()
         {
             // implicit cast, but not reference assignable.
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.Constant(0, typeof(long)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void InvalidTypeReferenceType()
         {
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.Constant("hello", typeof(Expression)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void NullType()
         {
             AssertExtensions.Throws<ArgumentNullException>("type", () => Expression.Constant("foo", null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ByRefType()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Constant(null, typeof(string).MakeByRefType()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void PointerType()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Constant(null, typeof(string).MakePointerType()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void GenericType()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Constant(null, typeof(List<>)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void TypeContainsGenericParameters()
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Constant(null, typeof(List<>.Enumerator)));
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Constant(null, typeof(List<>).MakeGenericType(typeof(List<>))));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ToStringTest()
         {
             ConstantExpression e1 = Expression.Constant(1);

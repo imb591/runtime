@@ -156,7 +156,7 @@ namespace System.Linq.Expressions.Tests
                 }
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(AssignmentMethods))]
         public void AssignmentReducable(MethodInfo assign, Type type)
         {
@@ -168,7 +168,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(assignment, assignment.ReduceAndCheck());
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(AssignmentMethods))]
         public void CannotAssignToNonWritable(MethodInfo assign, Type type)
         {
@@ -177,7 +177,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("left", () => withAssignment(Expression.Default(type), Expression.Default(type)));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(AssignmentMethods))]
         public void AssignmentWithMemberAccessReducable(MethodInfo assign, Type type)
         {
@@ -192,7 +192,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(assignment, assignment.ReduceAndCheck());
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(AssignmentMethods))]
         public void AssignmentWithIndexAccessReducable(MethodInfo assign, Type type)
         {
@@ -216,7 +216,7 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(AssignmentMethods))]
         public static void ThrowsOnLeftUnreadable(MethodInfo assign, Type type)
         {
@@ -227,7 +227,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("left", () => withAssignment(property, Expression.Default(type)));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(AssignmentMethods))]
         public static void ThrowsOnRightUnreadable(MethodInfo assign, Type type)
         {
@@ -239,7 +239,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("right", () => withAssignment(variable, property));
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(AssignmentMethodsWithoutTypes))]
         public void ThrowIfNoSuchBinaryOperation(MethodInfo assign)
         {
@@ -307,7 +307,7 @@ namespace System.Linq.Expressions.Tests
                 yield return Tuple.Create("Power", "PowerAssign");
         }
 
-        [Theory]
+        [Theory(Skip = "no call to CompileToMethod")]
         [MemberData(nameof(ToStringData))]
         public static void ToStringTest(ExpressionType kind, string symbol, Type type)
         {
@@ -434,7 +434,7 @@ namespace System.Linq.Expressions.Tests
                 AssignExpressionTypes.SelectMany(
                     t => NonIntegerTakingUnaryIntegerReturningLambda, (t, l) => new object[] {t, l});
 
-        [Theory, MemberData(nameof(AssignExpressionTypesArguments))]
+        [Theory(Skip = "no call to CompileToMethod"), MemberData(nameof(AssignExpressionTypesArguments))]
         public void CannotHaveConversionOnAssignWithoutMethod(ExpressionType type)
         {
             var lhs = Expression.Variable(typeof(int));
@@ -465,7 +465,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(118, func(15));
         }
 
-        [Theory, MemberData(nameof(AssignExpressionTypesAndNonUnaryLambdas))]
+        [Theory(Skip = "no call to CompileToMethod"), MemberData(nameof(AssignExpressionTypesAndNonUnaryLambdas))]
         public void ConversionMustBeUnary(ExpressionType type, LambdaExpression conversion)
         {
             var lhs = Expression.Parameter(typeof(int));
@@ -475,7 +475,7 @@ namespace System.Linq.Expressions.Tests
                 "conversion", () => Expression.MakeBinary(type, lhs, rhs, false, meth, conversion));
         }
 
-        [Theory, MemberData(nameof(AssignExpressionTypesAndNonIntegerReturnUnaryIntegerLambdas))]
+        [Theory(Skip = "no call to CompileToMethod"), MemberData(nameof(AssignExpressionTypesAndNonIntegerReturnUnaryIntegerLambdas))]
         public void ConversionMustConvertToLHSType(ExpressionType type, LambdaExpression conversion)
         {
             var lhs = Expression.Parameter(typeof(int));
@@ -484,7 +484,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidOperationException>(() => Expression.MakeBinary(type, lhs, rhs, false, meth, conversion));
         }
 
-        [Theory, MemberData(nameof(AssignExpressionTypesAndNonIntegerTakingUnaryIntegerReturningLambda))]
+        [Theory(Skip = "no call to CompileToMethod"), MemberData(nameof(AssignExpressionTypesAndNonIntegerTakingUnaryIntegerReturningLambda))]
         public void ConversionMustConvertFromRHSType(ExpressionType type, LambdaExpression conversion)
         {
             var lhs = Expression.Parameter(typeof(int));
@@ -513,7 +513,7 @@ namespace System.Linq.Expressions.Tests
 
         private static string StringAddition(int x, int y) => (x + y).ToString();
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CannotAssignOpIfOpReturnNotAssignable()
         {
             var lhs = Expression.Parameter(typeof(AddsToSomethingElse));

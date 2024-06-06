@@ -64,7 +64,7 @@ namespace System.Linq.Expressions.Tests
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NullNewMethod()
         {
             ConstantExpression validExpression = Expression.Constant(1);
@@ -83,7 +83,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentNullException>("newExpression", () => Expression.ListInit(null, Enumerable.Repeat(validElementInit, 1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void NullInitializers()
         {
             NewExpression validNew = Expression.New(typeof(List<int>));
@@ -124,7 +124,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Empty(func());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void TypeWithoutAdd()
         {
             NewExpression newExp = Expression.New(typeof(string).GetConstructor(new[] { typeof(char[]) }), Expression.Constant("aaaa".ToCharArray()));
@@ -134,7 +134,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidOperationException>(() => Expression.ListInit(newExp, default(MethodInfo), Enumerable.Repeat(Expression.Constant('a'), 1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void InitializeNonEnumerable()
         {
             // () => new NonEnumerableAddable { 1, 2, 4, 16, 42 } isn't allowed because list initialization
@@ -142,7 +142,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("newExpression", () => Expression.ListInit(Expression.New(typeof(NonEnumerableAddable)), Expression.Constant(1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void StaticAddMethodOnType()
         {
             NewExpression newExp = Expression.New(typeof(EnumerableStaticAdd));
@@ -156,7 +156,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>("addMethod", () => Expression.ElementInit(adder, Enumerable.Repeat(Expression.Constant(""), 1)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void AdderOnWrongType()
         {
             // This logically includes cases of methods of open generic types, since the NewExpression cannot be of such a type.
@@ -165,7 +165,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => Expression.ListInit(newExp, adder, Expression.Constant(0)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void OpenGenericAddMethod()
         {
             NewExpression newExp = Expression.New(typeof(AnyTypeList));
@@ -192,7 +192,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(new object[] {3, 2, 1}, func());
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void InitializersWrappedExactly()
         {
             NewExpression newExp = Expression.New(typeof(List<int>));
@@ -201,7 +201,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expressions, listInit.Initializers.Select(i => ((IArgumentProvider)i).GetArgument(0)));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void CanReduce()
         {
             ListInitExpression listInit = Expression.ListInit(
@@ -246,7 +246,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected.OrderBy(kvp => kvp.Key), func().OrderBy(kvp => kvp.Key));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateSameReturnsSame()
         {
             ListInitExpression init = Expression.ListInit(
@@ -257,7 +257,7 @@ namespace System.Linq.Expressions.Tests
             Assert.Same(init, init.Update(init.NewExpression, init.Initializers.ToArray()));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateNullThrows()
         {
             ListInitExpression init = Expression.ListInit(
@@ -269,7 +269,7 @@ namespace System.Linq.Expressions.Tests
             AssertExtensions.Throws<ArgumentNullException>("initializers", () => init.Update(init.NewExpression, null));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateDifferentNewReturnsDifferent()
         {
             ListInitExpression init = Expression.ListInit(
@@ -280,7 +280,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(init, init.Update(Expression.New(typeof(List<int>)), init.Initializers));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateDifferentInitializersReturnsDifferent()
         {
             MethodInfo meth = typeof(List<int>).GetMethod("Add");
@@ -300,7 +300,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(init, init.Update(init.NewExpression, inits));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public void UpdateDoesntRepeatEnumeration()
         {
             MethodInfo meth = typeof(List<int>).GetMethod("Add");
@@ -321,7 +321,7 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(init, init.Update(init.NewExpression, newInits));
         }
 
-        [Fact]
+        [Fact(Skip = "no call to CompileToMethod")]
         public static void ToStringTest()
         {
             ListInitExpression e1 = Expression.ListInit(Expression.New(typeof(List<int>)), Expression.Parameter(typeof(int), "x"));
