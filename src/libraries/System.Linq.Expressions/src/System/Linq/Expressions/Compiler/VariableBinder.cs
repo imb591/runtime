@@ -61,6 +61,10 @@ namespace System.Linq.Expressions.Compiler
                 return node;
             }
 
+            if (ReferenceEquals(CurrentLambdaName, ExpressionExtensions.s_specialLambdaName))
+            {
+                return node;
+            }
             throw Error.CannotCompileConstant(node.Value);
         }
 
@@ -162,6 +166,7 @@ namespace System.Linq.Expressions.Compiler
             if (lambda != null)
             {
                 body = new ReadOnlyCollection<Expression>(new[] { lambda.Body });
+                if (ReferenceEquals(ExpressionExtensions.s_specialLambdaName, lambda.Name)) return body;
             }
             else
             {
