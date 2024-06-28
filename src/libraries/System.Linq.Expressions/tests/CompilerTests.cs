@@ -20,7 +20,7 @@ namespace System.Linq.Expressions.Tests
         {
             var e = (Expression)Expression.Constant(0);
 
-            int n = 10000;
+            int n = 70000;
 
             for (var i = 0; i < n; i++)
                 e = Expression.Add(e, Expression.Constant(1));
