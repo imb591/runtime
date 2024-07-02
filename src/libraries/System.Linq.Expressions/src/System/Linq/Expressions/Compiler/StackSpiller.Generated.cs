@@ -34,6 +34,7 @@ namespace System.Linq.Expressions.Compiler
                 case ExpressionType.Add:
                 case ExpressionType.AddChecked:
                 case ExpressionType.And:
+                case ExpressionType.AndAlso:
                 case ExpressionType.ArrayIndex:
                 case ExpressionType.Divide:
                 case ExpressionType.Equal:
@@ -48,16 +49,15 @@ namespace System.Linq.Expressions.Compiler
                 case ExpressionType.MultiplyChecked:
                 case ExpressionType.NotEqual:
                 case ExpressionType.Or:
+                case ExpressionType.OrElse:
                 case ExpressionType.Power:
                 case ExpressionType.RightShift:
                 case ExpressionType.Subtract:
                 case ExpressionType.SubtractChecked:
                     result = RewriteBinaryExpression(node, stack);
                     break;
-                case ExpressionType.AndAlso:
                 case ExpressionType.Coalesce:
-                case ExpressionType.OrElse:
-                    result = RewriteLogicalBinaryExpression(node, stack);
+                    result = RewriteCoalesceBinaryExpression(node, stack);
                     break;
                 case ExpressionType.Assign:
                     result = RewriteAssignBinaryExpression(node, stack);

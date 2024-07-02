@@ -208,8 +208,7 @@ namespace System.Linq.Expressions.Compiler
             return cr.Finish(node);
         }
 
-        // BinaryExpression: AndAlso, OrElse
-        private Result RewriteLogicalBinaryExpression(Expression expr, Stack stack)
+        private Result RewriteCoalesceBinaryExpression(Expression expr, Stack stack)
         {
             var node = (BinaryExpression)expr;
 
@@ -224,9 +223,7 @@ namespace System.Linq.Expressions.Compiler
 
             if (action != RewriteAction.None)
             {
-                // We don't have to worry about byref parameters here, because the
-                // factory doesn't allow it (it requires identical parameters and
-                // return type from the AndAlso/OrElse method)
+                // We probably have to worry about byref parameters here
 
                 expr = BinaryExpression.Create(
                     node.NodeType,
