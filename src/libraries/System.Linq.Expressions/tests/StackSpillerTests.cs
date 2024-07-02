@@ -3,6 +3,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Runtime.CompilerServices;
 using Xunit;
 
@@ -96,6 +97,17 @@ namespace System.Linq.Expressions.Tests
             Test((l, r) => Expression.AndAlso(l, r), Expression.Constant(false), Expression.Constant(true));
             Test((l, r) => Expression.AndAlso(l, r), Expression.Constant(true), Expression.Constant(false));
             Test((l, r) => Expression.AndAlso(l, r), Expression.Constant(true), Expression.Constant(true));
+        }
+
+        [Fact]
+        public static void Spill_Binary_Logical_UserDefinedOperator()
+        {
+            Test((l, r) => Expression.AndAlso(l, r), Expression.Constant(new SqlBoolean(false)), Expression.Constant(new SqlBoolean(false)));
+            Test((l, r) => Expression.AndAlso(l, r), Expression.Constant(new SqlBoolean(false)), Expression.Constant(new SqlBoolean(true)));
+            Test((l, r) => Expression.AndAlso(l, r), Expression.Constant(new SqlBoolean(true)), Expression.Constant(new SqlBoolean(false)));
+            Test((l, r) => Expression.AndAlso(l, r), Expression.Constant(new SqlBoolean(true)), Expression.Constant(new SqlBoolean(true)));
+            Test((e1, e2, e3) => Expression.AndAlso(e1, Expression.AndAlso(e2, e3)),
+                Expression.Constant(new SqlBoolean(false)), Expression.Constant(new SqlBoolean(true)), Expression.Constant(new SqlBoolean(false)));
         }
 
         [Fact]

@@ -285,13 +285,26 @@ namespace System.Linq.Expressions.Compiler
             _ilg.Emit(OpCodes.Call, opFalse);
             _ilg.Emit(OpCodes.Brtrue, labEnd);
 
+            //store the value of the left value before emitting b.Right to empty the evaluation stack
+            LocalBuilder locLeft = GetLocal(b.Left.Type);
+            _ilg.Emit(OpCodes.Stloc, locLeft);
+
             EmitExpression(b.Right);
+            //store the right value to local
+            LocalBuilder locRight = GetLocal(b.Right.Type);
+            _ilg.Emit(OpCodes.Stloc, locRight);
+
+            Debug.Assert(b.Method.IsStatic);
+            _ilg.Emit(OpCodes.Ldloc, locLeft);
+            _ilg.Emit(OpCodes.Ldloc, locRight);
             if ((flags & CompilationFlags.EmitAsTailCallMask) == CompilationFlags.EmitAsTail)
             {
                 _ilg.Emit(OpCodes.Tailcall);
             }
 
             _ilg.Emit(OpCodes.Call, b.Method);
+            FreeLocal(locLeft);
+            FreeLocal(locRight);
             _ilg.MarkLabel(labEnd);
         }
 
@@ -391,13 +404,27 @@ namespace System.Linq.Expressions.Compiler
 
             _ilg.Emit(OpCodes.Call, opTrue);
             _ilg.Emit(OpCodes.Brtrue, labEnd);
+
+            //store the value of the left value before emitting b.Right to empty the evaluation stack
+            LocalBuilder locLeft = GetLocal(b.Left.Type);
+            _ilg.Emit(OpCodes.Stloc, locLeft);
+
             EmitExpression(b.Right);
+            //store the right value to local
+            LocalBuilder locRight = GetLocal(b.Right.Type);
+            _ilg.Emit(OpCodes.Stloc, locRight);
+
+            Debug.Assert(b.Method.IsStatic);
+            _ilg.Emit(OpCodes.Ldloc, locLeft);
+            _ilg.Emit(OpCodes.Ldloc, locRight);
             if ((flags & CompilationFlags.EmitAsTailCallMask) == CompilationFlags.EmitAsTail)
             {
                 _ilg.Emit(OpCodes.Tailcall);
             }
 
             _ilg.Emit(OpCodes.Call, b.Method);
+            FreeLocal(locLeft);
+            FreeLocal(locRight);
             _ilg.MarkLabel(labEnd);
         }
 
