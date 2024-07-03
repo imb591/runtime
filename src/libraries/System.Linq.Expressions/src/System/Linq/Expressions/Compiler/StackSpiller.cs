@@ -581,7 +581,7 @@ namespace System.Linq.Expressions.Compiler
             // it so we need to restore stack after unconditional throw to make JIT happy
             // this has an effect of executing Throw on an empty stack.
 
-            Result value = RewriteExpressionFreeTemps(node.Operand, Stack.Empty);
+            Result value = RewriteExpression(node.Operand, Stack.Empty);
 
             RewriteAction action = value.Action;
 
@@ -856,7 +856,7 @@ namespace System.Linq.Expressions.Compiler
 
             // Goto requires empty stack to execute so the expression is
             // going to execute on an empty stack.
-            Result value = RewriteExpressionFreeTemps(node.Value, Stack.Empty);
+            Result value = RewriteExpression(node.Value, Stack.Empty);
 
             // However, the statement itself needs an empty stack for itself
             // so if stack is not empty, rewrite to empty the stack.
@@ -879,7 +879,7 @@ namespace System.Linq.Expressions.Compiler
             var node = (SwitchExpression)expr;
 
             // The switch statement test is emitted on the stack in current state.
-            Result switchValue = RewriteExpressionFreeTemps(node.SwitchValue, stack);
+            Result switchValue = RewriteExpression(node.SwitchValue, stack);
 
             RewriteAction action = switchValue.Action;
             ReadOnlyCollection<SwitchCase> cases = node.Cases;

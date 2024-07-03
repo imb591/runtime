@@ -350,6 +350,12 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Fact]
+        public static void Spill_Switch_ParentWithNonEmptyStack()
+        {
+            Test((v, d) => Expression.Add(Expression.UnaryPlus(Expression.Constant(100)), Expression.Switch(Expression.Add(Expression.Constant(1), v), d, Expression.SwitchCase(Expression.Constant(7), Expression.Constant(1)))), Expression.UnaryPlus(Expression.Constant(2)), Expression.UnaryPlus(Expression.Constant(3)));
+        }
+
+        [Fact]
         public static void Spill_Block()
         {
             Test((a, b) => Expression.Block(a, b), Expression.Constant(1), Expression.Constant(2));
@@ -371,6 +377,58 @@ namespace System.Linq.Expressions.Tests
                         );
                 }, Expression.Constant(t), Expression.Constant(1), Expression.Constant(2));
             }
+        }
+
+        [Fact]
+        public static void Spill_LabelGoto_ParentWithNonEmptyStack()
+        {
+            Test(a =>
+            {
+                LabelTarget lbl = Expression.Label(typeof(int));
+
+                return
+                    Expression.Add(
+                        Expression.UnaryPlus(Expression.Constant(100)),
+                        Expression.Block(
+                            Expression.Goto(
+                                lbl,
+                                Expression.Add(
+                                    Expression.Constant(1),
+                                    a
+                                )
+                            ),
+                            Expression.Label(lbl, Expression.Default(typeof(int)))
+                        )
+                    );
+            }, Expression.Constant(1));
+        }
+
+        [Fact]
+        public static void Spill_Throw_ParentWithNonEmptyStack()
+        {
+            Test(a =>
+            {
+                ParameterExpression e = Expression.Parameter(typeof(IntegralException));
+
+                return Expression.Add(
+                    Expression.UnaryPlus(Expression.Constant(100)),
+                    Expression.TryCatch(
+                        Expression.Block(
+                            Expression.Throw(
+                                Expression.New(
+                                    typeof(IntegralException).GetConstructor(new[] { typeof(int) }),
+                                    Expression.Add(
+                                        Expression.Constant(1),
+                                        a
+                                    )
+                                )
+                            ),
+                            Expression.Constant(200)
+                        ),
+                        Expression.Catch(e, Expression.Property(e, nameof(IntegralException.Number)))
+                    )
+                );
+            }, Expression.Constant(1));
         }
 
         private static Expression<Func<int>> Spill_RefInstance_IndexAssignment()
@@ -2362,6 +2420,16 @@ namespace System.Linq.Expressions.Tests
             }
 
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        }
+
+        class IntegralException : Exception
+        {
+            public IntegralException(int number)
+            {
+                Number = number;
+            }
+
+            public int Number { get; }
         }
     }
 }
