@@ -100,13 +100,9 @@ namespace System.Linq.Expressions.Compiler
         // Called by Expression<T>.Accept(StackSpiller).
         internal Expression<T> Rewrite<T>(Expression<T> lambda)
         {
-            VerifyTemps();
-
             // Lambda starts with an empty stack.
-            Result body = RewriteExpressionFreeTemps(lambda.Body, _startingStack);
+            Result body = RewriteExpression(lambda.Body, _startingStack);
             _lambdaRewrite = body.Action;
-
-            VerifyTemps();
 
             if (body.Action != RewriteAction.None)
             {
@@ -151,14 +147,6 @@ namespace System.Linq.Expressions.Compiler
                 TypeUtils.AreReferenceAssignable(node.Type, result.Node.Type),
                 "rewritten object must be reference assignable to the original type"
             );
-        }
-
-        private Result RewriteExpressionFreeTemps(Expression? expression, Stack stack)
-        {
-            int mark = Mark();
-            Result result = RewriteExpression(expression, stack);
-            Free(mark);
-            return result;
         }
 
         private Result RewriteDynamicExpression(Expression expr)
