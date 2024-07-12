@@ -1,0 +1,64 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>12.0</LangVersion>
+    <DocumentationFile>bin\$(AssemblyName).xml</DocumentationFile>
+    <DefineConstants> $(DefineConstants);FEATURE_COMPILE_TO_METHODBUILDER;</DefineConstants>
+    <RootNamespace>.</RootNamespace>
+    <NoWarn>CS0436</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="**/*.cs" />
+    <None Remove="**/*.tt" />
+    <None Remove="**/*.resx" />
+    <EmbeddedResource Remove="**/*.resx" />
+    <None Remove="**/*.rd.xml" />
+    <Compile Include="Debug.cs" />
+    <Compile Include="System/Linq/Expressions/ExpressionExtensions.cs" />
+    <Compile Include="System/Dynamic/Utils/ContractUtils.cs" />
+    <Compile Include="System/Linq/Expressions/Error.cs" />
+    <Compile Include="System/Linq/Expressions/Strings.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/LambdaCompiler.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/AnalyzedTree.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/CompilerScope.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/CompilerScope.Storage.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/BoundConstants.cs" />
+    <Compile Include="System/Linq/Expressions/Common/CachedReflectionInfo.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/LambdaCompiler.Lambda.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/LambdaCompiler.Expressions.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/LambdaCompiler.Address.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/LambdaCompiler.Binary.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/LambdaCompiler.ControlFlow.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/LambdaCompiler.Generated.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/LambdaCompiler.Logical.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/LambdaCompiler.Statements.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/LambdaCompiler.Unary.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/HoistedLocals.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/StackSpiller.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/VariableBinder.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/StackSpiller.Temps.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/KeyedStack.cs" />
+    <Compile Include="System/Runtime/CompilerServices/TrueReadOnlyCollection.cs" />
+    <Compile Include="System/Runtime/CompilerServices/Closure.cs" />
+    <Compile Include="System/Runtime/CompilerServices/RuntimeOps.RuntimeVariableList.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/StackSpiller.Bindings.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/StackSpiller.Generated.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/StackSpiller.ChildRewriter.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/StackSpiller.SpilledExpressionBlock.cs" />
+    <Compile Include="System/Linq/Expressions/StackGuard.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/ILGen.cs" />
+    <Compile Include="System/Linq/Expressions/Compiler/LabelInfo.cs" />
+    <Compile Include="System/Linq/Expressions/Common/ConstantCheck.cs" />
+    <Compile Include="System/Linq/Expressions/Utils.cs" />
+    <Compile Include="System/Dynamic/Utils/TypeUtils.cs" />
+    <Compile Include="System/Dynamic/Utils/TypeExtensions.cs" />
+    <Compile Include="System/Dynamic/Utils/CacheDict.cs" />
+    <Compile Include="System/Dynamic/Utils/Helpers.cs" />
+    <Compile Include="System/Dynamic/Utils/CollectionExtensions.cs" />
+    <Compile Include="../../Common/src/System/Collections/Generic/ArrayBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
+  </ItemGroup>
+</Project>
