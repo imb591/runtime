@@ -47,8 +47,7 @@ namespace System.Linq.Expressions.Compiler
                 // handle ByRef parameters. BlockExpression prevents this
                 // from being exposed to user created trees.
 
-                // Set name if DebugInfoGenerator support is brought back.
-                _local = compiler.GetLocal(variable.IsByRef ? variable.Type.MakeByRefType() : variable.Type);
+                _local = compiler.GetNamedLocal(variable.IsByRef ? variable.Type.MakeByRefType() : variable.Type, variable.Parameter);
             }
 
             internal override void EmitLoad()
@@ -165,8 +164,7 @@ namespace System.Linq.Expressions.Compiler
                 Type boxType = typeof(StrongBox<>).MakeGenericType(variable.Type);
                 _boxValueField = boxType.GetField("Value")!;
 
-                // Set name if DebugInfoGenerator support is brought back.
-                _boxLocal = compiler.GetLocal(boxType);
+                _boxLocal = compiler.GetNamedLocal(boxType, variable);
             }
 
             internal override void EmitLoad()

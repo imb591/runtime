@@ -907,6 +907,26 @@ namespace System.Linq.Expressions.Compiler
             }
         }
 
+        private void EmitDebugInfoExpression(Expression expr)
+        {
+            if (_tree.DebugInfoGenerator is null)
+            {
+                return;
+            }
+            var node = (DebugInfoExpression)expr;
+
+            if (node.IsClear && _sequencePointCleared)
+            {
+                // Emitting another clearance after one clearance does not
+                // have any effect, so we can save it.
+                return;
+            }
+
+            _tree.DebugInfoGenerator.MarkSequencePoint(_method, _ilg, node);
+            _ilg.Emit(OpCodes.Nop);
+            _sequencePointCleared = node.IsClear;
+        }
+
         #region ListInit, MemberInit
 
         private void EmitListInitExpression(Expression expr)

@@ -58,6 +58,12 @@ namespace System.Linq.Expressions.Compiler
         // Free list of locals, so we reuse them rather than creating new ones
         private readonly KeyedStack<Type, LocalBuilder> _freeLocals = new KeyedStack<Type, LocalBuilder>();
 
+        /// <summary>
+        /// The value is true if a clearance was emitted and no new sequence point
+        /// has been emitted since that.
+        /// </summary>
+        bool _sequencePointCleared;
+
 #if FEATURE_COMPILE_TO_METHODBUILDER
         /// <summary>
         /// Creates a lambda compiler that will compile into the provided MethodBuilder
@@ -134,10 +140,12 @@ namespace System.Linq.Expressions.Compiler
         ///
         /// (probably shouldn't be modifying parameters/return type...)
         /// </summary>
-        internal static void Compile(LambdaExpression lambda, MethodBuilder method)
+        internal static void Compile(LambdaExpression lambda, MethodBuilder method, IExpressionDebugInfoGenerator? debugInfoGenerator)
         {
             // 1. Bind lambda
             AnalyzedTree tree = AnalyzeLambda(ref lambda);
+
+            tree.DebugInfoGenerator = debugInfoGenerator;
 
             // 2. Create lambda compiler
             LambdaCompiler c = new LambdaCompiler(tree, lambda, method);
@@ -165,6 +173,20 @@ namespace System.Linq.Expressions.Compiler
         {
             Debug.Assert(local != null);
             _freeLocals.Push(local.LocalType, local);
+        }
+
+        internal LocalBuilder GetNamedLocal(Type type, ParameterExpression variable)
+        {
+            Debug.Assert(type != null && variable != null);
+
+            if (_tree.DebugInfoGenerator is null || variable.Name is null)
+            {
+                return GetLocal(type);
+            }
+
+            LocalBuilder lb = _ilg.DeclareLocal(type);
+            _tree.DebugInfoGenerator.SetLocalName(lb, variable.Name);
+            return lb;
         }
 
         /// <summary>

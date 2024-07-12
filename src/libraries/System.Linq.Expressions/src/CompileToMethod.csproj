@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     <Nullable>enable</Nullable>
-    <LangVersion>12.0</LangVersion>
+    <LangVersion>preview</LangVersion>
     <DocumentationFile>bin\$(AssemblyName).xml</DocumentationFile>
     <DefineConstants> $(DefineConstants);FEATURE_COMPILE_TO_METHODBUILDER;</DefineConstants>
     <RootNamespace>.</RootNamespace>

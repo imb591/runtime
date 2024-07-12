@@ -5,12 +5,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.SymbolStore;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Linq.Expressions.Tests;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
+using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
+using System.Runtime.Loader;
+using System.Text.RegularExpressions;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -1538,7 +1545,6 @@ public class Miscellaneous
                 param1,
                 Expression.TypeEqual(Expression.TryFinally(param2, Expression.Empty()), typeof(string))),
             param1, param2);
-        var il = expr.GetMethodBuilderIL("M");
         var func = expr.Compile(CompilationType.CompileToMethod, withoutVisitor: true);
         Assert.False(func(false, 1));
         Assert.False(func(false, "1"));
@@ -1758,7 +1764,6 @@ public class Miscellaneous
         var genericParam = typeof(List<>).GetGenericArguments()[0];
         var expr = Expression.Lambda<Func<Type>>(
             Expression.Constant(genericParam));
-        var il = expr.GetMethodBuilderIL("M");
         var func = expr.Compile(CompilationType.CompileToMethod, withoutVisitor: true);
         Assert.Throws<BadImageFormatException>(() => func());
     }
@@ -1776,5 +1781,204 @@ public class Miscellaneous
 
         var type = typeBuilder.CreateType();
         Assert.Equal(type, type.GetMethod("M")!.Invoke(null, Array.Empty<object>()));
+    }
+
+    [Fact]
+    public void SymbolGeneration()
+    {
+        var symbolInfo = Expression.SymbolDocument("Expressions", SymLanguageType.CSharp);
+        var param = Expression.Parameter(typeof(int), "p");
+        var expr = Expression.Lambda<Func<int>>(
+            Expression.Block(
+                typeof(int),
+                new[] { param },
+                new Expression[]
+                {
+                    Expression.DebugInfo(symbolInfo, 1, 1, 1, 10),
+                    Expression.Assign(param, Expression.Constant(1)),
+                    Expression.ClearDebugInfo(symbolInfo),
+                    Expression.ClearDebugInfo(symbolInfo),
+                    Expression.PreIncrementAssign(param),
+                    Expression.ClearDebugInfo(symbolInfo),
+                    Expression.PreIncrementAssign(param),
+                    Expression.DebugInfo(symbolInfo, 2, 1, 2, 10),
+                    Expression.PreIncrementAssign(param),
+                    Expression.DebugInfo(symbolInfo, 3, 1, 3, 10),
+                    param,
+                }));
+
+        var assemblyName = new AssemblyName("SymbolGeneration");
+        var assemblyBuilder = new PersistedAssemblyBuilder(assemblyName, typeof(object).Assembly);
+        var moduleBuilder = assemblyBuilder.DefineDynamicModule("SymbolGeneration");
+        var typeBuilder = moduleBuilder.DefineType("C");
+        var methodBuilder = typeBuilder.DefineMethod("M", MethodAttributes.Public | MethodAttributes.Static);
+
+        var symbolGenerator = new ExpressionDebugInfoGenerator(moduleBuilder);
+        expr.CompileToMethod(methodBuilder, symbolGenerator);
+
+        typeBuilder.CreateType();
+
+        var mdb = assemblyBuilder.GenerateMetadata(out var il, out var fieldData, out var pdbMetadata);
+
+        using var stream = new MemoryStream();
+        var peHeaderBuilder = new PEHeaderBuilder(
+            imageCharacteristics: Characteristics.ExecutableImage | Characteristics.Dll);
+        var peBuilder = new ManagedPEBuilder(
+            header: peHeaderBuilder,
+            metadataRootBuilder: new MetadataRootBuilder(mdb),
+            ilStream: il,
+            mappedFieldData: fieldData,
+            strongNameSignatureSize: 0);
+        var peBlob = new BlobBuilder();
+        peBuilder.Serialize(peBlob);
+        peBlob.WriteContentTo(stream);
+        stream.Seek(0, SeekOrigin.Begin);
+
+        var assembly = AssemblyLoadContext.Default.LoadFromStream(stream);
+        var method = assembly.GetType("C")!.GetMethod("M");
+
+        using var sw = new StringWriter();
+        var ilWriter = new ReadableILStringToTextWriter(sw);
+        var ilProvider = new PersistedMethodBuilderILProvider(method);
+        var ilReader = new ILReader(ilProvider, new ModuleScopeTokenResolver(method));
+        ilReader.Accept(new ReadableILStringVisitor(ilWriter));
+        var methodIl = sw.ToString();
+        VerifyIL(methodIl, @"
+            IL_0000: nop
+            IL_0001: ldc.i4.1
+            IL_0002: stloc.0
+            IL_0003: nop
+            IL_0004: ldloc.0
+            IL_0005: ldc.i4.1
+            IL_0006: add
+            IL_0007: stloc.0
+            IL_0008: ldloc.0
+            IL_0009: ldc.i4.1
+            IL_000a: add
+            IL_000b: stloc.0
+            IL_000c: nop
+            IL_000d: ldloc.0
+            IL_000e: ldc.i4.1
+            IL_000f: add
+            IL_0010: stloc.0
+            IL_0011: nop
+            IL_0012: ldloc.0
+            IL_0013: ret
+        ");
+
+        var func = method!.CreateDelegate<Func<int>>();
+        Assert.Equal(4, func());
+
+        var portablePdbBlob = new BlobBuilder();
+        var pdbBuilder = new PortablePdbBuilder(pdbMetadata, mdb.GetRowCounts(), default);
+        pdbBuilder.Serialize(portablePdbBlob);
+        using var pdbStream = new MemoryStream();
+        portablePdbBlob.WriteContentTo(pdbStream);
+        pdbStream.Seek(0, SeekOrigin.Begin);
+
+        using var provider = MetadataReaderProvider.FromPortablePdbStream(pdbStream);
+        var reader = provider.GetMetadataReader();
+        var mdi = reader.GetMethodDebugInformation(MetadataTokens.MethodDebugInformationHandle(methodBuilder.MetadataToken));
+        using var docEnumerator = reader.Documents.GetEnumerator();
+        Assert.Equal(1, reader.Documents.Count);
+        Assert.True(docEnumerator.MoveNext());
+        var doc1 = reader.GetDocument(docEnumerator.Current);
+        Assert.Equal(symbolInfo.FileName, reader.GetString(doc1.Name));
+        Assert.Equal(symbolInfo.Language, reader.GetGuid(doc1.Language));
+        Assert.False(docEnumerator.MoveNext());
+
+        using var spcEnumerator = mdi.GetSequencePoints().GetEnumerator();
+        Assert.True(spcEnumerator.MoveNext());
+        var sp = spcEnumerator.Current;
+        Assert.Equal(doc1, reader.GetDocument(sp.Document));
+        Assert.Equal(1, sp.StartLine);
+        Assert.False(sp.IsHidden);
+        Assert.Equal(0x0, sp.Offset);
+        Assert.Equal(1, sp.StartColumn);
+        Assert.Equal(1, sp.EndLine);
+        Assert.Equal(10, sp.EndColumn);
+        Assert.True(spcEnumerator.MoveNext());
+        sp = spcEnumerator.Current;
+        Assert.True(sp.IsHidden);
+        Assert.Equal(0x3, sp.Offset);
+        Assert.True(spcEnumerator.MoveNext());
+        sp = spcEnumerator.Current;
+        Assert.Equal(doc1, reader.GetDocument(sp.Document));
+        Assert.Equal(2, sp.StartLine);
+        Assert.False(sp.IsHidden);
+        Assert.Equal(0xc, sp.Offset);
+        Assert.Equal(1, sp.StartColumn);
+        Assert.Equal(2, sp.EndLine);
+        Assert.Equal(10, sp.EndColumn);
+        Assert.True(spcEnumerator.MoveNext());
+        sp = spcEnumerator.Current;
+        Assert.Equal(doc1, reader.GetDocument(sp.Document));
+        Assert.Equal(3, sp.StartLine);
+        Assert.False(sp.IsHidden);
+        Assert.Equal(0x11, sp.Offset);
+        Assert.Equal(1, sp.StartColumn);
+        Assert.Equal(3, sp.EndLine);
+        Assert.Equal(10, sp.EndColumn);
+        Assert.False(spcEnumerator.MoveNext());
+
+        using var localScopes = reader.GetLocalScopes(MetadataTokens.MethodDefinitionHandle(methodBuilder.MetadataToken)).GetEnumerator();
+        Assert.True(localScopes.MoveNext());
+        LocalScope localScope = reader.GetLocalScope(localScopes.Current);
+        using var localEnumerator = localScope.GetLocalVariables().GetEnumerator();
+        Assert.True(localEnumerator.MoveNext());
+        Assert.Equal(param.Name, reader.GetString(reader.GetLocalVariable(localEnumerator.Current).Name));
+        Assert.False(localScopes.MoveNext());
+
+
+        static string Normalize(string s)
+        {
+            var normalizeRegex = new Regex(@"lambda_method[0-9]*");
+            IEnumerable<string> lines =
+                s
+                .Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                .Where(line => !line.StartsWith("//"))
+                .Select(beforeLambdaUniquifierRemoval => normalizeRegex.Replace(beforeLambdaUniquifierRemoval, "lambda_method"));
+            return string.Join("\n", lines);
+        }
+        static void VerifyIL(string actual, string expected)
+        {
+            string nExpected = Normalize(expected);
+            string nActual = Normalize(actual);
+            try
+            {
+                Assert.Equal(nExpected, nActual);
+            }
+            catch (Exception xunit)
+            {
+                throw new Exception($"IL assertion failed. Expected (normalized):\n{nExpected}\n\nActual:\n{actual}", xunit);
+            }
+        }
+
+    }
+
+    [Fact]
+    public void SymbolGeneration_InvalidModule()
+    {
+        var symbolInfo = Expression.SymbolDocument("Expressions", SymLanguageType.CSharp);
+        var expr = Expression.Lambda<Func<int>>(
+            Expression.Block(
+                typeof(int),
+                new Expression[]
+                {
+                    Expression.DebugInfo(symbolInfo, 1, 1, 1, 10),
+                    Expression.Constant(1),
+                }));
+
+        var assemblyName = new AssemblyName("SymbolGeneration");
+        var assemblyBuilder = new PersistedAssemblyBuilder(assemblyName, typeof(object).Assembly);
+        var moduleBuilder = assemblyBuilder.DefineDynamicModule("SymbolGeneration");
+        var typeBuilder = moduleBuilder.DefineType("C");
+        var methodBuilder = typeBuilder.DefineMethod("M", MethodAttributes.Public | MethodAttributes.Static);
+        var assemblyBuilder2 = new PersistedAssemblyBuilder(assemblyName, typeof(object).Assembly);
+        var moduleBuilder2 = assemblyBuilder2.DefineDynamicModule("SymbolGeneration");
+
+        var symbolGenerator = new ExpressionDebugInfoGenerator(moduleBuilder2);
+        var e = Assert.Throws<InvalidOperationException>(() => expr.CompileToMethod(methodBuilder, symbolGenerator));
+        Assert.Equal("Method is built on a module not corresponding to the debug info generator", e.Message);
     }
 }

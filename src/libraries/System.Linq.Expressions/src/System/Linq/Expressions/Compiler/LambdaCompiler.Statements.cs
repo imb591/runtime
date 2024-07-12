@@ -49,6 +49,17 @@ namespace System.Linq.Expressions.Compiler
                 Expression e = node.GetExpression(index);
                 Expression next = node.GetExpression(index + 1);
 
+                if (_tree.DebugInfoGenerator is not null)
+                {
+                    // No need to emit a clearance if the next expression in the block is also a
+                    // DebugInfoExprssion.
+                    var debugInfo = e as DebugInfoExpression;
+                    if (debugInfo != null && debugInfo.IsClear && next is DebugInfoExpression)
+                    {
+                        continue;
+                    }
+                }
+
                 CompilationFlags tailCallFlag;
                 if (tailCall != CompilationFlags.EmitAsNoTail)
                 {

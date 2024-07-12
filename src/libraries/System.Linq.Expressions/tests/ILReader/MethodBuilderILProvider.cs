@@ -107,5 +107,20 @@ namespace System.Linq.Expressions.Tests
             }
         }
     }
+
+    public class PersistedMethodBuilderILProvider : IILProvider
+    {
+        private readonly MethodBody _method;
+
+        public PersistedMethodBuilderILProvider(MethodBase method) => _method = method.GetMethodBody();
+
+        public byte[] GetByteArray() => _method.GetILAsByteArray();
+
+        public ExceptionInfo[] GetExceptionInfos() => throw new NotSupportedException();
+
+        public byte[] GetLocalSignature() => throw new NotSupportedException();
+
+        public int MaxStackSize => _method.MaxStackSize;
+    }
 }
 

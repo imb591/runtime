@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Diagnostics.SymbolStore;
 using System.Dynamic.Utils;
 using System.Reflection;
+using System.Reflection.Emit;
 using static System.Linq.Expressions.Expression;
 
 namespace System.Linq.Expressions;
@@ -19,12 +21,22 @@ public static class ExpressionExtensions
     /// <param name="method">A <see cref="System.Reflection.Emit.MethodBuilder"/> which will be used to hold the lambda's IL.</param>
     public static void CompileToMethod(this LambdaExpression @this, System.Reflection.Emit.MethodBuilder method)
     {
+        CompileToMethod(@this, method, null);
+    }
+
+    /// <summary>
+    /// Compiles the lambda into a method definition and custom debug information.
+    /// </summary>
+    /// <param name="this">The lambda</param>
+    /// <param name="method">A <see cref="System.Reflection.Emit.MethodBuilder"/> which will be used to hold the lambda's IL.</param>
+    /// <param name="debugInfoGenerator">Debugging information generator used by the compiler to mark sequence points and annotate local variables.</param>
+    public static void CompileToMethod(this LambdaExpression @this, System.Reflection.Emit.MethodBuilder method, IExpressionDebugInfoGenerator? debugInfoGenerator) {
         ArgumentNullException.ThrowIfNull(method);
         ContractUtils.Requires(method.IsStatic, nameof(method));
         var type = method.DeclaringType as System.Reflection.Emit.TypeBuilder;
         if (type == null) throw Error.MethodBuilderDoesNotHaveTypeBuilder();
 
-        Compiler.LambdaCompiler.Compile(@this, method);
+        Compiler.LambdaCompiler.Compile(@this, method, debugInfoGenerator);
     }
 
     internal static readonly string s_specialLambdaName = new string(' ', 1);
@@ -469,3 +481,63 @@ internal readonly struct BlockExpressionExt
     }
 }
 
+/// <summary>Generator of PDB debugging information for expression trees</summary>
+public interface IExpressionDebugInfoGenerator
+{
+    /// <summary>Marks a sequence point</summary>
+    /// <param name="methodBuilder">The generated method</param>
+    /// <param name="ilg">IL generator</param>
+    /// <param name="sequencePoint">Debug information corresponding to the sequence point</param>
+    void MarkSequencePoint(MethodBase methodBuilder, ILGenerator ilg, DebugInfoExpression sequencePoint);
+
+    /// <summary>Sets a name for a local</summary>
+    /// <param name="localBuilder">A local variable</param>
+    /// <param name="name">The name</param>
+    void SetLocalName(LocalBuilder localBuilder, string name);
+}
+
+#if NET9_0_OR_GREATER
+/// <summary>Generator of PDB debugging information for expression trees</summary>
+public sealed class ExpressionDebugInfoGenerator : IExpressionDebugInfoGenerator
+{
+    private readonly ModuleBuilder _module;
+    private Dictionary<SymbolDocumentInfo, ISymbolDocumentWriter>? _symbolWriters;
+
+    /// <summary>Generator of PDB debugging information for expression trees</summary>
+    public ExpressionDebugInfoGenerator(ModuleBuilder module)
+    {
+        _module = module;
+    }
+
+    /// <summary>Get the symbol writer for the document</summary>
+    public ISymbolDocumentWriter GetSymbolWriter(SymbolDocumentInfo document)
+    {
+        _symbolWriters ??= new Dictionary<SymbolDocumentInfo, ISymbolDocumentWriter>();
+        if (!_symbolWriters.TryGetValue(document, out ISymbolDocumentWriter? result))
+        {
+            result = _module.DefineDocument(document.FileName, document.Language, document.LanguageVendor, document.DocumentType);
+            _symbolWriters.Add(document, result);
+        }
+        return result;
+    }
+
+    /// <inheritdoc />
+    public void MarkSequencePoint(MethodBase methodBuilder, ILGenerator ilg, DebugInfoExpression sequencePoint)
+    {
+        if (methodBuilder is MethodBuilder builder)
+        {
+            if (builder.Module != _module)
+            {
+                throw new InvalidOperationException("Method is built on a module not corresponding to the debug info generator");
+            }
+            ilg.MarkSequencePoint(GetSymbolWriter(sequencePoint.Document), sequencePoint.StartLine, sequencePoint.StartColumn, sequencePoint.EndLine, sequencePoint.EndColumn);
+        }
+    }
+
+    /// <inheritdoc />
+    public void SetLocalName(LocalBuilder localBuilder, string name)
+    {
+        localBuilder.SetLocalSymInfo(name);
+    }
+}
+#endif
